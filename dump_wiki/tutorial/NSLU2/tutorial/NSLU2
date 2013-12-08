@@ -1,0 +1,58 @@
+''__Page to review : sqlite is not used/supported anymore !__''
+
+#Base install
+ipkg install python26
+ipkg install bash
+ipkg install py26-mercurial
+ipkg install py26-openssl py26-simplejson
+ipkg install crosstool-native
+ln -s /opt/bin/python2.6 /opt/bin/python
+
+#install sqlite header
+wget http://www.sqlite.org/sqlite-amalgamation-3_6_23_1.zip
+unzip sqlite-amalgamation-3_6_23_1.zip
+cp sqlite*h /opt/include/
+rm -f sqlite*
+
+#install python-sqlite libraries
+wget http://pysqlite.googlecode.com/files/pysqlite-2.6.0.tar.gz
+tar xvzf pysqlite-2.6.0.tar.gz
+cd pysqlite-2.6.0
+echo &quot;include_dirs=/opt/include&quot; &gt;&gt; setup.cfg
+python ./setup.py develop
+cd ..
+rm -rf pysqlite-2.6.0/
+
+#Change with the interface you want to use :
+IFACE=eth0
+
+#download and install domogik
+hg-2.6 clone http://hg.dunnewind.net/domogik/
+cd domogik 
+python ./setup.py install
+cp src/domogik/examples/default/domogik /etc.defaults/
+cp src/domogik/examples/init/domogik /opt/etc/init.d/
+chmod +x /opt/etc/init.d/domogik
+sed -i 's@etc/default/@etc.defaults/@' /opt/etc/init.d/domogik
+cp src/domogik/examples/config/domogik.cfg /root/.domogik.cfg
+sed -i &quot;s;^DOMOGIK_USER.*$;DOMOGIK_USER=root;&quot; /etc.defaults/domogik
+sed -i &quot;s;^CUSTOM_PATH.*$;CUSTOM_PATH=$PWD/src/domogik/xpl/tools/;&quot; /etc.defaults/domogik
+sed -i &quot;s;^custom_prefix.*$;custom_prefix=$PWD/src;&quot; /root/.domogik.cfg
+bind_addr=$(ifconfig $IFACE|egrep &quot;[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}&quot;|cut -d &quot;:&quot; -f 2|cut -d &quot; &quot; -f 1)
+sed -i &quot;s/^bind_interface.*$/bind_interface = $bind_addr/&quot; /root/.domogik.cfg
+sed -i &quot;s/^HUB_IFACE.*$/HUB_IFACE=$IFACE/&quot; /etc.defaults/domogik
+sed -i &quot;s/^rest_server_ip.*$/rest_server_ip = $bind_addr/&quot; /root/.domogik.cfg
+sed -i &quot;s/^django_server_ip.*$/django_server_ip = $bind_addr/&quot; /root/.domogik.cfg
+sed -i &quot;s/^django_rest_server_ip.*$/django_rest_server_ip = $bind_addr/&quot; /root/.domogik.cfg
+sed -i &quot;s;^db_path.*$;db_path = /root/.domogik.sqlite;&quot; /root/.domogik.cfg 
+python ./db_installer.py 
+sed -i &quot;s@/bin/bash@/opt/bin/bash@&quot; /opt/etc/init.d/domogik
+
+#finally 
+python ./test_config.py 
+
+It should finish with &quot;everything seems ok&quot;
+
+
+
+'''

@@ -1,0 +1,366 @@
+{maketoc}
+
+!Json API
+
+Json-rpc : http://json-rpc.org/wiki/implementations
+How to directly access thumbs : http://xbmc:port/vsf/special://masterprofile/Thumbnails/Music/8/8dc7e429.tbn 
+
+How to get all methods : json introspect
+
+Test script: 
+{CODE()}
+ 1. import json                                                                 
+ 2. import httplib, urllib                                                      
+ 3. import sys                                                                  
+ 4.                                                                             
+ 5. for arg in sys.argv:                                                        
+ 6.     print arg                                                               
+ 7.                                                                             
+ 8. url = 'http://localhost:8080'                                               
+ 9. jsonrpcurl = url + '/jsonrpc'                                               
+10.                                                                             
+11. if len(sys.argv) &gt; 2:                                                       
+12.   postdata = '{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;' + sys.argv[1] + '&quot;, &quot;params&quot;: ' + sys.argv[2] + ', &quot;id&quot;: &quot;1&quot;}'
+13. else:                                                                       
+14.   postdata = json.dumps({'jsonrpc': &quot;2.0&quot;, 'method': sys.argv[1], 'id': &quot;1&quot;})
+15.                                                                             
+16. print postdata                                                              
+17.                                                                             
+18. respdata = urllib.urlopen(jsonrpcurl, postdata).read()                      
+19. print respdata                          
+{CODE}
+How to call it : 
+{CODE()}
+python script.py MusicLibrary.GetSongs '{ &quot;start&quot;: 0, &quot;end&quot;: 3 }' 
+{CODE}
+
+All availables methods : http://localhost:8080/development.html
+
+{IMG(src=&quot;http://www.kraak-forum.nl/remote/image/XbmcWeb_1271716699757.png&quot;)}{IMG}
+!Specifications -- obsolete : http API
+!!Python API
+Extract from  http://manuel.xbmc.fr/index.php?title=WebServerHTTP-API :
+''The commands are also callable from Python scripts through the function executehttpapi imported from the xbmc module. All xbmcAPI commands have an identical name and the same parameters as the commands listed in the document. The response structure is also identical apart from the web serverâ€™s default header and footer which will not be present.''
+
+{CODE()}
+import xbmc
+response = xbmc.executehttpapi(&quot;TakeScreenShot(q:\\test.jpg,0,false,200,-1,90)&quot;) 
+{CODE}
+
+
+
+!!Commands usage
+
+!!!Generic
+!!!!Simple command
+* http://xbox/xbmcCmds/xbmcHttp?command=&lt;command&gt;
+
+!!!!Command with parameters 
+* http://xbox/xbmcCmds/xbmcHttp?command=&lt;command&gt;&amp;parameter=&lt;param1&gt;;&lt;param2&gt;;&lt;param3&gt;;...
+If a parameter is empty, use &quot;; ;&quot; or &quot;;%20;&quot;
+
+!!!!Response
+If error : 
+{CODE()}
+Error[:Reason]
+{CODE}
+
+A command with no return value (ex : SetVolume) :
+{CODE()}
+OK
+{CODE}
+
+A command with a return value (ex : GetVolume) :
+{CODE()}
+50
+{CODE}
+
+A command with multiple return values (ex : GetCurrentlyPlaying) :
+{CODE()}
+key1:value1
+key2:value2
+{CODE}
+
+!!!Python example
+{CODE()}
+import xbmc
+
+response = xbmc.executehttpapi(&quot;TakeScreenShot(q:\\test.jpg,0,false,200,-1,90)&quot;) 
+{CODE}
+
+
+!!List of interesting commands 
+__Notice about playlists :__ for the moment, I didn't get any playlist relative command. This will be view in a next version.
+
+!!!Informations about media
+!!!!GetCurrentlyPlaying 	 
+Retrieves the filename, details and status of the currently playing media. 
+
+
+
+!!!Navigation in media
+!!!!GetPercentage 	 
+Retrieves the current playing position of the currently playing media as a percentage of the mediaâ€™s length. 
+
+!!!!SeekPercentage 	 
+Sets the playing position of the currently playing media as a percentage of the mediaâ€™s length. 
+
+!!!!SeekPercentageRelative 	 
+Adds/Subtracts the current percentage on to the current postion in the song 
+
+
+
+!!!Volume
+!!!!GetVolume 	 
+Retrieves the current volume setting as a percentage of the maximum possible value. 
+
+!!!!SetVolume 	 
+Sets the volume as a percentage of the maximum possible. 
+
+
+
+!!!Actions
+!!!!SendKey
+(buttoncode;[LeftTrigger];[RightTrigger];[LeftThumbX];[LeftThumbY] ;[RightThumbX];[RightThumbY]) 	 
+Initiates a button, key or mouse event. Buttoncode specifies the type of event and the other parameters specify additional information that is specific to each buttoncode value. See key.h for the the list of keycodes. The example raises the A button event. 
+
+!!!!Shutdown 	 
+Shutdown XBOX 
+
+
+
+!!!Built in functions
+See http://manuel.xbmc.fr/index.php?title=List_of_Built_In_Functions
+
+Usage : 
+ExecBuiltIn(function) 	 
+Executes the XBMC â€˜built-inâ€™ function function. http://xbox/xbmcCmds/xbmcHttp?command=ExecBuiltIn&amp;parameter=Notification(WARNING,SHUTTING%20DOWN%20SYSTEM!)
+
+* XBMC.PlayerControl(command) : Allows control of music and videos. The command may be one of __Play, Stop, Forward, Rewind, Next, Previous, BigSkipForward, BigSkipBackward, SmallSkipForward, SmallSkipBackward, Random, Repeat, RepeatOne, RepeatAll, RepeatOff, Partymode(music) or Partymode(video) or Partymode(path to .xsp file), and Record__. Play will either pause, resume, or stop ffwding or rewinding. Random toggles random playback, Repeat cycles through the repeat modes, Partymode(music/video) toggles the appropriate partymode, defaults to music if no parameter is given, besides the default music or video partymode you can also pass a path to a custom smartplaylist (.xsp) as parameter. Record will work to record shoutcast streams (only?). 
+
+* XBMC.SetVolume(percent) : Sets the volume to the percentage specified. 
+* XBMC.Mute : Mutes (or unmutes) the volume. 
+
+* XBMC.PlayMedia(media) : Plays the media. This can be a playlist, music, or video file or an Url.
+||TODO : how to get media list ? ||
+
+* XBMC.PlayDVD : Will play the inserted CD or DVD media from the DVD-ROM drive. 
+
+* XBMC.Notification(header,message[,time,image]) : Will display a notification dialog with the specified header and messag, in addition you can set the length of time it displays and a icon image. 
+
+* XBMC.Powerdown : Powerdown system 
+* XBMC.Quit : Quits XBMC (same as XBMC.Dashboard on Xbox) 
+
+
+!Features with MEDIA.BASIC
+Here are all features in the order of this page : http://xplproject.org.uk/wiki/index.php?title=Schema_-_MEDIA
+
+!!Media transport commands
+
+!!!Play
+!!!!XBMC API
+{CODE()}
+ExecBuiltIn(PlayerControl(Play)) 
+{CODE}
+Play or pause the current media
+
+!!!!xPL
+{CODE()}
+xpl-cmnd
+{
+...
+}
+MEDIA.BASIC
+{
+command=&lt;play , pause&gt;
+mp=&lt;id&gt;
+}
+{CODE}
+''Warning : Play sould play and not pause if already playing (same processing for pause) but XBMC not allowed this. We will use Play to switch between play and pause mode''
+
+
+
+!!!Stop
+!!!!XBMC API
+{CODE()}
+ExecBuiltIn(PlayerControl(Stop)) 
+{CODE}
+Stop the current media
+
+!!!!xPL
+{CODE()}
+xpl-cmnd
+{
+...
+}
+MEDIA.BASIC
+{
+command=stop
+mp=&lt;id&gt;
+}
+{CODE}
+
+
+!!!Record
+''Not yet supported''
+
+
+!!!Forward and rewind
+!!!!XBMC API
+{CODE()}
+ExecBuiltIn(PlayerControl(Forward)) 
+ExecBuiltIn(PlayerControl(Rewind)) 
+{CODE}
+Go fast or go back in media
+
+!!!!xPL
+{CODE()}
+xpl-cmnd
+{
+...
+}
+MEDIA.BASIC
+{
+command=&lt;forward, rewind&gt;
+mp=&lt;id&gt;
+
+}
+{CODE}
+
+
+!!!Position
+!!!!XBMC API
+{CODE()}
+SeekPercentage(#)
+SeekPercentageRelative(&lt;-#, +#&gt;)
+{CODE}
+Go to a position in percent in media file
+
+!!!!xPL
+{CODE()}
+xpl-cmnd
+{
+...
+}
+MEDIA.BASIC
+{
+command=position
+mp=&lt;id&gt;
+position=&lt;#, -#, +#&gt;
+}
+{CODE}
+''Warning : value of position is normally in seconds but XBMC allows only percentage, so we use percentage''
+
+
+!!!Chapter
+''Not yet supported''
+
+
+!!!Next
+''Not yet supported''
+
+
+!!!Back
+''Not yet supported''
+
+
+!!Media selection command
+
+!!!Channel
+''Not yet supported''
+
+
+!!!Queue
+''Not yet supported''
+
+
+!!!Clear
+''Not yet supported''
+
+
+!!Media configuration commands
+
+
+!!!Power=on
+''Not yet supported''
+
+
+!!!Power=off
+!!!!XBMC API
+{CODE()}
+ExecBuiltIn(Powerdown())
+{CODE}
+Turn the device off
+
+!!!!xPL
+{CODE()}
+xpl-cmnd
+{
+...
+}
+MEDIA.BASIC
+{
+command=power
+mp=&lt;id&gt;
+state=off
+}
+{CODE}
+
+
+!!!Reboot
+''Not yet supported''
+
+
+!!!Mute
+!!!!XBMC API
+{CODE()}
+Mute()
+{CODE}
+Mute
+
+!!!!xPL
+{CODE()}
+xpl-cmnd
+{
+...
+}
+MEDIA.BASIC
+{
+command=mute
+mp=&lt;id&gt;
+}
+{CODE}
+''Warning : &quot;state=&lt;on, off&gt;&quot; should be present in xpl message. XBMC doesn't allow on or off so we don't use this''
+
+
+!!!Volume
+!!!!XBMC API
+{CODE()}
+SetVolume(#)
+{CODE}
+Set volume to the value (in percent)
+
+!!!!xPL
+{CODE()}
+xpl-cmnd
+{
+...
+}
+MEDIA.BASIC
+{
+command=volume
+mp=&lt;id&gt;
+level=&lt;#, -#, +#&gt; 
+}
+{CODE}
+Notice : only # will be used (no relative) because XBMC only support this.
+
+
+!!!Input
+''Not yet supported''
+
+
+!!!Options
+''Not yet supported''
+
+

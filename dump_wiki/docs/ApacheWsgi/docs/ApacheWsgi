@@ -1,0 +1,57 @@
+!Apache configuration for web access using wsgi (optional)
+
+Deploying Django with Apache and [http://code.google.com/p/modwsgi|mod_wsgi] is the recommended way to get Django into production. mod_wsgi is an Apache module which can be used to host any Python application which supports the Python WSGI interface, including Django.
+
+See [http://docs.djangoproject.com/en/dev/howto/deployment/modwsgi|here] for an exhaustive description.
+
+!!Install and configure mod_wsgi - Debian/Ubuntu method
+{CODE()}
+apt-get install libapache2-mod-wsgi
+{CODE}
+
+Then check your ''/usr/lib/apache2/modules'' directory and make sure the file ''mod_wsgi.so'' is pointing to ''mod_wsgi.so-2.6''. If it's not the case just do :
+{CODE()}
+ln -sf /usr/lib/apache2/modules/mod_wsgi.so-2.6 /usr/lib/apache2/modules/mod_wsgi.so
+{CODE}
+
+!!Add an entry to your Apache configuration file
+First enable rewrite and headers modules :
+
+{CODE()}a2enmod rewrite
+a2enmod headers{CODE}
+Replace the default virtualhost with :
+
+{CODE()}
+<VirtualHost *:80>
+
+    RewriteEngine on
+    RewriteRule ^/$ http://1.2.3.4/domogik/ [R=301,L]
+
+    Alias /design/ "/home/domogik/dmg/src/domogik/ui/djangodomo/core/templates/design/"
+    <Directory "/home/domogik/dmg/src/domogik/ui/djangodomo/core/templates/design">
+        Header add Expires "Thu, 01 Dec 2099 16:00:00 GMT"
+    </Directory>
+    Alias /widgets/ "/home/domogik/dmg/src/domogik/ui/djangodomo/core/templates/widgets/"
+    <Directory "/home/domogik/dmg/src/domogik/ui/djangodomo/core/templates/widgets/">
+        Header add Expires "Thu, 01 Dec 2099 16:00:00 GMT"
+    </Directory>
+    WSGIDaemonProcess domogik user=domogik group=domogik processes=1 threads=1
+    WSGIProcessGroup domogik
+    WSGIScriptAlias / /home/domogik/dmg/src/domogik/ui/djangodomo/apache/django.wsgi
+
+	CustomLog ${APACHE_LOG_DIR}/domogik.log combined
+    <Directory "/home/domogik/dmg/src/domogik/ui/djangodomo/apache">
+        Order deny,allow
+        Allow from all
+    </Directory>
+
+</VirtualHost>
+
+{CODE}
+
+Please note a few things :
+* For WSGIDaemonProcess, ''user'' and ''group'' should be the ones you are using to run your domogik installation (see ''/etc/default/domogik'').
+* Adapt path for both WSGIScriptAlias and Directory directives to your install.
+
+{CODE()}/etc/init.d/apache2 restart{CODE}
+
