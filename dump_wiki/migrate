@@ -1,0 +1,6 @@
+#!/bin/bash
+
+find . -type f
+echo "Replace first level header (!xxxxx)"
+sed -i '/^![^!]\+/{s/^!//;h;s/./*/g;H;G;}' $F
+
