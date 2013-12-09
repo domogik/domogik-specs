@@ -1,33 +1,26 @@
-**********************
-Writing Documentation
-**********************
+!Writing Documentation
 
 For Domogik and Domoweb, the documentation is under /docs folder.
 Each documentation page is a .txt file, and the structure is organized using folders.
 The main page is index.txt, and each page should be registered in contents.txt.
 
-reStructuredText format (reST)
-===============================
+!!reStructuredText format (reST)
 The documentation (not the wiki) is written in reStructuredText format (reST).
 
 For basic syntax:
-* [http://openalea.gforge.inria.fr/doc/openalea/doc/\_build/html/source/sphinx/rest\_syntax.html]
+* [http://openalea.gforge.inria.fr/doc/openalea/doc/_build/html/source/sphinx/rest_syntax.html]
 * [http://docs.geoserver.org/trunk/en/docguide/sphinx.html]
 * [http://sphinx.pocoo.org/rest.html]
 * [http://docutils.sourceforge.net/docs/user/rst/quickref.html]
 
-Sphinx documentation generator
-===============================
+!!Sphinx documentation generator
 If you want to generated the documentation locally, and check your documentation syntax, you need to install Sphinx first.
 * [http://sphinx.pocoo.org/]
 
 Then in the ''docs'' folder just run:
-.. code-block::
-    
-    make html
-    
+{CODE()}
+make html
+{CODE}
 
-
-Publishing your changes
-========================
-Once you have finished writing your documentation, just push your changes on the server (like you would do for application code). Every night there is a cron task on the server which will publish the newest documentation. This documentation can be found `here <http://doc.domogik.org>`_.
+!!Publishing your changes
+Once you have finished writing your documentation, just push your changes on the server (like you would do for application code). Every night there is a cron task on the server which will publish the newest documentation. This documentation can be found [http://doc.domogik.org|here].

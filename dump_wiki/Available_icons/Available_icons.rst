@@ -1,112 +1,103 @@
-****************
-Available icons
-****************
-.. toctree::
+!Available icons
+{maketoc}
+!! Default Theme
+!!! Home
+* {IMG(fileId=&quot;202&quot;)}{IMG} {IMG(fileId=&quot;207&quot;)}{IMG} {IMG(fileId=&quot;208&quot;)}{IMG}
 
-
- Default Theme
-===============
- Home
-******
-* {IMG(fileId="202")}{IMG} {IMG(fileId="207")}{IMG} {IMG(fileId="208")}{IMG}
-
- Areas 
-********
+!!! Areas 
 !!!! Attic
-* {IMG(fileId="219")}{IMG} {IMG(fileId="220")}{IMG}
+* {IMG(fileId=&quot;219&quot;)}{IMG} {IMG(fileId=&quot;220&quot;)}{IMG}
 
 !!!! Floors 
-*  {IMG(fileId="204")}{IMG} {IMG(fileId="209")}{IMG} {IMG(fileId="210")}{IMG}
-*  {IMG(fileId="203")}{IMG}  {IMG(fileId="211")}{IMG} {IMG(fileId="212")}{IMG}
+*  {IMG(fileId=&quot;204&quot;)}{IMG} {IMG(fileId=&quot;209&quot;)}{IMG} {IMG(fileId=&quot;210&quot;)}{IMG}
+*  {IMG(fileId=&quot;203&quot;)}{IMG}  {IMG(fileId=&quot;211&quot;)}{IMG} {IMG(fileId=&quot;212&quot;)}{IMG}
 !!!! Ground floor 
-* {IMG(fileId="205")}{IMG} {IMG(fileId="213")}{IMG} {IMG(fileId="214")}{IMG}
+* {IMG(fileId=&quot;205&quot;)}{IMG} {IMG(fileId=&quot;213&quot;)}{IMG} {IMG(fileId=&quot;214&quot;)}{IMG}
 
 
 !!!! Basement
-* {IMG(fileId="206")}{IMG} {IMG(fileId="215")}{IMG} {IMG(fileId="216")}{IMG} {IMG(fileId="218")}{IMG}
+* {IMG(fileId=&quot;206&quot;)}{IMG} {IMG(fileId=&quot;215&quot;)}{IMG} {IMG(fileId=&quot;216&quot;)}{IMG} {IMG(fileId=&quot;218&quot;)}{IMG}
 
- Rooms 
-********
+!!! Rooms 
 !!!! Bathroom 
-* {IMG(fileId="15")}{IMG} {IMG(fileId="152")}{IMG}  {IMG(fileId="147")}{IMG}
+* {IMG(fileId=&quot;15&quot;)}{IMG} {IMG(fileId=&quot;152&quot;)}{IMG}  {IMG(fileId=&quot;147&quot;)}{IMG}
 !!!! Bedroom 
-* {IMG(fileId="106")}{IMG}  {IMG(fileId="81")}{IMG} {IMG(fileId="68")}{IMG}
+* {IMG(fileId=&quot;106&quot;)}{IMG}  {IMG(fileId=&quot;81&quot;)}{IMG} {IMG(fileId=&quot;68&quot;)}{IMG}
 !!!! Kitchen 
-* {IMG(fileId="7")}{IMG}  {IMG(fileId="3")}{IMG} {IMG(fileId="71")}{IMG}
+* {IMG(fileId=&quot;7&quot;)}{IMG}  {IMG(fileId=&quot;3&quot;)}{IMG} {IMG(fileId=&quot;71&quot;)}{IMG}
 !!!! TV Lounge 
-* {IMG(fileId="45")}{IMG}  {IMG(fileId="154")}{IMG} {IMG(fileId="153")}{IMG}
+* {IMG(fileId=&quot;45&quot;)}{IMG}  {IMG(fileId=&quot;154&quot;)}{IMG} {IMG(fileId=&quot;153&quot;)}{IMG}
 !!!! Office 
-* {IMG(fileId="30")}{IMG} {IMG(fileId="149")}{IMG} {IMG(fileId="145")}{IMG}
+* {IMG(fileId=&quot;30&quot;)}{IMG} {IMG(fileId=&quot;149&quot;)}{IMG} {IMG(fileId=&quot;145&quot;)}{IMG}
 !!!! Kids bedroom 
-* {IMG(fileId="87")}{IMG}  {IMG(fileId="11")}{IMG} {IMG(fileId="73")}{IMG}
+* {IMG(fileId=&quot;87&quot;)}{IMG}  {IMG(fileId=&quot;11&quot;)}{IMG} {IMG(fileId=&quot;73&quot;)}{IMG}
 !!!! Garage 
-* {IMG(fileId="151")}{IMG}  {IMG(fileId="146")}{IMG} {IMG(fileId="148")}{IMG}
+* {IMG(fileId=&quot;151&quot;)}{IMG}  {IMG(fileId=&quot;146&quot;)}{IMG} {IMG(fileId=&quot;148&quot;)}{IMG}
 
- Devices Usages 
-*****************
+!!! Devices Usages 
 !!!! Not available (default icon, if the selected usage doesn't have icons yet)
-* {IMG(fileId="262")}{IMG} {IMG(fileId="263")}{IMG} {IMG(fileId="264")}{IMG}
+* {IMG(fileId=&quot;262&quot;)}{IMG} {IMG(fileId=&quot;263&quot;)}{IMG} {IMG(fileId=&quot;264&quot;)}{IMG}
 
 !!!! Light
-* Usage {IMG(fileId="114")}{IMG} {IMG(fileId="91")}{IMG}
-* Undefined {IMG(fileId="245")}{IMG}
-* Binary {IMG(fileId="37")}{IMG}  {IMG(fileId="83")}{IMG}
-* Range {IMG(fileId="37")}{IMG} {IMG(fileId="20")}{IMG} {IMG(fileId="70")}{IMG} {IMG(fileId="34")}{IMG} {IMG(fileId="120")}{IMG} {IMG(fileId="49")}{IMG} {IMG(fileId="13")}{IMG} {IMG(fileId="90")}{IMG} {IMG(fileId="27")}{IMG} {IMG(fileId="46")}{IMG} {IMG(fileId="83")}{IMG}
+* Usage {IMG(fileId=&quot;114&quot;)}{IMG} {IMG(fileId=&quot;91&quot;)}{IMG}
+* Undefined {IMG(fileId=&quot;245&quot;)}{IMG}
+* Binary {IMG(fileId=&quot;37&quot;)}{IMG}  {IMG(fileId=&quot;83&quot;)}{IMG}
+* Range {IMG(fileId=&quot;37&quot;)}{IMG} {IMG(fileId=&quot;20&quot;)}{IMG} {IMG(fileId=&quot;70&quot;)}{IMG} {IMG(fileId=&quot;34&quot;)}{IMG} {IMG(fileId=&quot;120&quot;)}{IMG} {IMG(fileId=&quot;49&quot;)}{IMG} {IMG(fileId=&quot;13&quot;)}{IMG} {IMG(fileId=&quot;90&quot;)}{IMG} {IMG(fileId=&quot;27&quot;)}{IMG} {IMG(fileId=&quot;46&quot;)}{IMG} {IMG(fileId=&quot;83&quot;)}{IMG}
 
 !!!! Appliance 
-* Usage {IMG(fileId="53")}{IMG} {IMG(fileId="124")}{IMG} {IMG(fileId="168")}{IMG} {IMG(fileId="177")}{IMG}
-* Undefined {IMG(fileId="243")}{IMG}
-* Binary {IMG(fileId="76")}{IMG}  {IMG(fileId="53")}{IMG}
-* Range {IMG(fileId="76")}{IMG} {IMG(fileId="77")}{IMG} {IMG(fileId="104")}{IMG} {IMG(fileId="119")}{IMG} {IMG(fileId="38")}{IMG} {IMG(fileId="108")}{IMG} {IMG(fileId="113")}{IMG} {IMG(fileId="28")}{IMG} {IMG(fileId="118")}{IMG} {IMG(fileId="22")}{IMG} {IMG(fileId="53")}{IMG}
+* Usage {IMG(fileId=&quot;53&quot;)}{IMG} {IMG(fileId=&quot;124&quot;)}{IMG} {IMG(fileId=&quot;168&quot;)}{IMG} {IMG(fileId=&quot;177&quot;)}{IMG}
+* Undefined {IMG(fileId=&quot;243&quot;)}{IMG}
+* Binary {IMG(fileId=&quot;76&quot;)}{IMG}  {IMG(fileId=&quot;53&quot;)}{IMG}
+* Range {IMG(fileId=&quot;76&quot;)}{IMG} {IMG(fileId=&quot;77&quot;)}{IMG} {IMG(fileId=&quot;104&quot;)}{IMG} {IMG(fileId=&quot;119&quot;)}{IMG} {IMG(fileId=&quot;38&quot;)}{IMG} {IMG(fileId=&quot;108&quot;)}{IMG} {IMG(fileId=&quot;113&quot;)}{IMG} {IMG(fileId=&quot;28&quot;)}{IMG} {IMG(fileId=&quot;118&quot;)}{IMG} {IMG(fileId=&quot;22&quot;)}{IMG} {IMG(fileId=&quot;53&quot;)}{IMG}
 
 !!!! Shutter 
-* Usage {IMG(fileId="63")}{IMG}  {IMG(fileId="69")}{IMG}
-* Undefined {IMG(fileId="246")}{IMG}
-* Binary {IMG(fileId="17")}{IMG}  {IMG(fileId="57")}{IMG}
-* Range {IMG(fileId="17")}{IMG} {IMG(fileId="121")}{IMG} {IMG(fileId="82")}{IMG} {IMG(fileId="99")}{IMG} {IMG(fileId="107")}{IMG} {IMG(fileId="112")}{IMG} {IMG(fileId="31")}{IMG} {IMG(fileId="105")}{IMG} {IMG(fileId="64")}{IMG} {IMG(fileId="95")}{IMG} {IMG(fileId="57")}{IMG}
+* Usage {IMG(fileId=&quot;63&quot;)}{IMG}  {IMG(fileId=&quot;69&quot;)}{IMG}
+* Undefined {IMG(fileId=&quot;246&quot;)}{IMG}
+* Binary {IMG(fileId=&quot;17&quot;)}{IMG}  {IMG(fileId=&quot;57&quot;)}{IMG}
+* Range {IMG(fileId=&quot;17&quot;)}{IMG} {IMG(fileId=&quot;121&quot;)}{IMG} {IMG(fileId=&quot;82&quot;)}{IMG} {IMG(fileId=&quot;99&quot;)}{IMG} {IMG(fileId=&quot;107&quot;)}{IMG} {IMG(fileId=&quot;112&quot;)}{IMG} {IMG(fileId=&quot;31&quot;)}{IMG} {IMG(fileId=&quot;105&quot;)}{IMG} {IMG(fileId=&quot;64&quot;)}{IMG} {IMG(fileId=&quot;95&quot;)}{IMG} {IMG(fileId=&quot;57&quot;)}{IMG}
 
 !!!! Air conditioning
-* Usage {IMG(fileId="66")}{IMG}  {IMG(fileId="96")}{IMG}
-* Undefined {IMG(fileId="244")}{IMG}
-* Binary {img fileId="98" }  {img fileId="66"  }  
-* Range {img fileId="98" }  {img fileId="65" }  {img fileId="21" }   {img fileId="44"  }  {img fileId="42"  }  {img fileId="52"  }  {img fileId="100"  }   {img fileId="110"  }  {img fileId="36"  }   {img fileId="85"  }  {img fileId="66"  }  
+* Usage {IMG(fileId=&quot;66&quot;)}{IMG}  {IMG(fileId=&quot;96&quot;)}{IMG}
+* Undefined {IMG(fileId=&quot;244&quot;)}{IMG}
+* Binary {img fileId=&quot;98&quot; }  {img fileId=&quot;66&quot;  }  
+* Range {img fileId=&quot;98&quot; }  {img fileId=&quot;65&quot; }  {img fileId=&quot;21&quot; }   {img fileId=&quot;44&quot;  }  {img fileId=&quot;42&quot;  }  {img fileId=&quot;52&quot;  }  {img fileId=&quot;100&quot;  }   {img fileId=&quot;110&quot;  }  {img fileId=&quot;36&quot;  }   {img fileId=&quot;85&quot;  }  {img fileId=&quot;66&quot;  }  
 
 !!!! Ventilation 
-* Usage {IMG(fileId="47")}{IMG}  {IMG(fileId="26")}{IMG}
-* Undefined {IMG(fileId="247")}{IMG}
-* Binary {img fileId="35" }  {img fileId="51"  }
-* Range {img fileId="35" } {img fileId="55" }  {img fileId="97" }  {img fileId="10" }  {img fileId="24" }  {img fileId="25" }  {img fileId="59"  }  {img fileId="115"  } {img fileId="93"  } {img fileId="61"  } {img fileId="51"  }
+* Usage {IMG(fileId=&quot;47&quot;)}{IMG}  {IMG(fileId=&quot;26&quot;)}{IMG}
+* Undefined {IMG(fileId=&quot;247&quot;)}{IMG}
+* Binary {img fileId=&quot;35&quot; }  {img fileId=&quot;51&quot;  }
+* Range {img fileId=&quot;35&quot; } {img fileId=&quot;55&quot; }  {img fileId=&quot;97&quot; }  {img fileId=&quot;10&quot; }  {img fileId=&quot;24&quot; }  {img fileId=&quot;25&quot; }  {img fileId=&quot;59&quot;  }  {img fileId=&quot;115&quot;  } {img fileId=&quot;93&quot;  } {img fileId=&quot;61&quot;  } {img fileId=&quot;51&quot;  }
 
 !!!! Heating 
 * Usage 
-* Binary {img fileId="172"}  {img fileId="171"}
-* List {img fileId="176"}  {img fileId="173"}  {img fileId="175"} {img fileId="174"}
+* Binary {img fileId=&quot;172&quot;}  {img fileId=&quot;171&quot;}
+* List {img fileId=&quot;176&quot;}  {img fileId=&quot;173&quot;}  {img fileId=&quot;175&quot;} {img fileId=&quot;174&quot;}
 
 !!!! Temperature 
-* Usage {IMG(fileId="200")}{IMG} {IMG(fileId="199")}{IMG}
+* Usage {IMG(fileId=&quot;200&quot;)}{IMG} {IMG(fileId=&quot;199&quot;)}{IMG}
 
 !!!! Telephony
-* Usage {IMG(fileId="225")}{IMG} {IMG(fileId="226")}{IMG}
+* Usage {IMG(fileId=&quot;225&quot;)}{IMG} {IMG(fileId=&quot;226&quot;)}{IMG}
 
 !!!! Computer
-* Usage {IMG(fileId="230")}{IMG} {img fileId="229"}
+* Usage {IMG(fileId=&quot;230&quot;)}{IMG} {img fileId=&quot;229&quot;}
 
 !!!! Server
 
 !!!! Mir:ror
-* Usage {IMG(fileId="232")}{IMG} {IMG(fileId="234")}{IMG} 
-* Binary {IMG(fileId="232")}{IMG} {IMG(fileId="237")}{IMG}
+* Usage {IMG(fileId=&quot;232&quot;)}{IMG} {IMG(fileId=&quot;234&quot;)}{IMG} 
+* Binary {IMG(fileId=&quot;232&quot;)}{IMG} {IMG(fileId=&quot;237&quot;)}{IMG}
 
 !!!! Nanoztag:tags
-* Usage {IMG(fileId="236")}{IMG} {IMG(fileId="235")}{IMG}
-* Binary {IMG(fileId="236")}{IMG} {IMG(fileId="239")}{IMG}
+* Usage {IMG(fileId=&quot;236&quot;)}{IMG} {IMG(fileId=&quot;235&quot;)}{IMG}
+* Binary {IMG(fileId=&quot;236&quot;)}{IMG} {IMG(fileId=&quot;239&quot;)}{IMG}
 
 !!!! TV
 
 !!!! Music
 
 !!!! Electricity
-* Usage {IMG(fileId="241")}{IMG} {IMG(fileId="242")}{IMG}
+* Usage {IMG(fileId=&quot;241&quot;)}{IMG} {IMG(fileId=&quot;242&quot;)}{IMG}
 
 !!!! Water
 
@@ -130,8 +121,7 @@ Available icons
 
 !!!!People
 
- Interface
-***********
+!!! Interface
 !!!! Visualisation link
 !!!! Administration link
 !!!! Help link

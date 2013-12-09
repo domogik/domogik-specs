@@ -1,12 +1,8 @@
-.. toctree::
-
-
+{maketoc}
 
 This page is a draft about reflexions for integrating ZoneMinder with Domogik
 
-********
-Install
-********
+!Install
 Download and expand zmxap in /usr/local/zmxap
 
 making the /var/run/zm dir manually, and making it mode 777 (755 ?), and start zm
@@ -18,14 +14,10 @@ lanch zmxap in /usr/local/zmxap :  sudo perl zmxap.pl
 check des logs :  tail -f /tmp/zmxap.log
 
 
-******************
-Xpl specification
-******************
+!Xpl specification
 
-Alarms
-=======
-Sent on alarm :
-****************
+!!Alarms
+!!!Sent on alarm :
 xpl-trig
 {
 ...
@@ -38,8 +30,7 @@ state=on         # start of alarm
 zone_data=all    # what the fuck is it ?
 }
 
-Sent during alarm :
-********************
+!!!Sent during alarm :
 xpl-trig
 {
 ...
@@ -73,8 +64,7 @@ pic=http://***MON IP***/cgi-bin/nph-zms?mode=single&amp;monitor=1&amp;scale=100&
 refresh=0.1
 }
 
-Sent at the end of alarm : 
-****************************
+!!!Sent at the end of alarm : 
 xpl-trig
 {
 ...

@@ -1,16 +1,10 @@
-**********
- Homepage
-**********
-{IMG(attId="4")}{IMG}
-***************
- Visualization
-***************
-{IMG(attId="20")}{IMG}
+! Homepage
+{IMG(attId=&quot;4&quot;)}{IMG}
+! Visualization
+{IMG(attId=&quot;20&quot;)}{IMG}
 
-{IMG(attId="21")}{IMG}
+{IMG(attId=&quot;21&quot;)}{IMG}
 
-{IMG(attId="26")}{IMG}
-*******
- Admin
-*******
-{IMG(attId="3")}{IMG}
+{IMG(attId=&quot;26&quot;)}{IMG}
+! Admin
+{IMG(attId=&quot;3&quot;)}{IMG}

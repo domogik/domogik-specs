@@ -1,16 +1,10 @@
-.. toctree::
+{maketoc}
 
-
-
-********
-Purpose
-********
+!Purpose
 
 TODO: ZiBase description
 
-**************
-Protocol list
-**************
+!Protocol list
 * VISONIC433 : Protocol VISIONIC with frequency 433 MHz
 * VISONIC868 : Protocol VISIONIC with frequency 868 MHz
 * CHACON : Protocol CHACON for CHACON V2 + DIO series
@@ -24,93 +18,74 @@ Protocol list
 * XDD868PILOT : Protocol X2D Pilot Wire 
 * XDD868BOAC : Protocol X2D Boiler/AC
 
-*********************
-Plugin configuration
-*********************
-Enabling plugin
-================
+!Plugin configuration
+!!Enabling plugin
 You can enable plugin by using:
-.. code-block::
-    
-    dmgenplug zibase
-    
-
+{CODE()}
+dmgenplug zibase
+{CODE}
 You just have to reload administration page to see the plugin in the list.
 
-Configuration
-==============
+!!Configuration
 In Domogik administration, go to zibase configuration page.
 
-ip
-***
+!!!ip
 IP of the ZiBase.
 
 
-interface
-**********
+!!!interface
 Network interface to connect your PC to your local network.
 
-port
-*****
+!!!port
 Listening port for the reception of messages from the ZiBase.
 
-envar
-******
+!!!envar
 Enable reading internal variable
 
-interv
-*******
+!!!interv
 Interval between each reading of the internal variables (in secondes)
 
-Start plugin
-=============
+!!Start plugin
 You can now start the plugin (start button).
 
-****************************
-Creating devices for ZiBase
-****************************
-In administration, go to Organization > Devices page to create tour devices.
+!Creating devices for ZiBase
+In administration, go to Organization &gt; Devices page to create tour devices.
 
-Actuators
-==========
+!!Actuators
 
-lamp device
-************
+!!!lamp device
 Create a new device like this:
 
-* Name : "Living room" (or whatever you want)
+* Name : &quot;Living room&quot; (or whatever you want)
 * Description : a short description (Placement, usage ,etc)
-* Address : <__Address device__>:<__protocol__>. you should put : __G1:CHACON__ or __G2:X10__ or __G3:DOMIA__
-* Reference : "Zibase" (or whatever you want)
-* Usage : "Light" (for example)
+* Address : &lt;__Address device__&gt;:&lt;__protocol__&gt;. you should put : __G1:CHACON__ or __G2:X10__ or __G3:DOMIA__
+* Reference : &quot;Zibase&quot; (or whatever you want)
+* Usage : &quot;Light&quot; (for example)
 * Feature :
 ** ZiBase.Switch provides only on/off
 ** ZiBase.Dimmer provides on/off and dim/bright
 
 Examples :
-{IMG(fileId="268|267")}{IMG}
+{IMG(fileId=&quot;268|267&quot;)}{IMG}
 
 
 ((Setup_your_devices|Attribute the features to a place and you will be able to control your lamp.))
 
-appliance device
-*****************
+!!!appliance device
 Create a new device like this:
 
-* Name : "Swimming pump" (or whatever you want)
+* Name : &quot;Swimming pump&quot; (or whatever you want)
 * Description : a short description (Placement, usage ,etc)
-* Address : <__Address device__>:<__protocol__>. you should put : __G1:CHACON__ or __G2:X10__ or __G3:DOMIA__
-* Reference : "Zibase" (or whatever you want)
-* Usage : "Appliance" (for example)
+* Address : &lt;__Address device__&gt;:&lt;__protocol__&gt;. you should put : __G1:CHACON__ or __G2:X10__ or __G3:DOMIA__
+* Reference : &quot;Zibase&quot; (or whatever you want)
+* Usage : &quot;Appliance&quot; (for example)
 * Feature : ZiBase.Switch
 
 ((Setup_your_devices|Attribute the features to a place and you can now control your appliance.))
 
-Sensors
-========
+!!Sensors
 
-Sensors list
-*************
+!!!Sensors list
 * Oregon rain
 * Oregon U.V (*)
 * Oregon Anemometer
@@ -122,36 +97,29 @@ Sensors list
 
 (*) Sensor not tested
 
-Add a new sensor
-*****************
+!!!Add a new sensor
 Create a new sensor like this:
 
-* Name : "Swimming temp" (or whatever you want)
+* Name : &quot;Swimming temp&quot; (or whatever you want)
 * Description : a short description (Placement, usage ,etc)
-* Address : <__Address device__> (Sensor ID in zibase configurator)
-{IMG(fileId="274")}{IMG}
-* Reference : "Zibase" (or whatever you want)
-* Usage : "Temperature" (for example)
+* Address : &lt;__Address device__&gt; (Sensor ID in zibase configurator)
+{IMG(fileId=&quot;274&quot;)}{IMG}
+* Reference : &quot;Zibase&quot; (or whatever you want)
+* Usage : &quot;Temperature&quot; (for example)
 * Feature : ZiBase.Oregon Temperature
 
-Internal variable
-==================
+!!Internal variable
 
-Add an internal variable reading
-*********************************
-* Name : "Internal var" (or whatever you want)
+!!!Add an internal variable reading
+* Name : &quot;Internal var&quot; (or whatever you want)
 * Description : a short description (Usage ,etc)
-* Address : "VAR" &amp; <__number of the internal variable__> ( for example : VAR1 for the internal variable number 1)
-* Reference : "Zibase" (or whatever you want)
+* Address : &quot;VAR&quot; &amp; &lt;__number of the internal variable__&gt; ( for example : VAR1 for the internal variable number 1)
+* Reference : &quot;Zibase&quot; (or whatever you want)
 * Usage : whatever you want
 * Feature : ZiBase.Internal VARs
 
-********
-Helpers
-********
+!Helpers
 ''To get an introduction to helpers, you can read the ((Plugins_helpers|Helper documentation)). To use a helper, the plugin must be stopped.''
 
-*****************
-Developper Notes
-*****************
+!Developper Notes
 TODO:xpl schema

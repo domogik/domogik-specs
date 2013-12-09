@@ -1,56 +1,47 @@
-********************************************************************************************************
-{IMG(src="http://code.google.com/p/domodroid/logo?cct=1319102596")}{IMG} Domodroid User Guide
-********************************************************************************************************
+!{IMG(src=&quot;http://code.google.com/p/domodroid/logo?cct=1319102596&quot;)}{IMG} Domodroid User Guide
 
-Introduction
-=============
+!!Introduction
 
 Domodroid is a free Android user interface for Domogik under GNU/GPL v3 Licence. With Domodroid, users can control most of the devices supported by Domogik (PLCBus, X10, 1wire, Mjpeg Camera, WolPing, Yahoo Weather...).
 
 Domodroid provides the following usages compatible with many technologies:
 
-.. code-block::wrap="1",ishtml="1"
-    <table>
-    <tr>
-    <td>
-    <p><b> - Switch </b></p>
-    <p><b> - Dimmer </b></p>
-    <p><b> - Trigger </b></p>
-    <p><b> - Camera </b></p>
-    <p><b> - Sensor </b></p>
-    <p><b> - Binary </b></p>
-    </td>
-    <td><img src="http://i40.tinypic.com/mn16yo.png" border="0"></td>
-    </tr>
-    </table>
+{CODE(wrap=&quot;1&quot;,ishtml=&quot;1&quot;)}&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;p&gt;&lt;b&gt; - Switch &lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;&lt;b&gt; - Dimmer &lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;&lt;b&gt; - Trigger &lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;&lt;b&gt; - Camera &lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;&lt;b&gt; - Sensor &lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;&lt;b&gt; - Binary &lt;/b&gt;&lt;/p&gt;
+&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;http://i40.tinypic.com/mn16yo.png&quot; border=&quot;0&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;{CODE}
 
-
-Features and Informations
-==========================
+!!Features and Informations
 
 Domodroid 1.0 provides plenty of features: 
-General
-********
+!!!General
 *Multi display compatibility (Smartphone and Tablet)
 *Easy configuration: Set your REST IP/URL access and synchronize
 *Ability to set the widget's update timer from 10 to 300 secondes
 *Power Management control keeping your screen on during the use of Domodroid
 *Full icon pack supported
 
-Widgets
-********
+!!!Widgets
 *6 animated widgets
 *Auto-Updated with an asynchrone threading system
 *Data widget with 2d chart engine
 
-Map system
-***********
-*Creation of the "Domodroid" directory at the root of the external storage directory (or internal for some specific devices), maps have to be put in this directory.
+!!!Map system
+*Creation of the &quot;Domodroid&quot; directory at the root of the external storage directory (or internal for some specific devices), maps have to be put in this directory.
 **Zoom: 2 fingers pinch
 **Drag: 2 fingers move
 **Change map: 3 fingers tap
 
-*Multi-touch gesture (Zoom, Drag, Change Map) can be activated from the "Options" screen.
+*Multi-touch gesture (Zoom, Drag, Change Map) can be activated from the &quot;Options&quot; screen.
 Gesture activation must be activated only on powerfull devices otherwise Domodroid will certainly crashes. Bitmap rezising might cause OutOfMemory exception so domodroid will automatically reduce bitmaps exceeding 800*800px by √2.
 
 *Png and SVG format supported:
@@ -70,34 +61,27 @@ This library supports a subset of the SVG Basic 1.1 specification. Typically, yo
 
 *Remove widgets button allows users to remove the widget from the map
 
-{IMG(src="http://i39.tinypic.com/swy611.png")}{IMG}
+{IMG(src=&quot;http://i39.tinypic.com/swy611.png&quot;)}{IMG}
 
-Camera
-*******
+!!!Camera
 * Mjpeg Stream supported
 * Framerate counter
 
 To use the camera streaming feature, the Camera plugin has to be installed in Domogik. If none of your camera stream Mjpeg datas, you can use Zoneminder which a free video camera security application that encode many kind of video stream format to mjpeg stream.
 
-{IMG(src="http://i51.tinypic.com/5v6paa.png")}{IMG}
+{IMG(src=&quot;http://i51.tinypic.com/5v6paa.png&quot;)}{IMG}
 
-Apps and Sources
-=================
+!!Apps and Sources
 Domodroid is available on the Android Market and also on the code.google website which also allows you to download the last available sources
 http://code.google.com/p/domodroid/
 
-Contact
-========
+!!Contact
 pierre.laine2@gmail.com
 
 
-**************
-Domodroid Dev
-**************
+!Domodroid Dev
 
-Domodroid specification
-========================
+!!Domodroid specification
 ((Spec_Domodroid|Here))
-Domodroid how to use source code
-=================================
+!!Domodroid how to use source code
 ((Domodroid_Src|Here))

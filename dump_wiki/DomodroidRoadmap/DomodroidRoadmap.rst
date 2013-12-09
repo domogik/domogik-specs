@@ -1,21 +1,14 @@
-******************
-Domodroid roadmap
-******************
+!Domodroid roadmap
 
-.. toctree::
+{maketoc}
 
-
-
-Release 1.1 (closed)
-=====================
+!!Release 1.1 (closed)
 This was the release for Domogik 0.1
 
-Release 1.2 (Domogik 0.2 ... 0.3)
-==================================
+!!Release 1.2 (Domogik 0.2 ... 0.3)
 
-Features included
-******************
-* Handle the "page" evolution : the widgets are grouped by usages now with Domogik 0.3 and are grouped as before with Domogik 0.2 (Done by Basilic)
+!!!Features included
+* Handle the &quot;page&quot; evolution : the widgets are grouped by usages now with Domogik 0.3 and are grouped as before with Domogik 0.2 (Done by Basilic)
 * Finish the map mode (in progress)
 * Include more usages icons (Done by Tikismoke)
 * Charts improvement (buttons to change the display period Done)
@@ -29,20 +22,16 @@ Features included
 * Start the application on the map mode (with a menu option activated in map config menu)(Done by Doume)
 * Save currentscale for map.(Done by Tikismoke)
 * widgets for the map to display another map.(Done by Doume)
-Candidates
-***********
+!!!Candidates
 * Add a widget choose for binary widget to add mono function, only on or only off, for exemple start a timer, or switch off all light.
 * Adapt Domodroid to the resolution screen.
 * Save currentscale for each map, not all with the same zoom.
 
-Release 2.0 (Domogik 0.4)
-==========================
+!!Release 2.0 (Domogik 0.4)
 
-Features included
-******************
+!!!Features included
 
-Candidates
-***********
+!!!Candidates
 * Add a sub runtime for new rest/rinor url
 * Add a table on database to store command id
 * Add an admin room and widget for view mode

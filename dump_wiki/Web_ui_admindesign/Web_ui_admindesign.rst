@@ -1,4 +1,3 @@
 This page regroup all the current mockups by Alban
-Plugin section
-===============
-{IMG(attId="391|392|393|394",height="25%",width="25%")}{IMG}
+!!Plugin section
+{IMG(attId=&quot;391|392|393|394&quot;,height=&quot;25%&quot;,width=&quot;25%&quot;)}{IMG}

@@ -1,16 +1,12 @@
-*************************************************
-Device models management webapp (specifications)
-*************************************************
+!Device models management webapp (specifications)
 
-Purpose
-========
+!!Purpose
 
 This web app is a REST service to receives informations about devices models from the users.
 There will be a small UI to display the informations sent and change their status
 
 
-Authentication
-===============
+!!Authentication
 
 The webapp will need a basic authentication for the user interface. As there are no critical data, there is no need to have something heavily secured.
 Login/password will be enough. All accounts will have the same grants.
@@ -19,11 +15,9 @@ The new accounts can be created only on command line with a tool like this: *pyt
 To update a password, same thing : *python update_user my_login new_password*
 To delete a user : same thing : *python delete_user my_login*
 
-Database model
-===============
+!!Database model
 
-Table : users
-**************
+!!!Table : users
 
 ||Field|Type
 user|string
@@ -31,8 +25,7 @@ password|password||
 
 
 
-Table : data
-*************
+!!!Table : data
 
 ||Field|Type|Description
 id|int|PK
@@ -47,24 +40,22 @@ status|enum|NEW : when inserted, PROCESSING, PROCESSED
 issue_url|string|url of the issue (when in status PROCESSING/PROCESSED) : null when row is inserted||
 ~~#F00:last_value ?~~
 
-How it will work (uses cases)
-==============================
+!!How it will work (uses cases)
 
-On Domogik admin side
-**********************
+!!!On Domogik admin side
 There will be a button in the plugin devices view for each device. When clicking on the button the user will access to a form with these fields :
 
-* package_id : <package id> (prefilled, not updatable)
-* device_type : <device type> (prefilled, not updatable)
+* package_id : &lt;package id&gt; (prefilled, not updatable)
+* device_type : &lt;device type&gt; (prefilled, not updatable)
 ~~#F00:attention avec device_type dans le nouvau modèle: Il n'y a plus la notion de type. mais simplement un identifiant de template utilisé pour créer le device. cette donnée peut être nulle si le device a été créé manuellement, sans template. de plus ce champ devra être vidé si la structure du device à été modifiée~~
 ~~#F00:Il faudrait aussi voir si cereal à ajouté la version du template utilisé, pour les mise à jour~~
 
-* device description (model, reference) : <device model or reference> (prefilled if possible, updatable by the user)
+* device description (model, reference) : &lt;device model or reference&gt; (prefilled if possible, updatable by the user)
 * device status (list of choices) : works fine / don't work / works a bit
 ~~#F00:pour quelle utilisation?~~
 
-* (displayed if status != works fine) issue description : <informations from the user>
-* user email : <the user email> (updatable, can be blank if the user don't want to give its email)
+* (displayed if status != works fine) issue description : &lt;informations from the user&gt;
+* user email : &lt;the user email&gt; (updatable, can be blank if the user don't want to give its email)
 
 When the user validates the form, an url is called on the webapp with the data in a json format : 
 { 
@@ -82,10 +73,9 @@ The url should return a HTTP 200 (or 204 ?) response. If so, a success notificat
 
 The url is configured in /etc/domogik/domogik.cfg so we can change it from a version to another one (in case we need to change it a day)
 
-On the webapp side
-===================
+!!On the webapp side
 
-There will be 2 "public" urls : 
+There will be 2 &quot;public&quot; urls : 
 * /add (POST) : this is the url called by the domogik admin
 ~~#F00:Je comprends pas à quoi ca sert~~
 
@@ -94,8 +84,7 @@ There will be 2 "public" urls :
 Some other urls will be needed (but users won't need to know them) :
 * /admin/* : all the pages of the admin
 
-the /add url is called
-***********************
+!!!the /add url is called
 
 Here is what should happen :
 {code()}
@@ -106,8 +95,7 @@ send an email to a mailing list to notify (can be disabled by config)
 call a free url (to update a dashboard in the future)
 {code}
 
-the / url is accessed
-**********************
+!!!the / url is accessed
 
 A login box must be displayed. If the login/password is not good, display an error. If it is good, display the main niew
 
@@ -133,10 +121,9 @@ All the debug about the issue must be handled in the issue on the tracker.
 
 !!!!UI views
 
-{IMG(attId="441",height="25%",width="25%")}{IMG}
+{IMG(attId=&quot;441&quot;,height=&quot;25%&quot;,width=&quot;25%&quot;)}{IMG}
 
-Installation
-=============
+!!Installation
 The installation must respect the following rules : 
 * installer is in python
 * all the installation options must be set as options for install.py

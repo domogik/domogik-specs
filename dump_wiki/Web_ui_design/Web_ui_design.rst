@@ -1,6 +1,4 @@
-*****************************
-Web UI design specifications
-*****************************
+!Web UI design specifications
 The Web UI v2 will introduce a new structure concept:
 *The main base element will be the 'Page' element. (((Web_ui_pages|See Pages for more details)))
 *Each page element will be visually represented by a 'View' element. (((Web_ui_views|See Views for more details)))
@@ -8,23 +6,18 @@ The Web UI v2 will introduce a new structure concept:
 *Some specifics sections will be able to display some 'Widget' elements. (((WebUIWidgets|SeeWidgets for more details)))
 
 
-Placement
-==========
+!!Placement
 A default layout is available for each view.
 But each view can have its own layout.
 (Default layout for each page)
-{IMG(attId="209")}{IMG}
+{IMG(attId=&quot;209&quot;)}{IMG}
 
-Examples
-=========
-View of 'Ma Pièce', with colored sections and page background
-**************************************************************
-{IMG(attId="206")}{IMG}
+!!Examples
+!!!View of 'Ma Pièce', with colored sections and page background
+{IMG(attId=&quot;206&quot;)}{IMG}
 
-View of 'Ma Pièce', with image background
-******************************************
-{IMG(attId="207")}{IMG}
+!!!View of 'Ma Pièce', with image background
+{IMG(attId=&quot;207&quot;)}{IMG}
 
-View of 'Ma Pièce', with image background and section color backgrounds
-************************************************************************
-{IMG(attId="208")}{IMG}
+!!!View of 'Ma Pièce', with image background and section color backgrounds
+{IMG(attId=&quot;208&quot;)}{IMG}

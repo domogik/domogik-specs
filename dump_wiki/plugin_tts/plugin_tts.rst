@@ -1,110 +1,79 @@
-.. toctree::
+{maketoc}
 
-
-
-********
-Purpose
-********
+!Purpose
 This plugin allows sending message by TTS (Text To Speech).  
 
-*********************
-Package Installation
-*********************
- TTS festival
-==============
+!Package Installation
+!! TTS festival
 For use TTS with festival for english language:
 
-.. code-block::
-    
-    # apt-get install festival
-    
+{CODE()}
+# apt-get install festival
+{CODE}
+
+!! TTS espeak
+
+!! TTS SVOX pico
+{CODE()}
+# apt-get install libttspico-utils
+{CODE}
 
 
- TTS espeak
-============
-
- TTS SVOX pico
-===============
-.. code-block::
-    
-    # apt-get install libttspico-utils
-    
-
-
-
-*********************
-Plugin configuration
-*********************
-Enabling plugin
-================
+!Plugin configuration
+!!Enabling plugin
 You can enable plugin by using :
-.. code-block::
-    
-    dmgenplug tts
-    
-
+{CODE()}
+dmgenplug tts
+{CODE}
 
 You just have to reload administration page to see the plugin in the list.
 
-Configuration
-==============
-Start plugin
-=============
+!!Configuration
+!!Start plugin
 You can now start the plugin (start button).
 
-software : Command line for use TTS software
-*********************************************
+!!!software : Command line for use TTS software
 * for french language with SVOX pico:
-** pico2wave -l fr-FR -w tts.wav \"%s\" | paplay tts.wav 
+** pico2wave -l fr-FR -w tts.wav \&quot;%s\&quot; | paplay tts.wav 
 
 * for french language with espeak:
-** espeak -v fr \"%s\"
+** espeak -v fr \&quot;%s\&quot;
 
 * for english language :
-** echo \"%s\" | festival --tts
+** echo \&quot;%s\&quot; | festival --tts
 
 
 
 
-*****************
-Developper Notes
-*****************
+!Developper Notes
 
-How the online plugin to test of order? 
-=========================================
+!!How the online plugin to test of order? 
 In a final one, since the catalog xpl/bin it is necessary to launch the order. 
-.. code-block::
-    
-    ./tts.py -f
-    
-
+{CODE()}
+./tts.py -f
+{CODE}
 
 In a final other, since the catalog xpl/bin it is necessary to launch the order. 
-.. code-block::
-    
-    ./send.py xpl-cmnd tts.basic “speech=your_text"
-    
+{CODE()}
+./send.py xpl-cmnd tts.basic “speech=your_text&quot;
+{CODE}
 
 
 
-
-xPL schema
-***********
-* `tts.basic <http://xplproject.org.uk/wiki/index.php?title=Schema\_-\_TTS.BASIC>`_
+!!!xPL schema
+* [http://xplproject.org.uk/wiki/index.php?title=Schema_-_TTS.BASIC|tts.basic]
 
 
 !!!!Message to send to plugin for send message to TTS software
 To ask a plugin to send a message, you should send this __xpl-cmnd__ message :
-.. code-block::
-    
-    TTS.BASIC
-    {
-    SPEECH=<text to announce>
-    [VOLUME=<0 to 100>]
-    [SPEED=<-10 to 10>]
-    [VOICE=<name of voice to use>]
-    }
-    
+{CODE()}
+TTS.BASIC
+{
+SPEECH=&lt;text to announce&gt;
+[VOLUME=&lt;0 to 100&gt;]
+[SPEED=&lt;-10 to 10&gt;]
+[VOICE=&lt;name of voice to use&gt;]
+}
+{CODE}
 
-
-For this moment only field "speech" is use.
+For this moment only field &quot;speech&quot; is use.

@@ -1,17 +1,11 @@
-*******************
-Plugins in Domogik
-*******************
-.. toctree::
+!Plugins in Domogik
+{maketoc}
 
-
-
-Plugin list
-============
+!!Plugin list
 
 ||{img fileId=343} | The plugins end user documentation has migrated to a new tool. It is now available on http://repo.domogik.org/package/ .__ Only specification pages for packages which are not yet in nightly builds will remain on this page.||
 
-Plugins with the doc still not migrated
-****************************************
+!!!Plugins with the doc still not migrated
 ||__Plugin__|__Description______|__Target release version__
 ((external_ar_rgb|ar_rgb)) | Manage RGB leds with an arduino | 0.2.0 (finished)
 ((plugin_xbmc_not|xbmc_not)) |Send notifications to a XBMC Media Center|obsolete (will be replaced by a full xbmc plugin)
@@ -43,8 +37,7 @@ Plugins with the doc still not migrated
 ((plugin_bluez|bluez)) |Detect bluetooth phones |0.2.0||
 
 
-Ideas
-******
+!!!Ideas
 ||__Plugin__|__Description__
 ((plugin_gvsms|gvsms)) |Send free text messages (SMS) with Google Voice
 ((plugin_tv_samsg|tv_samsg)) |Control a Samsung television with a serial port
@@ -52,13 +45,11 @@ Ideas
 ((plugin_cron|cron)) |A cron server over XPL|
 ((plugin_lighting|lighting)) |A lighting implementation||
 
-School projects
-****************
+!!!School projects
 ||__Plugin__|__Description__|__Target release version__
 ((plugin_bts_gen|bts_gen))|Generic scenario plugin for a bts project|BTS project only for the moment
 ((plugin_water|water))|Water|prototype not ended. For example only||
 
-Other
-******
+!!!Other
 ||__Nom__|__Description__
 ((plugin_pyozw|py-openzwave)) |py-openzwave installation methode (require for ozwave plugin)||

@@ -1,24 +1,19 @@
 ||__Created:__|22/06/2012
 __Creator:__|jesuislibre
 __Reviewers:__|
-__Status:__|{GAUGE(value=>50, max=>100, label=>''dev'', perc=>true, labelsize=>50, height=>20, color=>green, bgcolor=>#EEEEEE)}{GAUGE}
+__Status:__|{GAUGE(value=&gt;50, max=&gt;100, label=&gt;''dev'', perc=&gt;true, labelsize=&gt;50, height=&gt;20, color=&gt;green, bgcolor=&gt;#EEEEEE)}{GAUGE}
 __Target:__|0.x.0
 __References:__|((Database_ui_terminal|Database Model))||
 
-****************************
- Reduce DeviceStats storage
-****************************
+! Reduce DeviceStats storage
 Some device can collect data every 10 seconds, in 24 hours, the device can collect 8640 data by item, in teleinfo device, they have 23 items, in one day the device colect (6*60*24*23) = 198720 items
 
 By default, the reduce sytem, only reduce the same values (in the default mercurial branch), if you would like affine reduce stats, see flapping elimination (at bottom of this page)
 
-******************
-Actualy algorithm
-******************
+!Actualy algorithm
 
-normal device stats
-====================
-{FANCYTABLE(head=>id~|~date~|~timestamp~|~skey~|~device_id~|~value_num~|~value_str)}
+!!normal device stats
+{FANCYTABLE(head=&gt;id~|~date~|~timestamp~|~skey~|~device_id~|~value_num~|~value_str)}
 1~|~2012-06-24 05:27:01~|~1340508421~|~temp~|~1~|~10~|~10
 2~|~2012-06-24 05:27:02~|~1340508422~|~temp~|~1~|~10~|~10
 3~|~2012-06-24 05:27:03~|~1340508423~|~temp~|~1~|~10~|~10
@@ -41,9 +36,8 @@ normal device stats
 20~|~2012-06-24 05:27:20~|~1340508440~|~command~|~2~|~NULL~|~on
 {FANCYTABLE}
 
- reduced device stats
-======================
-{FANCYTABLE(head=>id~|~date~|~timestamp~|~skey~|~device_id~|~value_num~|~value_str)}
+!! reduced device stats
+{FANCYTABLE(head=&gt;id~|~date~|~timestamp~|~skey~|~device_id~|~value_num~|~value_str)}
 1~|~2012-06-24 05:27:01~|~1340508421~|~temp~|~1~|~10~|~10
 4~|~2012-06-24 05:27:04~|~1340508424~|~temp~|~1~|~10~|~10
 5~|~2012-06-24 05:27:05~|~1340508425~|~temp~|~1~|~11~|~11
@@ -61,28 +55,22 @@ normal device stats
 
 in this example, the storage was reduced by 35%
 
-****************
-Round algorithm
-****************
+!Round algorithm
 
 In this sample, they have 92 items
 
- simple round algorithm (developpement only)
-=============================================
+!! simple round algorithm (developpement only)
 
 rounded by 1000 modulos / 27 differents lines (__70% reduced__)
 
-{IMG(attId="421")}{IMG}
+{IMG(attId=&quot;421&quot;)}{IMG}
 
- flapping elimation algorithm (developpement only)
-===================================================
+!! flapping elimation algorithm (developpement only)
 
-__Note__: This algorithm, is already implemented in "Reduce device stats volumetry" mercurial branch. The round is optional, in developpement, you must add a parameter in domogik.cfg in database section if you would like affine reduce stats with round optino.
+__Note__: This algorithm, is already implemented in &quot;Reduce device stats volumetry&quot; mercurial branch. The round is optional, in developpement, you must add a parameter in domogik.cfg in database section if you would like affine reduce stats with round optino.
 
-.. code-block::
-    db_round_filter = {"12" : { "total_space" : 1048576, "free_space" : 1048576, "percent_used" : 0.5, "used_space": 1048576 },"13" : { "hchp" : 500, "hchc" : 500, "papp" : 100, "iinst" : 2 }}{CODE}
-    
-    rounded by 1000 range (up/down = 500) / 5 differents lines (__95% reduced__)
-    
-    {IMG(attId="422"
-    {IMG}
+{CODE()}db_round_filter = {&quot;12&quot; : { &quot;total_space&quot; : 1048576, &quot;free_space&quot; : 1048576, &quot;percent_used&quot; : 0.5, &quot;used_space&quot;: 1048576 },&quot;13&quot; : { &quot;hchp&quot; : 500, &quot;hchc&quot; : 500, &quot;papp&quot; : 100, &quot;iinst&quot; : 2 }}{CODE}
+
+rounded by 1000 range (up/down = 500) / 5 differents lines (__95% reduced__)
+
+{IMG(attId=&quot;422&quot;)}{IMG}

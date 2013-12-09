@@ -1,11 +1,8 @@
-*********************************
-Système interne de communication
-*********************************
+!Système interne de communication
 
 __But__ : refonte du système de communication interne en vue de rationnalisation du code existant / ajout de fonctionnalités supplémentaires.
 
- Communication interne
-=======================
+!! Communication interne
 Pour certaines actions internes à Domogik, la communication via xpl est limitée.
 L'idée serait d'avoir un second réseau de communication, pour les échanges liés au fonctionnement de Domogik, et n'ayant pas d'intérèt pour les éléments domotiques.
 Parmi les fonctionnalités qu'il serait interessant d'avoir:
@@ -21,18 +18,15 @@ Il serait utile de pouvoir integer les helpers dans ce réseau, de façon à pou
 
 Ainsi que pour les plugins, d'avoir la possibilité de récupérer des données depuis la base.
 
-Flux mixtes xpl/second canal
-=============================
+!!Flux mixtes xpl/second canal
 Dans certains cas il pourrait être judicieux de mixer xpl et le second canal de communication. 
 
 Cas pratique : auto discovery (qui sera implémenté côté plugins dans XplPlugin). Lorsqu'un plugin détecte un device non connu pour sa techno, il envoie un xpl pour le signaler (avec techno/adresse/type/reference). Rest doit intercepter ce message xPL. Ensuite il serait judicieux que ce message soit transformé en message du second canal et soit diffusé. Ainsi les IHMs utilisées (quelles qu'elles soient) pourraient notifier ce nouveau device et proposer de le créer.
 
-Limiter le second canal 
-=========================
-Le second canal devrait être limité aux échanges IHMs<=>rest<=>managers. Les plugins doivent utiliser uniquement xpl pour communiquer.
+!!Limiter le second canal 
+Le second canal devrait être limité aux échanges IHMs&lt;=&gt;rest&lt;=&gt;managers. Les plugins doivent utiliser uniquement xpl pour communiquer.
 
- Evénements internes
-=====================
+!! Evénements internes
 Pour les UI, il serait grandement bénéficiable de pouvoir récupérer (sur tout écran et pas seulement depuis l'admin) toutes sortes d'événements relatifs au fonctionnement de Domogik:
 * demarrage/arrêt de plugins
 * modification de la base
@@ -41,12 +35,10 @@ Pour les UI, il serait grandement bénéficiable de pouvoir récupérer (sur tou
 * ...
 Tout cela au sein d'un même flux d'évenements
 
-Logs
-=====
+!!Logs
 Voir si ça pourrait permettre de remonter facilement les logs (à la demande) des différents hôtes vers rest ou les ihms.
 
-Notes
-======
+!!Notes
 Ne pas oublier de prendre en compte Domodroid :
 * aspect déconnexion du réseau
 

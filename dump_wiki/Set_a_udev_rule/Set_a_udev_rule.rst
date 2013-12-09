@@ -1,16 +1,10 @@
-****************
-Set a udev rule
-****************
-.. toctree::
+!Set a udev rule
+{maketoc}
 
-
-
-Purpose
-========
+!!Purpose
 Setting a udev rule allow the computer to create a permanent /dev/mydevice entry for a device. This is usefull to be sure of the path of a device.
 
-Udev rules are indicated by Domogik plugins.
-=============================================
+!!Udev rules are indicated by Domogik plugins.
 In Domogik, the udev rules to create for a device is indicated :
 * when installing a plugin
 * in the plugin page
@@ -20,32 +14,25 @@ Copy the suggested rule (and if necessary adapt it) and put it in the given file
 Then, you just have to unplug/plug the device
 
 Check the rule is used with the following command. You should see the new device entry :
-.. code-block::
-    
-    $ ls -ltr
-    
+{CODE()}
+$ ls -ltr
+{CODE}
 
-
-How to create a rule (example)
-===============================
+!!How to create a rule (example)
 By default, you need to be root to access some devices. To give access to everybody on your computer to the device, follow these instructions.
 
 First, get vendor and product ids. Example for a Mir:ror device :
-.. code-block::
-    
-    # dmesg | grep Mirror
-    generic-usb 0003:1DA8:1301.0002: hiddev0,hidraw1: USB HID v1.00 Device [Violet M
-    irror] on usb-0000:00:1d.0-2/input0        
-    
-
+{CODE()}
+# dmesg | grep Mirror
+generic-usb 0003:1DA8:1301.0002: hiddev0,hidraw1: USB HID v1.00 Device [Violet M
+irror] on usb-0000:00:1d.0-2/input0        
+{CODE}
 
 Here, vendor id is 1da8 and product id is 1301.
 
 Create an udev rule for the Mir:ror device in file __/etc/udev/rules.d/mirror.rules__ :
-.. code-block::
-    
-    KERNEL=="hidraw*", ATTRS{idVendor}=="1da8", ATTRS{idProduct}=="1301", SYMLINK+="mirror", MODE="0666"
-    
-
+{CODE()}
+KERNEL==&quot;hidraw*&quot;, ATTRS{idVendor}==&quot;1da8&quot;, ATTRS{idProduct}==&quot;1301&quot;, SYMLINK+=&quot;mirror&quot;, MODE=&quot;0666&quot;
+{CODE}
 
 You just have to unplug and plug back your Mir:ror to have permissions on it as a non root user. Your Mir:ror device will have __/dev/mirror__ as entry point

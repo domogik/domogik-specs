@@ -1,6 +1,4 @@
-******
- test
-******
+! test
 C'est une page franÃ§aise
 
 modifiÃ©e

@@ -1,34 +1,26 @@
-.. toctree::
-
-
-****************************************************************
-Log in (and eventually create an account if you don't have one)
-****************************************************************
+{maketoc}
+!Log in (and eventually create an account if you don't have one)
 First, go on http://tracker.domogik.org.
 
-If you don't have an account, in banner, click on "Register" to create an account. The account will be created on Domogik's wiki and is used by tracker, forum, ...
+If you don't have an account, in banner, click on &quot;Register&quot; to create an account. The account will be created on Domogik's wiki and is used by tracker, forum, ...
 
-{IMG(attId="316")}{IMG}
+{IMG(attId=&quot;316&quot;)}{IMG}
 
-***********************************
-Create issue/bug/evolution request
-***********************************
+!Create issue/bug/evolution request
 In banner, click on __Projects__ :
 
-{IMG(attId="317")}{IMG}
+{IMG(attId=&quot;317&quot;)}{IMG}
 
 And select Domogik project : 
 
-{IMG(attId="318")}{IMG}
+{IMG(attId=&quot;318&quot;)}{IMG}
 
 Click on __New issue__ :
 
-{IMG(attId="319")}{IMG}
+{IMG(attId=&quot;319&quot;)}{IMG}
 
-***************
-Fill in report
-***************
-{IMG(attId="320")}{IMG}
+!Fill in report
+{IMG(attId=&quot;320&quot;)}{IMG}
 
 Fill all following fields :
 * __Tracker :__ bug, evolution, etc. 

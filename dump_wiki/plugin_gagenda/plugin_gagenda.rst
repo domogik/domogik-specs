@@ -1,39 +1,26 @@
-*********
- Status 
-*********
+! Status 
 First version ok
 
-*****************
- Goal of module 
-*****************
+! Goal of module 
 This module allows to get events from a google calendar.
 
-*************
- ShÃ©ma xPL 
-*************
+! ShÃ©ma xPL 
 * ((xPL_calendar_schema|Proposition of calendar.basic schema))
 
 Note : only ''startdate'' and ''object'' are used for this version.
 
-***************
- Prerequisite 
-***************
+! Prerequisite 
 
- Google account 
-=================
+!! Google account 
 You need a valid gmail account.
 
- Installation 
-===============
+!! Installation 
 You need to install python package for google data. 
 
- Debian/Ubuntu 
-****************
+!!! Debian/Ubuntu 
  # apt-get install python-gdata
 
-***************
- How it works 
-***************
+! How it works 
 The xPL client listens to ''calendar.request'' messages. When it gets one, it asks google calendar for the given date. These three dates parameters are allowed :  
 * TODAY : get today's events after current time
 * TOMORROW : get tomorrow's events
@@ -41,9 +28,7 @@ The xPL client listens to ''calendar.request'' messages. When it gets one, it as
 
 A ''calendar.basic'' message will be sent back for each event found.
 
-****************
- Configuration 
-****************
+! Configuration 
 You need following entries : 
 
 * email : email of gmail account

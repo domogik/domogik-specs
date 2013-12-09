@@ -1,158 +1,136 @@
-.. toctree::
+{maketoc}
 
-
-
-********
-Purpose
-********
+!Purpose
 This messages are used by REST for acting or requesting managers about packages. See ((REST_package|REST /package page)) for more detail.
 
-*************
-Xpl messages
-*************
-List installed packages on an host
-===================================
+!Xpl messages
+!!List installed packages on an host
 Notice : the request (xpl-cmnd) for getting the list of installed packages list is used on rest startup only. Manager sends updates when starting and everytime an install or uninstall action has run.
 
 Command : 
-.. code-block::
-    
-    xpl-cmnd                                           
-    {                                                                               
-    ...                                                                       
-    }                                                                               
-    domogik.package                                                                 
-    {                                                                               
-    command=installed-packages-list                                                
-    host=<host or *>   
-    }
-    
-
+{CODE()}
+xpl-cmnd                                           
+{                                                                               
+...                                                                       
+}                                                                               
+domogik.package                                                                 
+{                                                                               
+command=installed-packages-list                                                
+host=&lt;host or *&gt;   
+}
+{CODE}
 
 Response : 
-.. code-block::
-    
-    xpl-trig                                           
-    {                                                                               
-    ...                                                                       
-    }                                                                               
-    domogik.package                                                                 
-    {                                                                               
-    command=installed-packages-list                                                
-    host=<host>
-    fullname0=<package fullname : type-name>
-    name0=<package name>
-    type0=<package type : plugin,...>
-    version0=<package version>
-    enabled0=<yes/no>
-    fullname1=...
-    name1=...
-    type1=...
-    version1=...
-    enabled1=...
-    ...
-    }                                                                               
-    
-
+{CODE()}
+xpl-trig                                           
+{                                                                               
+...                                                                       
+}                                                                               
+domogik.package                                                                 
+{                                                                               
+command=installed-packages-list                                                
+host=&lt;host&gt;
+fullname0=&lt;package fullname : type-name&gt;
+name0=&lt;package name&gt;
+type0=&lt;package type : plugin,...&gt;
+version0=&lt;package version&gt;
+enabled0=&lt;yes/no&gt;
+fullname1=...
+name1=...
+type1=...
+version1=...
+enabled1=...
+...
+}                                                                               
+{CODE}
 
 Notice : the uuid is needed because several request are done in the same time by the user interface (and so by rest).
 
-Get package dependencies for a package
-=======================================
+!!Get package dependencies for a package
 Command : 
-.. code-block::
-    
-    xpl-cmnd                                           
-    {                                                                               
-    ...                                                                       
-    }                                                                               
-    domogik.package                                                                 
-    {                                                                               
-    command=get-dependencies                                                 
-    host=<host>        
-    type=<plugin, external, ..>
-    id=<package id>
-    }
-    
-
+{CODE()}
+xpl-cmnd                                           
+{                                                                               
+...                                                                       
+}                                                                               
+domogik.package                                                                 
+{                                                                               
+command=get-dependencies                                                 
+host=&lt;host&gt;        
+type=&lt;plugin, external, ..&gt;
+id=&lt;package id&gt;
+}
+{CODE}
 
 Response : 
-.. code-block::
-    
-    xpl-trig                                           
-    {                                                                               
-    ...                                                                       
-    }                                                                               
-    domogik.package                                                                 
-    {                                                                               
-    command=get-dependencies                                                 
-    host=<host>        
-    type=<plugin, external, ..>
-    id=<package id>                                         
-    [error=<error message>]
-    [dep0-id=<dependency id>]
-    [dep0-type=<dependency type : python, plugin, other, ...>]
-    [dep1-id=...]
-    [dep1-type=...]
-    ...
-    }                                                                               
-    
+{CODE()}
+xpl-trig                                           
+{                                                                               
+...                                                                       
+}                                                                               
+domogik.package                                                                 
+{                                                                               
+command=get-dependencies                                                 
+host=&lt;host&gt;        
+type=&lt;plugin, external, ..&gt;
+id=&lt;package id&gt;                                         
+[error=&lt;error message&gt;]
+[dep0-id=&lt;dependency id&gt;]
+[dep0-type=&lt;dependency type : python, plugin, other, ...&gt;]
+[dep1-id=...]
+[dep1-type=...]
+...
+}                                                                               
+{CODE}
 
-
-Check package dependencies
-===========================
+!!Check package dependencies
 Command : 
-.. code-block::
-    
-    xpl-cmnd                                           
-    {                                                                               
-    ...                                                                       
-    }                                                                               
-    domogik.package                                                                 
-    {                                                                               
-    command=check-dependencies                                                 
-    host=<host>        
-    [dep0=<dependency>]
-    [dep1=...]
-    ...                                               
-    }
-    
-
-''Dependency has python dependency format. Example : pySerial >= 2.4''
+{CODE()}
+xpl-cmnd                                           
+{                                                                               
+...                                                                       
+}                                                                               
+domogik.package                                                                 
+{                                                                               
+command=check-dependencies                                                 
+host=&lt;host&gt;        
+[dep0=&lt;dependency&gt;]
+[dep1=...]
+...                                               
+}
+{CODE}
+''Dependency has python dependency format. Example : pySerial &gt;= 2.4''
 
 Response : 
-.. code-block::
-    
-    xpl-trig                                           
-    {                                                                               
-    ...                                                                       
-    }                                                                               
-    domogik.package                                                                 
-    {                                                                               
-    command=check-dependencies                                             
-    host=<host>                                           
-    [error=<error message>]
-    [dep0=<dependency>]
-    [dep0-installed=<yes|no>]
-    [dep0-release=<installed release>]
-    [dep0-candidate=<release to install>]
-    [dep0-cmd-line=<command line to install dependency : "sudo easy_install ....">]
-    [dep1=...]
-    [dep1-installed=...]
-    [dep1-release=...]
-    [dep1-candidate=...]
-    [dep1-cmd-line=...]
-    ...
-    }                                                                               
-    
-
+{CODE()}
+xpl-trig                                           
+{                                                                               
+...                                                                       
+}                                                                               
+domogik.package                                                                 
+{                                                                               
+command=check-dependencies                                             
+host=&lt;host&gt;                                           
+[error=&lt;error message&gt;]
+[dep0=&lt;dependency&gt;]
+[dep0-installed=&lt;yes|no&gt;]
+[dep0-release=&lt;installed release&gt;]
+[dep0-candidate=&lt;release to install&gt;]
+[dep0-cmd-line=&lt;command line to install dependency : &quot;sudo easy_install ....&quot;&gt;]
+[dep1=...]
+[dep1-installed=...]
+[dep1-release=...]
+[dep1-candidate=...]
+[dep1-cmd-line=...]
+...
+}                                                                               
+{CODE}
 When an error is detected for a dependency, message can be incomplete (current and following dependencies are not listed in xpl message). Here are possible following errors : 
-* Wrong version format for '<dependency>' : should be 'foo (...)'              
-* No candidate to dependency '<dependency name>' installation found                 
-* Irrational version for dependency <dependency>
+* Wrong version format for '&lt;dependency&gt;' : should be 'foo (...)'              
+* No candidate to dependency '&lt;dependency name&gt;' installation found                 
+* Irrational version for dependency &lt;dependency&gt;
 
-Install a package    
-======================
+!!Install a package    
 A package is installed as two parts :
 * the main host (the one with RINOR) part.
 * the target host part.
@@ -162,94 +140,83 @@ On main host, files needed by RINOR are installed (for plugins : xml files for u
 
 For all package's type you need to send the two xPL messages. For each message, concerned host's manager will know if it needs to install files or not.
 
-Xpl part (target host part)
-****************************
+!!!Xpl part (target host part)
 This message should be sent first.
 
 Command : 
-.. code-block::
-    
-    xpl-cmnd
-    {
-    }
-    domogik.package
-    {
-    command=install
-    host=<target host>
-    source=<where we got the packet from. Actually only "cache" is handled>
-    type=<package type>
-    id=<package id>
-    release=<release number>
-    part=xpl
-    }
-    
-
+{CODE()}
+xpl-cmnd
+{
+}
+domogik.package
+{
+command=install
+host=&lt;target host&gt;
+source=&lt;where we got the packet from. Actually only &quot;cache&quot; is handled&gt;
+type=&lt;package type&gt;
+id=&lt;package id&gt;
+release=&lt;release number&gt;
+part=xpl
+}
+{CODE}
 
 Response : 
-.. code-block::
-    
-    xpl-trig
-    {
-    }
-    domogik.package
-    {
-    command=install
-    host=<target host>
-    error=<small error message>
-    source=<where we got the packet from. Actually only "cache" is handled>
-    type=<package type>
-    id=<package id>
-    release=<release number>
-    }
-    
+{CODE()}
+xpl-trig
+{
+}
+domogik.package
+{
+command=install
+host=&lt;target host&gt;
+error=&lt;small error message&gt;
+source=&lt;where we got the packet from. Actually only &quot;cache&quot; is handled&gt;
+type=&lt;package type&gt;
+id=&lt;package id&gt;
+release=&lt;release number&gt;
+}
+{CODE}
 
+For a plugin, if it is already installed and in running state, you will obtain the following error message : &quot;Plugin '&lt;plugin name&gt;' is running. Stop it before installing plugin.&quot;
 
-For a plugin, if it is already installed and in running state, you will obtain the following error message : "Plugin '<plugin name>' is running. Stop it before installing plugin."
-
-Rinor part
-***********
+!!!Rinor part
 This message should be sent only __after__ the previous (xpl part) give back its xpl-trig.
 
 Command : 
-.. code-block::
-    
-    xpl-cmnd
-    {
-    }
-    domogik.package
-    {
-    command=install
-    host=<target host>
-    source=<where we got the packet from. Actually only "cache" is handled>
-    type=<package type>
-    id=<package id>
-    release=<release number>
-    part=rinor
-    }
-    
-
+{CODE()}
+xpl-cmnd
+{
+}
+domogik.package
+{
+command=install
+host=&lt;target host&gt;
+source=&lt;where we got the packet from. Actually only &quot;cache&quot; is handled&gt;
+type=&lt;package type&gt;
+id=&lt;package id&gt;
+release=&lt;release number&gt;
+part=rinor
+}
+{CODE}
 
 Response : 
-.. code-block::
-    
-    xpl-trig
-    {
-    }
-    domogik.package
-    {
-    command=install
-    host=<target host>
-    error=<small error message>
-    source=<where we got the packet from. Actually only "cache" is handled>
-    type=<package type>
-    id=<package id>
-    release=<release number>
-    }
-    
+{CODE()}
+xpl-trig
+{
+}
+domogik.package
+{
+command=install
+host=&lt;target host&gt;
+error=&lt;small error message&gt;
+source=&lt;where we got the packet from. Actually only &quot;cache&quot; is handled&gt;
+type=&lt;package type&gt;
+id=&lt;package id&gt;
+release=&lt;release number&gt;
+}
+{CODE}
 
-
-Uninstall a package    
-========================
+!!Uninstall a package    
 A package is installed as two parts :
 * the main host (the one with RINOR) part.
 * the target host part.
@@ -257,37 +224,33 @@ A package is installed as two parts :
 When uninstalling, we actually (0.2.0) only delete the description xml file for type __plugin__ and __external__
 
 Command : 
-.. code-block::
-    
-    xpl-cmnd
-    {
-    }
-    domogik.package
-    {
-    command=uninstall
-    host=<target host>
-    type=<package type>
-    id=<package id>
-    }
-    
-
+{CODE()}
+xpl-cmnd
+{
+}
+domogik.package
+{
+command=uninstall
+host=&lt;target host&gt;
+type=&lt;package type&gt;
+id=&lt;package id&gt;
+}
+{CODE}
 
 Response : 
-.. code-block::
-    
-    xpl-trig
-    {
-    }
-    domogik.package
-    {
-    command=uninstall
-    host=<target host>
-    error=<small error message>
-    type=<package type>
-    id=<package id>
-    }
-    
+{CODE()}
+xpl-trig
+{
+}
+domogik.package
+{
+command=uninstall
+host=&lt;target host&gt;
+error=&lt;small error message&gt;
+type=&lt;package type&gt;
+id=&lt;package id&gt;
+}
+{CODE}
 
-
-For a plugin, if it is already installed and in running state, you will obtain the following error message : "Plugin '<plugin name>' is running. Stop it before installing plugin."
+For a plugin, if it is already installed and in running state, you will obtain the following error message : &quot;Plugin '&lt;plugin name&gt;' is running. Stop it before installing plugin.&quot;
 

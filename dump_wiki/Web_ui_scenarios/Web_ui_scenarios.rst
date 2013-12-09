@@ -5,7 +5,6 @@
 * Enhanced mode
 * wiki tutorial
 
- Enhanced mode ideas
-=====================
+!! Enhanced mode ideas
 * wireit (http://neyric.github.com/wireit/)
 * http://www.modk.it/alpha

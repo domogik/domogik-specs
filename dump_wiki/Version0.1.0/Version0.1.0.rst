@@ -1,11 +1,7 @@
-.. toctree::
+{maketoc}
 
-
-
-{IMG(attId="366")}{IMG}
-*************
-Présentation
-*************
+{IMG(attId=&quot;366&quot;)}{IMG}
+!Présentation
 L'équipe de Domogik est fière de vous annoncer la première version de son application.
 Cette version 0.1.0 avait plusieurs objectifs principaux qui furent tous atteints :
 * Architecture modulaire et multi-hôtes.
@@ -21,25 +17,20 @@ Huit plugins sont fournis avec cette version :
 * ((plugin_ipx800|ipx800)) : support IPX 800 (cartes relai).
 * ((plugin_teleinfo|teleinfo)) : les compteurs électriques récents d'EDF sont pris en charge. Vous pouvez ainsi mesurer votre consommation électrique.
 * ((plugin_mirror|mirror)) : support du lecteur RFID Mir:ror.
-* ((plugin_cidmodem|cidmodem)) : gestion du "caller id" avec un modem.
+* ((plugin_cidmodem|cidmodem)) : gestion du &quot;caller id&quot; avec un modem.
 * ((plugin_wol_ping|wol_ping)) : démarrage à distance d'ordinateurs et ping.
 
-{IMG(attId="367")}{IMG}
+{IMG(attId=&quot;367&quot;)}{IMG}
 
-{IMG(attId="368")}{IMG}
+{IMG(attId=&quot;368&quot;)}{IMG}
 
-{IMG(attId="369")}{IMG}
+{IMG(attId=&quot;369&quot;)}{IMG}
 
-********************
-Application Android
-********************
-Une application appelée `Domodroid <https://market.android.com/details?id=org.panel&amp;feature=search\_result>`_ est disponible sur l'Android Market et est pleinement opérationnelle avec Domogik 0.1.0.
+!Application Android
+Une application appelée [https://market.android.com/details?id=org.panel&amp;feature=search_result|Domodroid] est disponible sur l'Android Market et est pleinement opérationnelle avec Domogik 0.1.0.
 
-**************
-Compatibilité
-**************
-Partie serveur
-===============
+!Compatibilité
+!!Partie serveur
 Domogik devrait fonctionner sur toutes les distributions GNU/Linux avec Python 2.6/2.7.
 Il a été testé par l'équipe de développement sur les systèmes suivants :
 * Ubuntu
@@ -51,16 +42,13 @@ Les architectures suivantes sont supportées :
 * x86 64bits
 * arm
 
-Partie cliente
-===============
+!!Partie cliente
 Un des navigateurs suivants est nécessaire pour utiliser l'interface web de Domogik :
-* Firefox >= 3.6
-* Chrome >= 5
+* Firefox &gt;= 3.6
+* Chrome &gt;= 5
 Il pourrait y avoir des problèmes avec d'autres navigateurs (si ils n'implémentent pas certaines fonctionnalités du HTML 5).
 
-*****************
-Demandes connues
-*****************
+!Demandes connues
 ''Ici sont listées des fonctionnalités non encore opérationnelles et qui seront ajoutées dans les prochaines versions.''
 * Gestion des scénarios.
 * Les navigateurs de smartphones ne sont pas supportés en intégralité en raison de l'utilisation de fonctionnalité avancées par l'IHM web de Domogik. Une adaptation sera effectuée dans une prochaine version.
@@ -68,9 +56,7 @@ Demandes connues
 * Domogik supporte le multi-hôtes mais l'installateur n'est pas encore prêt pour ce type d'installation.
 * Certaines fonctionnalités du x10 et du Plcbus ne sont pas encore implémentées (par exemple ''ALL LIGHTS ON'').
 
-*****************
-Pour le futur...
-*****************
+!Pour le futur...
 Parlons maintenant un peu du futur de Domogik...
 
 Plusieurs plugins sont en cours de développement pour les prochaines versions (envoi de SMS, Text To Speech, notifications Android et iPhone, Zibase, ...)
@@ -83,12 +69,8 @@ Parlons maintenant de la principale fonction manquant encore à Domogik : les sc
 
 Pour ce qui est des plugins, ils sont encore intégrés à Domogik pour le moment. Dans le futur Domogik ne contiendra plus de plugins par défaut, nous allons mettre en place un dépôt (avec un outil permettant facilement d'en ajouter et de les mettre à jour).
 
-**************************
-Comment signaler un bug ?
-**************************
+!Comment signaler un bug ?
 Vous venez de trouver un bug dans cette version et vous souhaitez nous le signaler ? C'est simple, il suffit de suivre [ReportABug|ces instructions].
 
-**************************
-Développement des plugins
-**************************
-Il est actuellement possible de développer vos propres plugins pour Domogik. Il y a plusieurs personnes qui travaillent sur de nouveaux plugins. N'hésitez pas à nous rejoindre, vous trouverez de l'aide sur le canal IRC (#domogik sur freenode) ainsi que `sur le forum <http://forum.domogik.org>`_.
+!Développement des plugins
+Il est actuellement possible de développer vos propres plugins pour Domogik. Il y a plusieurs personnes qui travaillent sur de nouveaux plugins. N'hésitez pas à nous rejoindre, vous trouverez de l'aide sur le canal IRC (#domogik sur freenode) ainsi que [http://forum.domogik.org|sur le forum].
