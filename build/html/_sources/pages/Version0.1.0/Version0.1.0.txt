@@ -2,7 +2,7 @@
 
 
 
-{IMG(attId="366")}{IMG}
+.. image:: ../../_static/images/366
 *************
 Présentation
 *************
@@ -25,11 +25,11 @@ Huit plugins sont fournis avec cette version :
 * ((plugin_cidmodem|cidmodem)) : gestion du "caller id" avec un modem.
 * ((plugin_wol_ping|wol_ping)) : démarrage à distance d'ordinateurs et ping.
 
-{IMG(attId="367")}{IMG}
+.. image:: ../../_static/images/367
 
-{IMG(attId="368")}{IMG}
+.. image:: ../../_static/images/368
 
-{IMG(attId="369")}{IMG}
+.. image:: ../../_static/images/369
 
 ********************
 Application Android

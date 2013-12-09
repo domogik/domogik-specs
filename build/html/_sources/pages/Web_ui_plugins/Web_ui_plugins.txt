@@ -44,7 +44,7 @@ Points to see :
 Configuration (DONE in 0.1.0!)
 ============================!==
 
-{IMG(attId="270")}{IMG}
+.. image:: ../../_static/images/270
 
 Helpers
 ********
@@ -53,4 +53,4 @@ Helpers
 Resources
 **********
 
-{IMG(attId="271")}{IMG}
+.. image:: ../../_static/images/271

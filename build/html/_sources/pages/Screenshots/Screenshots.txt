@@ -2,18 +2,18 @@
  Homepage
 **********
 
-{IMG(attId="4")}{IMG}
+.. image:: ../../_static/images/4
 ***************
  Visualization
 ***************
 
-{IMG(attId="20")}{IMG}
+.. image:: ../../_static/images/20
 
-{IMG(attId="21")}{IMG}
+.. image:: ../../_static/images/21
 
-{IMG(attId="26")}{IMG}
+.. image:: ../../_static/images/26
 *******
  Admin
 *******
 
-{IMG(attId="3")}{IMG}
+.. image:: ../../_static/images/3

@@ -1,7 +1,7 @@
 *********
 Community
 *********
-{IMG(src="http://profiles.tikiwiki.org/tiki-download_wiki_attachment.php?attId=16")}{IMG}
+{IMG(src="http://profiles.tikiwiki.org/tiki-download_wiki_attachment.php?attId=16")}
 
 * 6+ years old
 * 35+ languages
@@ -13,7 +13,7 @@ Community
 
 
 
-{IMG(src="http://profiles.tikiwiki.org/tiki-download_wiki_attachment.php?attId=17")}{IMG}
+{IMG(src="http://profiles.tikiwiki.org/tiki-download_wiki_attachment.php?attId=17")}
 
 * Mozilla / Firefox, this enormously popular web browser uses Tiki for its very busy multilingual support site. - support.mozilla.com
 * Council of Europe, has 47 European member states. It uses Tiki to support over 40 different areas of activity within the council. - coe.int

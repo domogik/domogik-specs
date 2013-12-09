@@ -7,7 +7,7 @@ Purpose
 
 This hardware plugin aims to control one RGB leds strip with an arduino and xPL.
 
-{IMG(attId="301")}{IMG}
+.. image:: ../../_static/images/301
 
 **************
 Prerequisites
@@ -16,7 +16,7 @@ Prerequisites
 You will need :
 * 1 Arduino Uno
 * 1 Arduino's ethernet shiled based on wizenet
-{IMG(attId="277")}{IMG}
+.. image:: ../../_static/images/277
 
 * 1 12V DC power supply
 * 1 RGB Led strip
@@ -46,12 +46,12 @@ For breadboard testing
 ***********************
 
 Here, RGB led strip is shown as a single RGB led. You just have to connect the led strip where the led is placed.
-{IMG(attId="296")}{IMG}
+.. image:: ../../_static/images/296
 
 Schematic
 **********
 
-{IMG(attId="295")}{IMG}
+.. image:: ../../_static/images/295
 
 PCB
 ****
@@ -75,10 +75,10 @@ ULN2003 component
 ******************
 
 This component contains several `Darlingtons <http://en.wikipedia.org/wiki/Darlington\_transistor>`_. Each output can deliver up to 500mA. With the following schematic, we can deliver up to 500mA to each color of the led strip :
-{IMG(attId="310")}{IMG}
+.. image:: ../../_static/images/310
 
 To deliver up to 1A to a color, you can group inputs and outputs like this :
-{IMG(attId="311")}{IMG}
+.. image:: ../../_static/images/311
 
 Max intensity needed for a color
 =================================
@@ -264,7 +264,7 @@ Check arduino is seen by Domogik
 =================================
 
 When going in administration page, you should the __ar_rgb__ hardware plugin in the plugins list :
-{IMG(attId="312")}{IMG}
+.. image:: ../../_static/images/312
  
 If not, there is a problem : check network configuration of arduino.
 
@@ -272,7 +272,7 @@ Create device
 ==============
 
 Create a device like this :
-{IMG(attId="313")}{IMG}
+.. image:: ../../_static/images/313
 
 Address must correspond to what you defined in __MY_DEVICE__ in ar_rgb.pde. It will also correspond to the instance name (which you can see in plugins list).
 
@@ -288,21 +288,21 @@ Bug in actual widget on first use with no stats for device
 ***********************************************************
 
 When you first create the device, and arduino is off or don't raise events (color changes), the widget has a bug : it will be displayed like this until first stat got in database. This bug will be corrected of course ;)
-{IMG(attId="314")}{IMG}
+.. image:: ../../_static/images/314
 
 State off
 **********
 
 When leds are off, widget is like this. To switch leds on, just clic on top left icon.
 
-{IMG(attId="315")}{IMG}
+.. image:: ../../_static/images/315
 
 State on
 *********
 
 When leds are on, chromatic wheel is activated. You just have to choose a color. To turn leds off, just click on top left icon.
 
-{IMG(attId="302")}{IMG}
+.. image:: ../../_static/images/302
 
 
 
@@ -323,7 +323,7 @@ The idea is to make a conversion from HSL (hue, saturation, lightness) format to
 
 I create the following script to generate this result (screenshot from a html page) : 
 
-{IMG(attId="279")}{IMG}
+.. image:: ../../_static/images/279
 
 .. code-block:: json
 

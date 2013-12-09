@@ -55,16 +55,16 @@
 <h1>Mise en place d&#8217;un bus 1wire<a class="headerlink" href="#mise-en-place-d-un-bus-1wire" title="Permalink to this headline">¶</a></h1>
 <p>Voici un exemple pour réaliser bus 1wire, en effet une fois les composants reçus, il reste encore à&nbsp; faire le montage.</p>
 <p>Pour ma part, j&#8217;utilise une interface DS1420, celle-ci est équipée d&#8217;un port RJ11. Mais disposant de câbles RJ45, c&#8217;est ce format que je vais utiliser plutôt que du RJ11, de moins en moins répandu.</p>
-<p>Donc on commence par réaliser un câble &amp;quot;RJ11 - RJ45&amp;quot;, pour cela j&#8217;ai récupéré un ancien câble téléphone muni de deux RJ11. L&#8217;opération est simple, on coupe le fil a une extrémité, et replace par un RJ45, en utilisant les 4 broches centrales., il suffit de mettre les fils dans le même ordre que sur le RJ11 restant.</p>
-<p>{img fileId=&amp;quot;162&amp;quot; thumb=&amp;quot;y&amp;quot; alt=&amp;quot;&amp;quot; rel=&amp;quot;box[g]&amp;quot;}</p>
+<p>Donc on commence par réaliser un câble &#8220;RJ11 - RJ45&#8221;, pour cela j&#8217;ai récupéré un ancien câble téléphone muni de deux RJ11. L&#8217;opération est simple, on coupe le fil a une extrémité, et replace par un RJ45, en utilisant les 4 broches centrales., il suffit de mettre les fils dans le même ordre que sur le RJ11 restant.</p>
+<p>{img fileId=&#8221;162&#8221; thumb=&#8221;y&#8221; alt=&#8221;&#8221; rel=&#8221;box[g]&#8221;}</p>
 <p>J&#8217;ai utilisé un simple coupleur RJ45, on en trouve un peu partout, pour 1 ou 2 euros pièce, c&#8217;est encore moins cher si on les achète par lots de 10 ou 20.</p>
-<p>{img fileId=&amp;quot;163&amp;quot; thumb=&amp;quot;y&amp;quot; alt=&amp;quot;&amp;quot; rel=&amp;quot;box[g]&amp;quot;}</p>
+<p>{img fileId=&#8221;163&#8221; thumb=&#8221;y&#8221; alt=&#8221;&#8221; rel=&#8221;box[g]&#8221;}</p>
 <p>Ensuite on ouvre le coupleur en s&#8217;aidant d&#8217;un tournevis, et on va souder notre composant dedans, ici une sonde de température DS1820B.</p>
-<p>{img fileId=&amp;quot;164&amp;quot; thumb=&amp;quot;y&amp;quot; alt=&amp;quot;&amp;quot; rel=&amp;quot;box[g]&amp;quot;}</p>
+<p>{img fileId=&#8221;164&#8221; thumb=&#8221;y&#8221; alt=&#8221;&#8221; rel=&#8221;box[g]&#8221;}</p>
 <p>Dans ce coupleur, impossible de souder directement sur les contacteurs, l&#8217;étain ne prenait pas, vous n&#8217;aurez peut-être pas ce soucis. Pour remédier à ce problème, j&#8217;ai du remplacer les fils de contacts  par de petit fils de cuivre. Puis on soude le DS1820B.</p>
-<p>{img fileId=&amp;quot;165&amp;quot; thumb=&amp;quot;y&amp;quot; alt=&amp;quot;&amp;quot; rel=&amp;quot;box[g]&amp;quot;}</p>
+<p>{img fileId=&#8221;165&#8221; thumb=&#8221;y&#8221; alt=&#8221;&#8221; rel=&#8221;box[g]&#8221;}</p>
 <p>Il ne reste plus qu&#8217;a vérifier que le tout fonctionne, je trouve que le plus simple et rapide est le logiciel OnwireViewer fourni par  [<a class="reference external" href="http://www.maxim-ic.com/products/ibutton/software/1wire/OneWireViewer">http://www.maxim-ic.com/products/ibutton/software/1wire/OneWireViewer</a>.cfm|sur le site Maxim]. Et si tout est okay, vous verrez apparaître, votre interface, ainsi que votre DS1820B et dans l&#8217;onglet de droite vous pourrez directement lire le relevé de température.</p>
-<p>{img fileId=&amp;quot;166&amp;quot; thumb=&amp;quot;y&amp;quot; alt=&amp;quot;&amp;quot; rel=&amp;quot;box[g]&amp;quot;}</p>
+<p>{img fileId=&#8221;166&#8221; thumb=&#8221;y&#8221; alt=&#8221;&#8221; rel=&#8221;box[g]&#8221;}</p>
 <p>Evidemment l&#8217;avantage de ce montage a faible coût et que vous pouvez directement tirer parti du bus 1wire en branchant bout a bout autant de composants que vous voulez (dans la limite de ce que permet le bus), il suffit de relier les coupleurs les uns aux autres par un câble RJ45 droit. également le montage marche pour n&#8217;importe quel composant et permet de véhiculer une tension sur les 5 fils libres.</p>
 <p>TODO :
 <a href="#id1"><span class="problematic" id="id2">*</span></a>schema de brochage

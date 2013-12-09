@@ -22,7 +22,7 @@ __sudo dmgenplug -f dawndusk__
 Configure and start the plugin
 ===============================
 
-{IMG(attId="428")}{IMG}
+.. image:: ../../_static/images/428
 
 You must specify the latitude and the longitude of your house. Use your GPS or Google maps to find them.
 If you have the cron plugin installed, you can use it instead of the internal one.

@@ -3,7 +3,7 @@
 
 
 
-{IMG(src="http://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Nabaztagtag_large.jpg/220px-Nabaztagtag_large.jpg")}{IMG}
+{IMG(src="http://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Nabaztagtag_large.jpg/220px-Nabaztagtag_large.jpg")}
 
 ********
 Purpose

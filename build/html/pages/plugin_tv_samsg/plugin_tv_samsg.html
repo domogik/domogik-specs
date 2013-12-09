@@ -58,42 +58,42 @@
 <div class="section" id="purpose">
 <h1>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h1>
 <p>This plugin&#8217;s goal is to control a Samsung television with EX-link port (sort of a serial port).</p>
-<p>::{IMG(attId=&#8221;203&#8221;)}{IMG}:</p>
-<div class="highlight-python"><pre>*************</pre>
+<p>::.. image:: ../../_static/images/203</p>
 </div>
 <div class="section" id="ex-link-wire">
-<h2>EX Link wire<a class="headerlink" href="#ex-link-wire" title="Permalink to this headline">¶</a></h2>
+<h1>EX Link wire<a class="headerlink" href="#ex-link-wire" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="schematic">
-<h3>Schematic<a class="headerlink" href="#schematic" title="Permalink to this headline">¶</a></h3>
-<p>{IMG(attId=&#8221;149&#8221;)}{IMG}</p>
+<h2>Schematic<a class="headerlink" href="#schematic" title="Permalink to this headline">¶</a></h2>
+<img alt="../../_images/149" src="../../_images/149" />
 </div>
 <div class="section" id="make-your-own-wire">
-<h3>Make your own wire<a class="headerlink" href="#make-your-own-wire" title="Permalink to this headline">¶</a></h3>
-</div>
-</div>
+<h2>Make your own wire<a class="headerlink" href="#make-your-own-wire" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="materials-needed">
-<h2>Materials needed<a class="headerlink" href="#materials-needed" title="Permalink to this headline">¶</a></h2>
+<h3>Materials needed<a class="headerlink" href="#materials-needed" title="Permalink to this headline">¶</a></h3>
 <p>You need a simple stereo wire with a 3.5mm jack plug and a female DB9 :</p>
-<p>{IMG(attId=&#8221;196&#8221;)}{IMG}</p>
-<p>{IMG(attId=&#8221;197&#8221;)}{IMG} {IMG(attId=&#8221;198&#8221;)}{IMG}</p>
+<img alt="../../_images/196" src="../../_images/196" />
+<img alt="../../_images/197" src="../../_images/197" />
 <p>Brase wire on DB9 like told in schematic :</p>
-<p>{IMG(attId=&#8221;199&#8221;)}{IMG}</p>
+<img alt="../../_images/199" src="../../_images/199" />
 <p>And finally, protect your new EX Link wire :</p>
-<p>{IMG(attId=&#8221;200&#8221;)}{IMG}</p>
+<img alt="../../_images/200" src="../../_images/200" />
+</div>
 </div>
 </div>
 <div class="section" id="how-to-plug">
 <h1>How to plug<a class="headerlink" href="#how-to-plug" title="Permalink to this headline">¶</a></h1>
 <p>Just plug EX Link&#8217;s jack side on television like this :</p>
-<p>{IMG(attId=&#8221;202&#8221;)}{IMG}</p>
+<img alt="../../_images/2021" src="../../_images/2021" />
 <p>If your computer doesn&#8217;t have any serial port, you may need a serial&lt;=&gt;usb adaptator.</p>
-<p>{IMG(attId=&#8221;201&#8221;)}{IMG}</p>
+<img alt="../../_images/201" src="../../_images/201" />
 </div>
 <div class="section" id="developper-notes">
 <h1>Developper notes<a class="headerlink" href="#developper-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="xpl-schema">
+<h2>xPL Schema<a class="headerlink" href="#xpl-schema" title="Permalink to this headline">¶</a></h2>
 <p>No xPL schema exists for television control. We choose to use <a href="#id1"><span class="problematic" id="id2">`CONTROL.BASIC schema] to send commands. Acknowledgments will be made by a [http://xplproject.org.uk/wiki/index.php?title=Schema\_-\_SENSOR.BASIC|SENSOR.BASIC schema &lt;http://xplproject.org.uk/wiki/index.php?title=Schema\_-\_CONTROL.BASIC&gt;`_</span></a></p>
 <div class="section" id="xpl-cmnd">
-<h2>xpl-cmnd<a class="headerlink" href="#xpl-cmnd" title="Permalink to this headline">¶</a></h2>
+<h3>xpl-cmnd<a class="headerlink" href="#xpl-cmnd" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-json"><pre>xpl-cmnd
 {
 ...
@@ -108,11 +108,11 @@ current=&lt;alias for command : power_on, channel_up, etc&gt;
 </div>
 </div>
 <div class="section" id="xpl-stat">
-<h2>xpl-stat<a class="headerlink" href="#xpl-stat" title="Permalink to this headline">¶</a></h2>
+<h3>xpl-stat<a class="headerlink" href="#xpl-stat" title="Permalink to this headline">¶</a></h3>
 <p>||TODO : if we can get television power status, return this data||</p>
 </div>
 <div class="section" id="xpl-trig">
-<h2>xpl-trig<a class="headerlink" href="#xpl-trig" title="Permalink to this headline">¶</a></h2>
+<h3>xpl-trig<a class="headerlink" href="#xpl-trig" title="Permalink to this headline">¶</a></h3>
 <p>Acknowloedgment for successfull xpl-cmnd :
 .. code-block:: json</p>
 <blockquote>
@@ -127,16 +127,16 @@ type=television
 current=&lt;alias for command : power_on, channel_up, etc&gt;
 [data1=&lt;optionnal value : current=&#8217;channel&#8217;, data1=1 to set channel 1&gt;]
 }</div></blockquote>
+</div>
+</div>
 <div class="section" id="widgets-reflexion">
-<h3>Widgets reflexion<a class="headerlink" href="#widgets-reflexion" title="Permalink to this headline">¶</a></h3>
-<p>{IMG(attId=&#8221;148&#8221;)}{IMG}</p>
+<h2>Widgets reflexion<a class="headerlink" href="#widgets-reflexion" title="Permalink to this headline">¶</a></h2>
+<img alt="../../_images/148" src="../../_images/148" />
 </div>
 <div class="section" id="protocol">
-<h3>Protocol<a class="headerlink" href="#protocol" title="Permalink to this headline">¶</a></h3>
-</div>
-</div>
+<h2>Protocol<a class="headerlink" href="#protocol" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="commands">
-<h2>Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h2>
+<h3>Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h3>
 <p>See Proof of concept for the moment</p>
 <p>Set volume to a level :
 .. code-block:: json</p>
@@ -145,17 +145,17 @@ current=&lt;alias for command : power_on, channel_up, etc&gt;
 octet 6=volume.</div></blockquote>
 </div>
 <div class="section" id="return">
-<h2>Return<a class="headerlink" href="#return" title="Permalink to this headline">¶</a></h2>
+<h3>Return<a class="headerlink" href="#return" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>&#8220;0x03 0x0C 0xFF&#8221; if error</li>
 <li>&#8220;0x03 0x0C 0xF1&#8221; if OK.</li>
 </ul>
+</div>
+</div>
 <div class="section" id="proof-of-concept">
-<h3>Proof of concept<a class="headerlink" href="#proof-of-concept" title="Permalink to this headline">¶</a></h3>
-</div>
-</div>
+<h2>Proof of concept<a class="headerlink" href="#proof-of-concept" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="samsung-led-py-list-of-action-code">
-<h2>samsung_led.py : list of action/code<a class="headerlink" href="#samsung-led-py-list-of-action-code" title="Permalink to this headline">¶</a></h2>
+<h3>samsung_led.py : list of action/code<a class="headerlink" href="#samsung-led-py-list-of-action-code" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-json"><pre>COMMANDS = {
 "power_standby" : "00000001", # Power Standby    ### OK
 "power_on" : "00000002", # Power On              ### OK
@@ -228,7 +228,7 @@ octet 6=volume.</div></blockquote>
 </div>
 </div>
 <div class="section" id="tv-test-py-pof">
-<h2>tv_test.py : pof<a class="headerlink" href="#tv-test-py-pof" title="Permalink to this headline">¶</a></h2>
+<h3>tv_test.py : pof<a class="headerlink" href="#tv-test-py-pof" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-json"><pre>#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
@@ -340,6 +340,7 @@ my_tv.close()</pre>
 </div>
 </div>
 </div>
+</div>
 
 
           </div>
@@ -349,31 +350,34 @@ my_tv.close()</pre>
         <div class="sphinxsidebarwrapper">
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Purpose</a><ul>
+<li><a class="reference internal" href="#">Purpose</a></li>
 <li><a class="reference internal" href="#ex-link-wire">EX Link wire</a><ul>
 <li><a class="reference internal" href="#schematic">Schematic</a></li>
-<li><a class="reference internal" href="#make-your-own-wire">Make your own wire</a></li>
+<li><a class="reference internal" href="#make-your-own-wire">Make your own wire</a><ul>
+<li><a class="reference internal" href="#materials-needed">Materials needed</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#materials-needed">Materials needed</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#how-to-plug">How to plug</a></li>
 <li><a class="reference internal" href="#developper-notes">Developper notes</a><ul>
+<li><a class="reference internal" href="#xpl-schema">xPL Schema</a><ul>
 <li><a class="reference internal" href="#xpl-cmnd">xpl-cmnd</a></li>
 <li><a class="reference internal" href="#xpl-stat">xpl-stat</a></li>
-<li><a class="reference internal" href="#xpl-trig">xpl-trig</a><ul>
+<li><a class="reference internal" href="#xpl-trig">xpl-trig</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#widgets-reflexion">Widgets reflexion</a></li>
-<li><a class="reference internal" href="#protocol">Protocol</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#protocol">Protocol</a><ul>
 <li><a class="reference internal" href="#commands">Commands</a></li>
-<li><a class="reference internal" href="#return">Return</a><ul>
-<li><a class="reference internal" href="#proof-of-concept">Proof of concept</a></li>
+<li><a class="reference internal" href="#return">Return</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#proof-of-concept">Proof of concept</a><ul>
 <li><a class="reference internal" href="#samsung-led-py-list-of-action-code">samsung_led.py : list of action/code</a></li>
 <li><a class="reference internal" href="#tv-test-py-pof">tv_test.py : pof</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

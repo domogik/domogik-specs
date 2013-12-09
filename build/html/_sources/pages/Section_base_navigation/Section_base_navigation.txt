@@ -2,7 +2,7 @@
 Web UI : Section "Base navigation"
 *********************************************
 
-{IMG(attId="323")}{IMG}
+.. image:: ../../_static/images/323
 
 Several navigation modes:
 ~~#C00:To do~~

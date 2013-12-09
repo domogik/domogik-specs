@@ -1,5 +1,5 @@
 ********************************************************************************************************
-{IMG(src="http://code.google.com/p/domodroid/logo?cct=1319102596")}{IMG} Domodroid User Guide
+{IMG(src="http://code.google.com/p/domodroid/logo?cct=1319102596")} Domodroid User Guide
 ********************************************************************************************************
 
 
@@ -78,7 +78,7 @@ This library supports a subset of the SVG Basic 1.1 specification. Typically, yo
 
 *Remove widgets button allows users to remove the widget from the map
 
-{IMG(src="http://i39.tinypic.com/swy611.png")}{IMG}
+{IMG(src="http://i39.tinypic.com/swy611.png")}
 
 Camera
 *******
@@ -88,7 +88,7 @@ Camera
 
 To use the camera streaming feature, the Camera plugin has to be installed in Domogik. If none of your camera stream Mjpeg datas, you can use Zoneminder which a free video camera security application that encode many kind of video stream format to mjpeg stream.
 
-{IMG(src="http://i51.tinypic.com/5v6paa.png")}{IMG}
+{IMG(src="http://i51.tinypic.com/5v6paa.png")}
 
 Apps and Sources
 =================

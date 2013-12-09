@@ -3,7 +3,7 @@
 
 
 
-{IMG(src="http://last48hours.com/wp-content/uploads/2010/10/karotz-nabaztag-270x300.jpg")}{IMG}
+{IMG(src="http://last48hours.com/wp-content/uploads/2010/10/karotz-nabaztag-270x300.jpg")}
 
 ********
 Purpose

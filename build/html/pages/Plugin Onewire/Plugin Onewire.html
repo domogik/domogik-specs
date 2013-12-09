@@ -55,7 +55,7 @@
 <h1>Plugin Onewire<a class="headerlink" href="#plugin-onewire" title="Permalink to this headline">¶</a></h1>
 <p>^La traduction de cette page n&#8217;est pas terminée.^
 !Plugin onewire
-{HTML}&amp;lt;div class=&amp;quot;to_dev_or_doc&amp;quot;&amp;gt;
+{HTML}&amp;lt;div class=&#8221;to_dev_or_doc&#8221;&amp;gt;
 ((plugin_onewire_dev|Aller à la page d&#8217;information de développement de ce plugin))
 &amp;lt;/div&amp;gt;{HTML}
 {maketoc}</p>
@@ -153,10 +153,10 @@ Les plugins sont installés depuis la page d&#8217;administration. Voir ((Instal
 Voir [<a class="reference external" href="http://owfs.org/index.php?page=wiring-standards">http://owfs.org/index.php?page=wiring-standards</a>]</p>
 <p>!!Interfaces Onewire
 !!!DS9490R
-{img attId=&amp;quot;258&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;}</p>
+{img attId=&#8221;258&#8221;,stylebox=&#8221;border&#8221;,align=&#8221;center&#8221;}</p>
 <p>The device address to use for this interface will be __u__</p>
 <p>Here is the description on this interface connection :</p>
-<p>{img attId=&amp;quot;283&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;}</p>
+<p>{img attId=&#8221;283&#8221;,stylebox=&#8221;border&#8221;,align=&#8221;center&#8221;}</p>
 <p>!!!!Permissions</p>
 <p>Par défaut, vous devez être en root pour l&#8217;accès au réseau OneWire. Pour donner accès à tout le monde sur votre ordinateur et au périphérique OneWire, suivre ces instructions.</p>
 <p>En premier lieu, obtenir les identifiants du fournisseur et du produit:
@@ -167,7 +167,7 @@ Bus 006 Device 013: ID 04fa:2490 Dallas Semiconductor DS1490F 2-in-1 Fob, 1-Wire
 <p>Ici, l&#8217;ID du fournisseur est 04fa et l&#8217;identification du produit est 2490 (ils seront les mêmes pour tous les DS1490).</p>
 <p>Créer une règle udev pour OneWire dans le fichier __/etc/udev/rules.d/<a href="#id1"><span class="problematic" id="id4">onewire.rules__</span></a> :
 {CODE()}
-SUBSYSTEMS==&amp;quot;usb&amp;quot;, ATTRS{idVendor}==&amp;quot;04fa&amp;quot;, ATTRS{idProduct}==&amp;quot;2490&amp;quot;, SYMLINK+=&amp;quot;onewire&amp;quot;, MODE=&amp;quot;0666&amp;quot;
+SUBSYSTEMS==&#8221;usb&#8221;, ATTRS{idVendor}==&#8221;04fa&#8221;, ATTRS{idProduct}==&#8221;2490&#8221;, SYMLINK+=&#8221;onewire&#8221;, MODE=&#8221;0666&#8221;
 {CODE}
 Si vous n&#8217;avez pas de DS9490, vous devez adapter l&#8217;ID du vendeur et l&#8217;ID du produit.</p>
 <p>Il vous suffit de débrancher et rebrancher votre DS9490 disposer d&#8217;autorisations sur elle.</p>
@@ -182,9 +182,9 @@ Il ya d&#8217;autres éléments de configuration qui dépendent des composants. 
 <p>!!DS18B20
 !!!Comment le brancher
 !!!!Mode parasite
-{img attId=&amp;quot;46&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;}</p>
+{img attId=&#8221;46&#8221;,stylebox=&#8221;border&#8221;,align=&#8221;center&#8221;}</p>
 <p>!!!!Mode nominal
-{img attId=&amp;quot;44&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;}</p>
+{img attId=&#8221;44&#8221;,stylebox=&#8221;border&#8221;,align=&#8221;center&#8221;}</p>
 <p>!!Les éléments de configuration
 !!!ds18b20-en
 {FANCYTABLE(head=&amp;gt;Key~|~Default value~|~Description)}
@@ -202,24 +202,24 @@ Vous pouvez définir __ds18b20-<a href="#id1"><span class="problematic" id="id7"
 <p>!!!Création d&#8217;un dispositif pour DS18B20
 Dans l&#8217;administration, aller dans __Organization&amp;gt; <a href="#id1"><span class="problematic" id="id8">Devices__</span></a> . Créer un nouveau périphérique comme ceci:
 {FANCYTABLE(head=&amp;gt;Field~|~Suggested value~|~Description)}
-Name~|~~|~Un nom (&amp;quot;Temperature&amp;quot;, &amp;quot;Temp cuisine&amp;quot;, ... à vous de voir)
+Name~|~~|~Un nom (&#8220;Temperature&#8221;, &#8220;Temp cuisine&#8221;, ... à vous de voir)
 Address~|~~|~L&#8217;Identifiant DS18b20 (vous pouvez l&#8217;obtenir avec cette commande dans le Helpers : __onewire <a href="#id1"><span class="problematic" id="id9">ds18b20__</span></a> qui vous donnera toutes vos DS18B20 détecté)
 Feature~|~__1Wire.Thermometer__~|~
 Usage~|~__Temperature__~|~
 Description~|~~|~une petite description (DS18b20, sonde_1 etc)
-Reference~|~~|~&amp;quot;DS18B20&amp;quot; (Vous pouvez mettre ce que vous souhaitez)
+Reference~|~~|~&#8221;DS18B20&#8221; (Vous pouvez mettre ce que vous souhaitez)
 {FANCYTABLE}</p>
 <p>Exemple :</p>
-<p>{img attId=&amp;quot;179&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;}</p>
+<p>{img attId=&#8221;179&#8221;,stylebox=&#8221;border&#8221;,align=&#8221;center&#8221;}</p>
 <p>((Setup_your_devices| Attribution des endroits,où vous pouvez maintenant voir la température)):)</p>
 <p>!!DS18S20
 !!!Difference with DS18B20
 The DS18__B__20 component offers 4 resolutions for temperature : 9 ~ 12 bits. The DS18__S__20 offers only a 9bits resolution.</p>
 <p>!!!How to plug
 !!!!Parasit mode
-{IMG(attId=&amp;quot;69&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;)}{IMG}</p>
+.. image:: ../../_static/images/69</p>
 <p>!!!!Normal mode
-{IMG(attId=&amp;quot;70&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;)}{IMG}</p>
+.. image:: ../../_static/images/70</p>
 <p>!!!Configuration items
 {FANCYTABLE(head=&amp;gt;Key~|~Default value~|~Description)}
 ds18s20-en~|~&#8217;&#8216;unchecked&#8217;&#8216;~|~Enabling (or not) DS18S20 components support.
@@ -232,14 +232,14 @@ See DS18S20 component for the indications.</p>
 <p>!!DS2401
 !!!How to plug
 !!!!Parasit mode
-{IMG(attId=&amp;quot;63&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;)}{IMG}</p>
+.. image:: ../../_static/images/63</p>
 <p>!!!Configuration items
 {FANCYTABLE(head=&amp;gt;Key~|~Default value~|~Description)}
 ds2401-en~|~&#8217;&#8216;unchecked&#8217;&#8216;~|~Enabling (or not) DS2401 components support.
 ds2401-int~|~5~|~Interval between each DS2401 component reading. The interval to set depends on the usage you will have for DS2401 components.
 {FANCYTABLE}</p>
 <p>!!!!Opening sensor for a garage door
-A garage door is something that takes time to close/open, especially when it has a motor. Opening or closing such a door can take up to 15 seconds, so there is no risk that someone opens and closes your door without being &amp;quot;seen&amp;quot; by the DS2401 component (with a 5 seconds value).</p>
+A garage door is something that takes time to close/open, especially when it has a motor. Opening or closing such a door can take up to 15 seconds, so there is no risk that someone opens and closes your door without being &#8220;seen&#8221; by the DS2401 component (with a 5 seconds value).</p>
 <p>!!!Creating a device for a DS2401
 In administration, go to __Organization &amp;gt; <a href="#id1"><span class="problematic" id="id10">Devices__</span></a> page. Create a new device like this :</p>
 <p>{FANCYTABLE(head=&amp;gt;Field~|~Suggested value~|~Description)}
@@ -251,13 +251,13 @@ Description~|~~|~a short description (Placement, usage, etc)
 Reference~|~~|~the device reference (model, etc)
 {FANCYTABLE}</p>
 <p>Example :</p>
-<p>{img attId=&amp;quot;180&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;}</p>
+<p>{img attId=&#8221;180&#8221;,stylebox=&#8221;border&#8221;,align=&#8221;center&#8221;}</p>
 <p>((Setup_your_devices|Attribute the feature to a place)) and you can now see the status of your DS2401 (present or not)</p>
 <p>!!DS2438 in MS-T module (not in 0.1.0 : in dev release)
 __Notice : as MS-T is only supported actually, only temperature feature is fully supported.__</p>
-<p>{img attId=&amp;quot;284&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;}</p>
+<p>{img attId=&#8221;284&#8221;,stylebox=&#8221;border&#8221;,align=&#8221;center&#8221;}</p>
 <p>!!!How to plug
-{IMG(attId=&amp;quot;290&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;)}{IMG}</p>
+.. image:: ../../_static/images/290</p>
 <p>!!!Configuration items
 {FANCYTABLE(head=&amp;gt;Key~|~Default value~|~Description)}
 ds2438-en~|~&#8217;&#8216;unchecked&#8217;&#8216;~|~Enabling (or not) DS2401 components support.
@@ -274,12 +274,12 @@ Description~|~~|~a short description (Placement, usage, etc)
 Reference~|~~|~the device reference (model, etc)
 {FANCYTABLE}</p>
 <p>Example :</p>
-<p>{img attId=&amp;quot;376&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;}</p>
+<p>{img attId=&#8221;376&#8221;,stylebox=&#8221;border&#8221;,align=&#8221;center&#8221;}</p>
 <p>((Setup_your_devices|Attribute the feature to a place)) and you can now see your temperature.</p>
 <p>!!Helpers
 &#8216;&#8217;To get an introduction to helpers, you can read the ((Plugins_helpers|Helper documentation)). To use a helper, the plugin must be stopped.&#8217;&#8216;</p>
 <p>__Warning :__ for some reasons, it is not a good idea to use both onewire helper and onewire plugin : you could obtain permission issues... These issues could even force you to reboot your computer or wait a long time before using back the plugin or the helper. So, you should only use the helper when the plugin is stopped and shouldn&#8217;t start the plugin when using the helper. It is a sad thing and we will look how to correct these bug (which is linked to the &#8216;&#8217;ow&#8217;&#8217; library). If you have a solution about this, feel free to report it :)</p>
-<p>__Notice about  parameter :__  parameter has the same possible values as defined in &amp;quot;configuration &amp;gt; device&amp;quot;. For the following examples we will use the &amp;quot;u&amp;quot; device which is Usb adaptor.</p>
+<p>__Notice about  parameter :__  parameter has the same possible values as defined in &#8220;configuration &amp;gt; device&#8221;. For the following examples we will use the &#8220;u&#8221; device which is Usb adaptor.</p>
 <p>!!!onewire all
 __onewire <a href="#id1"><span class="problematic" id="id14">all__</span></a> will list all onewire components found on your 1 wire network.</p>
 <p>Example :

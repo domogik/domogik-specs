@@ -73,13 +73,13 @@ For my part, i use a photo sensor placed around the needle that indicate 1/10 li
 <div class="section" id="electrical-schematic">
 <h2>Electrical schematic<a class="headerlink" href="#electrical-schematic" title="Permalink to this headline">¶</a></h2>
 <p>If your water meter is just near your raspberry you could use a very simple schematic with the photo sensor.</p>
-<p>{IMG(src=&#8221;display345&#8221;)}{IMG}</p>
+<p>{IMG(src=&#8221;display345&#8221;)}</p>
 <p>R1 is used to generate current through the IR led and must be around 330 ohms.
 R2 is a pullup that maintain the GPIO of the raspberry pi at high level when there is no signal.
 The value must be between 5k to 50k (electronic is very indulgent !!).</p>
 <p>If your water meter is far away (some meters) this schematic could be not very efficient.
 So, i use this schematic</p>
-<p>{IMG(src=&#8221;display346&#8221;)}{IMG}</p>
+<p>{IMG(src=&#8221;display346&#8221;)}</p>
 <p>I use a shmitt trigger to re-arrange the signal into a proper square form. It will also invert the signal, but each impuls will generate a rising and a falling edge so there is no importance on the value of the signal.
 R2 and C1 must be near the trigger.</p>
 </div>
@@ -120,8 +120,7 @@ It will indicate if the plugin must be start at Domogik startup</p>
 <p>!!!!pin
 This parameter indicate the pin number of the raspberry pi where the impuls has to be read. the number used here is the real pin number not the GPIO.
 For example GPIO 4 is defined on pin 7 of the header. So you must enter 7 in the configuration.
-{IMG(src=&#8221;<a class="reference external" href="http://elinux.org/images/2/2a/GPIOs.png">http://elinux.org/images/2/2a/GPIOs.png</a>&#8221;
-{IMG}</p>
+{IMG(src=&#8221;<a class="reference external" href="http://elinux.org/images/2/2a/GPIOs.png">http://elinux.org/images/2/2a/GPIOs.png</a>&#8220;</p>
 <p>!!!!interval
 This parameter indicate the interval in minute between to data logging in database</p>
 <p>!!!!current-val

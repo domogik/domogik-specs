@@ -81,7 +81,7 @@ on receive of the zmq message:
 # scenarios is another user
 # so admin decides what actions a scenario user can take, the same flowchart applies as in a request coming from rest
 
-{IMG(attId="440")}{IMG}
+.. image:: ../../_static/images/440
 
 ***************************************
 Authorization (What the client can do)

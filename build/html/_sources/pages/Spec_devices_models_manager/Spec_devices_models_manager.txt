@@ -144,7 +144,7 @@ All the debug about the issue must be handled in the issue on the tracker.
 
 !!!!UI views
 
-{IMG(attId="441",height="25%",width="25%")}{IMG}
+.. image:: ../../_static/images/441
 
 Installation
 =============

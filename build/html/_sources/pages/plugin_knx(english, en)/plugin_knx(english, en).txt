@@ -142,7 +142,7 @@ groupwrite ip:127.0.0.1 1/1/1 1
 
 
 !!Variation
-La variation est une commande &quot;+&quot; ou &quot;-&quot; suivie d'une commande d'arrêt. A ne pas utiliser depuis l'UI donc.
+La variation est une commande "+" ou "-" suivie d'une commande d'arrêt. A ne pas utiliser depuis l'UI donc.
 Privilégier les pourcentages.
 
 !!Comment faire la différence entre un on/off, une montée descente, etc ?
@@ -177,13 +177,13 @@ commandes en shell d'EIBD:
 groupsocketlisten: affiche tous les messages passant sur le bus jusqu'à interruption.
 
 Les messages sont du type: 
-&quot;Write from X.Y.Z to X/Y/Z: Value&quot;
+"Write from X.Y.Z to X/Y/Z: Value"
 or
-&quot;Read from X.Y.Z to X/Y/Z&quot;
+"Read from X.Y.Z to X/Y/Z"
 
-&quot;Response from X.Y.Z to X/Y/Z: Value&quot;
+"Response from X.Y.Z to X/Y/Z: Value"
 
-groupwrite: envoi un message sur le bus et acquitte avec un:&quot;Send request&quot; puis termine.
+groupwrite: envoi un message sur le bus et acquitte avec un:"Send request" puis termine.
 
 Nota: les messages envoyé via le localhost et lu par le localhost on l'adresse 0.0.0 si le message est envoyé par une autre machine via l'interface il prend l'adresse physique de l'interface.
 Par exemple si 2 serveurs contrôlent le bus (1 de gestion et 1 de visualisation)
@@ -211,8 +211,8 @@ Par exemple si 2 serveurs contrôlent le bus (1 de gestion et 1 de visualisation
 !Schéma xpl
 
 * xpl-cmnd : utilisé pour exécuter une commande sur le bus : Write,Read,Response
-* xpl-trig : utilisé quand la boucle eibd &quot;write&quot; reçoit des &quot;write&quot; (Changement d'état) ou une confirmation de commande
-* xpl-stat : utilisé quand eibd reçoit un message de type &quot;Responce&quot; (retour d'un état)
+* xpl-trig : utilisé quand la boucle eibd "write" reçoit des "write" (Changement d'état) ou une confirmation de commande
+* xpl-stat : utilisé quand eibd reçoit un message de type "Responce" (retour d'un état)
 
 On remplace les / séparateurs de l'adresse de groupe par : afin d'éviter les problèmes avec rest.
 

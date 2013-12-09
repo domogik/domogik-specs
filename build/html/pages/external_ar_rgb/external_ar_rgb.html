@@ -58,14 +58,14 @@
 <div class="section" id="purpose">
 <h1>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h1>
 <p>This hardware plugin aims to control one RGB leds strip with an arduino and xPL.</p>
-<p>{IMG(attId=&#8221;301&#8221;)}{IMG}</p>
+<img alt="../../_images/301" src="../../_images/301" />
 </div>
 <div class="section" id="prerequisites">
 <h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h1>
 <p>You will need :
 * 1 Arduino Uno
 * 1 Arduino&#8217;s ethernet shiled based on wizenet
-{IMG(attId=&#8221;277&#8221;)}{IMG}</p>
+.. image:: ../../_static/images/277</p>
 <ul class="simple">
 <li>1 12V DC power supply</li>
 <li>1 RGB Led strip</li>
@@ -86,11 +86,11 @@
 <div class="section" id="for-breadboard-testing">
 <h3>For breadboard testing<a class="headerlink" href="#for-breadboard-testing" title="Permalink to this headline">¶</a></h3>
 <p>Here, RGB led strip is shown as a single RGB led. You just have to connect the led strip where the led is placed.
-{IMG(attId=&#8221;296&#8221;)}{IMG}</p>
+.. image:: ../../_static/images/296</p>
 </div>
 <div class="section" id="schematic">
 <h3>Schematic<a class="headerlink" href="#schematic" title="Permalink to this headline">¶</a></h3>
-<p>{IMG(attId=&#8221;295&#8221;)}{IMG}</p>
+<img alt="../../_images/295" src="../../_images/295" />
 </div>
 <div class="section" id="pcb">
 <h3>PCB<a class="headerlink" href="#pcb" title="Permalink to this headline">¶</a></h3>
@@ -109,9 +109,9 @@
 <div class="section" id="uln2003-component">
 <h3>ULN2003 component<a class="headerlink" href="#uln2003-component" title="Permalink to this headline">¶</a></h3>
 <p>This component contains several <a href="#id12"><span class="problematic" id="id13">`Darlingtons &lt;http://en.wikipedia.org/wiki/Darlington\_transistor&gt;`_</span></a>. Each output can deliver up to 500mA. With the following schematic, we can deliver up to 500mA to each color of the led strip :
-{IMG(attId=&#8221;310&#8221;)}{IMG}</p>
+.. image:: ../../_static/images/310</p>
 <p>To deliver up to 1A to a color, you can group inputs and outputs like this :
-{IMG(attId=&#8221;311&#8221;)}{IMG}</p>
+.. image:: ../../_static/images/311</p>
 </div>
 </div>
 <div class="section" id="max-intensity-needed-for-a-color">
@@ -245,13 +245,13 @@ I used the version 22 of the IDE for this project. But I updated the UDP library
 <div class="section" id="check-arduino-is-seen-by-domogik">
 <h2>Check arduino is seen by Domogik<a class="headerlink" href="#check-arduino-is-seen-by-domogik" title="Permalink to this headline">¶</a></h2>
 <p>When going in administration page, you should the __ar_rgb__ hardware plugin in the plugins list :
-{IMG(attId=&#8221;312&#8221;)}{IMG}</p>
+.. image:: ../../_static/images/312</p>
 <p>If not, there is a problem : check network configuration of arduino.</p>
 </div>
 <div class="section" id="create-device">
 <h2>Create device<a class="headerlink" href="#create-device" title="Permalink to this headline">¶</a></h2>
 <p>Create a device like this :
-{IMG(attId=&#8221;313&#8221;)}{IMG}</p>
+.. image:: ../../_static/images/313</p>
 <p>Address must correspond to what you defined in __MY_DEVICE__ in ar_rgb.pde. It will also correspond to the instance name (which you can see in plugins list).</p>
 </div>
 <div class="section" id="place-widget">
@@ -263,17 +263,17 @@ I used the version 22 of the IDE for this project. But I updated the UDP library
 <div class="section" id="bug-in-actual-widget-on-first-use-with-no-stats-for-device">
 <h3>Bug in actual widget on first use with no stats for device<a class="headerlink" href="#bug-in-actual-widget-on-first-use-with-no-stats-for-device" title="Permalink to this headline">¶</a></h3>
 <p>When you first create the device, and arduino is off or don&#8217;t raise events (color changes), the widget has a bug : it will be displayed like this until first stat got in database. This bug will be corrected of course ;)
-{IMG(attId=&#8221;314&#8221;)}{IMG}</p>
+.. image:: ../../_static/images/314</p>
 </div>
 <div class="section" id="state-off">
 <h3>State off<a class="headerlink" href="#state-off" title="Permalink to this headline">¶</a></h3>
 <p>When leds are off, widget is like this. To switch leds on, just clic on top left icon.</p>
-<p>{IMG(attId=&#8221;315&#8221;)}{IMG}</p>
+<img alt="../../_images/315" src="../../_images/315" />
 </div>
 <div class="section" id="state-on">
 <h3>State on<a class="headerlink" href="#state-on" title="Permalink to this headline">¶</a></h3>
 <p>When leds are on, chromatic wheel is activated. You just have to choose a color. To turn leds off, just click on top left icon.</p>
-<p>{IMG(attId=&#8221;302&#8221;)}{IMG}</p>
+<img alt="../../_images/302" src="../../_images/302" />
 </div>
 </div>
 </div>
@@ -288,7 +288,7 @@ I used the version 22 of the IDE for this project. But I updated the UDP library
 * RGB (fr) : <a class="reference external" href="http://fr.wikipedia.org/wiki/Rouge_vert_bleu">http://fr.wikipedia.org/wiki/Rouge_vert_bleu</a>
 * Different color conversion formulas : <a class="reference external" href="http://www.easyrgb.com/index.php?X=MATH#text21">http://www.easyrgb.com/index.php?X=MATH#text21</a></p>
 <p>I create the following script to generate this result (screenshot from a html page) :</p>
-<p>{IMG(attId=&#8221;279&#8221;)}{IMG}</p>
+<img alt="../../_images/279" src="../../_images/279" />
 <div class="highlight-json"><pre>&lt;?
 $S = 1;
 $L = 0.6;

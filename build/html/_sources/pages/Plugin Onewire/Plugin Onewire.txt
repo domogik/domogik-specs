@@ -3,7 +3,7 @@ Plugin Onewire
 **************
 ^La traduction de cette page n'est pas terminée.^
 !Plugin onewire
-{HTML}&lt;div class=&quot;to_dev_or_doc&quot;&gt;
+{HTML}&lt;div class="to_dev_or_doc"&gt;
 ((plugin_onewire_dev|Aller à la page d'information de développement de ce plugin))
 &lt;/div&gt;{HTML}
 {maketoc}
@@ -122,13 +122,13 @@ Voir [http://owfs.org/index.php?page=wiring-standards]
 
 !!Interfaces Onewire
 !!!DS9490R
-{img attId=&quot;258&quot;,stylebox=&quot;border&quot;,align=&quot;center&quot;}
+{img attId="258",stylebox="border",align="center"}
 
 The device address to use for this interface will be __u__
 
 Here is the description on this interface connection :
 
-{img attId=&quot;283&quot;,stylebox=&quot;border&quot;,align=&quot;center&quot;}
+{img attId="283",stylebox="border",align="center"}
 
 !!!!Permissions
 
@@ -144,7 +144,7 @@ Ici, l'ID du fournisseur est 04fa et l'identification du produit est 2490 (ils s
 
 Créer une règle udev pour OneWire dans le fichier __/etc/udev/rules.d/onewire.rules__ :
 {CODE()}
-SUBSYSTEMS==&quot;usb&quot;, ATTRS{idVendor}==&quot;04fa&quot;, ATTRS{idProduct}==&quot;2490&quot;, SYMLINK+=&quot;onewire&quot;, MODE=&quot;0666&quot;
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="04fa", ATTRS{idProduct}=="2490", SYMLINK+="onewire", MODE="0666"
 {CODE}
 Si vous n'avez pas de DS9490, vous devez adapter l'ID du vendeur et l'ID du produit.
 
@@ -165,10 +165,10 @@ Il ya d'autres éléments de configuration qui dépendent des composants. Vous l
 !!DS18B20
 !!!Comment le brancher
 !!!!Mode parasite
-{img attId=&quot;46&quot;,stylebox=&quot;border&quot;,align=&quot;center&quot;}
+{img attId="46",stylebox="border",align="center"}
 
 !!!!Mode nominal 
-{img attId=&quot;44&quot;,stylebox=&quot;border&quot;,align=&quot;center&quot;}
+{img attId="44",stylebox="border",align="center"}
 
 !!Les éléments de configuration
 !!!ds18b20-en
@@ -193,18 +193,18 @@ Vous pouvez définir __ds18b20-int__ entre 60 secondes et 300 secondes (5 minute
 !!!Création d'un dispositif pour DS18B20
 Dans l'administration, aller dans __Organization&gt; Devices__ . Créer un nouveau périphérique comme ceci:
 {FANCYTABLE(head=&gt;Field~|~Suggested value~|~Description)}
-Name~|~~|~Un nom (&quot;Temperature&quot;, &quot;Temp cuisine&quot;, ... à vous de voir)
+Name~|~~|~Un nom ("Temperature", "Temp cuisine", ... à vous de voir)
 Address~|~~|~L'Identifiant DS18b20 (vous pouvez l'obtenir avec cette commande dans le Helpers : __onewire ds18b20__ qui vous donnera toutes vos DS18B20 détecté)
 Feature~|~__1Wire.Thermometer__~|~ 
 Usage~|~__Temperature__~|~
 Description~|~~|~une petite description (DS18b20, sonde_1 etc)
-Reference~|~~|~&quot;DS18B20&quot; (Vous pouvez mettre ce que vous souhaitez)
+Reference~|~~|~"DS18B20" (Vous pouvez mettre ce que vous souhaitez)
 {FANCYTABLE}
 
 
 Exemple : 
 
-{img attId=&quot;179&quot;,stylebox=&quot;border&quot;,align=&quot;center&quot;}
+{img attId="179",stylebox="border",align="center"}
 
 ((Setup_your_devices| Attribution des endroits,où vous pouvez maintenant voir la température)):)
 
@@ -215,10 +215,10 @@ The DS18__B__20 component offers 4 resolutions for temperature : 9 ~ 12 bits. Th
 
 !!!How to plug 
 !!!!Parasit mode
-{IMG(attId=&quot;69&quot;,stylebox=&quot;border&quot;,align=&quot;center&quot;)}{IMG}
+.. image:: ../../_static/images/69
 
 !!!!Normal mode
-{IMG(attId=&quot;70&quot;,stylebox=&quot;border&quot;,align=&quot;center&quot;)}{IMG}
+.. image:: ../../_static/images/70
 
 !!!Configuration items
 {FANCYTABLE(head=&gt;Key~|~Default value~|~Description)}
@@ -236,7 +236,7 @@ See DS18S20 component for the indications.
 !!DS2401
 !!!How to plug 
 !!!!Parasit mode
-{IMG(attId=&quot;63&quot;,stylebox=&quot;border&quot;,align=&quot;center&quot;)}{IMG}
+.. image:: ../../_static/images/63
 
 !!!Configuration items
 {FANCYTABLE(head=&gt;Key~|~Default value~|~Description)}
@@ -245,7 +245,7 @@ ds2401-int~|~5~|~Interval between each DS2401 component reading. The interval to
 {FANCYTABLE}
 
 !!!!Opening sensor for a garage door
-A garage door is something that takes time to close/open, especially when it has a motor. Opening or closing such a door can take up to 15 seconds, so there is no risk that someone opens and closes your door without being &quot;seen&quot; by the DS2401 component (with a 5 seconds value).
+A garage door is something that takes time to close/open, especially when it has a motor. Opening or closing such a door can take up to 15 seconds, so there is no risk that someone opens and closes your door without being "seen" by the DS2401 component (with a 5 seconds value).
 
 !!!Creating a device for a DS2401
 In administration, go to __Organization &gt; Devices__ page. Create a new device like this :
@@ -262,17 +262,17 @@ Reference~|~~|~the device reference (model, etc)
 
 Example : 
 
-{img attId=&quot;180&quot;,stylebox=&quot;border&quot;,align=&quot;center&quot;}
+{img attId="180",stylebox="border",align="center"}
 
 ((Setup_your_devices|Attribute the feature to a place)) and you can now see the status of your DS2401 (present or not)
 
 !!DS2438 in MS-T module (not in 0.1.0 : in dev release)
 __Notice : as MS-T is only supported actually, only temperature feature is fully supported.__
 
-{img attId=&quot;284&quot;,stylebox=&quot;border&quot;,align=&quot;center&quot;}
+{img attId="284",stylebox="border",align="center"}
 
 !!!How to plug 
-{IMG(attId=&quot;290&quot;,stylebox=&quot;border&quot;,align=&quot;center&quot;)}{IMG}
+.. image:: ../../_static/images/290
 
 !!!Configuration items
 {FANCYTABLE(head=&gt;Key~|~Default value~|~Description)}
@@ -295,7 +295,7 @@ Reference~|~~|~the device reference (model, etc)
 
 Example : 
 
-{img attId=&quot;376&quot;,stylebox=&quot;border&quot;,align=&quot;center&quot;}
+{img attId="376",stylebox="border",align="center"}
 
 ((Setup_your_devices|Attribute the feature to a place)) and you can now see your temperature.
 
@@ -305,7 +305,7 @@ Example :
 
 __Warning :__ for some reasons, it is not a good idea to use both onewire helper and onewire plugin : you could obtain permission issues... These issues could even force you to reboot your computer or wait a long time before using back the plugin or the helper. So, you should only use the helper when the plugin is stopped and shouldn't start the plugin when using the helper. It is a sad thing and we will look how to correct these bug (which is linked to the ''ow'' library). If you have a solution about this, feel free to report it :)
 
-__Notice about  parameter :__  parameter has the same possible values as defined in &quot;configuration &gt; device&quot;. For the following examples we will use the &quot;u&quot; device which is Usb adaptor.
+__Notice about  parameter :__  parameter has the same possible values as defined in "configuration &gt; device". For the following examples we will use the "u" device which is Usb adaptor.
 
 !!!onewire all 
 __onewire all__ will list all onewire components found on your 1 wire network.

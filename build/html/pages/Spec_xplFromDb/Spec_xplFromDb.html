@@ -62,9 +62,9 @@
 <p>((Spec_device_template|Device Template))
 DB schema
 ==========</p>
-<p>{IMG(attId=&#8221;439&#8221;)}{IMG}
-table description
-<strong>**************</strong></p>
+<img alt="../../_images/439" src="../../_images/439" />
+<div class="section" id="table-description">
+<h3>table description<a class="headerlink" href="#table-description" title="Permalink to this headline">¶</a></h3>
 <p><a href="#id1"><span class="problematic" id="id2">*</span></a>Device =&gt; holds each device known by domogik
 <a href="#id3"><span class="problematic" id="id4">*</span></a>Command =&gt; every possible command that can be sent, there can be multiple commands for each device, the command can be an xplcommand if the xpl_command_id is not Null
 <a href="#id5"><span class="problematic" id="id6">*</span></a>Command_param =&gt; the needed parameters for this command (typically the result of a widget action)
@@ -73,6 +73,7 @@ table description
 <a href="#id11"><span class="problematic" id="id12">*</span></a>XplStat =&gt; All xplstat messages that domogic can know. This message can either be linked to a xplCommand or to a sensor
 <a href="#id13"><span class="problematic" id="id14">*</span></a>XplStat_param =&gt; the parameters for each xplstat message (used for filtering)
 <a href="#id15"><span class="problematic" id="id16">*</span></a>Sensors =&gt; used inside the stat manager define what parameters need to be stored inside the db</p>
+</div>
 </div>
 <div class="section" id="upgrading">
 <h2>Upgrading<a class="headerlink" href="#upgrading" title="Permalink to this headline">¶</a></h2>
@@ -590,7 +591,10 @@ We will keep the old devices but will not return them in rets urls (address fiel
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Generate XPL messages from the DB</a><ul>
-<li><a class="reference internal" href="#original-idea">Original idea</a></li>
+<li><a class="reference internal" href="#original-idea">Original idea</a><ul>
+<li><a class="reference internal" href="#table-description">table description</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#upgrading">Upgrading</a></li>
 <li><a class="reference internal" href="#implementation">Implementation</a><ul>
 <li><a class="reference internal" href="#plugin-json">Plugin JSON</a></li>
