@@ -52,5 +52,5 @@ find . -maxdepth 2 -type f |while read f; do
     #.. code-block
     echo '`-> Replace {CODE} with .. code-block'
     sed $REAL '/.. code-block::/,/{CODE}/{s/ \([^]*\)",\?/ \1/;s/
-    /\n    /;s///;s/{CODE(/.. code-block::/;/.. code-block::/b;s/^/    /;s/{CODE}//}' $f
+    /\n    /;s///;s/{CODE(/.. code-block::/;/.. code-block::/b;s/^/    /;s/{CODE}/\n/}' $f
     done
