@@ -1,4 +1,6 @@
-!Uses Cases for General Interactions
+************************************
+Uses Cases for General Interactions
+************************************
 
 This document purpose is for listing simple to more complex interaction with Domogik system, and start to clarify the general notions that are going to be needed to move to a more interactive, intuitive, intelligent system.
 
@@ -8,11 +10,14 @@ A 'notification' could be a text message on a screen, a TTS sentence, ...
 An 'event', can be a sensor event, a date/time, ...
 
 
-!!#Mail
-!!!Description
+#Mail
+======
+Description
+************
 The mailman just dropped an envelop in the mailbox, outside the house.
 And the system will notify the user(s)
-!!!Notions
+Notions
+********
 The event simply update the a general state.
 __state__: mail(s) in the mailbox (on/off, or 0...999 if possible)
 
@@ -27,10 +32,13 @@ __state__: does the user available? (doing home work, at the phone, ...)
 __preference__: Does the user want to be notified on real time? when he comes back?
 __preference__: what is the preferred way for notification? TTS? via TXTmsg/email if not at home? Message on screen?
 
-!!#General speech type command
-!!!Description
-A user send a vocal command: &quot;Please, turn on the light&quot;
-!!!Notions
+#General speech type command
+=============================
+Description
+************
+A user send a vocal command: "Please, turn on the light"
+Notions
+********
 The first thing to identify is the __target__ of the command
 Is the __target__ indicated in the vocal command? If not how to reduce the number of possible targets?
 How many 'light' devices are available? (For unique devices like TV, the target will be more easy to find)
@@ -48,35 +56,41 @@ Does the target action can be regulated by general __state__? (light at 50% if d
 If so does the user have __preferences__ for this command? (the user may have set the light at 70% the last time at the same time period)
 
 
-!!#Shopping list (speech command)
-!!!Description
-A user initiate a vocal command: &quot;Please, add to the shopping list&quot;
+#Shopping list (speech command)
+================================
+Description
+************
+A user initiate a vocal command: "Please, add to the shopping list"
 Then, he can add some items :
-&quot;water&quot;
-&quot;milk&quot;
+"water"
+"milk"
 ..
 And to finish the list :
-&quot;thats is all&quot; / &quot;end&quot; / ...
+"thats is all" / "end" / ...
 
-Later, the user can retrieve the shopping list : &quot;Please give me the shopping list&quot;
+Later, the user can retrieve the shopping list : "Please give me the shopping list"
 
-!!!Notions
+Notions
+********
 The system must be able to start to listen for a list of vocal items and append them in a list in memory.
 The system must be able to detect the end of the list
 The system must be able to store permanently the list and complete it when requested
-The system must be able to give back the list when needed. It could be on various format : voice, texte, email (&quot;send the shopping list to my wife&quot;), ...
+The system must be able to give back the list when needed. It could be on various format : voice, texte, email ("send the shopping list to my wife"), ...
 
 Can we have as many shopping lists (some notes finally) as we want ?
-&quot;Please, add to XXXXXXXXXX&quot;
+"Please, add to XXXXXXXXXX"
 
-!!# Speech, photo and glasses/screens interactions
-!!!Description
-The user plug a usb key with some photo/schematics in a &quot;electric plan&quot; folder
-He wears his glasses and ask &quot;Please, display the pictures from the folder electric plan of the usb key on my glasses&quot;
+# Speech, photo and glasses/screens interactions
+=================================================
+Description
+************
+The user plug a usb key with some photo/schematics in a "electric plan" folder
+He wears his glasses and ask "Please, display the pictures from the folder electric plan of the usb key on my glasses"
 The system loads the picture and display them on the glasses
-Then the user can do some actions : &quot;next&quot;, &quot;previous&quot;, &quot;end&quot;
+Then the user can do some actions : "next", "previous", "end"
 
-!!!Notions
+Notions
+********
 This is a quite advanced usage : get some data, send them to a component (which will make a copy or act as a proxy) and display them on a device. The device can be glasses, screens, tablets
 
 The command may also be done with a drag and drop on a user interface instead of a voice control

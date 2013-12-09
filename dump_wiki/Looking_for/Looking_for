@@ -1,11 +1,14 @@
-! We are looking for ... 
+*************************
+ We are looking for ... 
+*************************
 
-!! Icons 
+ Icons 
+========
 Each icon needs to be in 256x256 png (with transparency) format.
 Make sure the icon is visible for 64px to 16px reduction.
 If necessary a complementary icon can be created for 32px and 16px resolutions.
 ''(For ex. if a room icon is not clearly identifiable in 32px and under. A simple representative object can be used for those lower resolutions)''
-''For 64px (and above) {img fileId=&quot;7&quot; thumb=&quot;y&quot; alt=&quot;&quot; rel=&quot;box[g]&quot;}  |- For 32px (and under) {img fileId=&quot;3&quot; thumb=&quot;y&quot; alt=&quot;&quot; rel=&quot;box[g]&quot;} ''
+''For 64px (and above) {img fileId="7" thumb="y" alt="" rel="box[g]"}  |- For 32px (and under) {img fileId="3" thumb="y" alt="" rel="box[g]"} ''
 
 * an icon for each zone (ground floor, floor, basement, ...)
 * an icon for each room (bedroom, kitchen, ...)

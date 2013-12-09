@@ -1,93 +1,114 @@
-{maketoc}
+.. toctree::
 
 
-{IMG(src=&quot;http://last48hours.com/wp-content/uploads/2010/10/karotz-nabaztag-270x300.jpg&quot;)}{IMG}
+{IMG(src="http://last48hours.com/wp-content/uploads/2010/10/karotz-nabaztag-270x300.jpg")}{IMG}
 
-!Purpose
+********
+Purpose
+********
 This plugin allows control your Karotz (tts, ears and led)
 
-!Prerequisites
-You must install &quot;Domogik controller&quot; in your Karotz
+**************
+Prerequisites
+**************
+You must install "Domogik controller" in your Karotz
 
 Click below:
-[http://www.karotz.com/appz/app?id=1862&amp;category_id=0&amp;filter=mindscape|Domogik controller]
+`Domogik controller <http://www.karotz.com/appz/app?id=1862&amp;category\_id=0&amp;filter=mindscape>`_
 
-!Plugin configuration
-!!Enabling plugin
+*********************
+Plugin configuration
+*********************
+Enabling plugin
+================
 You can enable plugin by using :
-{CODE()}
-dmgenplug karotz
-{CODE}
+.. code-block::
+    
+    dmgenplug karotz
+    
 if it don't work, try with -f option.
 
 
 You just have to reload administration page to see the plugin in the list.
 
-!!Configuration
-!!!startup-plugin
+Configuration
+==============
+startup-plugin
+***************
 You can enable or disable the auto-start of the plugin.
 
-!!!name
+name
+*****
 Indicate the name of your Karotz (not used at the moment)
 
-!!!installid
-It is necessary to indicate the &quot;Domogik controller&quot; installid of your Karotz.
+installid
+**********
+It is necessary to indicate the "Domogik controller" installid of your Karotz.
 
-{img fileId=&quot;315&quot; thumb=&quot;y&quot; rel=&quot;box[g]&quot;}
+{img fileId="315" thumb="y" rel="box[g]"}
 
-!!!language
+language
+*********
 Language spoken by the Kartoz (EN: English, FR: French, DE: German, ES: Spanish)
 
-!!Start plugin
+Start plugin
+=============
 You can now start the plugin (start button)
 
-!Developper Notes
+*****************
+Developper Notes
+*****************
 
-!!How the online plugin to test of order? 
+How the online plugin to test of order? 
+=========================================
 In a final one, since the catalog xpl/bin it is necessary to launch the order. 
-{CODE()}
-./karotz.py -f
-{CODE}
+.. code-block::
+    
+    ./karotz.py -f
+    
 
 In a final other, since the catalog xpl/bin it is necessary to launch the order. 
 for example: tts command
-{CODE()}
-./send.py xpl-cmnd karotz.basic &quot;device=nameofyourkarotz,command=tts,value=yourmessage &quot;
-{CODE}
+.. code-block::
+    
+    ./send.py xpl-cmnd karotz.basic "device=nameofyourkarotz,command=tts,value=yourmessage "
+    
 
 where nameofyourkarotz is the name you have configure in the configuration page of the plugin.
 where yourmessage is the message that must be transmitted
 
 
-!!XPL-CMND Structure
-{CODE()}
-tts example:
-
-karotz.basic
-{
-device=&lt;Name of your karotz&gt;
-command=tts
-value=&lt;text to speech&gt;
-}
-
-led example:
-
-karotz.basic
-{
-device=&lt;Name of your karotz&gt;
-command=led
-value=&lt;color value (hex) for example : 0000FF&gt;
-time=10 (in secondes)
-}
-
-ears example:
-
-karotz.basic
-{
-device=&lt;Name of your karotz&gt;
-command=ears
-right=&lt;Position (dec) for example : 20&gt;
-left=&lt;Position (dec) for example : 10&gt;
-}
-
-{CODE}
+XPL-CMND Structure
+===================
+.. code-block::
+    
+    tts example:
+    
+    karotz.basic
+    {
+    device=<Name of your karotz>
+    command=tts
+    value=<text to speech>
+    }
+    
+    led example:
+    
+    karotz.basic
+    {
+    device=<Name of your karotz>
+    command=led
+    value=<color value (hex) for example : 0000FF>
+    time=10 (in secondes)
+    }
+    
+    ears example:
+    
+    karotz.basic
+    {
+    device=<Name of your karotz>
+    command=ears
+    right=<Position (dec) for example : 20>
+    left=<Position (dec) for example : 10>
+    }
+    
+    

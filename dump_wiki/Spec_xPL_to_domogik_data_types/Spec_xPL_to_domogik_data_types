@@ -1,4 +1,6 @@
-!xPL to Domogik data types transcoding
+**************************************
+xPL to Domogik data types transcoding
+**************************************
 
 The current model stores the values directly from the xPL to the database.
 The interpretation (On/Off, Up/Down) is deducted from the usage associated to the device.
@@ -9,14 +11,16 @@ Current model problems:
 * The usage (so the interpretation) is associated to a device, but some devices have multiples outputs, and each output can be dedicated to a specific usage.
 * When adding an usage, each widget should be modified to take the new usage in account (new interpretations).
 
-!!New Model
+New Model
+==========
 The new model will consist of 3 main modifications:
 
 * Extending feature types to Domogik data types
 * Create transcoding functions to convert techno values to unified values based on Domogik data types
 * Update the RINOR to process the transcoding
 
-!!!Domogik data types
+Domogik data types
+*******************
 The Domogik data types are going to be based on a simplified version of the KNX Data Point Types.
 (list to do)
 !!!!Values transcoding functions
@@ -28,15 +32,17 @@ We will need 2 Python functions per techno+type :
 
 The functions will be stored to the XML file:
 
-{CODE()}&lt;transcode from='techno' type='DT_Switch'&gt;
-def transcode(value):
-    ...
-    return trancoded_value
-&lt;/transcode&gt;{CODE}
+.. code-block::
+    <transcode from='techno' type='DT_Switch'>
+    def transcode(value):
+        ...
+        return trancoded_value
+    </transcode>
 
 ~~#F00:Fritz : I don't agree with that. Storing functions in xml is a bad idea : it would be best to have python functions that deduce what to do from xml file~~
 
-!!!RINOR transcoding process
+RINOR transcoding process
+**************************
 The transcoding process will require 4 steps:
 
 # Use the XML to identify keys and values

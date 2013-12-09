@@ -1,36 +1,38 @@
 *!Installation du plugin KNX
 
-!!Installation du BCUSDK
+Installation du BCUSDK
+=======================
 
 Le BCUSDK contient des outils qui permettent la communication entre le PC et le bus via une interface, il existe des packages ubuntu par exemple: http://ppa.launchpad.net/mkoegler/bcusdk/
 
 Pour installer a partir des sources:
-{CODE()}
-Installer php5 via synaptic
-apt-get install gcc
-apt-get install g++ 
-apt-get install make 
-apt-get install libmysqlclient15-dev 
- 
-
-wget http://sourceforge.net/projects/bcusdk/files/pthsem/pthsem_2.0.8.tar.gz
-wget http://sourceforge.net/projects/bcusdk/files/bcusdk/bcusdk_0.0.5.tar.gz
-tar -xzf pthsem_2.0.8.tar.gz 
-tar -xzf bcusdk_0.0.5.tar.gz
-
-cd pthsem-2.0.8/ 
-./configure 
-make 
-make test 
-make install 
-export LD_LIBRARY_PATH=/usr/local/lib 
-
-cd ..
-cd bcusdk-0.0.5/ 
-./configure --enable-onlyeibd --enable-eibnetiptunnel --enable-usb --enable-eibnetipserver --enable-ft12 
-make 
-make install 
-{CODE}
+.. code-block::
+    
+    Installer php5 via synaptic
+    apt-get install gcc
+    apt-get install g++ 
+    apt-get install make 
+    apt-get install libmysqlclient15-dev 
+     
+    
+    wget http://sourceforge.net/projects/bcusdk/files/pthsem/pthsem_2.0.8.tar.gz
+    wget http://sourceforge.net/projects/bcusdk/files/bcusdk/bcusdk_0.0.5.tar.gz
+    tar -xzf pthsem_2.0.8.tar.gz 
+    tar -xzf bcusdk_0.0.5.tar.gz
+    
+    cd pthsem-2.0.8/ 
+    ./configure 
+    make 
+    make test 
+    make install 
+    export LD_LIBRARY_PATH=/usr/local/lib 
+    
+    cd ..
+    cd bcusdk-0.0.5/ 
+    ./configure --enable-onlyeibd --enable-eibnetiptunnel --enable-usb --enable-eibnetipserver --enable-ft12 
+    make 
+    make install 
+    
 
 Sur ma Ubuntu Server 11.04 j'ai eux uun message d'erreur suivant lorsque j'ai tenté de lancer EIBD:
 
@@ -38,9 +40,10 @@ Sur ma Ubuntu Server 11.04 j'ai eux uun message d'erreur suivant lorsque j'ai te
 Pour y remédier
 
 cette ligne de commande montre les si les librairies sont tout présente:
-{CODE()}
-ldd /usr/local/bin/eibd
-{CODE}
+.. code-block::
+    
+    ldd /usr/local/bin/eibd
+    
 
 The line libpthsem.so.20 affiche non trouver
 
@@ -49,24 +52,27 @@ Editer le fichier /etc/ld.so.conf et ajouter la ligne:
 include /usr/local/lib
 
 Puis en tant que root executé:
-{CODE()}
-ldconfig
-
-restart ldd /usr/local/bin/eibd and this time the path must be correct and eibd will work correctly.
-{CODE}
+.. code-block::
+    
+    ldconfig
+    
+    restart ldd /usr/local/bin/eibd and this time the path must be correct and eibd will work correctly.
+    
 
 EIBD est prêt a fonctionner
 
-!!Demarrage automatique de EIBD
+Demarrage automatique de EIBD
+==============================
 Pour démarré automatiquement EIBD avec votre distribution il faut crée un fichier dans /etc/init.d/
 
 par exemple le fichier knxeibd situer dans src/domogik/examples/init/
 
 Vous aurez a adapter la ligne
 
-{CODE()}
-EIBD_DAEMON_OPTS=&quot;--pid-file=$EIBD_PIDFILE paramétre
-{CODE}
+.. code-block::
+    
+    EIBD_DAEMON_OPTS="--pid-file=$EIBD_PIDFILE paramétre
+    
 
 Par exemple le paramètre peuvent être:
 Interface IP: -i -d -D ipt:adressIP
@@ -76,24 +82,30 @@ Pour connaitre les paramètres nécessaire reporté vous a la documentation d'EI
 
 Maintenant que votre fichier est en place on ajoute le script a la liste des executions automatique avec la commande:
 
-{CODE()}
-sudo update-rc.d knxeibd defaults XX
-{CODE}
+.. code-block::
+    
+    sudo update-rc.d knxeibd defaults XX
+    
 
 XX représente l'ordre dans lequel sont démarrer les scripts (plus le chiffre est proche de 0 plus il est lancer tôt.
 
 Votre script doit être lancer avant celui de Domogik sinon le plugin ne pourra démarrer automatiquement.
 
-!Ajouter le KNX a domogik
+*************************
+Ajouter le KNX a domogik
+*************************
 Il suffit d'aller dans la partie administration
 
 En mode DEV:
 dans une console tapez la commande:
-{CODE()}
-dmgenplug knx
-{CODE}
+.. code-block::
+    
+    dmgenplug knx
+    
 
-!Paramétrage du plugin:
+***********************
+Paramétrage du plugin:
+***********************
 Domogik ne sais pas gérer 2 adresses pour un même device, il faut donc passé par un alias.
 
 Dans la zone Administration de domogik, dans le menu plugin KNX, il y a un onglet Special:
@@ -124,7 +136,9 @@ En 11 ce bouton permet de supprimé la ligne indiqué dans la zone 12
 
 Une fois le device renseigner et ajouter, le device sera reconnu par le plugin, pour pouvoir l'affiché dans domogik il faudrat l'ajouter dans la section device de domogik.
 
-!Paramétrage du plugin (edition manuel):
+****************************************
+Paramétrage du plugin (edition manuel):
+****************************************
 Pour palier a l'absence d'adresse multiple une solution a été adopté:
 Un fichier de configuration doit être crée dans:
 
@@ -132,11 +146,12 @@ share/domogik/data/knx/knx.txt
 
 Ce fichier contient des lignes types:
 exemple:
-{CODE()}
-datatype:1.001 adr_dmg:lampe1 adr_cmd:1/1/5 adr_stat:1/1/0 dpt_stat:1.001 check=True end
-{CODE}
+.. code-block::
+    
+    datatype:1.001 adr_dmg:lampe1 adr_cmd:1/1/5 adr_stat:1/1/0 dpt_stat:1.001 check=True end
+    
 
-adr_dmg: Cette adresse n'a pas de structure propre, un nom un numéro convient a condition qu'il soit unique dans votre fichier, c'est cette adresse qui devra ensuite est reporté dans la configuration de &quot;device&quot; de domogik
+adr_dmg: Cette adresse n'a pas de structure propre, un nom un numéro convient a condition qu'il soit unique dans votre fichier, c'est cette adresse qui devra ensuite est reporté dans la configuration de "device" de domogik
 
 adr_cmd: C'est l'adresse de group qui permet de piloté votre foncton
 adr_stat: C'est l'adresse de group qui représente l'état de votre fonction si elle est différente de adr_cmd

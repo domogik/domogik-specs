@@ -1,8 +1,11 @@
-{maketoc}
+.. toctree::
 
-!Exemple de fonctionnement du plugin
+************************************
+Exemple de fonctionnement du plugin
+************************************
 
-!! Considérations générales pour les exemples suivants:
+ Considérations générales pour les exemples suivants:
+======================================================
 1.1.1 est un interrupteur permettant de commander divers groupes
 1.1.2 est un actionneur 10 sorties
 2.1.1 est une télécommande radio HF
@@ -14,64 +17,74 @@ Le groupe 1/1/0 commande l'ensemble des sorties de l'actionneur 1.1.2
 Les groupes de 2/1/1 à 2/1/10 représentent les états des différentes sorties de l'actionneur 1.1.2
 
 
-!!Fonctionnement simple
+Fonctionnement simple
+======================
 
-!!!1er cas: Action sur une commande simple
+1er cas: Action sur une commande simple
+****************************************
 
 ''Une personne appuie sur l'interrupteur pour allumer la sortie 1 de l'actionneur''
-EIBD = Write from 1.1.1 to 1/1/1 : 01  =&gt; xpl-trig &quot;command=Write, group=1:1:1, type=s, data=01&quot;
+EIBD = Write from 1.1.1 to 1/1/1 : 01  => xpl-trig "command=Write, group=1:1:1, type=s, data=01"
 ''L'actionneur change l'état de la sortie, et modifie le groupe qui représente l'état de la sortie 1''
-EIBD = Write from 1.1.2 to 2/1/1 : 01 =&gt; xpl-trig &quot;command=Write, group=2:1:1, type=s, data=01&quot;
+EIBD = Write from 1.1.2 to 2/1/1 : 01 => xpl-trig "command=Write, group=2:1:1, type=s, data=01"
 
-!!!2eme cas: Action sur une commande groupée puis une commande simple
+2eme cas: Action sur une commande groupée puis une commande simple
+*******************************************************************
 ''Une personne appuie sur l'interrupteur, demande l'allumage général, puis appuie sur une autre touche pour éteindre la sortie 2''
-EIBD = Write from 1.1.1 to 1/1/0 : 01 =&gt; xpl-trig &quot;command=Write, group=1:1:0, type=s, data=01&quot;
+EIBD = Write from 1.1.1 to 1/1/0 : 01 => xpl-trig "command=Write, group=1:1:0, type=s, data=01"
 ''L'actionneur change l'état des sorties et modifie les groupes qui représente les états des sorties''
-EIBD = Write from 1.1.2 to 2/1/1 : 01 =&gt; xpl-trig &quot;command=Write, group=2:1:1, type=s, data=01&quot;
-EIBD = Write from 1.1.2 to 2/1/2 : 01 =&gt; xpl-trig &quot;command=Write, group=2:1:2, type=s, data=01&quot;
-EIBD = Write from 1.1.2 to 2/1/3 : 01 =&gt; xpl-trig &quot;command=Write, group=2:1:3, type=s, data=01&quot;
-EIBD = Write from 1.1.2 to 2/1/4 : 01 =&gt; xpl-trig &quot;command=Write, group=2:1:4, type=s, data=01&quot;
-EIBD = Write from 1.1.2 to 2/1/5 : 01 =&gt; xpl-trig &quot;command=Write, group=2:1:5, type=s, data=01&quot;
+EIBD = Write from 1.1.2 to 2/1/1 : 01 => xpl-trig "command=Write, group=2:1:1, type=s, data=01"
+EIBD = Write from 1.1.2 to 2/1/2 : 01 => xpl-trig "command=Write, group=2:1:2, type=s, data=01"
+EIBD = Write from 1.1.2 to 2/1/3 : 01 => xpl-trig "command=Write, group=2:1:3, type=s, data=01"
+EIBD = Write from 1.1.2 to 2/1/4 : 01 => xpl-trig "command=Write, group=2:1:4, type=s, data=01"
+EIBD = Write from 1.1.2 to 2/1/5 : 01 => xpl-trig "command=Write, group=2:1:5, type=s, data=01"
 ...
-EIBD = Write from 1.1.2 to 2/1/10 : 01 =&gt; xpl-trig &quot;command=Write, group=2:1:10, type=s, data=01&quot;
+EIBD = Write from 1.1.2 to 2/1/10 : 01 => xpl-trig "command=Write, group=2:1:10, type=s, data=01"
 ''Puis 2eme appui''
-EIBD = Write from 1.1.1 to 1/1/2 : 00 =&gt; xpl-trig &quot;command=Write, group=1:1:2, type=s, data=00&quot;
+EIBD = Write from 1.1.1 to 1/1/2 : 00 => xpl-trig "command=Write, group=1:1:2, type=s, data=00"
 ''L'actionneur change l'état de la sortie 2 et modifie le groupe qui représente la sortie''
-EIBD = Write from 1.1.2 to 2/1/2 : 00 =&gt; xpl-trig &quot;command=Write, group=2:1:2, type=s, data=00&quot;
+EIBD = Write from 1.1.2 to 2/1/2 : 00 => xpl-trig "command=Write, group=2:1:2, type=s, data=00"
 
-!!!3ème cas: Action sur une commande simple non reliée au bus physiquement
+3ème cas: Action sur une commande simple non reliée au bus physiquement
+************************************************************************
 On appuie sur une télécommande Radio HF, celle ci de part sa mobilité a un protocole afin de connaître l'action qu'elle doit effectuer.
 
 ''La télécommande demande la valeur du groupe qui représente l'état de la sortie 1''
-EIBD = Read from 2.1.1 to 2/1/1  =&gt; xpl-trig &quot;command=Read, group=2:1:1, type=none, data=none&quot;
+EIBD = Read from 2.1.1 to 2/1/1  => xpl-trig "command=Read, group=2:1:1, type=none, data=none"
 ''L'actionneur lui répond que le groupe est a 1''
-EIBD = Responce from 1.1.2 to 2/1/1 : 01 =&gt; xpl-stat &quot;command=Responce, group=2:1:1, type=s, data=01&quot;
+EIBD = Responce from 1.1.2 to 2/1/1 : 01 => xpl-stat "command=Responce, group=2:1:1, type=s, data=01"
 ''La télécommande en déduit qu'il faut mettre la sortie a 00 puisqu'elle est déjà a 01''
-EIBD = Write from 2.1.1 to 1/1/1 : 00 =&gt; xpl-trig &quot;command=Write, group=1:1:1, type=s, data=00&quot;
+EIBD = Write from 2.1.1 to 1/1/1 : 00 => xpl-trig "command=Write, group=1:1:1, type=s, data=00"
 ''L'actionneur modifie la valeur du groupe qui représente la sortie''
-EIBD = Write from 1.1.2 to 2/1/1 : 00 =&gt; xpl-trig &quot;command=Write, group=2:1:1, type=s, data=00&quot;
+EIBD = Write from 1.1.2 to 2/1/1 : 00 => xpl-trig "command=Write, group=2:1:1, type=s, data=00"
 
-!!!4ème cas: Action sur une commande de l'IHM
+4ème cas: Action sur une commande de l'IHM
+*******************************************
 ''Depuis l'ihm on commande la sortie 3 de l'actionneur 1.1.2''
 ''On appuie donc sur le widget qui va bien''
-Widget =&gt; xpl-cmnd &quot;command=Write, group=1:1:3, type=s, data=01&quot; =&gt; EIBD= Write from 0.0.0 to 1/1/3 : 01 
-=&gt;xpl-trig &quot;command=Write, group=1:1:3, type=s, data=01&quot;
+Widget => xpl-cmnd "command=Write, group=1:1:3, type=s, data=01" => EIBD= Write from 0.0.0 to 1/1/3 : 01 
+=>xpl-trig "command=Write, group=1:1:3, type=s, data=01"
 ''L'actionneur change la valeur du groupe qui représente l'état de la sortie 3''
-EIBD=Write from 1.1.2 to 2/1/3 : 01 =&gt; xpl-trig &quot;command=Write, group=2.1.3, type=s, data=01&quot;
+EIBD=Write from 1.1.2 to 2/1/3 : 01 => xpl-trig "command=Write, group=2.1.3, type=s, data=01"
 
-!Interaction possible entre l'IHM et le bus KNX grâce au scénario
+*****************************************************************
+Interaction possible entre l'IHM et le bus KNX grâce au scénario
+*****************************************************************
 
-!!1er cas: Scénario simple
+1er cas: Scénario simple
+=========================
 La première possibilité d'utilisation des interactions entre domogik et le bus est le déclenchement sur condition, par exemple:
 
-SI la sonde de température Onewire A &lt; 10°C ALORS mise en mode marche du chauffage
+SI la sonde de température Onewire A < 10°C ALORS mise en mode marche du chauffage
 
 Dans ce cas l'action part de Domogik vers le bus, le scénario sert alors a faire une dérogation sur le système KNX
 
-!!2eme cas: Scénario complexe
+2eme cas: Scénario complexe
+============================
 On peut utiliser un groupe de commande KNX pour déclencher un scénario sur Domogik. Par exemple une simulation de présence, dans ce cas une action Write sur le bus déclenche un scénario sur de Domogik entraînant une chaîne d'actions. Dans ce cas Domogik devient en partie acteur du système (il pilote différentes sorties avec des horaires par exemple ou des conditions propre au bus)
 
-!!3ème cas: Liaison entre plusieurs technologies.
+3ème cas: Liaison entre plusieurs technologies.
+================================================
 
 Par exemple envoyer à intervalle régulier la température d'une sonde sur le bus (Le bus réagira comme si un participant du bus était une sonde de température). Pour que Domogik soit totalement vue comme un participant il faudra qu'il soit en mesure de répondre a une demande d'état du bus, ce qui nécessitera un petit scénario, domogik déclenchera un xpl-stat, une commande de type Response sur le bus.
 

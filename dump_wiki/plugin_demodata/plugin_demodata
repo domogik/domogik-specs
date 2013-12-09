@@ -1,5 +1,7 @@
-!Plugin demodata
+****************
+Plugin demodata
+****************
 
-{maketoc}
+.. toctree::
 
 There is no developpers note actually for this plugin.

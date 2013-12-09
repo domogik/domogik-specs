@@ -1,42 +1,57 @@
-!WARNING
+********
+WARNING
+********
 
 __This is the old main page of the wiki, his content is not up to date. This is only an archive which will be soon removed
 __
-! Domogik projet 
-!! Overview 
+*****************
+ Domogik projet 
+*****************
+ Overview 
+===========
 Domogik is a home automation software working on GNU/Linux operating systems
 
-!! Status / Roadmap 
+ Status / Roadmap 
+===================
 * ((CurrentStatus|Current status))
-* [http://trac.domogik.org/domogik/roadmap|Roadmap]
+* `Roadmap <http://trac.domogik.org/domogik/roadmap>`_
 * ((Screenshots|Screenshots))
 * ((NextReleases|Ideas for next versions))
 
-!! Developers team 
+ Developers team 
+==================
 * ((WhoIsWho|Who is who))
 
-!! How to help us 
+ How to help us 
+=================
 * ((I18n|Traduction)) -- Domogik is looking for translators
-* [http://trac.domogik.org/domogik/wiki/WebInterfaceModel#Wearelookingfor|UI resources] -- Domogik is looking for icons, etc
+* `UI resources <http://trac.domogik.org/domogik/wiki/WebInterfaceModel#Wearelookingfor>`_ -- Domogik is looking for icons, etc
 
-!! Releases 
+ Releases 
+===========
 * ((Domogik_version_numbering|Release numbering))
 
-!!! Changelog
+ Changelog
+***********
 ''Following changelog pages will be filled when first development version will become stable (in fonctionnality and structure)''
 * Database Changelog
 * REST Changelog
 * Official Plugins Changelog
 * Core Changelog
-! End-user documentation 
-!! Compatibility 
-!!! Browser 
+*************************
+ End-user documentation 
+*************************
+ Compatibility 
+================
+ Browser 
+**********
 ||__Browser__|__Main UI__
 Firefox 3.0 / 3.5| No CSS reflexion, No background gradient
 Firefox 3.6|No CSS reflexion
 Chrome 5.0|OK||
 
-!! Installation 
+ Installation 
+===============
 (([TOC(doc/Installation-*,|inline, noheading)]))
 
 ''TODO when released ok''
@@ -44,28 +59,35 @@ Chrome 5.0|OK||
 * Install package
 * Start Domogik
 
-!! How to use Domogik 
-!!! Domogik Overview 
+ How to use Domogik 
+=====================
+ Domogik Overview 
+*******************
 ''TODO when released ok''
 
 (([TOC(doc/Presentation-*,|inline, noheading)]))
 
-!!! Domogik Administration 
+ Domogik Administration 
+*************************
 ''TODO when released ok''
 
 (([TOC(doc/Administration-*,|inline, noheading)]))
 
-!!! Domogik Usage 
+ Domogik Usage 
+****************
 ''TODO when released ok''
 
 (([TOC(doc/Usage-*,|inline, noheading)]))
 
 
-!! UI customisation 
+ UI customisation 
+===================
 ''TODO when released ok''
 
-!! Plugins 
-!!! Device or software plugins 
+ Plugins 
+==========
+ Device or software plugins 
+*****************************
 
 Each plugin has its own page with the detail of its functionalities and requirements.
 
@@ -83,7 +105,8 @@ Each plugin has its own page with the detail of its functionalities and requirem
 
 Note : a target release version ''trunk'' indicates that the plugin is under development and can be checked out from Mercurial
 
-!!! Domogik internal plugins 
+ Domogik internal plugins 
+***************************
 REST is a special plugin acting as a gateway between xPL and the user interface.
 
 ||__Plugin__|__Description__|__Target release version__
@@ -98,24 +121,31 @@ REST is a special plugin acting as a gateway between xPL and the user interface.
 [tiki-index.php?page=plugins/REST-statmgr|REST : Statistics Manager]|Record in database xpl activity on network|0.1.0||
 
 
-!!How To
+How To
+=======
 
 ||TODO : Howto for installing a module, configuring plugin and creating device on Domogik||
-! Development 
-!!Rules to read before coding!
+**************
+ Development 
+**************
+Rules to read before coding!
+===========================!=
 * ((Developer_rules|Rules to respect absolutly!!))
 
-!! How to get install and get ready for developing Domogik  
+ How to get install and get ready for developing Domogik  
+===========================================================
 * ((Use_mercurial|Grab the sources (mercurial)))
 * ((Install_mercurial_windows|How to get Mercurial working on Windows))
 * ((Domogik_installation_for_developpers|Domogik's installation))
 * ((Errors_and_solutions|Some errors and their solutions))
 
 
-!! General presentation 
+ General presentation 
+=======================
 * ((DevGeneral|General technical description on how Domogik is working))
 
-!! Plugins 
+ Plugins 
+==========
 * ((Mocks|Mocks))
 * ((PluginDevelopment|How to develop a plugin))
 ** ((MultipleInterfacesPlugin|Multiple interfaces in a plugin))
@@ -123,10 +153,12 @@ REST is a special plugin acting as a gateway between xPL and the user interface.
 * ((ReflexionAboutPluginFacilities|Reflexion about plugin facilities))
 * ((AdaptNonPythonPlugin|How to adapt a non-python xpl plugin to Domogik ?))
 
-!! Protocols 
+ Protocols 
+============
 * ((zwave|Information about zwave))
 
-!! xPL 
+ xPL 
+======
 * ((xPLDomogik|xPL &amp; Domogik))
 * ((REST_statmgr|xPL Statistics Manager))
 * ((xPL_config_request|How to fetch a config item over xPL))
@@ -137,35 +169,41 @@ REST is a special plugin acting as a gateway between xPL and the user interface.
 ** ((xPL_teleinfo_schema|Teleinfo schema))
 ** ((xPL_calendar_schema|Calendar schema))
  
-!! Database 
+ Database 
+===========
 * ((Database_structure_first_version|Database structure))
 * ((Spec_technologies|Technology list))
 * ((Devices|Device types, features and usages))
 * ((Actuators|Actuators))
 * ((Sensors|Sensors))
 
-!! User interface 
+ User interface 
+=================
 * ((Web_interface_model|Model for the web interface))
 * Graphical resources
 ** ((Available_icons|List of already available icons)) 
 * ((DjangoHttpProxy|HTTP proxy for django))
 
 
-!! About coding 
+ About coding 
+===============
 * ((CodingRules|Coding rules))
-* [http://doc.domogik.org|Code documentation]
+* `Code documentation <http://doc.domogik.org>`_
 * ((Internationalization|Internationalization))
 
-!! Tools 
-* [http://rennes1.dunnewind.net:8010/|Build bot]
-* [http://hg.domogik.dunnewind.net/hgweb.cgi|Mercurial web interface]
+ Tools 
+========
+* `Build bot <http://rennes1.dunnewind.net:8010/>`_
+* `Mercurial web interface <http://hg.domogik.dunnewind.net/hgweb.cgi>`_
 * [DemoData] : create demo database
-* [http://www.jsonlint.com/|Json validator]
-* [http://hginit.com/|A mercurial tutorial]
-* [http://www.timestamp.fr/|Play with timestamp]
-!! Tests
+* `Json validator <http://www.jsonlint.com/>`_
+* `A mercurial tutorial <http://hginit.com/>`_
+* `Play with timestamp <http://www.timestamp.fr/>`_
+ Tests
+=======
 * ((Core_team_test_capacity|Core Team test capacity))
 
-!! Other stuff 
+ Other stuff 
+==============
 * ((WikiStructure|How to organize wiki)) -- Documentation organisation
 * ((WikiGuide|How to use the Wiki)) -- naming conventions, internationalization...

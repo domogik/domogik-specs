@@ -1,37 +1,49 @@
-{maketoc}
+.. toctree::
 
-!Purpose
+********
+Purpose
+********
 Diskfree plugin send disk usage on xPL
 
-!Plugin configuration
-!!Enabling plugin
+*********************
+Plugin configuration
+*********************
+Enabling plugin
+================
 You can enable plugin by using :
-{CODE()}
-dmgenplug diskfree
-{CODE}
+.. code-block::
+    
+    dmgenplug diskfree
+    
 
 You just have to reload administration page to see the plugin in the list.
 
-!!Configuration
+Configuration
+==============
 In Domogik administration, go to diskfreeconfiguration page.
 
-!!!interval
+interval
+*********
 Interval (minutes) between each check of disk usage.
 
-!!!path-X
+path-X
+*******
 Path on your filesystem where you want to check free, used, total space.
 
-!!Start plugin
+Start plugin
+=============
 You can now start the plugin (start button).
 
-!Creating a device for Diskfree
-In administration, go to __Organization &gt; Devices__ page. Create a new device like this :
+*******************************
+Creating a device for Diskfree
+*******************************
+In administration, go to __Organization > Devices__ page. Create a new device like this :
 * Name : Whatever you want to name a path on filesystem
 * Description : Whatever you want to describe a path on filesystem
 * Address : a path on your filesystem /, /home/user, /media/disk, etc
 * Reference : anything you want
 * Usage : Computer, Server
-* Type : &quot;Computer.Disk usage&quot;
+* Type : "Computer.Disk usage"
 
 Example :
 
@@ -47,9 +59,12 @@ A device will give you several features :
 
 
 
-!Developper notes
-!!xPL Schema 
-The [http://xplproject.org.uk/wiki/index.php?title=Schema_-_SENSOR.BASIC|sensor.basic] schema is used by this plugin.
+*****************
+Developper notes
+*****************
+xPL Schema 
+============
+The `sensor.basic <http://xplproject.org.uk/wiki/index.php?title=Schema\_-\_SENSOR.BASIC>`_ schema is used by this plugin.
 
 Four messages are sent for each path check. There is one message per type : 
 * type=free_space
@@ -59,15 +74,16 @@ Four messages are sent for each path check. There is one message per type :
 
 Values are in kbyte forfree, used and total space. Percent used is a percent.
 On __xpl-stat__ is used by this plugin :
-{CODE()}
-xpl-stat
-{
-...
-}
-sensor.basic
-{
-device=&lt;path&gt;
-type=&lt;free_space, used_space, total_space, percent_used&gt;
-current=&lt;value&gt;
-}
-{CODE}
+.. code-block::
+    
+    xpl-stat
+    {
+    ...
+    }
+    sensor.basic
+    {
+    device=<path>
+    type=<free_space, used_space, total_space, percent_used>
+    current=<value>
+    }
+    

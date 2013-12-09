@@ -1,14 +1,17 @@
-!How to secure UI+REST API access
+*********************************
+How to secure UI+REST API access
+*********************************
 ||__Created:__|16/02/2012
 __Creator:__|Ferllings
 __Reviewers:__|
-__Status:__|{GAUGE(value=&gt;10, max=&gt;100, label=&gt;''draft'', perc=&gt;true, labelsize=&gt;50, height=&gt;20, color=&gt;green, bgcolor=&gt;#EEEEEE)}{GAUGE}
+__Status:__|{GAUGE(value=>10, max=>100, label=>''draft'', perc=>true, labelsize=>50, height=>20, color=>green, bgcolor=>#EEEEEE)}{GAUGE}
 __Target:__|???
 __References:__| ||
 
 This document will gather all techniques and ideas to secure Domogik UI access.
 
-!! Requirements
+ Requirements
+==============
 * The link between the REST API and the UI should be secure (HTTPS use)
 * The link between the Web browser and DomoWeb should be secure (HTTPS use)
 * The REST API should have an authentification method, with multiple session handeling.
@@ -18,9 +21,11 @@ This document will gather all techniques and ideas to secure Domogik UI access.
 ** External access: Both  Admin and view sections require auth, Shorter connection time
 ** External public access: A stronger auth methode can be used for very unsecure access. (One time password)
 
-!! Techniques
+ Techniques
+============
 REST Auth : http://developer.netflix.com/docs/Security#0_18325
 
-!! Independent techniques
+ Independent techniques
+========================
 * VPN use
 * Firewall configuration

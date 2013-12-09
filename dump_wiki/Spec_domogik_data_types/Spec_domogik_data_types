@@ -1,12 +1,15 @@
-!Data types of Domogik
+**********************
+Data types of Domogik
+**********************
 ||__Created:__|xx/xx/2011
 __Creator:__|Ferllings
 __Reviewers:__|
-__Status:__|{GAUGE(value=&gt;40, max=&gt;100, label=&gt;''review'', perc=&gt;true, labelsize=&gt;50, height=&gt;20, color=&gt;green, bgcolor=&gt;#EEEEEE)}{GAUGE}
+__Status:__|{GAUGE(value=>40, max=>100, label=>''review'', perc=>true, labelsize=>50, height=>20, color=>green, bgcolor=>#EEEEEE)}{GAUGE}
 __Target:__|0.3.0
 __References:__|((Database_core_model|Database Model))||
 
-!!Boolean type
+Boolean type
+=============
 __Feature options for Boolean__:(none)
 
 *DT_Trigger (0,1=Trigger)
@@ -20,7 +23,8 @@ __Feature options for Boolean__:(none)
 **DT_Start (0=Stop, 1=Start)
 **DT_State (0=Inactive, 1=Active)
 
-!!Number type (float or integer)
+Number type (float or integer)
+===============================
 __Feature options for Number:__
 *Min value
 *Max value
@@ -60,7 +64,8 @@ __Feature options for Number:__
 **DT_mSecond (range=0,999; unit=ms; integer only)
 **DT_Timestamp (integer only)
 
-!!String type
+String type
+============
 __Feature options for String:__
 *Max length
 
@@ -70,7 +75,8 @@ __Feature options for String:__
 **DT_Hexa
 ***DT_ColorRGBHexa (format Hexadecimal = RRGGBB, length = 6)
 
-!!Set type
+Set type
+=========
 *DT_DayOfWeek (range=0,7)
 **1=Monday
 **2=Tuesday
@@ -102,12 +108,14 @@ __Feature options for String:__
 **Bk=Black
 **Br=Brown
 
-!!Date/Time type
+Date/Time type
+===============
 *DT_DateTime (format ISO=YYYY-MM-DDThh:mm:ss.s)
 **DT_Date (format ISO=YYYY-MM-DD)
 **DT_Time (format ISO=hh:mm:ss.s)
 
-!!List type
+List type
+==========
 Comma separated values
 *DT_List
 **DT_ColorRGB (format = (R 0-255),(G 0-255),(B 0-255) (ex. '10,145,230'))
