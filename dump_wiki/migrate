@@ -11,7 +11,7 @@ find . -maxdepth 2 -type f |while read f; do
     # Replace {maketoc}
     # with .. toctree::
     echo '`-> Replace {maketoc} with .. toctree::'
-    sed $REAL 's/^{maketoc.*$/.. toctree::/' $f
+    sed $REAL 's/^{maketoc.*$/.. toctree::\n\n/' $f
 
      #Replace !xxxxxx by
      #********
