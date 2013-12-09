@@ -1,0 +1,145 @@
+****************
+Available icons
+****************
+.. toctree::
+
+
+ Default Theme
+===============
+ Home
+******
+* {IMG(fileId="202")}{IMG} {IMG(fileId="207")}{IMG} {IMG(fileId="208")}{IMG}
+
+ Areas 
+********
+!!!! Attic
+* {IMG(fileId="219")}{IMG} {IMG(fileId="220")}{IMG}
+
+!!!! Floors 
+*  {IMG(fileId="204")}{IMG} {IMG(fileId="209")}{IMG} {IMG(fileId="210")}{IMG}
+*  {IMG(fileId="203")}{IMG}  {IMG(fileId="211")}{IMG} {IMG(fileId="212")}{IMG}
+!!!! Ground floor 
+* {IMG(fileId="205")}{IMG} {IMG(fileId="213")}{IMG} {IMG(fileId="214")}{IMG}
+
+
+!!!! Basement
+* {IMG(fileId="206")}{IMG} {IMG(fileId="215")}{IMG} {IMG(fileId="216")}{IMG} {IMG(fileId="218")}{IMG}
+
+ Rooms 
+********
+!!!! Bathroom 
+* {IMG(fileId="15")}{IMG} {IMG(fileId="152")}{IMG}  {IMG(fileId="147")}{IMG}
+!!!! Bedroom 
+* {IMG(fileId="106")}{IMG}  {IMG(fileId="81")}{IMG} {IMG(fileId="68")}{IMG}
+!!!! Kitchen 
+* {IMG(fileId="7")}{IMG}  {IMG(fileId="3")}{IMG} {IMG(fileId="71")}{IMG}
+!!!! TV Lounge 
+* {IMG(fileId="45")}{IMG}  {IMG(fileId="154")}{IMG} {IMG(fileId="153")}{IMG}
+!!!! Office 
+* {IMG(fileId="30")}{IMG} {IMG(fileId="149")}{IMG} {IMG(fileId="145")}{IMG}
+!!!! Kids bedroom 
+* {IMG(fileId="87")}{IMG}  {IMG(fileId="11")}{IMG} {IMG(fileId="73")}{IMG}
+!!!! Garage 
+* {IMG(fileId="151")}{IMG}  {IMG(fileId="146")}{IMG} {IMG(fileId="148")}{IMG}
+
+ Devices Usages 
+*****************
+!!!! Not available (default icon, if the selected usage doesn't have icons yet)
+* {IMG(fileId="262")}{IMG} {IMG(fileId="263")}{IMG} {IMG(fileId="264")}{IMG}
+
+!!!! Light
+* Usage {IMG(fileId="114")}{IMG} {IMG(fileId="91")}{IMG}
+* Undefined {IMG(fileId="245")}{IMG}
+* Binary {IMG(fileId="37")}{IMG}  {IMG(fileId="83")}{IMG}
+* Range {IMG(fileId="37")}{IMG} {IMG(fileId="20")}{IMG} {IMG(fileId="70")}{IMG} {IMG(fileId="34")}{IMG} {IMG(fileId="120")}{IMG} {IMG(fileId="49")}{IMG} {IMG(fileId="13")}{IMG} {IMG(fileId="90")}{IMG} {IMG(fileId="27")}{IMG} {IMG(fileId="46")}{IMG} {IMG(fileId="83")}{IMG}
+
+!!!! Appliance 
+* Usage {IMG(fileId="53")}{IMG} {IMG(fileId="124")}{IMG} {IMG(fileId="168")}{IMG} {IMG(fileId="177")}{IMG}
+* Undefined {IMG(fileId="243")}{IMG}
+* Binary {IMG(fileId="76")}{IMG}  {IMG(fileId="53")}{IMG}
+* Range {IMG(fileId="76")}{IMG} {IMG(fileId="77")}{IMG} {IMG(fileId="104")}{IMG} {IMG(fileId="119")}{IMG} {IMG(fileId="38")}{IMG} {IMG(fileId="108")}{IMG} {IMG(fileId="113")}{IMG} {IMG(fileId="28")}{IMG} {IMG(fileId="118")}{IMG} {IMG(fileId="22")}{IMG} {IMG(fileId="53")}{IMG}
+
+!!!! Shutter 
+* Usage {IMG(fileId="63")}{IMG}  {IMG(fileId="69")}{IMG}
+* Undefined {IMG(fileId="246")}{IMG}
+* Binary {IMG(fileId="17")}{IMG}  {IMG(fileId="57")}{IMG}
+* Range {IMG(fileId="17")}{IMG} {IMG(fileId="121")}{IMG} {IMG(fileId="82")}{IMG} {IMG(fileId="99")}{IMG} {IMG(fileId="107")}{IMG} {IMG(fileId="112")}{IMG} {IMG(fileId="31")}{IMG} {IMG(fileId="105")}{IMG} {IMG(fileId="64")}{IMG} {IMG(fileId="95")}{IMG} {IMG(fileId="57")}{IMG}
+
+!!!! Air conditioning
+* Usage {IMG(fileId="66")}{IMG}  {IMG(fileId="96")}{IMG}
+* Undefined {IMG(fileId="244")}{IMG}
+* Binary {img fileId="98" }  {img fileId="66"  }  
+* Range {img fileId="98" }  {img fileId="65" }  {img fileId="21" }   {img fileId="44"  }  {img fileId="42"  }  {img fileId="52"  }  {img fileId="100"  }   {img fileId="110"  }  {img fileId="36"  }   {img fileId="85"  }  {img fileId="66"  }  
+
+!!!! Ventilation 
+* Usage {IMG(fileId="47")}{IMG}  {IMG(fileId="26")}{IMG}
+* Undefined {IMG(fileId="247")}{IMG}
+* Binary {img fileId="35" }  {img fileId="51"  }
+* Range {img fileId="35" } {img fileId="55" }  {img fileId="97" }  {img fileId="10" }  {img fileId="24" }  {img fileId="25" }  {img fileId="59"  }  {img fileId="115"  } {img fileId="93"  } {img fileId="61"  } {img fileId="51"  }
+
+!!!! Heating 
+* Usage 
+* Binary {img fileId="172"}  {img fileId="171"}
+* List {img fileId="176"}  {img fileId="173"}  {img fileId="175"} {img fileId="174"}
+
+!!!! Temperature 
+* Usage {IMG(fileId="200")}{IMG} {IMG(fileId="199")}{IMG}
+
+!!!! Telephony
+* Usage {IMG(fileId="225")}{IMG} {IMG(fileId="226")}{IMG}
+
+!!!! Computer
+* Usage {IMG(fileId="230")}{IMG} {img fileId="229"}
+
+!!!! Server
+
+!!!! Mir:ror
+* Usage {IMG(fileId="232")}{IMG} {IMG(fileId="234")}{IMG} 
+* Binary {IMG(fileId="232")}{IMG} {IMG(fileId="237")}{IMG}
+
+!!!! Nanoztag:tags
+* Usage {IMG(fileId="236")}{IMG} {IMG(fileId="235")}{IMG}
+* Binary {IMG(fileId="236")}{IMG} {IMG(fileId="239")}{IMG}
+
+!!!! TV
+
+!!!! Music
+
+!!!! Electricity
+* Usage {IMG(fileId="241")}{IMG} {IMG(fileId="242")}{IMG}
+
+!!!! Water
+
+!!!! Weather
+
+!!!! Christmas tree
+
+!!!! Router or internet box (freebox, etc) (for reboot usage and ping status)
+
+!!!! Micro
+
+!!!!Door
+
+!!!!Window
+
+!!!!Garage door
+
+!!!!Harddisk (for NAS or hard disk usage)
+
+!!!!RGB light (led, dmx, ...)
+
+!!!!People
+
+ Interface
+***********
+!!!! Visualisation link
+!!!! Administration link
+!!!! Help link
+!!!! Login/Logout link
+!!!! Areas Menuitem
+!!!! Rooms Menuitem
+!!!! Devices Menuitem
+!!!! Accounts Menuitem
+!!!! Plugins Menuitem
+!!!! REST Menuitem
+!!!! Helpers Menuitem

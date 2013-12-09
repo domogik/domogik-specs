@@ -1,0 +1,75 @@
+Ce plugin permet de réaliser des tests logiques ou de valeur sur des devices et de lancer une action en fonction du résultat.
+
+************
+Dépendance:
+************
+
+Le plugin n'a aucune dépendance à proprement parler, en fonction de ce que vous voudrez réaliser, il vous faudra ou non installer d'autres plugins.
+
+Attention, ce plugin étant en cours de développement et fortement lié a Domoweb, il vous faut aussi la version 'dev' de domoweb.
+=================================================================================================================================
+
+************************
+Installation du plugin:
+************************
+
+Ce plugin est inclus dans les sources, pour l'activer:
+
+dmgenplug scene
+
+*******************
+Ajouter une règle:
+*******************
+
+Pour ajouter une règle, assurez vous que le plugin est lancé, puis rendez vous dans l'onglet 'creator' de l'admin du plugin.
+
+{img fileId="344"}
+
+Choisir un device à tester avec éventuellement une condition.
+
+Pour ajouter un autre device à tester cliquer sur 'Add another device'.
+
+Une fois tous les devices devant déclencher le test ajoutés, renseigner le champ condition en utilisant les termes device1, device2 etc. (limité a 100)
+
+Des test pouvant être réalisés par exemple:
+device1 or device2 --> device1 et device2 doivent avoir un test configuré
+device1 and device2 --> device1 et device2 doivent avoir un test configuré
+device1 != device2 --> device1 et device2 peuvent avoir un test configuré ou non
+(device1 and device2) or device3 --> device1, device2 et device3 doivent avoir un test configurer
+(device1 > device2) and device3 --> seul device3 doit avoir un test configuré
+True  --> dans ce cas dès qu'un message xpl-trig sera reçu pour l'un des device configurés, les actions "true" seront réalisées (idem si False mais avec les actions False)
+....
+
+Vous pouvez ensuite définir la ou les actions à réaliser, pour cela choisir sur quel état de la condition vous voulez réaliser l'action (True ou False) sélectionner le device à commander et sa valeur.
+
+Cliquer sur "Add another action" pour ajouter une autre action (limité a 100 au total)
+
+Option: vous pouvez choisir si la scène sera lancée automatiquement avec le plugin ou non. Cela permet de créer une scène qui devient active grâce a une autre scène.
+
+Crée un tache avec des fonctions basées sur l'heure:
+=====================================================
+
+Grace au plugin cron vous avez la possiblité de définir des ordres à certaines heures ou sur certaines dates.
+Pour l'utiliser dans le plugin Scene il vous faut un device a piloter, c'est pourquoi dans les devices de la technologie Scene vous trouverez un "Fake device" (un device fictif).
+
+Si vous voulez qu'en cas de grosse chaleur l'été vos volets se ferment, définissez une tache cron entre 2 dates qui mettra a true votre Fake device entre ces 2 dates.
+
+Ajouter ce fake device dans l'une des conditions d'une scene.
+
+Exemple d'utilisation:
+=======================
+-Arrosage automatique (plugin Scene et plugin Cron):
+*****************************************************
+* Crée un fake device "horraire arrosage" type scene.fake device
+* Dans le plugin Cron crée une tache qui comprend les jours ou vous voulez arroser et la plage horraire sur laquel vous autorisé l'arrosage.
+* Dans le plugin Scene selectionner votre device "horraire arrosage" test '=' et valeur 'true'
+* Ajouter eventuellement une autre condition, par exemple "capteur1.humidity" < '20'
+* Selectionner une commande "True": "arrosage" à on et une commande "False" arrosage à "off"
+
+-Envoyer un sms si l'alarme se déclanche (plugin SMS et plugin Scene)
+**********************************************************************
+* Dans le plugin scene selection le device représentant l'état déclenché de votre alarme
+* dans une commande True selectionner "command line" et entrer la ligne chemincomplet/./send.py xpl-cmnd sendmsg.basic "to=yourphone,body="votre message"
+
+
+
