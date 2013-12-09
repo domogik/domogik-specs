@@ -22,7 +22,7 @@ Domogik is delivered without any packages (so, without any plugins) since the 0.
 
 All packages are available on online repositories. Currently there are 4 official repositories. You can see them on http://repo.domogik.org/repository/ :
 
-{IMG(attId="415")}{IMG}
+.. image:: ../../_static/images/415
 
 !!!!The stable repository
 This is the only activated repository after a Domogik installation. It is the main repository with official, stable and validated packages.
@@ -61,7 +61,7 @@ Looking for the packages list without having Domogik installed ?
 
 If you want to see the packages list, just go to http://repo.domogik.org/package/. 
 
-{IMG(attId="398")}{IMG}
+.. image:: ../../_static/images/398
 
 By default only stable packages are displayed. Just check the appropriate checkboxes to view packages from other repositories.
 
@@ -70,11 +70,11 @@ Manage packages from Domoweb
 
 Just go to the Domoweb administration panel. In the left menu, go to the section __Hosts__ : you will see the list of all hosts where Domogik is installed. Here is the list on a single host installation (darkstar is the name of the computer) :
 
-{IMG(attId="400{file name="menu_01.png"}")}{IMG}
+.. image:: ../../_static/images/400
 
 Click on the host name :
 
-{IMG(attId="399")}{IMG}
+.. image:: ../../_static/images/399
 
 On the top, you will find 3 tabs : 
 * Repositories : list all the activated repositories and allow to update the cache.
@@ -86,16 +86,16 @@ Repositories
 
 Updating the cache consist in getting from the repositories the list of the available packages. To update the cache, just click on the __Update cache__ button :
 
-{IMG(attId="401")}{IMG}
+.. image:: ../../_static/images/401
 
 When the cache is updated, you will get a notification :
 
-{IMG(attId="402")}{IMG}
+.. image:: ../../_static/images/402
 
 Plugins
 ********
 
-{IMG(attId="403")}{IMG}
+.. image:: ../../_static/images/403
 
 This page is divided in 2 sections :
 * Installed : the list of the installed plugin packages.
@@ -104,39 +104,39 @@ This page is divided in 2 sections :
 !!!!Search for a plugin
 You can use the search field to find a plugin with a keyword :
 
-{IMG(attId="404")}{IMG}
+.. image:: ../../_static/images/404
 
 !!!!Install a plugin
 When you have found the plugin you are looking for, just click on the __Install__ button :
 
-{IMG(attId="405")}{IMG}
+.. image:: ../../_static/images/405
 
 If the package requires a dependency, which is not installed, you will get an error message :
 
-{IMG(attId="406")}{IMG}
+.. image:: ../../_static/images/406
 
-{IMG(attId="407")}{IMG}
+.. image:: ../../_static/images/407
 
 When the plugin will be installed, you will get a notification :
 
-{IMG(attId="408")}{IMG}
+.. image:: ../../_static/images/408
 
 The plugin is now displayed in the installed list :
 
-{IMG(attId="409")}{IMG}
+.. image:: ../../_static/images/409
 
 !!!!Enable and configure a plugin
 You need now to enable the plugin. If you don't do it, the plugin won't be available in the plugin list of the left menu. just click on the __Enable__ button :
 
-{IMG(attId="410")}{IMG}
+.. image:: ../../_static/images/410
 
 You will get a notification when the plugin is enabled :
 
-{IMG(attId="411")}{IMG}
+.. image:: ../../_static/images/411
 
 And, the __Enable__ button is replaced by both __Disable__ and __Configure__ buttons :
 
-{IMG(attId="412")}{IMG}
+.. image:: ../../_static/images/412
 
 You can now ((Plugins_installation_configuration|configure your plugin)) 
 

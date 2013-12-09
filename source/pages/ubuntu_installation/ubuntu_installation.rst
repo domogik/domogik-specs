@@ -44,27 +44,27 @@ Look for domogik in the search engine and select domogik-full.
 
 Apply updates
 
-{IMG(fileId="322"
-{IMG}
+.. image:: ../../_static/images/322
+
 The interface to use with xplhub.
 If your computer is connected to a wired network, you should use eth0.
 With wifi, you should try wlan0. Otherwise use lo
 
 
-{IMG(fileId="323"
-{IMG}
+.. image:: ../../_static/images/323
+
 Domogik need to create a database to finish its installation.
 If you have a dedicated mysql server on your network, use it. If not, use localhost to connect to the previously installed mysql-server.
 You also need the password of the admin user. It will be used to create the database.
 
 
-{IMG(fileId="324"
-{IMG}
+.. image:: ../../_static/images/324
+
 Domogik use a special user to connect to the database. It's also possible to change the name of the database used by domogik.
 
 
-{IMG(fileId="325"
-{IMG}
+.. image:: ../../_static/images/325
+
 The interface Domogik should bind to. It MUST be the same as xplhub.
 
 

@@ -15,7 +15,7 @@ Placement
 A default layout is available for each view.
 But each view can have its own layout.
 (Default layout for each page)
-{IMG(attId="209")}{IMG}
+.. image:: ../../_static/images/209
 
 Examples
 =========
@@ -23,14 +23,14 @@ Examples
 View of 'Ma Pièce', with colored sections and page background
 **************************************************************
 
-{IMG(attId="206")}{IMG}
+.. image:: ../../_static/images/206
 
 View of 'Ma Pièce', with image background
 ******************************************
 
-{IMG(attId="207")}{IMG}
+.. image:: ../../_static/images/207
 
 View of 'Ma Pièce', with image background and section color backgrounds
 ************************************************************************
 
-{IMG(attId="208")}{IMG}
+.. image:: ../../_static/images/208

@@ -170,7 +170,7 @@ In administration, go to __Organization > Devices__ page. Create a new device li
 
 Example : 
 
-{IMG(attId="194")}{IMG}   {IMG(attId="195")}{IMG}
+.. image:: ../../_static/images/194
 
 ((Setup_your_devices|Attribute the features to a place and you can now control your lamp)).
 

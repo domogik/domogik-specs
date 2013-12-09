@@ -29,7 +29,7 @@ Electrical schematic
 
 If your water meter is just near your raspberry you could use a very simple schematic with the photo sensor.
 
-{IMG(src="display345")}{IMG}
+{IMG(src="display345")}
 
 R1 is used to generate current through the IR led and must be around 330 ohms.
 R2 is a pullup that maintain the GPIO of the raspberry pi at high level when there is no signal.
@@ -38,7 +38,7 @@ The value must be between 5k to 50k (electronic is very indulgent !!).
 If your water meter is far away (some meters) this schematic could be not very efficient.
 So, i use this schematic
 
-{IMG(src="display346")}{IMG}
+{IMG(src="display346")}
 
 I use a shmitt trigger to re-arrange the signal into a proper square form. It will also invert the signal, but each impuls will generate a rising and a falling edge so there is no importance on the value of the signal.
 R2 and C1 must be near the trigger.
@@ -92,7 +92,7 @@ caption="Adding user to gpio group"
     This parameter indicate the pin number of the raspberry pi where the impuls has to be read. the number used here is the real pin number not the GPIO.
     For example GPIO 4 is defined on pin 7 of the header. So you must enter 7 in the configuration.
     {IMG(src="http://elinux.org/images/2/2a/GPIOs.png"
-    {IMG}
+    
     
     !!!!interval
     This parameter indicate the interval in minute between to data logging in database

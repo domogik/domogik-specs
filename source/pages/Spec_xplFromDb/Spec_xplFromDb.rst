@@ -12,7 +12,7 @@ Original idea
 DB schema
 ==========
 
-{IMG(attId="439")}{IMG}
+.. image:: ../../_static/images/439
 table description
 ******************
 

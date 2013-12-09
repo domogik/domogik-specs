@@ -26,7 +26,7 @@ First case of use
 
 I want to start my "christmas" tree at 7:00 every morning and stop it at 8:00. In the evening, I want to start it at 17:00 and stop it at 21:00. In the weekend, start it at 10:00 and stop it at 21:00.
 I want to send an on (off) command using the xpl-cmnd type, according to the telldus.basic schema to device TS14.
-{IMG(fileId="326")}{IMG}
+.. image:: ../../_static/images/326
 
 Second case of use
 *******************
@@ -37,12 +37,12 @@ The light will start at 7:00 with a level of 10%, and 12 minutes later (60 minut
 At 8:00, the ligth will be 100%.
 Here is the value to put in the alarm1 configuration zone : SaSu,07:00-08:00,10,20,40,60,80,100
 Actually, your device must use the dim command and the level parameter.
-{IMG(fileId="327")}{IMG}
+.. image:: ../../_static/images/327
 
 Third case of use with plcbus
 ******************************
 
 Want to shut off all the lights of the home at 0h00 from sunday to thursday and at 1h00 friday and saturday.
-{IMG(fileId="336")}{IMG}
+.. image:: ../../_static/images/336
 Now add a device in Domogik (technology cron / job) and give homeOff as address.
 The last thing to do is to add widgets. Look at the `cron <http://wiki.domogik.org/plugin\_zalarms>`_ documentation.

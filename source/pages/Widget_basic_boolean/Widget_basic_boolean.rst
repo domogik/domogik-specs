@@ -2,4 +2,4 @@
 Web UI : Widget "basic boolean"
 ******************************************
 
-{IMG(attId="305")}{IMG}
+.. image:: ../../_static/images/305

@@ -43,7 +43,7 @@ Points to see :
 * make pictures examples for techno/type
 * make pictures examples for address
 
-{IMG(attId="269")}{IMG}
+.. image:: ../../_static/images/269
 
 Auto discovery process
 =======================

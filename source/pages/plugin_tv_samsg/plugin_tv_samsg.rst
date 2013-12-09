@@ -9,7 +9,7 @@ Purpose
 
 This plugin's goal is to control a Samsung television with EX-link port (sort of a serial port).
 
-::{IMG(attId="203")}{IMG}::
+::.. image:: ../../_static/images/203
 
 *************
 EX Link wire
@@ -18,7 +18,7 @@ EX Link wire
 Schematic
 ==========
 
-{IMG(attId="149")}{IMG}
+.. image:: ../../_static/images/149
 
 Make your own wire 
 ====================
@@ -28,17 +28,17 @@ Materials needed
 
 You need a simple stereo wire with a 3.5mm jack plug and a female DB9 :
 
-{IMG(attId="196")}{IMG}
+.. image:: ../../_static/images/196
 
-{IMG(attId="197")}{IMG} {IMG(attId="198")}{IMG}
+.. image:: ../../_static/images/197
 
 Brase wire on DB9 like told in schematic :
 
-{IMG(attId="199")}{IMG}
+.. image:: ../../_static/images/199
 
 And finally, protect your new EX Link wire :
 
-{IMG(attId="200")}{IMG}
+.. image:: ../../_static/images/200
 
 ************
 How to plug
@@ -46,11 +46,11 @@ How to plug
 
 Just plug EX Link's jack side on television like this : 
 
-{IMG(attId="202")}{IMG}
+.. image:: ../../_static/images/202
 
 If your computer doesn't have any serial port, you may need a serial<=>usb adaptator.
 
-{IMG(attId="201")}{IMG}
+.. image:: ../../_static/images/201
 
 *****************
 Developper notes
@@ -113,7 +113,7 @@ Acknowloedgment for successfull xpl-cmnd :
 Widgets reflexion
 ==================
 
-{IMG(attId="148")}{IMG}
+.. image:: ../../_static/images/148
 
 Protocol
 =========

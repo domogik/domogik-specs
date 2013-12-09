@@ -1,4 +1,4 @@
-{IMG(src="https://docs.google.com/drawings/pub?id=1270aD9hLpPgboPCYwBNqCuZfS1ISzNEtMeO3a0VAo9g&amp;w=960&amp;h=720")}{IMG}
+{IMG(src="https://docs.google.com/drawings/pub?id=1270aD9hLpPgboPCYwBNqCuZfS1ISzNEtMeO3a0VAo9g&amp;w=960&amp;h=720")}
 
 Package format
 ===============

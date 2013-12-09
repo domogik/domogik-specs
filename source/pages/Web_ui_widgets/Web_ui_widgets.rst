@@ -146,7 +146,7 @@ caption="Template"
  Internal processing and data
 ==============================
 
-{IMG(attId="395")}{IMG}
+.. image:: ../../_static/images/395
  Django Start
 **************
 

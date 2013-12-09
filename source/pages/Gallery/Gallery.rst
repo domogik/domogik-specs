@@ -8,8 +8,8 @@ Gallery
 Wallpapers
 ==========
 
-{IMG(attId="423",thumb="y",rel="box[g]",max="300")}{IMG}
-{IMG(attId="424",thumb="y",rel="box[g]",max="300")}{IMG}
+.. image:: ../../_static/images/423
+.. image:: ../../_static/images/424
 
 Version 0.2.0
 =============
@@ -18,7 +18,7 @@ Pictures
 ********
 
 !!!!Charts
-{IMG(attId="375",thumb="y",rel="box[g]",max="300")}{IMG}
+.. image:: ../../_static/images/375
 
 Videos
 ******
@@ -39,26 +39,26 @@ Pictures
 ********
 
 !!!!Visualisation mode
-{IMG(attId="255",thumb="y",rel="box[g]",max="300")}{IMG}
+.. image:: ../../_static/images/255
 
-{IMG(attId="264",thumb="y",rel="box[g]",max="300")}{IMG}
+.. image:: ../../_static/images/264
 
-{IMG(attId="266",thumb="y",rel="box[g]",max="300")}{IMG}
+.. image:: ../../_static/images/266
 
 !!!!House organization
-{IMG(attId="253",thumb="y",rel="box[g]",max="300")}{IMG}
+.. image:: ../../_static/images/253
 
-{IMG(attId="256",thumb="y",rel="box[g]",max="300")}{IMG}
+.. image:: ../../_static/images/256
 
 !!!!Devices management
-{IMG(attId="254",thumb="y",rel="box[g]",max="300")}{IMG}
+.. image:: ../../_static/images/254
 
-{IMG(attId="257",thumb="y",rel="box[g]",max="300")}{IMG}
+.. image:: ../../_static/images/257
 
 !!!!Plugins management
-{IMG(attId="262",thumb="y",rel="box[g]",max="300")}{IMG}
+.. image:: ../../_static/images/262
 
-{IMG(attId="263",thumb="y",rel="box[g]",max="300")}{IMG}
+.. image:: ../../_static/images/263
 
 Videos
 ******

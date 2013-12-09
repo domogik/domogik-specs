@@ -49,10 +49,10 @@ Global status
 Dev status's last update : 10/05/2010
 ======================================
 
-{IMG(attId="33",height="100%",width="100%")}{IMG}
+.. image:: ../../_static/images/33
 
 Others status's last update : 10/05/2010
 =========================================
 
-{IMG(attId="34",height="100%",width="100%")}{IMG}
+.. image:: ../../_static/images/34
 

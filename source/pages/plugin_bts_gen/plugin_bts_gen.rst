@@ -294,13 +294,13 @@ Créer le device
 ================
 
 Créer un device comme ceci : 
-{IMG(attId="307")}{IMG}
+.. image:: ../../_static/images/307
 
 Choisir le widget
 ==================
 
 Sélectionner ce widget et le placer :
-{IMG(attId="306")}{IMG}
+.. image:: ../../_static/images/306
 
 ********
 Annexes

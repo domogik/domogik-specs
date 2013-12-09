@@ -78,7 +78,7 @@ In this sample, they have 92 items
 
 rounded by 1000 modulos / 27 differents lines (__70% reduced__)
 
-{IMG(attId="421")}{IMG}
+.. image:: ../../_static/images/421
 
  flapping elimation algorithm (developpement only)
 ===================================================
@@ -93,5 +93,5 @@ __Note__: This algorithm, is already implemented in "Reduce device stats volumet
     
     rounded by 1000 range (up/down = 500) / 5 differents lines (__95% reduced__)
     
-    {IMG(attId="422"
-    {IMG}
+    .. image:: ../../_static/images/422
+    

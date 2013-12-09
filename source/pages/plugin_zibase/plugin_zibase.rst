@@ -104,7 +104,7 @@ Create a new device like this:
 ** ZiBase.Dimmer provides on/off and dim/bright
 
 Examples :
-{IMG(fileId="268|267")}{IMG}
+.. image:: ../../_static/images/268
 
 
 ((Setup_your_devices|Attribute the features to a place and you will be able to control your lamp.))
@@ -149,7 +149,7 @@ Create a new sensor like this:
 * Name : "Swimming temp" (or whatever you want)
 * Description : a short description (Placement, usage ,etc)
 * Address : <__Address device__> (Sensor ID in zibase configurator)
-{IMG(fileId="274")}{IMG}
+.. image:: ../../_static/images/274
 * Reference : "Zibase" (or whatever you want)
 * Usage : "Temperature" (for example)
 * Feature : ZiBase.Oregon Temperature
