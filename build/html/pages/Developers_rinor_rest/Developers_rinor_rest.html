@@ -1,0 +1,153 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>RINOR / REST &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Tools for developers" href="../Developers_tools/Developers_tools.html" />
+    <link rel="prev" title="Packages" href="../Developers_packages/Developers_packages.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Developers_tools/Developers_tools.html" title="Tools for developers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Developers_packages/Developers_packages.html" title="Packages"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="rinor-rest">
+<h1>RINOR / REST<a class="headerlink" href="#rinor-rest" title="Permalink to this headline">¶</a></h1>
+<p>The RINOR/REST server is a gateway between all User Interfaces (UI), the xPL network and the database.</p>
+<p>The stable API of Rest can be found for each version in the official documentation : <a class="reference external" href="http://docs.domogik.org/domogik/dev/en/">http://docs.domogik.org/domogik/dev/en/</a> chapter RINOR.</p>
+<p>__All the below pages are only specifications of draft. Use them with caution. __</p>
+<div class="section" id="log-viewing-candidate-for-domogik-0-2-0">
+<h2>Log viewing (candidate for Domogik 0.2.0)<a class="headerlink" href="#log-viewing-candidate-for-domogik-0-2-0" title="Permalink to this headline">¶</a></h2>
+<p>||__Part__                                <a href="#id1"><span class="problematic" id="id2">|__Description__                                               |__Rest API number__|__Progress__
+((REST_log|REST : /log))                  |View log files from REST                                      |0.4                |{GAUGE(value=&gt;70, max=&gt;100, label=&gt;&#8217;&#8216;dev&#8217;&#8216;, perc=&gt;true, labelsize=&gt;50, height=&gt;20, color=&gt;green, bgcolor=&gt;#EEEEEE)}{GAUGE}||</span></a></p>
+</div>
+<div class="section" id="scenario">
+<h2>Scenario<a class="headerlink" href="#scenario" title="Permalink to this headline">¶</a></h2>
+<p>||__Part__                                <a href="#id3"><span class="problematic" id="id4">|__Description__                                               |__Rest API number__|__Progress__
+((REST_scenario|REST : /scenario))        |Scenario                                                      |                   |{GAUGE(value=&gt;10, max=&gt;100, label=&gt;&#8217;&#8216;specification&#8217;&#8216;, perc=&gt;true, labelsize=&gt;50, height=&gt;20, color=&gt;green, bgcolor=&gt;#EEEEEE)}{GAUGE} {GAUGE(value=&gt;0, max=&gt;100, label=&gt;&#8217;&#8216;dev&#8217;&#8216;, perc=&gt;true, labelsize=&gt;50, height=&gt;20, color=&gt;green, bgcolor=&gt;#EEEEEE)}{GAUGE}||</span></a></p>
+</div>
+<div class="section" id="next-data-model">
+<h2>Next data model<a class="headerlink" href="#next-data-model" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Data service (REST)</div></blockquote>
+<hr class="docutils" />
+<p>||__Part__                                <a href="#id5"><span class="problematic" id="id6">|__Description__                                               |__Data API number__|__Progress__
+((RINOR_base2|</span></a>/base))               <a href="#id7"><span class="problematic" id="id8">|Get data from the database (pages, features, devices, etc)    |                   |{GAUGE(value=&gt;30, max=&gt;100, label=&gt;&#8217;&#8216;draft&#8217;&#8216;, perc=&gt;true, labelsize=&gt;50, height=&gt;20, color=&gt;green, bgcolor=&gt;#EEEEEE)}{GAUGE}
+((REST_stats2|</span></a>/stats))              <a href="#id9"><span class="problematic" id="id10">|/stats : get stats from the database                         |                   |{GAUGE(value=&gt;0, max=&gt;100, label=&gt;&#8217;&#8216;draft&#8217;&#8216;, perc=&gt;true, labelsize=&gt;50, height=&gt;20, color=&gt;green, bgcolor=&gt;#EEEEEE)}{GAUGE}||</span></a></p>
+<blockquote>
+<div>Events service (Server Sent Event ?)</div></blockquote>
+<hr class="docutils" />
+<p>||__Part__                                <a href="#id11"><span class="problematic" id="id12">|__Description__                                               |__Events API number__|__Progress__
+((RINOR_xpl_msgs|xpl_msgs))        |Get filtered xPL messages                                     |                   |{GAUGE(value=&gt;20, max=&gt;100, label=&gt;&#8217;&#8216;specification&#8217;&#8216;, perc=&gt;true, labelsize=&gt;50, height=&gt;20, color=&gt;green, bgcolor=&gt;#EEEEEE)}{GAUGE}
+((RINOR_events2|events))           |/events: get events                                           |                   |{GAUGE(value=&gt;10, max=&gt;100, label=&gt;&#8217;&#8216;draft&#8217;&#8216;, perc=&gt;true, labelsize=&gt;50, height=&gt;20, color=&gt;green, bgcolor=&gt;#EEEEEE)}{GAUGE}||</span></a></p>
+<blockquote>
+<div>Commands service (JSON-RPC)</div></blockquote>
+<hr class="docutils" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">RINOR / REST</a><ul>
+<li><a class="reference internal" href="#log-viewing-candidate-for-domogik-0-2-0">Log viewing (candidate for Domogik 0.2.0)</a></li>
+<li><a class="reference internal" href="#scenario">Scenario</a></li>
+<li><a class="reference internal" href="#next-data-model">Next data model</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Developers_packages/Developers_packages.html"
+                        title="previous chapter">Packages</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Developers_tools/Developers_tools.html"
+                        title="next chapter">Tools for developers</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Developers_rinor_rest/Developers_rinor_rest.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Developers_tools/Developers_tools.html" title="Tools for developers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Developers_packages/Developers_packages.html" title="Packages"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,416 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>&lt;br /&gt; &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Devices" href="../RINOR_base2/RINOR_base2.html" />
+    <link rel="prev" title="Developper Notes" href="../REST_scenario/REST_scenario.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../RINOR_base2/RINOR_base2.html" title="Devices"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../REST_scenario/REST_scenario.html" title="Developper Notes"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="br">
+<h1>&lt;br /&gt;<a class="headerlink" href="#br" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="purpose-br">
+<h1>Purpose&lt;br /&gt;<a class="headerlink" href="#purpose-br" title="Permalink to this headline">¶</a></h1>
+<p>__/<a href="#id7"><span class="problematic" id="id8">stats__</span></a> entry allows to get statistics stored in database (table device_stats).&lt;br /&gt;
+&lt;br /&gt;
+<strong>*********************************</strong>
+Getting data with /stats&lt;br /&gt;
+<strong>*********************************</strong></p>
+<div class="section" id="parameters-description-br">
+<h2>Parameters description&lt;br /&gt;<a class="headerlink" href="#parameters-description-br" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>device id : a device id. Could be &#8216;*&#8217; to return all keys.&lt;br /&gt;</li>
+<li>key : key name for data in table __device_stats__. Could be &#8216;*&#8217; to return all keys. &lt;br /&gt;</li>
+<li>start time (optionnal)&lt;br /&gt;</li>
+<li>end time (optionnal : none = now)&lt;br /&gt;</li>
+</ul>
+<p>&lt;br /&gt;
+/stats/&lt;device id&gt;/&lt;key&gt;/all&lt;br /&gt;
+=====================================================</p>
+<p>Get all values. You may avoid to use this entry : there could be several thousands values in database!&lt;br /&gt;
+some exemples&lt;br /&gt;
+.. code-block:: json</p>
+<blockquote>
+<div>&lt;br /&gt;
+/stat/<em>/</em>/all&lt;br /&gt;
+/stat/5/<a href="#id1"><span class="problematic" id="id2">*</span></a>/all&lt;br /&gt;
+/stat/5/command/all&lt;br /&gt;</div></blockquote>
+<p>&lt;br /&gt;
+&lt;br /&gt;
+Result:&lt;br /&gt;
+.. code-block:: json</p>
+<blockquote>
+<div><p>&lt;br /&gt;
+{&lt;br /&gt;</p>
+<blockquote>
+<div><p>&#8220;status&#8221; : &#8220;OK&#8221;,&lt;br /&gt;
+&#8220;code&#8221; : 0,&lt;br /&gt;
+&#8220;description&#8221; : &#8220;None&#8221;,&lt;br /&gt;
+&#8220;stats&#8221; : [&lt;br /&gt;</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{&lt;br /&gt;</dt>
+<dd>&#8220;timestamp&#8221; : 1286226868,&lt;br /&gt;
+&#8220;value&#8221; : &#8220;HIGH&#8221;,&lt;br /&gt;
+&#8220;key&#8221; : &#8220;ping&#8221;,&lt;br /&gt;
+&#8220;date&#8221; : &#8220;2010-07-21 16:02:14&#8221;,&lt;br /&gt;
+&#8220;device_id&#8221; : 3&lt;br /&gt;</dd>
+</dl>
+<p>},&lt;br /&gt;
+...&lt;br /&gt;</p>
+</div></blockquote>
+<p>]&lt;br /&gt;</p>
+</div></blockquote>
+<p>}&lt;br /&gt;</p>
+</div></blockquote>
+<p>&lt;br /&gt;
+&lt;br /&gt;
+/stats/&lt;device id&gt;/&lt;key&gt;/latest&lt;br /&gt;
+========================================================</p>
+<p>Get latest value&lt;br /&gt;
+&lt;br /&gt;
+.. code-block:: json</p>
+<blockquote>
+<div>&lt;br /&gt;
+/stat/<em>/</em>/latest&lt;br /&gt;
+/stat/5/<a href="#id3"><span class="problematic" id="id4">*</span></a>/latest&lt;br /&gt;
+/stat/5/command/latest&lt;br /&gt;</div></blockquote>
+<p>&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+Result : same than /all but with only one value&lt;br /&gt;
+&lt;br /&gt;
+/stats/&lt;device id&gt;/&lt;key&gt;/last/&lt;number of item to get&gt;&lt;br /&gt;
+====================================================================================</p>
+<p>Get the N last values&lt;br /&gt;
+&lt;br /&gt;
+.. code-block:: json</p>
+<blockquote>
+<div>&lt;br /&gt;
+/stat/<em>/</em>/last/10&lt;br /&gt;
+/stat/5/<a href="#id5"><span class="problematic" id="id6">*</span></a>/last/10&lt;br /&gt;
+/stat/5/command/last/10&lt;br /&gt;</div></blockquote>
+<p>&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+Result : same than /all but with only N values&lt;br /&gt;
+&lt;br /&gt;</p>
+</div>
+<div class="section" id="stats-device-id-key-from-start-time-to-end-time-br">
+<h2>/stats/&lt;device id&gt;/&lt;key&gt;/from/&lt;start time&gt; {/to/&lt;end time&gt;}&lt;br /&gt;<a class="headerlink" href="#stats-device-id-key-from-start-time-to-end-time-br" title="Permalink to this headline">¶</a></h2>
+<p>~~#C00:CSV export allowed~~&lt;br /&gt;
+&lt;br /&gt;
+Get values from &lt;start time&gt; to ...&lt;br /&gt;
+&lt;start time&gt; and &lt;end time&gt; need to be timestamps&lt;br /&gt;
+&lt;br /&gt;
+Result : same than /all but with values between start and end time&lt;br /&gt;
+&lt;br /&gt;
+Example&lt;br /&gt;
+<strong>****************</strong></p>
+<p>__/stats/4/temperature/from/1286226613/to/1286500000__&lt;br /&gt;
+&lt;br /&gt;
+.. code-block:: json</p>
+<blockquote>
+<div><p>&lt;br /&gt;
+{&lt;br /&gt;</p>
+<blockquote>
+<div><p>&#8220;status&#8221; : &#8220;OK&#8221;,&lt;br /&gt;
+&#8220;code&#8221; : 0,&lt;br /&gt;
+&#8220;description&#8221; : &#8220;None&#8221;,&lt;br /&gt;
+&#8220;stats&#8221; : [&lt;br /&gt;</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{&lt;br /&gt;</dt>
+<dd><dl class="first docutils">
+<dt>&#8220;device_stats&#8221; <span class="classifier-delimiter">:</span> <span class="classifier">[&lt;br /&gt;</span></dt>
+<dd><dl class="first docutils">
+<dt>{&lt;br /&gt;</dt>
+<dd>&#8220;timestamp&#8221; : 1286226868,&lt;br /&gt;
+&#8220;value&#8221; : &#8220;22.6875&#8221;,&lt;br /&gt;
+&#8220;key&#8221; : &#8220;temperature&#8221;,&lt;br /&gt;
+&#8220;date&#8221; : &#8220;2010-10-04 23:14:28&#8221;,&lt;br /&gt;
+&#8220;device_id&#8221; : 4&lt;br /&gt;</dd>
+</dl>
+<p>},&lt;br /&gt;
+{&lt;br /&gt;</p>
+<blockquote>
+<div>&#8220;timestamp&#8221; : 1286226884,&lt;br /&gt;
+&#8220;value&#8221; : &#8220;22.6875&#8221;,&lt;br /&gt;
+&#8220;key&#8221; : &#8220;temperature&#8221;,&lt;br /&gt;
+&#8220;date&#8221; : &#8220;2010-10-04 23:14:44&#8221;,&lt;br /&gt;
+&#8220;device_id&#8221; : 4&lt;br /&gt;</div></blockquote>
+<p>},&lt;br /&gt;
+{&lt;br /&gt;</p>
+<blockquote>
+<div>&#8220;timestamp&#8221; : 1286226899,&lt;br /&gt;
+&#8220;value&#8221; : &#8220;22.6875&#8221;,&lt;br /&gt;
+&#8220;key&#8221; : &#8220;temperature&#8221;,&lt;br /&gt;
+&#8220;date&#8221; : &#8220;2010-10-04 23:14:59&#8221;,&lt;br /&gt;
+&#8220;device_id&#8221; : 4&lt;br /&gt;</div></blockquote>
+<p class="last">},&lt;br /&gt;
+...&lt;br /&gt;</p>
+</dd>
+</dl>
+<p class="last">],&lt;br /&gt;
+&#8220;key&#8221; : &#8220;temperature&#8221;,&lt;br /&gt;
+&#8220;device_id&#8221; : &#8220;4&#8221;&lt;br /&gt;</p>
+</dd>
+</dl>
+<p>}&lt;br /&gt;</p>
+</div></blockquote>
+<p>]&lt;br /&gt;</p>
+</div></blockquote>
+<p>}&lt;br /&gt;</p>
+</div></blockquote>
+<p>&lt;br /&gt;
+&lt;br /&gt;
+/stats/&lt;device id&gt;/&lt;key&gt;/from/&lt;start time&gt; {/to/&lt;end time&gt;}/interval/&lt;year, month, week, day, hour, minute, second&gt;/selector/&lt;min(number only), max(number only), avg(number only), first, last, x&gt;&lt;br /&gt;
+====================================================================================================================================================================================================================================================</p>
+<p>~~#C00:CSV export allowed~~&lt;br /&gt;
+&lt;br /&gt;
+Result : for performance issue, the return format is different from /all. Following data are returned :&lt;br /&gt;
+* key&lt;br /&gt;
+* device_id&lt;br /&gt;
+* values : a list of tuples&lt;br /&gt;
+Tuples format&lt;br /&gt;
+<strong>**********************</strong></p>
+<div class="highlight-json"><pre>&lt;br /&gt;
+# Minutes&lt;br /&gt;
+# Format : (year, month, week, day, hour, min, value)&lt;br /&gt;
+[(2010, 2, 7, 21, 15, 57, 56.5), (2010, 2, 7, 21, 15, 58, 62.5), (2010, 2, 7, 21, 15, 59, 68.5),&lt;br /&gt;
+(2010, 2, 7, 21, 16, 0, 74.5), (2010, 2, 7, 21, 16, 1, 80.5), (2010, 2, 7, 21, 16, 2, 86.5)]&lt;br /&gt;
+&lt;br /&gt;
+# Hours&lt;br /&gt;
+# Format : (year, month, week, day, hour, value)&lt;br /&gt;
+[(2010, 6, 25, 22, 19, 38.5), (2010, 6, 25, 22, 20, 40.0), (2010, 6, 25, 22, 21, 41.5),&lt;br /&gt;
+ (2010, 6, 25, 22, 22, 43.0), (2010, 6, 25, 22, 23, 44.0), (2010, 6, 25, 23, 0, 45.5),&lt;br /&gt;
+ (2010, 6, 25, 23, 1, 47.0), (2010, 6, 25, 23, 2, 48.0)]&lt;br /&gt;
+&lt;br /&gt;
+# Days&lt;br /&gt;
+# Format : (year, month, week, day, value)&lt;br /&gt;
+[(2010, 6, 25, 22, 4.0), (2010, 6, 25, 23, 6.0), (2010, 6, 25, 24, 9.0), (2010, 6, 25, 25, 12.0),&lt;br /&gt;
+ (2010, 6, 25, 26, 15.0), (2010, 6, 25, 27, 18.0), (2010, 6, 26, 28, 21.0)]&lt;br /&gt;
+&lt;br /&gt;
+# Weeks&lt;br /&gt;
+# Format : (year, month, week, value)&lt;br /&gt;
+[(2010, 7, 29, 25.0), (2010, 7, 30, 35.5), (2010, 8, 31, 49.5), (2010, 8, 32, 63.5),&lt;br /&gt;
+ (2010, 8, 33, 77.5), (2010, 8, 34, 88.0)]&lt;br /&gt;</pre>
+</div>
+<p>&lt;br /&gt;
+&lt;br /&gt;
+Example &lt;br /&gt;
+<strong>*****************</strong></p>
+<p>&lt;br /&gt;
+__/stats/4/temperature/from/1286226613/to/1286500000/interval/hour/selector/avg  __&lt;br /&gt;
+&lt;br /&gt;
+.. code-block:: json</p>
+<blockquote>
+<div><p>&lt;br /&gt;
+{&lt;br /&gt;</p>
+<blockquote>
+<div><p>&#8220;status&#8221; : &#8220;OK&#8221;,&lt;br /&gt;
+&#8220;code&#8221; : 0,&lt;br /&gt;
+&#8220;description&#8221; : &#8220;None&#8221;,&lt;br /&gt;
+&#8220;stats&#8221; : [&lt;br /&gt;</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{&lt;br /&gt;</dt>
+<dd><dl class="first docutils">
+<dt>&#8220;values&#8221; <span class="classifier-delimiter">:</span> <span class="classifier">[&lt;br /&gt;</span></dt>
+<dd><dl class="first docutils">
+<dt>[&lt;br /&gt;</dt>
+<dd>2010,&lt;br /&gt;
+10,&lt;br /&gt;
+40,&lt;br /&gt;
+4,&lt;br /&gt;
+23,&lt;br /&gt;
+22.753251445086704&lt;br /&gt;</dd>
+</dl>
+<p>],&lt;br /&gt;
+[&lt;br /&gt;</p>
+<blockquote>
+<div>2010,&lt;br /&gt;
+10,&lt;br /&gt;
+40,&lt;br /&gt;
+5,&lt;br /&gt;
+0,&lt;br /&gt;
+22.559444444444445&lt;br /&gt;</div></blockquote>
+<p>],&lt;br /&gt;
+[&lt;br /&gt;</p>
+<blockquote>
+<div>2010,&lt;br /&gt;
+10,&lt;br /&gt;
+40,&lt;br /&gt;
+5,&lt;br /&gt;
+1,&lt;br /&gt;
+22.12887168141593&lt;br /&gt;</div></blockquote>
+<p class="last">],&lt;br /&gt;
+...&lt;br /&gt;</p>
+</dd>
+</dl>
+<p class="last">],&lt;br /&gt;
+&#8220;key&#8221; : &#8220;temperature&#8221;,&lt;br /&gt;
+&#8220;device_id&#8221; : &#8220;4&#8221;&lt;br /&gt;</p>
+</dd>
+</dl>
+<p>}&lt;br /&gt;</p>
+</div></blockquote>
+<p>]&lt;br /&gt;</p>
+</div></blockquote>
+<p>}&lt;br /&gt;</p>
+</div></blockquote>
+<p>&lt;br /&gt;
+&lt;br /&gt;
+/stats/multi/&lt;id1&gt;/&lt;key1&gt;/&lt;id2&gt;/&lt;key2&gt;&lt;br /&gt;
+===========================================================================</p>
+<p>Get last values for multiple id/keys in one request&lt;br /&gt;
+&lt;br /&gt;
+Example json response : &lt;br /&gt;
+.. code-block:: json</p>
+<blockquote>
+<div><p>&lt;br /&gt;
+{&lt;br /&gt;</p>
+<blockquote>
+<div><p>&#8220;status&#8221; : &#8220;OK&#8221;,&lt;br /&gt;
+&#8220;code&#8221; : 0,&lt;br /&gt;
+&#8220;description&#8221; : &#8220;None&#8221;,&lt;br /&gt;
+&#8220;stats&#8221; : [&lt;br /&gt;</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{&lt;br /&gt;</dt>
+<dd>&#8220;timestamp&#8221; : 1286226868,&lt;br /&gt;
+&#8220;value&#8221; : &#8220;HIGH&#8221;,&lt;br /&gt;
+&#8220;key&#8221; : &#8220;ping&#8221;,&lt;br /&gt;
+&#8220;date&#8221; : &#8220;2010-07-21 16:02:14&#8221;,&lt;br /&gt;
+&#8220;device_id&#8221; : 3&lt;br /&gt;</dd>
+<dt>},        {&lt;br /&gt;</dt>
+<dd>&#8220;timestamp&#8221; : 1286566868,&lt;br /&gt;
+&#8220;value&#8221; : &#8220;LOG&#8221;,&lt;br /&gt;
+&#8220;key&#8221; : &#8220;command&#8221;,&lt;br /&gt;
+&#8220;date&#8221; : &#8220;2010-07-22 16:02:14&#8221;,&lt;br /&gt;
+&#8220;device_id&#8221; : 5&lt;br /&gt;</dd>
+</dl>
+<p>},&lt;br /&gt;
+...&lt;br /&gt;</p>
+</div></blockquote>
+<p>]&lt;br /&gt;</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">&lt;br /&gt;</a></li>
+<li><a class="reference internal" href="#purpose-br">Purpose&lt;br /&gt;</a><ul>
+<li><a class="reference internal" href="#parameters-description-br">Parameters description&lt;br /&gt;</a></li>
+<li><a class="reference internal" href="#stats-device-id-key-from-start-time-to-end-time-br">/stats/&lt;device id&gt;/&lt;key&gt;/from/&lt;start time&gt; {/to/&lt;end time&gt;}&lt;br /&gt;</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../REST_scenario/REST_scenario.html"
+                        title="previous chapter">Developper Notes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../RINOR_base2/RINOR_base2.html"
+                        title="next chapter">Devices</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/REST_stats2/REST_stats2.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../RINOR_base2/RINOR_base2.html" title="Devices"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../REST_scenario/REST_scenario.html" title="Developper Notes"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

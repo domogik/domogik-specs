@@ -1,0 +1,318 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Developper Notes &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="&lt;br /&gt;" href="../REST_stats2/REST_stats2.html" />
+    <link rel="prev" title="REST /log" href="../REST_log/REST_log.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../REST_stats2/REST_stats2.html" title="&lt;br /&gt;"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../REST_log/REST_log.html" title="REST /log"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <p>Feature linked to ((Scenarios))</p>
+<div class="section" id="developper-notes">
+<h1>Developper Notes<a class="headerlink" href="#developper-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="specifications">
+<h2>Specifications<a class="headerlink" href="#specifications" title="Permalink to this headline">¶</a></h2>
+<p>~~#990:
+* how do we identify a scenario instance ? what is the id ? how do we create it ?
+* when do we call start / stop features ?
+~~
+/scenario/list-templates
+<strong>*********************</strong></p>
+<p>List all xml template files
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd><dl class="first docutils">
+<dt>&#8220;data&#8221; <span class="classifier-delimiter">:</span> <span class="classifier">[</span></dt>
+<dd><dl class="first docutils">
+<dt>{</dt>
+<dd>&#8220;name&#8221; : &#8220;Scenario name&#8221;,
+&#8220;description&#8221; : &#8220;this is a scenario....&#8221;,
+&#8220;id&#8221; : &#8220;filename&#8221;</dd>
+</dl>
+<p>} ,
+{</p>
+<blockquote>
+<div>&#8220;name&#8221; : &#8220;Scenario name&#8221;,
+&#8220;description&#8221; : &#8220;this is a scenario....&#8221;,
+&#8220;id&#8221; : &#8220;filename&#8221;</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p class="last">]</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<div class="section" id="scenario-detail-templates-template-id">
+<h3>/scenario/detail-templates/&lt;template id&gt;<a class="headerlink" href="#scenario-detail-templates-template-id" title="Permalink to this headline">¶</a></h3>
+<p>Get detail from a template
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd><dl class="first docutils">
+<dt>&#8220;data&#8221; <span class="classifier-delimiter">:</span> <span class="classifier">{</span></dt>
+<dd><p class="first">&#8220;id&#8221; : &#8220;string scenario id&#8221;,
+&#8220;name&#8221; : &#8220;scenario name&#8221;,
+&#8220;description&#8221; : &#8220;scenario description&#8221;,
+&#8220;parameters&#8221; : [</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd>&#8220;id&#8221; : &#8220;param id&#8221;,
+&#8220;name&#8221; : &#8220;param name&#8221;,
+&#8220;description&#8221; : &#8220;param description&#8221;,
+&#8220;type&#8221; : &#8220;param type&#8221;</dd>
+</dl>
+<p>},
+{</p>
+<blockquote>
+<div>&#8220;id&#8221; : &#8220;param id&#8221;,
+&#8220;name&#8221; : &#8220;param name&#8221;,
+&#8220;description&#8221; : &#8220;param description&#8221;,
+&#8220;type&#8221; : &#8220;param type&#8221;,
+&#8220;available-values&#8221; : [&#8216;a&#8217;,&#8217;b&#8217;,&#8217;e&#8217;,&#8217;f&#8217;]</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p class="last">]</p>
+</dd>
+</dl>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+</div>
+<div class="section" id="scenario-add-template-id-template-id-instance-name-name-given-by-user-param1-param-1-value-param2">
+<h3>/scenario/add/template-id/&lt;template id&gt;/instance-name/&lt;name given by user&gt;/param1/&lt;param 1 value&gt;/param2/&lt;...&gt;/...<a class="headerlink" href="#scenario-add-template-id-template-id-instance-name-name-given-by-user-param1-param-1-value-param2" title="Permalink to this headline">¶</a></h3>
+<p>Instantiate a scenario.
+A scenario id will be created.</p>
+<p>Returns only status message</p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+    <span class="nt">&quot;instance-id&quot;</span> <span class="p">:</span> <span class="s2">&quot;instance id&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scenario-update-instance-id-instance-id-instance-name-name-given-by-user-param1-param-1-value-param2">
+<h3>/scenario/update/instance-id/&lt;instance id&gt;/instance-name/&lt;name given by user&gt;/param1/&lt;param 1 value&gt;/param2/&lt;...&gt;/...<a class="headerlink" href="#scenario-update-instance-id-instance-id-instance-name-name-given-by-user-param1-param-1-value-param2" title="Permalink to this headline">¶</a></h3>
+<p>Update a scenario instance
+Returns only status message</p>
+</div>
+<div class="section" id="scenario-del-instance-id">
+<h3>/scenario/del/&lt;instance id&gt;<a class="headerlink" href="#scenario-del-instance-id" title="Permalink to this headline">¶</a></h3>
+<p>Delete a scenario instance
+Returns only status message</p>
+</div>
+<div class="section" id="scenario-list-instances">
+<h3>/scenario/list-instances<a class="headerlink" href="#scenario-list-instances" title="Permalink to this headline">¶</a></h3>
+<p>List all scenario instancies
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd><dl class="first docutils">
+<dt>&#8220;data&#8221; <span class="classifier-delimiter">:</span> <span class="classifier">[</span></dt>
+<dd><dl class="first docutils">
+<dt>{</dt>
+<dd>&#8220;name&#8221; : &#8220;Scenario name&#8221;,
+&#8220;description&#8221; : &#8220;this is a scenario....&#8221;,
+&#8220;id&#8221; : &#8220;string_scenario_id&#8221; ,
+&#8220;instance-name&#8221; : &#8220;Name given by user&#8221;,
+&#8220;instance-id&#8221; : &#8220;instance id&#8221;
+&#8220;status&#8221; : &#8220;on/off&#8221;</dd>
+</dl>
+<p>} ,
+{</p>
+<blockquote>
+<div>&#8220;name&#8221; : &#8220;Scenario name&#8221;,
+&#8220;description&#8221; : &#8220;this is a scenario....&#8221;,
+&#8220;id&#8221; : &#8220;string_scenario_id&#8221; ,
+&#8220;instance-name&#8221; : &#8220;Name given by user&#8221;,
+&#8220;instance-id&#8221; : &#8220;instance id&#8221;
+&#8220;status&#8221; : &#8220;on/off&#8221;</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p class="last">]</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+</div>
+<div class="section" id="scenario-detail-instances-instance-id">
+<h3>/scenario/detail-instances/&lt;instance id&gt;<a class="headerlink" href="#scenario-detail-instances-instance-id" title="Permalink to this headline">¶</a></h3>
+<p>Get detail from a template
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd><dl class="first docutils">
+<dt>&#8220;data&#8221; <span class="classifier-delimiter">:</span> <span class="classifier">{</span></dt>
+<dd><p class="first">&#8220;id&#8221; : &#8220;string scenario id&#8221;,
+&#8220;name&#8221; : &#8220;scenario name&#8221;,
+&#8220;description&#8221; : &#8220;scenario description&#8221;,
+&#8220;instance-name&#8221; : &#8220;Name given by user&#8221;,
+&#8220;instance-id&#8221; : &#8220;instance id&#8221;
+&#8220;status&#8221; : &#8220;on/off&#8221;
+&#8220;parameters&#8221; : [</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd>&#8220;id&#8221; : &#8220;param id&#8221;,
+&#8220;name&#8221; : &#8220;param name&#8221;,
+&#8220;description&#8221; : &#8220;param description&#8221;,
+&#8220;type&#8221; : &#8220;param type&#8221; ,
+&#8220;value&#8221; : &#8220;param value&#8221;</dd>
+</dl>
+<p>},
+{</p>
+<blockquote>
+<div>&#8220;id&#8221; : &#8220;param id&#8221;,
+&#8220;name&#8221; : &#8220;param name&#8221;,
+&#8220;description&#8221; : &#8220;param description&#8221;,
+&#8220;type&#8221; : &#8220;param type&#8221;
+&#8220;value&#8221; : &#8220;param value&#8221;</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p class="last">]</p>
+</dd>
+</dl>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+</div>
+<div class="section" id="scenario-start-instance-id">
+<h3>/scenario/start/&lt;instance id&gt;<a class="headerlink" href="#scenario-start-instance-id" title="Permalink to this headline">¶</a></h3>
+<p>Start a scenario instance
+Returns only status message</p>
+</div>
+<div class="section" id="scenario-stop-instance-id">
+<h3>/scenario/stop/&lt;instance id&gt;<a class="headerlink" href="#scenario-stop-instance-id" title="Permalink to this headline">¶</a></h3>
+<p>Stop a scenario instance
+Returns only status message</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Developper Notes</a><ul>
+<li><a class="reference internal" href="#specifications">Specifications</a><ul>
+<li><a class="reference internal" href="#scenario-detail-templates-template-id">/scenario/detail-templates/&lt;template id&gt;</a></li>
+<li><a class="reference internal" href="#scenario-add-template-id-template-id-instance-name-name-given-by-user-param1-param-1-value-param2">/scenario/add/template-id/&lt;template id&gt;/instance-name/&lt;name given by user&gt;/param1/&lt;param 1 value&gt;/param2/&lt;...&gt;/...</a></li>
+<li><a class="reference internal" href="#scenario-update-instance-id-instance-id-instance-name-name-given-by-user-param1-param-1-value-param2">/scenario/update/instance-id/&lt;instance id&gt;/instance-name/&lt;name given by user&gt;/param1/&lt;param 1 value&gt;/param2/&lt;...&gt;/...</a></li>
+<li><a class="reference internal" href="#scenario-del-instance-id">/scenario/del/&lt;instance id&gt;</a></li>
+<li><a class="reference internal" href="#scenario-list-instances">/scenario/list-instances</a></li>
+<li><a class="reference internal" href="#scenario-detail-instances-instance-id">/scenario/detail-instances/&lt;instance id&gt;</a></li>
+<li><a class="reference internal" href="#scenario-start-instance-id">/scenario/start/&lt;instance id&gt;</a></li>
+<li><a class="reference internal" href="#scenario-stop-instance-id">/scenario/stop/&lt;instance id&gt;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../REST_log/REST_log.html"
+                        title="previous chapter">REST /log</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../REST_stats2/REST_stats2.html"
+                        title="next chapter">&lt;br /&gt;</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/REST_scenario/REST_scenario.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../REST_stats2/REST_stats2.html" title="&lt;br /&gt;"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../REST_log/REST_log.html" title="REST /log"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,155 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>List of available mocks &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Neopsine" href="../Neopsine/Neopsine.html" />
+    <link rel="prev" title="Mise en place d’un bus 1wire" href="../Mise en place d&#39;un bus 1wire/Mise en place d&#39;un bus 1wire.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Neopsine/Neopsine.html" title="Neopsine"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Mise en place d'un bus 1wire/Mise en place d'un bus 1wire.html" title="Mise en place d’un bus 1wire"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="list-of-available-mocks">
+<h1>List of available mocks<a class="headerlink" href="#list-of-available-mocks" title="Permalink to this headline">¶</a></h1>
+<p>||__Mock name__|__Description__
+x10evt|Send an event for a X10 cpl network||</p>
+</div>
+<div class="section" id="how-to-launch-a-mock">
+<h1>How to launch a mock ?<a class="headerlink" href="#how-to-launch-a-mock" title="Permalink to this headline">¶</a></h1>
+<p>&#8216;&#8217;Note : __-<a href="#id1"><span class="problematic" id="id2">f__</span></a> parameters must be given. Else, mock will be launch in background&#8217;&#8216;</p>
+<p>Generic example :
+.. code-block:: json</p>
+<blockquote>
+<div>cd xpl/mock/
+./mymock.py -f &#8211;param1=foo &#8211;param2=fuu</div></blockquote>
+<p>Example for X10 event : device A3 passed to status ON :
+.. code-block:: json</p>
+<blockquote>
+<div>cd xpl/mock/
+./x10evt -f &#8211;command=STATUS_ON &#8211;device=A3</div></blockquote>
+</div>
+<div class="section" id="mocks-detail">
+<h1>Mocks Detail<a class="headerlink" href="#mocks-detail" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div>x10evt</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div>Purpose</div></blockquote>
+<hr class="docutils" />
+<dl class="docutils">
+<dt>This mock is made to send an event instead of sending a real order to an X10 device.</dt>
+<dd>Parameters</dd>
+</dl>
+<hr class="docutils" />
+<ul class="simple">
+<li>&#8211;command!&lt;command&gt;: X10 command (cf <a class="reference external" href="http://xplproject.org.uk/wiki/index.php?title!Schema_-_X10.BASIC">http://xplproject.org.uk/wiki/index.php?title!Schema_-_X10.BASIC</a> for available X10 commands)</li>
+<li>&#8211;device!&lt;device&gt; : device reference : A1...A16...P16</li>
+<li>&#8211;house!&lt;house&gt; : house reference : A...P</li>
+<li>&#8211;level!&lt;level&gt; : level value : 0...100</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">List of available mocks</a></li>
+<li><a class="reference internal" href="#how-to-launch-a-mock">How to launch a mock ?</a></li>
+<li><a class="reference internal" href="#mocks-detail">Mocks Detail</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Mise en place d&#39;un bus 1wire/Mise en place d&#39;un bus 1wire.html"
+                        title="previous chapter">Mise en place d&#8217;un bus 1wire</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Neopsine/Neopsine.html"
+                        title="next chapter">Neopsine</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Mocks/Mocks.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Neopsine/Neopsine.html" title="Neopsine"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Mise en place d'un bus 1wire/Mise en place d'un bus 1wire.html" title="Mise en place d’un bus 1wire"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

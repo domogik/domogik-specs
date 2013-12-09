@@ -1,0 +1,298 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Add a user to manage repository &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Use Case 1 - Address split in 2 sub addresses" href="../Uses_Case_for_v2/Uses_Case_for_v2.html" />
+    <link rel="prev" title="Tutorials and external articles" href="../Tutorials/Tutorials.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Uses_Case_for_v2/Uses_Case_for_v2.html" title="Use Case 1 - Address split in 2 sub addresses"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Tutorials/Tutorials.html" title="Tutorials and external articles"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <p>This page explain how to create an ubuntu repository for the packages of domogik/domoweb.</p>
+<div class="section" id="add-a-user-to-manage-repository">
+<h1>Add a user to manage repository<a class="headerlink" href="#add-a-user-to-manage-repository" title="Permalink to this headline">¶</a></h1>
+<p>We need a user to run the repository scritpts. It need a GPG key to sign the index files.
+.. code-block:: json</p>
+<blockquote>
+<div>#sudo adduser &#8211;home /home/repository &#8211;shell /bin/bash &#8211;group repository{CODE}
+Assign a password to the user</div></blockquote>
+<div class="highlight-json"><pre>#sudo passwd repository{CODE}</pre>
+</div>
+<p>Genereate a key
+.. code-block:: json</p>
+<blockquote>
+<div>#su repository
+#gpg &#8211;genkey</div></blockquote>
+</div>
+<div class="section" id="install-reprepro">
+<h1>Install reprepro<a class="headerlink" href="#install-reprepro" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-json"><pre>#sudo apt-get install reprepro{CODE}
+Create a conf directory in the repository. You need to put the reprepro configuration file in it.</pre>
+</div>
+<div class="highlight-json"><pre>#mkdir /home/repository/conf</pre>
+</div>
+<p>We also need to create some directories and fix security attributes.
+Keep in mind that we are sharing some of these directories with apache.
+.. code-block:: json</p>
+<blockquote>
+<div>#mkdir db dists logs scripts pool keys</div></blockquote>
+<div class="highlight-json"><pre>#chmod o+rx dists logs pool keys
+#chmod o-rx db scripts</pre>
+</div>
+<p>Add a &#8220;distributions&#8221; file in the conf directory with the following content :
+.. code-block:: json</p>
+<blockquote>
+<div><p>Origin: packages.domogik.org
+Label: Domogik repository
+Codename: oneiric
+Architectures: amd64 i386 armel source
+Components: universe
+Description: Ubuntu repository for Domogik and dependances
+Uploaders: uploaders
+SignWith: <a class="reference external" href="mailto:repository4domogik&#37;&#52;&#48;gmail&#46;com">repository4domogik<span>&#64;</span>gmail<span>&#46;</span>com</a>
+Contents: .bz2</p>
+<p>Origin: packages.domogik.org
+Label: Domogik repository
+Codename: precise
+Architectures: amd64 i386 armel source
+Components: universe
+Description: Ubuntu repository for Domogik and dependances
+Uploaders: uploaders
+SignWith: <a class="reference external" href="mailto:repository4domogik&#37;&#52;&#48;gmail&#46;com">repository4domogik<span>&#64;</span>gmail<span>&#46;</span>com</a>
+Contents: .bz2</p>
+</div></blockquote>
+<p>Origin : the address of the repository
+Label : a short description
+Description : a long description
+Codename : must be the name of a real distribution
+Components : universe or main
+Architecture : all the architectures holded by the repository
+Contents : will be compresses using bz2
+Uploaders : the list of developpers authorizes to upload packages.
+SignWith : the key generated previously. Use gpg &#8211;list-keys to retrieve it.</p>
+<p>Create a file conf/incoming
+.. code-block:: json</p>
+<blockquote>
+<div><p>Name: oneiric
+IncomingDir: /home/ftp/incoming/oneiric
+TempDir: tmp/oneiric
+Allow: oneiric
+Cleanup: on_deny on_error</p>
+<p>Name: precise
+IncomingDir: /home/ftp/incoming/precise
+TempDir: tmp/precise
+Allow: precise
+Cleanup: on_deny on_error</p>
+</div></blockquote>
+<p>We defined 2 incomings directory, one for oneiric and another for precise.</p>
+<p>Create a file scripts/import-new-packages.sh. We can use it to maually add packages... code-block:: json</p>
+<blockquote>
+<div><p>#!/bin/bash
+BASEDIR=/home/repository</p>
+<p># Import package to distribution.
+reprepro -V -b $BASEDIR processincoming oneiric</p>
+</div></blockquote>
+<p>reprepro -V -b $BASEDIR processincoming precise{CODE}And create a /etc/cron.d/repository to call it every 5 mins with cron... code-block:: json</p>
+<blockquote>
+<div># /etc/cron.d/repository</div></blockquote>
+<p>SHELL=/bin/sh
+PATH=/home/repository/scripts:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin</p>
+<p><a href="#id1"><span class="problematic" id="id2">*</span></a>/5 * * * *   repository import-new-packages.sh
+{CODE}You can also add /etc/logrotate.d/repository
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>/home/repository/logs/<a href="#id3"><span class="problematic" id="id4">*</span></a>.log {</dt>
+<dd>weekly
+missingok
+rotate 7
+copytruncate
+compress
+notifempty
+create 644 repository repository</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+</div>
+<div class="section" id="ftp-and-http">
+<h1>Ftp and Http<a class="headerlink" href="#ftp-and-http" title="Permalink to this headline">¶</a></h1>
+<p>Now, you should create an anonymous user (ftp in this tutorial) with no password for your ftp server. dupload will use it to upload packages. It&#8217;s also possible to use a scp connection to do it.
+Every body can write to it, but reprepro will check the packages keys before adding them. If the uploader is not allowed, reprepro will delete the files.
+Create the incoming directories :
+.. code-block:: json</p>
+<blockquote>
+<div>#mkdir  /home/ftp/incoming/oneric
+#mkdir  /home/ftp/incoming/precise</div></blockquote>
+<p>At last, we need a http server. Create a directory and link some directories from /home/repository.
+Apache uses www-data user to read files from the filesystem. So keep in ming that this user must have access to some /home/repository directories.
+.. code-block:: json</p>
+<blockquote>
+<div>#mkdir /var/www/ubuntu
+#sudo ln -s /home/repository/pool /var/www/ubuntu/pool
+#sudo ln -s /home/repository/dists /var/www/ubuntu/dists
+#sudo ln -s /home/repository/logs /var/www/ubuntu/logs
+#sudo ln -s /home/repository/maintainers.keys /var/www/ubuntu/maintainers.keys
+#sudo chown -Rf www-data:www-data /var/www/ubuntu</div></blockquote>
+<p>And now, add this section to your apache configuration
+.. code-block:: json</p>
+<blockquote>
+<div><p>Alias /ubuntu/ &#8220;/var/www/ubuntu/&#8221;
+&lt;Directory &#8220;/var/www/ubuntu/&#8221;&gt;</p>
+<blockquote>
+<div>Options Indexes MultiViews FollowSymLinks
+AllowOverride None
+Order allow,deny
+Allow from all</div></blockquote>
+<p>&lt;/Directory&gt;</p>
+</div></blockquote>
+<p>And restart it
+.. code-block:: json</p>
+<blockquote>
+<div><p>#/etc/init.d/apache2 restart{CODE}</p>
+<p>Import the key of the uploader</p>
+</div></blockquote>
+<div class="highlight-json"><pre>#su repository
+#gpg --import uploader_key_file.key</pre>
+</div>
+<p>Retrieve the key id
+.. code-block:: json</p>
+<blockquote>
+<div>#su repository
+#gpg &#8211;list-keys</div></blockquote>
+<p>And add it to conf/uploaders :
+.. code-block:: json</p>
+<blockquote>
+<div>allow * by key keyid</div></blockquote>
+</div>
+<div class="section" id="upload-packages-to-the-repository">
+<h1>Upload packages to the repository<a class="headerlink" href="#upload-packages-to-the-repository" title="Permalink to this headline">¶</a></h1>
+<p>Install dupload on the compiler computer. It will push new packages to the domogik repository.
+.. code-block:: json</p>
+<blockquote>
+<div>sudo apt-get install dupload{CODE}
+Now edit /etc/dupload.conf or create a .dupload.conf in your home directory.</div></blockquote>
+<div class="highlight-json"><pre>$default_host = "domogik";
+$cfg{'domogik'} = {
+        fqdn =&gt; "192.168.14.66",
+        incoming =&gt; "/incoming/oneiric/",
+        dinstall_runs =&gt; 1,
+};</pre>
+</div>
+<p>You can use the following command to upload a new package to the repository
+.. code-block:: json</p>
+<blockquote>
+<div><p>#dupload package.changes{CODE}
+Links
+======</p>
+<p><a class="reference external" href="http://blog.mycrot.ch/2011/04/26/creating-your-own-signed-apt-repository-and-debian-packages/">http://blog.mycrot.ch/2011/04/26/creating-your-own-signed-apt-repository-and-debian-packages/</a>
+<a class="reference external" href="http://mirrorer.alioth.debian.org/">http://mirrorer.alioth.debian.org/</a>
+<a class="reference external" href="http://www.debian-administration.org/articles/286">http://www.debian-administration.org/articles/286</a></p>
+</div></blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Add a user to manage repository</a></li>
+<li><a class="reference internal" href="#install-reprepro">Install reprepro</a></li>
+<li><a class="reference internal" href="#ftp-and-http">Ftp and Http</a></li>
+<li><a class="reference internal" href="#upload-packages-to-the-repository">Upload packages to the repository</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Tutorials/Tutorials.html"
+                        title="previous chapter">Tutorials and external articles</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Uses_Case_for_v2/Uses_Case_for_v2.html"
+                        title="next chapter">Use Case 1 - Address split in 2 sub addresses</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Ubuntu_repository/Ubuntu_repository.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Uses_Case_for_v2/Uses_Case_for_v2.html" title="Use Case 1 - Address split in 2 sub addresses"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Tutorials/Tutorials.html" title="Tutorials and external articles"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

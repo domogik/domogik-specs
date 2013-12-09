@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Standard installation for Domogik 0.2.0-beta1 &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Domogik installation for developers" href="../Domogik_installation_for_developpers/Domogik_installation_for_developpers.html" />
+    <link rel="prev" title="How to use domodroid Source" href="../Domodroid_Src/Domodroid_Src.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Domogik_installation_for_developpers/Domogik_installation_for_developpers.html" title="Domogik installation for developers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Domodroid_Src/Domodroid_Src.html" title="How to use domodroid Source"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="standard-installation-for-domogik-0-2-0-beta1">
+<h1>Standard installation for Domogik 0.2.0-beta1<a class="headerlink" href="#standard-installation-for-domogik-0-2-0-beta1" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>These examples assume Debian or another apt-based distribution (Ubuntu, etc).  Adjust accordingly (eg, use yum instead if using RedHat-based distribution).</li>
+<li>Domogik includes its own xPL hub.  If you are running another xPL hub on your target machine (xpl-perl, etc), you will have to stop it before installation.</li>
+</ul>
+</div>
+<div class="section" id="dependencies">
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h3>
+<p>Check your Python version with :
+.. code-block:: json</p>
+<blockquote>
+<div>python -V</div></blockquote>
+<p>__Please note:__ Right now Domogik __requires Python 2.6/<a href="#id2"><span class="problematic" id="id3">2.7__</span></a>. Python 3 is not (yet) supported.</p>
+<p>If you don&#8217;t already have Python 2.6/2.7 or above (you have it if you are running a recent Linux system), then you can run for example:
+.. code-block:: json</p>
+<blockquote>
+<div># apt-get install python2.7
+# ln -sf /usr/bin/python2.7 /usr/bin/python</div></blockquote>
+<p>Even if you have python2.6 or higher installed, check that the development package is also installed, or install them :
+.. code-block:: json</p>
+<blockquote>
+<div># apt-get install python2.7-dev gcc</div></blockquote>
+<p>Install SSL librairies
+.. code-block:: json</p>
+<blockquote>
+<div># apt-get install libssl-dev</div></blockquote>
+<p>Install librairies for mysql access and command line client :
+.. code-block:: json</p>
+<blockquote>
+<div># apt-get install libmysqlclient-dev mysql-client</div></blockquote>
+</div>
+<div class="section" id="mysql-server">
+<h3>Mysql server<a class="headerlink" href="#mysql-server" title="Permalink to this headline">¶</a></h3>
+<p>&#8216;&#8217;If you have already a Mysql server installed, you will only have to create the Domogik database.&#8217;&#8216;</p>
+<p>Install packages for mysql server :
+.. code-block:: json</p>
+<blockquote>
+<div># apt-get install mysql-server-5.0</div></blockquote>
+<p>Or if mysql 5.1 is available on your Linux system :
+.. code-block:: json</p>
+<blockquote>
+<div># apt-get install mysql-server-5.1</div></blockquote>
+<p>Log on the mysql database as root user :
+.. code-block:: json</p>
+<blockquote>
+<div>$ mysql -u root -p
+Enter password:</div></blockquote>
+<p>Create a database called &#8220;domogik&#8221; :
+.. code-block:: json</p>
+<blockquote>
+<div>mysql&gt; CREATE DATABASE domogik;
+Query OK, 1 row affected (0.00 sec)</div></blockquote>
+<p>Create the user &#8220;domogik&#8221; to use the new database :
+.. code-block:: json</p>
+<blockquote>
+<div><p>mysql&gt; GRANT ALL PRIVILEGES ON domogik.* to <a class="reference external" href="mailto:domogik&#37;&#52;&#48;localhost">domogik<span>&#64;</span>localhost</a> IDENTIFIED BY &#8216;domopass&#8217;;
+Query OK, 0 rows affected (0.00 sec)</p>
+<p>mysql&gt;exit</p>
+</div></blockquote>
+</div>
+<div class="section" id="download-domogik">
+<h3>Download Domogik<a class="headerlink" href="#download-domogik" title="Permalink to this headline">¶</a></h3>
+<p>Go on the ((Download|download page)) to get Domogik.
+You will get a file named __domogik-&lt;release&gt;.tgz__. Download it and extract it :
+.. code-block:: json</p>
+<blockquote>
+<div>$ wget <a class="reference external" href="http://repo.domogik.org/">http://repo.domogik.org/</a>...
+$ tar xvzf domogik-&lt;release&gt;.tgz
+$ cd domogik-&lt;release&gt;</div></blockquote>
+</div>
+<div class="section" id="install-domogik">
+<h3>Install Domogik<a class="headerlink" href="#install-domogik" title="Permalink to this headline">¶</a></h3>
+<p>From __domogik-&lt;release&gt;__ folder, run the install :
+&#8216;&#8217;Note : during installation, a new user will be created if necessary.&#8217;&#8217;
+.. code-block:: json</p>
+<blockquote>
+<div>$ sudo ./install.sh</div></blockquote>
+<p>You will be asked for the following questions :</p>
+<div class="highlight-json"><pre>If you want to use a proxy, please set it now. It will only be used during the installation. (ex: http://1.2.3.4:8080)</pre>
+</div>
+<p>During the installation, some python librairies could be downloaded. If you use a proxy, you must set it here.</p>
+<div class="highlight-json"><pre>Which user will run domogik, it will be created if it does not exist yet? (default : domogik)</pre>
+</div>
+<p>System user that will launch Domogik. You should keep the default choice.</p>
+<p>If the choosen user doesn&#8217;t exists, you will have to answser following questions :
+.. code-block:: json</p>
+<blockquote>
+<div><p>Enter new UNIX password:
+...
+Retype new UNIX password:
+...
+Changing the user information for domogik
+Enter the new value, or press ENTER for the default</p>
+<blockquote>
+<div>Full Name []:
+Room Number []:
+Work Phone []:
+Home Phone []:
+Other []:</div></blockquote>
+<p>Is the information correct? [Y/n]
+...</p>
+</div></blockquote>
+<p>Enter twice a password for the user and eventually, fill values about the new user.</p>
+<div class="highlight-json"><pre>You already have Domogik configuration files. Do you want to keep them ? [Y/n]</pre>
+</div>
+<p>If you already have Domogik configuration files, you will be asked for keeping them or not.</p>
+<div class="highlight-json"><pre>Which interface do you want to bind to? (default : lo) :</pre>
+</div>
+<p>To use Domogik only on a local computer, choose __lo__. To access it from another computer or use multi host features, choose the appropriate network interface (e.g. : __eth0__).</p>
+<div class="highlight-json"><pre>If you need to access Domogik from outside, you can specify an IP now :</pre>
+</div>
+<p>Used to access to Domogik over the internet. You can set your public IP here (depending on your configuration, you could need to create a port redirection on your router.
+Domogik is not yet secure, use this with caution!</p>
+<div class="highlight-json"><pre>You need to have a working Mysql server with a domogik user and database.
+You can create it using these commands (as mysql admin user) :
+ &gt; CREATE DATABASE domogik;
+ &gt; GRANT ALL PRIVILEGES ON domogik.* to domogik@localhost IDENTIFIED BY 'randompassword';
+Press Enter to continue the installation when your setup is ok.</pre>
+</div>
+<p>If you have installed Mysql server and create the Domogik database, just press Enter.</p>
+<div class="highlight-json"><pre>Please set your mysql parameters.
+Username : domogik
+Password : domopass
+Port [3306] :
+Host [localhost] :
+Database name [domogik]:</pre>
+</div>
+<p>Set connection informations for the database.</p>
+<div class="highlight-json"><pre>Your database already contains some tables, do you want to drop them. If you choose No, new items will *NOT* be installed ? [Y/n]</pre>
+</div>
+<p>In case the Domogik database is not empty (it is not the first installation), you will get this warning. Depending on your needs choose the appropriate option. Y choice will delete all existing data.</p>
+<div class="highlight-json"><pre>Everything seems to be good, Domogik should be installed correctly.
+I will start the test_config.py script to check it.
+Please press Enter when ready.</pre>
+</div>
+<p>Just press enter to start the check script.</p>
+<div class="highlight-json"><pre>==&gt; ================================================== &lt;==
+==&gt;  Everything seems ok, you should be able to start  &lt;==
+==&gt;       Domogik with /etc/init.d/domogik start       &lt;==
+==&gt;             or /etc/rc.d/domogik start             &lt;==
+==&gt; ================================================== &lt;==</pre>
+</div>
+<p>The installation is finished and seems to be OK.</p>
+</div>
+<div class="section" id="optional-postgresql-instead-of-mysql">
+<h3>Optional : postgresql (instead of mysql)<a class="headerlink" href="#optional-postgresql-instead-of-mysql" title="Permalink to this headline">¶</a></h3>
+<p>If you wish to use postgresql instead of mysql
+* Create your database
+* Edit your &#8216;&#8217;.domogik.cfg&#8217;&#8217; file and put database information : db_type (postgresql), db_user, db_password...</p>
+</div>
+<div class="section" id="make-domogik-start-with-your-computer">
+<h3>Make Domogik start with your computer<a class="headerlink" href="#make-domogik-start-with-your-computer" title="Permalink to this headline">¶</a></h3>
+<p>For Debian or Ubuntu systems:
+.. code-block:: json</p>
+<blockquote>
+<div># update-rc.d domogik defaults</div></blockquote>
+<p>For Archlinux:
+Add <a class="reference external" href="mailto:''&#37;&#52;&#48;domogik">''<span>&#64;</span>domogik</a>&#8216;&#8217; at the very end of the line starting with &#8216;&#8217;DAEMON&#8217;&#8216;.</p>
+</div>
+<div class="section" id="start-domogik">
+<h3>Start domogik<a class="headerlink" href="#start-domogik" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-json"><pre>sudo /etc/init.d/domogik start
+* Starting XPL... Done.
+* Starting Manager (with -d -r -p -E)... Done
+* Updating packages cache... Done</pre>
+</div>
+<p>It will start :
+* The xpl hub
+* The Domogik manager on this host
+* The database manager and the REST interface module and will take in account your config.</p>
+<p>Domogik is mutli-thread, so it could take some times before you can connect to it.</p>
+</div>
+<div class="section" id="logs">
+<h3>Logs<a class="headerlink" href="#logs" title="Permalink to this headline">¶</a></h3>
+<p>A file named __domogik__ is installed in __/etc/logrotate.d/__. You can update it to change the logrotate configuration.</p>
+</div>
+<div class="section" id="it-doesn-t-work">
+<h3>It doesn&#8217;t work?<a class="headerlink" href="#it-doesn-t-work" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>((Errors_and_solutions|See errors and solutions))</li>
+</ul>
+</div>
+</div>
+<div class="section" id="next-step">
+<h2>Next step ?<a class="headerlink" href="#next-step" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>((Domoweb_installation_for_developpers|Domoweb installation))</li>
+</ul>
+</div>
+<div class="section" id="installation-on-secondary-hosts">
+<h2>Installation on secondary hosts<a class="headerlink" href="#installation-on-secondary-hosts" title="Permalink to this headline">¶</a></h2>
+<p>Domogik is multihost, but the installation will be different between the main host (which will have the database manager and rinor activated) and the others hosts (which will have only the manager activated).</p>
+<div class="section" id="id1">
+<h3>Dependencies<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Just do the same actions you did for the main host</p>
+<p>!!!!Install the Domogik development release
+Do the same actions you did for the main host, except for the __install.sh__ shell script : to launch install for a secondary host, run the installation script with the __&#8211;<a href="#id2"><span class="problematic" id="id4">secondary__</span></a> option :
+.. code-block:: json</p>
+<blockquote>
+<div>$ cd domogik
+$ sudo ./install.sh &#8211;secondary</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Standard installation for Domogik 0.2.0-beta1</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#notes">Notes</a></li>
+<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#mysql-server">Mysql server</a></li>
+<li><a class="reference internal" href="#download-domogik">Download Domogik</a></li>
+<li><a class="reference internal" href="#install-domogik">Install Domogik</a></li>
+<li><a class="reference internal" href="#optional-postgresql-instead-of-mysql">Optional : postgresql (instead of mysql)</a></li>
+<li><a class="reference internal" href="#make-domogik-start-with-your-computer">Make Domogik start with your computer</a></li>
+<li><a class="reference internal" href="#start-domogik">Start domogik</a></li>
+<li><a class="reference internal" href="#logs">Logs</a></li>
+<li><a class="reference internal" href="#it-doesn-t-work">It doesn&#8217;t work?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#next-step">Next step ?</a></li>
+<li><a class="reference internal" href="#installation-on-secondary-hosts">Installation on secondary hosts</a><ul>
+<li><a class="reference internal" href="#id1">Dependencies</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Domodroid_Src/Domodroid_Src.html"
+                        title="previous chapter">How to use domodroid Source</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Domogik_installation_for_developpers/Domogik_installation_for_developpers.html"
+                        title="next chapter">Domogik installation for developers</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Domogik_installation_for_0.2.0_beta1/Domogik_installation_for_0.2.0_beta1.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Domogik_installation_for_developpers/Domogik_installation_for_developpers.html" title="Domogik installation for developers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Domodroid_Src/Domodroid_Src.html" title="How to use domodroid Source"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,242 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Notifications &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Packages" href="../Developers_packages/Developers_packages.html" />
+    <link rel="prev" title="Système interne de communication" href="../Developers_internal_communication_system/Developers_internal_communication_system.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Developers_packages/Developers_packages.html" title="Packages"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Developers_internal_communication_system/Developers_internal_communication_system.html" title="Système interne de communication"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="notifications">
+<h1>Notifications<a class="headerlink" href="#notifications" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<p>See HTML5 notifications for definitions : <a class="reference external" href="http://www.w3.org/TR/notifications/">http://www.w3.org/TR/notifications/</a></p>
+<div class="section" id="what-is-a-notification">
+<h2>What is a notification ?<a class="headerlink" href="#what-is-a-notification" title="Permalink to this headline">¶</a></h2>
+<p>It is a way to &#8220;notify&#8221; an event for example :
+* incoming call
+* mail reception
+* a door opens
+* etc</p>
+<p>The ways to notify could be :
+* a lightbox on a web ui
+* a notification on a smartphone
+* a voice (TTS) message in your house
+* a message box in the media center (possible in xbmc for example)</p>
+<p>There are 2 ways to check for notifications :
+* listening to xpl (plugin case : voice message, sms message, xbmc plugin, etc)
+* listening to REST (web ui, smartphone&#8217;s ui)</p>
+</div>
+<div class="section" id="sending-a-notification">
+<h2>Sending a notification<a class="headerlink" href="#sending-a-notification" title="Permalink to this headline">¶</a></h2>
+<p>To test notifications, just use this command :
+.. code-block:: json</p>
+<blockquote>
+<div>./send.py xpl-trig notify.basic &#8220;title=titre,message=blabl
+a,type=info,timestamp=1286522935812&#8221;</div></blockquote>
+<p>More details about options in the &#8216;&#8217;xPL Schema chapter&#8217;&#8216;</p>
+</div>
+<div class="section" id="how-to-listen-for-notifications-from-an-ui">
+<h2>How to listen for notifications from an UI<a class="headerlink" href="#how-to-listen-for-notifications-from-an-ui" title="Permalink to this headline">¶</a></h2>
+<p>When a notification is received by the statistic manager (REST), an event is created for a device with id=0. So, you just have to put the device with &#8216;&#8217;id=0&#8217;&#8217; in your &#8216;&#8217;__/events/<a href="#id1"><span class="problematic" id="id2">request__</span></a>&#8216;&#8217; calls to REST.</p>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>For this request,
+.. code-block:: json</p>
+<blockquote>
+<div>wget -qO- <a class="reference external" href="http://192.168.0.10:40405/events/request/new/0">http://192.168.0.10:40405/events/request/new/0</a></div></blockquote>
+<p>After a notification reception, it will receive :
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd><p class="first">&#8220;status&#8221; : &#8220;OK&#8221;,
+&#8220;code&#8221; : 0,
+&#8220;description&#8221; : &#8220;None&#8221;,
+&#8220;event&#8221; : [</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd><p class="first">&#8220;timestamp&#8221; : 1286529227,
+&#8220;data&#8221; : [</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd>&#8220;value&#8221; : &#8220;titre&#8221;,
+&#8220;key&#8221; : &#8220;title&#8221;</dd>
+</dl>
+<p>},
+{</p>
+<blockquote>
+<div>&#8220;value&#8221; : &#8220;blabla&#8221;,
+&#8220;key&#8221; : &#8220;message&#8221;</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div>&#8220;value&#8221; : &#8220;info&#8221;,
+&#8220;key&#8221; : &#8220;type&#8221;</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div>&#8220;value&#8221; : &#8220;1286522935812&#8221;,
+&#8220;key&#8221; : &#8220;timestamp&#8221;</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p class="last">],
+&#8220;ticket_id&#8221; : &#8220;1&#8221;,
+&#8220;device_id&#8221; : 0</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p class="last">]</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>Notice the four elements :
+* title
+* message
+* type (optionnal) : info, warning, error, success
+* timestamp (optionnal) : time linked to notification</p>
+</div>
+<div class="section" id="xpl-schema">
+<h3>xPL Schema<a class="headerlink" href="#xpl-schema" title="Permalink to this headline">¶</a></h3>
+<p>A notification is an event, so __only &#8216;&#8217;xpl-trig&#8217;&#8216;__ is supported.</p>
+</div>
+<div class="section" id="xpl-trig">
+<h3>xpl-trig<a class="headerlink" href="#xpl-trig" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-json"><pre>xpl-trig
+{
+...
+}
+notify.basic
+{
+title = &lt;notification title&gt;
+message = &lt;content of notification&gt;
+[type = &lt;INFO|WARNING|ERROR|SUCCESS&gt;]
+[timestamp = &lt;date/time to diplay in timestamp format (the universal)&gt;]
+}</pre>
+</div>
+<p>By default, if no type is defined, consider that it is an &#8216;&#8217;__INFO__&#8217;&#8217; notification.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Notifications</a><ul>
+<li><a class="reference internal" href="#what-is-a-notification">What is a notification ?</a></li>
+<li><a class="reference internal" href="#sending-a-notification">Sending a notification</a></li>
+<li><a class="reference internal" href="#how-to-listen-for-notifications-from-an-ui">How to listen for notifications from an UI</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#xpl-schema">xPL Schema</a></li>
+<li><a class="reference internal" href="#xpl-trig">xpl-trig</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Developers_internal_communication_system/Developers_internal_communication_system.html"
+                        title="previous chapter">Système interne de communication</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Developers_packages/Developers_packages.html"
+                        title="next chapter">Packages</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Developers_notifications/Developers_notifications.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Developers_packages/Developers_packages.html" title="Packages"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Developers_internal_communication_system/Developers_internal_communication_system.html" title="Système interne de communication"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

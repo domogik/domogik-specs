@@ -1,0 +1,171 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Get process information over the xPL network &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="xplProcol" href="../xplProcol/xplProcol.html" />
+    <link rel="prev" title="xPL calendar schema" href="../xPL_calendar_schema/xPL_calendar_schema.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../xplProcol/xplProcol.html" title="xplProcol"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../xPL_calendar_schema/xPL_calendar_schema.html" title="xPL calendar schema"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="get-process-information-over-the-xpl-network">
+<h1>Get process information over the xPL network<a class="headerlink" href="#get-process-information-over-the-xpl-network" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<p>Domogik plugins are able to send over the xPL network their cpu and memory usage. Each plugin that inherits from XplPlugin does it naturally. The goal is to display charts in Domogik administration (web ui) about each plugin for cpu and memory usage.</p>
+</div>
+<div class="section" id="how-it-works">
+<h2>How it works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
+<p>in __xpl/common/<a href="#id1"><span class="problematic" id="id2">plugin.py__</span></a>, an object ProcessInfo (from common/processinfo.py) is created. It will get process information and send them to a callback function which will send the data over xPL.</p>
+</div>
+<div class="section" id="xpl-schema">
+<h2>xPL Schema<a class="headerlink" href="#xpl-schema" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="xpl-stat">
+<h3>xpl-stat<a class="headerlink" href="#xpl-stat" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-json"><pre>xpl-stat
+{
+...
+}
+domogik.usage
+{
+name = &lt;plugin name&gt;.&lt;host&gt;
+pid = &lt;process id&gt;
+cpu-percent = [0..100]
+memory-percent = [0..100]
+memory-rss = &lt;float&gt;
+memory-vsz = &lt;float&gt;
+[ futur additionnal values : thread number, etc]
+}</pre>
+</div>
+<p>Memory RSS and VSZ corresponds to :
+* RSS : memory used by plugin and its data
+* VSZ : memory used for cache and buffers</p>
+</div>
+<div class="section" id="xpl-cmnd">
+<h3>xpl-cmnd<a class="headerlink" href="#xpl-cmnd" title="Permalink to this headline">¶</a></h3>
+<p>No xpl-cmnd usage</p>
+</div>
+<div class="section" id="xpl-trig">
+<h3>xpl-trig<a class="headerlink" href="#xpl-trig" title="Permalink to this headline">¶</a></h3>
+<p>No xpl-cmnd usage</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Get process information over the xPL network</a><ul>
+<li><a class="reference internal" href="#purpose">Purpose</a></li>
+<li><a class="reference internal" href="#how-it-works">How it works</a></li>
+<li><a class="reference internal" href="#xpl-schema">xPL Schema</a><ul>
+<li><a class="reference internal" href="#xpl-stat">xpl-stat</a></li>
+<li><a class="reference internal" href="#xpl-cmnd">xpl-cmnd</a></li>
+<li><a class="reference internal" href="#xpl-trig">xpl-trig</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../xPL_calendar_schema/xPL_calendar_schema.html"
+                        title="previous chapter">xPL calendar schema</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../xplProcol/xplProcol.html"
+                        title="next chapter">xplProcol</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/xPL_process_information/xPL_process_information.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../xplProcol/xplProcol.html" title="xplProcol"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../xPL_calendar_schema/xPL_calendar_schema.html" title="xPL calendar schema"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

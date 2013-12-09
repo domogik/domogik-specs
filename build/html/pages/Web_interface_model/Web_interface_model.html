@@ -1,0 +1,260 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The web interface model &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Web_ui_admindesign" href="../Web_ui_admindesign/Web_ui_admindesign.html" />
+    <link rel="prev" title="{IMG(attId=”366”)}{IMG}" href="../Version0.1.0/Version0.1.0.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Web_ui_admindesign/Web_ui_admindesign.html" title="Web_ui_admindesign"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Version0.1.0/Version0.1.0.html" title="{IMG(attId=”366”)}{IMG}"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-web-interface-model">
+<h1>The web interface model<a class="headerlink" href="#the-web-interface-model" title="Permalink to this headline">¶</a></h1>
+<p>This page is a draft helping us to create the domogik web interface.</p>
+<div class="section" id="general-overview">
+<h2>General overview<a class="headerlink" href="#general-overview" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="technical-overview">
+<h2>Technical overview<a class="headerlink" href="#technical-overview" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>All the semantic and content is coded in XHTML 1.0 strict.</dt>
+<dd>Design</dd>
+</dl>
+<hr class="docutils" />
+<p>The design is separated from the content, using external CSS files.
+To improve the user experience, we use the <a class="reference external" href="http://jquery.com/">JQuery library</a> to add animations, effects and improved controls (graceful degradation).</p>
+<p>__Interesting links to look at :__</p>
+<ul class="simple">
+<li>Designing icons :</li>
+</ul>
+<p>** <a class="reference external" href="http://icones.pro">icones pro</a></p>
+<ul class="simple">
+<li>Drawing nice charts :</li>
+</ul>
+<p>** <a class="reference external" href="http://solutoire.com/flotr/">flotr</a> (require prototype.js framework)
+** <a class="reference external" href="http://www.jscharts.com/">jscharts</a> (free but not open-source)
+** <a class="reference external" href="http://code.google.com/p/flot">flot</a> (some bugs, lot of open bugs, pretty few dev/commits)
+** <a class="reference external" href="http://g.raphaeljs.com/">gRaphaÃ«l</a>
+** <a class="reference external" href="http://www.humblesoftware.com/finance/index">HumbleFinance</a> (use flotr)
+** <a class="reference external" href="http://omnipotent.net/jquery.sparkline/">jQuery Sparklines</a>
+** <a class="reference external" href="http://www.deensoft.com/lab/protochart/linechart.php">Protochart</a> (require prototype.js framework)
+** <a class="reference external" href="http://highcharts.com/">Highcharts</a> (by-nc, not gpl compatible !)
+** <a class="reference external" href="http://www.liquidx.net/plotkit/">PlotKit</a> (require Mochikit)
+** <a href="#id2"><span class="problematic" id="id3">`jQuery Visualize &lt;http://www.filamentgroup.com/lab/update\_to\_jquery\_visualize\_accessible\_charts\_with\_html5\_from\_designing\_with/&gt;`_</span></a> (Accessible)
+** <a class="reference external" href="http://www.simile-widgets.org/timeline/">Timeline</a>
+** <a class="reference external" href="http://www.jqplot.com">jQplot</a> (gpl2, only one dev, looot of open bugs (110+) but also very active dev, many commits a day)
+* Images :
+** <a class="reference external" href="http://www.lokeshdhakar.com/projects/lightbox2">lightbox2 for image management</a>
+** <a class="reference external" href="http://imageflow.finnrudolph.de/">nice slide effects for images</a>
+* Scenarios:
+** <a class="reference external" href="http://www.simile-widgets.org/timeline/">Timeline</a>
+** <a class="reference external" href="http://neyric.github.com/wireit/">Wiring</a>
+* Medias (coverflow):
+** <a class="reference external" href="http://www.simile-widgets.org/runway/">Runway</a>
+* Managing Lists
+** [<a class="reference external" href="http://razorjack.net/quicksand/">http://razorjack.net/quicksand/</a>]
+* Animated icons (for v0.2.0)
+** [<a class="reference external" href="http://www.conforama.fr/webapp/wcs/stores/servlet/AmbianceView?langId=-2&amp;amp;storeId=10001&amp;amp;catalogId=10051">http://www.conforama.fr/webapp/wcs/stores/servlet/AmbianceView?langId=-2&amp;amp;storeId=10001&amp;amp;catalogId=10051</a>]
+* Color picker
+** <a class="reference external" href="http://acko.net/dev/farbtastic">farbtastic (GPL)</a></p>
+<div class="section" id="accessibility">
+<h3>Accessibility<a class="headerlink" href="#accessibility" title="Permalink to this headline">¶</a></h3>
+<p>The interface has dynamic content and advanced user interface controls developed with Ajax
+So, to make this web application more accessible to people with disabilities, we are following the <a class="reference external" href="http://www.w3.org/TR/WCAG/">Web Content Accessibility Guidelines</a> (WCAG) 2.0.
+and using ARIA attributes (<a class="reference external" href="http://www.w3.org/TR/wai-aria">Accessible Rich Internet Applications</a> (WAI-ARIA) 1.0)
+in order to provide more semantics to Assistive Technologies.</p>
+</div>
+<div class="section" id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>It was decided that CSS3 instructions can be used to create the design more easily.</li>
+</ul>
+</div>
+<div class="section" id="color-codes">
+<h3>Color codes<a class="headerlink" href="#color-codes" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>Here are the main colors used with the web interface:</dt>
+<dd><dl class="first last docutils">
+<dt>Gradient from !#000000 to !#403E3F::</dt>
+<dd>{HTML()}</dd>
+</dl>
+</dd>
+</dl>
+<p>&lt;div style=&#8221;display:inline-block;height:1em; width:5em; background-color:#000000&#8221;&gt;&lt;/div&gt;
+&lt;div style=&#8221;display:inline-block;height:1em; width:5em; background-color:#403E3F&#8221;&gt;&lt;/div&gt;
+{HTML}</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Gradient from !#534F45 to !#625E53::</dt>
+<dd>{HTML()}</dd>
+</dl>
+</div></blockquote>
+<p>&lt;div style=&#8221;display:inline-block;height:1em; width:5em; background-color:#534F45&#8221;&gt;&lt;/div&gt;
+&lt;div style=&#8221;display:inline-block;height:1em; width:5em; background-color:#625E53&#8221;&gt;&lt;/div&gt;
+{HTML}</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Gradient from !#BDCB2F to !#9BB528::</dt>
+<dd>{HTML()}</dd>
+</dl>
+</div></blockquote>
+<p>&lt;div style=&#8221;display:inline-block;height:1em; width:5em; background-color:#BDCB2F&#8221;&gt;&lt;/div&gt;
+&lt;div style=&#8221;display:inline-block;height:1em; width:5em; background-color:#9BB528&#8221;&gt;&lt;/div&gt;
+{HTML}</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Border !#B9C248::</dt>
+<dd>{HTML()}</dd>
+</dl>
+</div></blockquote>
+<p>&lt;div style=&#8221;display:inline-block;height:1em; width:5em; background-color:#B9C248&#8221;&gt;&lt;/div&gt;
+{HTML}</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Gradient from !#908D6F to !#D2CDBC::</dt>
+<dd>{HTML()}</dd>
+</dl>
+</div></blockquote>
+<p>&lt;div style=&#8221;display:inline-block;height:1em; width:5em; background-color:#908D6F&#8221;&gt;&lt;/div&gt;
+&lt;div style=&#8221;display:inline-block;height:1em; width:5em; background-color:#D2CDBC&#8221;&gt;&lt;/div&gt;
+{HTML}</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Border !#979387::</dt>
+<dd>{HTML()}</dd>
+</dl>
+</div></blockquote>
+<p>&lt;div style=&#8221;display:inline-block;height:1em; width:5em; background-color:#979387&#8221;&gt;&lt;/div&gt;
+{HTML}</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Background !#cccccc::</dt>
+<dd>{HTML()}</dd>
+</dl>
+</div></blockquote>
+<p>&lt;div style=&#8221;display:inline-block;height:1em; width:5em; background-color:#cccccc&#8221;&gt;&lt;/div&gt;
+{HTML}</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Background !#eeeeee::</dt>
+<dd>{HTML()}</dd>
+</dl>
+</div></blockquote>
+<p>&lt;div style=&#8221;display:inline-block;height:1em; width:5em; background-color:#eeeeee; border:1px solid#cccccc&#8221;&gt;&lt;/div&gt;
+{HTML}</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The web interface model</a><ul>
+<li><a class="reference internal" href="#general-overview">General overview</a></li>
+<li><a class="reference internal" href="#technical-overview">Technical overview</a><ul>
+<li><a class="reference internal" href="#accessibility">Accessibility</a></li>
+<li><a class="reference internal" href="#notes">Notes</a></li>
+<li><a class="reference internal" href="#color-codes">Color codes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Version0.1.0/Version0.1.0.html"
+                        title="previous chapter">{IMG(attId=&#8221;366&#8221;)}{IMG}</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Web_ui_admindesign/Web_ui_admindesign.html"
+                        title="next chapter">Web_ui_admindesign</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Web_interface_model/Web_interface_model.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Web_ui_admindesign/Web_ui_admindesign.html" title="Web_ui_admindesign"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Version0.1.0/Version0.1.0.html" title="{IMG(attId=”366”)}{IMG}"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

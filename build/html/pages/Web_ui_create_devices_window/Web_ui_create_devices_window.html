@@ -1,0 +1,231 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Web UI : creating new devices &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Web UI design specifications" href="../Web_ui_design/Web_ui_design.html" />
+    <link rel="prev" title="Web_ui_admindesign" href="../Web_ui_admindesign/Web_ui_admindesign.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Web_ui_design/Web_ui_design.html" title="Web UI design specifications"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Web_ui_admindesign/Web_ui_admindesign.html" title="Web_ui_admindesign"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="web-ui-creating-new-devices">
+<h1>Web UI : creating new devices<a class="headerlink" href="#web-ui-creating-new-devices" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="ideas">
+<h2>Ideas<a class="headerlink" href="#ideas" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>For actuators, add a field for the device for the max power consumed by the appliance plugged on the actuator</li>
+</ul>
+</div>
+<div class="section" id="administration-view">
+<h2>Administration view<a class="headerlink" href="#administration-view" title="Permalink to this headline">¶</a></h2>
+<p>When creating a new device, the user will have 2 choices:</p>
+<ul class="simple">
+<li>Unique address, for physical device of software service where the features can be reached by a unique address. (X10, plcBus, ...)</li>
+<li>Multi addresses, for physical or virtual devices where the features are identified by their own individual addresses. (KNX, ...)</li>
+</ul>
+<p>The user will have to choose a techno, or a specific device type for pre-populated feature list.</p>
+<p>It will be possible to add, remove or disable any feature.
+And Configure the Domogik Type for each feature.</p>
+<p>As actually the features will be separated in 2 categories:
+* Actuator: with reference for command and reference for state
+* Sensor: only with state reference</p>
+<div class="section" id="unique-address-device">
+<h3>Unique address device<a class="headerlink" href="#unique-address-device" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Will ask for a global address</li>
+<li>For each feature it will require, the command name (for command) or key name (for state) as references</li>
+</ul>
+</div>
+</div>
+<div class="section" id="multi-address-device">
+<h2>Multi address device<a class="headerlink" href="#multi-address-device" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>For each feature it will require, the addresses (for command and for state) as references</li>
+</ul>
+<p>Points to see :
+* auto discovery (modify below pic)
+* make pictures examples for techno/type
+* make pictures examples for address</p>
+<p>{IMG(attId=&#8221;269&#8221;)}{IMG}</p>
+</div>
+<div class="section" id="auto-discovery-process">
+<h2>Auto discovery process<a class="headerlink" href="#auto-discovery-process" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="plugin-side">
+<h3>Plugin side<a class="headerlink" href="#plugin-side" title="Permalink to this headline">¶</a></h3>
+<p>At startup, the plugin create one or more listeners for :
+* type = xpl-cmnd
+* schema = domogik.helpers
+* command = autodiscovery
+* techno = &lt;plugin technology&gt;
+If a plugin/technology can make the difference between features : the lsitener is also on :
+* feature/type = &lt;feature/type (same than UI value)</p>
+<p>A listener makes reference to a callback function that will :
+* refresh devices list
+* send a list as xpl-trig domogik.helpers. &#8220;plugin = &lt;plugin name&gt;&#8221; is added in xpl message</p>
+</div>
+<div class="section" id="xpl">
+<h3>xPL<a class="headerlink" href="#xpl" title="Permalink to this headline">¶</a></h3>
+<p>Request :
+.. code-block:: json</p>
+<blockquote>
+<div>xpl-cmnd
+{
+...
+}
+domogik.helper
+{
+command = autodiscovery
+technology = &lt;technology asking for discovery&gt;
+[ type = &lt;filter on type : switch, light, temperature, etc&gt; ]
+}</div></blockquote>
+<p>Answer :
+.. code-block:: json</p>
+<blockquote>
+<div>xpl-trig
+{
+...
+}
+domogik.helper
+{
+command = autodiscovery
+technology = &lt;technology asking for discovery&gt;
+[ type = &lt;filter on type : switch, light, temperature, etc&gt; ]
+plugin = &lt;plugin providing device&gt;
+host = &lt;host on which is plugin&gt;
+dev0-address = &lt;address&gt;
+dev0-reference = &lt;reference&gt;
+dev1-address = ...
+dev1-reference = ...
+...
+}</div></blockquote>
+</div>
+<div class="section" id="ui-rest-side">
+<h3>UI/REST side<a class="headerlink" href="#ui-rest-side" title="Permalink to this headline">¶</a></h3>
+<p>When clicking in the address field, a box appears. On box opening, REST is called :
+* /autodiscovery/technology/&lt;techno&gt; [ /type/&lt;type&gt; ]
+This makes REST send a &#8216;&#8217;xpl-cmnd domogik.helpers&#8217;&#8217; &#8220;command=autodiscovery&#8221; message. Then REST waits for several replies.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Web UI : creating new devices</a><ul>
+<li><a class="reference internal" href="#ideas">Ideas</a></li>
+<li><a class="reference internal" href="#administration-view">Administration view</a><ul>
+<li><a class="reference internal" href="#unique-address-device">Unique address device</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#multi-address-device">Multi address device</a></li>
+<li><a class="reference internal" href="#auto-discovery-process">Auto discovery process</a><ul>
+<li><a class="reference internal" href="#plugin-side">Plugin side</a></li>
+<li><a class="reference internal" href="#xpl">xPL</a></li>
+<li><a class="reference internal" href="#ui-rest-side">UI/REST side</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Web_ui_admindesign/Web_ui_admindesign.html"
+                        title="previous chapter">Web_ui_admindesign</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Web_ui_design/Web_ui_design.html"
+                        title="next chapter">Web UI design specifications</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Web_ui_create_devices_window/Web_ui_create_devices_window.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Web_ui_design/Web_ui_design.html" title="Web UI design specifications"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Web_ui_admindesign/Web_ui_admindesign.html" title="Web_ui_admindesign"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

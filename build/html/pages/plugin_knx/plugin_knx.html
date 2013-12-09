@@ -1,0 +1,250 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installation du BCUSDK &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Exemple de fonctionnement du plugin" href="../plugin_knx_exemple/plugin_knx_exemple.html" />
+    <link rel="prev" title="plugin_knx(english, en)" href="../plugin_knx(english, en)/plugin_knx(english, en).html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_knx_exemple/plugin_knx_exemple.html" title="Exemple de fonctionnement du plugin"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_knx(english, en)/plugin_knx(english, en).html" title="plugin_knx(english, en)"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <p><a href="#id1"><span class="problematic" id="id2">*</span></a>!Installation du plugin KNX</p>
+<div class="section" id="installation-du-bcusdk">
+<h1>Installation du BCUSDK<a class="headerlink" href="#installation-du-bcusdk" title="Permalink to this headline">¶</a></h1>
+<p>Le BCUSDK contient des outils qui permettent la communication entre le PC et le bus via une interface, il existe des packages ubuntu par exemple: <a class="reference external" href="http://ppa.launchpad.net/mkoegler/bcusdk/">http://ppa.launchpad.net/mkoegler/bcusdk/</a></p>
+<p>Pour installer a partir des sources:
+.. code-block:: json</p>
+<blockquote>
+<div><p>Installer php5 via synaptic
+apt-get install gcc
+apt-get install g++
+apt-get install make
+apt-get install libmysqlclient15-dev</p>
+<p>wget <a class="reference external" href="http://sourceforge.net/projects/bcusdk/files/pthsem/pthsem_2.0.8.tar.gz">http://sourceforge.net/projects/bcusdk/files/pthsem/pthsem_2.0.8.tar.gz</a>
+wget <a class="reference external" href="http://sourceforge.net/projects/bcusdk/files/bcusdk/bcusdk_0.0.5.tar.gz">http://sourceforge.net/projects/bcusdk/files/bcusdk/bcusdk_0.0.5.tar.gz</a>
+tar -xzf pthsem_2.0.8.tar.gz
+tar -xzf bcusdk_0.0.5.tar.gz</p>
+<p>cd pthsem-2.0.8/
+./configure
+make
+make test
+make install
+export LD_LIBRARY_PATH=/usr/local/lib</p>
+<p>cd ..
+cd bcusdk-0.0.5/
+./configure &#8211;enable-onlyeibd &#8211;enable-eibnetiptunnel &#8211;enable-usb &#8211;enable-eibnetipserver &#8211;enable-ft12
+make
+make install</p>
+</div></blockquote>
+<p>Sur ma Ubuntu Server 11.04 j&#8217;ai eux uun message d&#8217;erreur suivant lorsque j&#8217;ai tenté de lancer EIBD:</p>
+<p>... error loading libraries: libpthsem.so.20 ....
+Pour y remédier</p>
+<p>cette ligne de commande montre les si les librairies sont tout présente:
+.. code-block:: json</p>
+<blockquote>
+<div>ldd /usr/local/bin/eibd</div></blockquote>
+<p>The line libpthsem.so.20 affiche non trouver</p>
+<p>Vérifier si elle est bien présente dans: /usr/local/lib
+Editer le fichier /etc/ld.so.conf et ajouter la ligne:
+include /usr/local/lib</p>
+<p>Puis en tant que root executé:
+.. code-block:: json</p>
+<blockquote>
+<div><p>ldconfig</p>
+<p>restart ldd /usr/local/bin/eibd and this time the path must be correct and eibd will work correctly.</p>
+</div></blockquote>
+<p>EIBD est prêt a fonctionner</p>
+</div>
+<div class="section" id="demarrage-automatique-de-eibd">
+<h1>Demarrage automatique de EIBD<a class="headerlink" href="#demarrage-automatique-de-eibd" title="Permalink to this headline">¶</a></h1>
+<p>Pour démarré automatiquement EIBD avec votre distribution il faut crée un fichier dans /etc/init.d/</p>
+<p>par exemple le fichier knxeibd situer dans src/domogik/examples/init/</p>
+<p>Vous aurez a adapter la ligne</p>
+<div class="highlight-json"><pre>EIBD_DAEMON_OPTS="--pid-file=$EIBD_PIDFILE paramétre</pre>
+</div>
+<p>Par exemple le paramètre peuvent être:
+Interface IP: -i -d -D ipt:adressIP
+Interface Serie:-i -d -D bcu1:/dev/ttyS0</p>
+<p>Pour connaitre les paramètres nécessaire reporté vous a la documentation d&#8217;EIBD.</p>
+<p>Maintenant que votre fichier est en place on ajoute le script a la liste des executions automatique avec la commande:</p>
+<div class="highlight-json"><pre>sudo update-rc.d knxeibd defaults XX</pre>
+</div>
+<p>XX représente l&#8217;ordre dans lequel sont démarrer les scripts (plus le chiffre est proche de 0 plus il est lancer tôt.</p>
+<p>Votre script doit être lancer avant celui de Domogik sinon le plugin ne pourra démarrer automatiquement.</p>
+<div class="section" id="ajouter-le-knx-a-domogik">
+<h2>Ajouter le KNX a domogik<a class="headerlink" href="#ajouter-le-knx-a-domogik" title="Permalink to this headline">¶</a></h2>
+<p>Il suffit d&#8217;aller dans la partie administration</p>
+<p>En mode DEV:
+dans une console tapez la commande:
+.. code-block:: json</p>
+<blockquote>
+<div>dmgenplug knx</div></blockquote>
+</div>
+<div class="section" id="parametrage-du-plugin">
+<h2>Paramétrage du plugin:<a class="headerlink" href="#parametrage-du-plugin" title="Permalink to this headline">¶</a></h2>
+<p>Domogik ne sais pas gérer 2 adresses pour un même device, il faut donc passé par un alias.</p>
+<p>Dans la zone Administration de domogik, dans le menu plugin KNX, il y a un onglet Special:</p>
+<p>{img fileId=328}</p>
+<p>En 1 c&#8217;est l&#8217;adresse qui sera renseigner dans le device Domogik (sont Alias)</p>
+<p>En 2 l&#8217;adresse du groupe de commande sur le bus</p>
+<p>En 3 Le datapoint type du groupe de commande</p>
+<p>En 4 Le groupe de retour d&#8217;état si il existe</p>
+<p>En 5 le datapoint type du groupe d&#8217;état.</p>
+<p>En 6 si coché, le plugin interrogera la valeur au démarrage du plugin (attention cette fonction peu crée des actions inatendu)</p>
+<p>En 7 Une description plus détailler vous permettant de vous retrouver dans votre fichier de configuration (cette ligne est ajouter avant la ligne de configuration</p>
+<p>En 8 ce bouton enregistre votre nouvelle ligne de configuration dans le fichier</p>
+<p>En 9 ce bouton permet de lire le fichier</p>
+<p>Zone 10 affiche le contenu du fichier de configuration</p>
+<p>En 11 ce bouton permet de supprimé la ligne indiqué dans la zone 12</p>
+<p>Une fois le device renseigner et ajouter, le device sera reconnu par le plugin, pour pouvoir l&#8217;affiché dans domogik il faudrat l&#8217;ajouter dans la section device de domogik.</p>
+</div>
+<div class="section" id="parametrage-du-plugin-edition-manuel">
+<h2>Paramétrage du plugin (edition manuel):<a class="headerlink" href="#parametrage-du-plugin-edition-manuel" title="Permalink to this headline">¶</a></h2>
+<p>Pour palier a l&#8217;absence d&#8217;adresse multiple une solution a été adopté:
+Un fichier de configuration doit être crée dans:</p>
+<p>share/domogik/data/knx/knx.txt</p>
+<p>Ce fichier contient des lignes types:
+exemple:
+.. code-block:: json</p>
+<blockquote>
+<div>datatype:1.001 adr_dmg:lampe1 adr_cmd:1/1/5 adr_stat:1/1/0 dpt_stat:1.001 check=True end</div></blockquote>
+<p>adr_dmg: Cette adresse n&#8217;a pas de structure propre, un nom un numéro convient a condition qu&#8217;il soit unique dans votre fichier, c&#8217;est cette adresse qui devra ensuite est reporté dans la configuration de &#8220;device&#8221; de domogik</p>
+<p>adr_cmd: C&#8217;est l&#8217;adresse de group qui permet de piloté votre foncton
+adr_stat: C&#8217;est l&#8217;adresse de group qui représente l&#8217;état de votre fonction si elle est différente de adr_cmd
+datatype: C&#8217;est le type de donnée (commune a adr_stat et adr_cmd)
+dpt_stat: Si le type de donnée est différent pour le stat (optionel)
+check: Si True, le plugin demandera l&#8217;état du groups stat a son lancement.</p>
+<p>DPT:
+||| Réception | OK| Emission | OK | DataPoint Type | Description
+| X | OK | X | OK | 1.001 | switching (on/off) (EIS1)
+| X | OK | X | OK | 1.008 | blinds control up/down
+| X |    | X |    | 3.007 | dimming (control of dimmer using up/down/stop) (EIS2)
+| X |    | X | OK | 3.008 | blinds (control of blinds using close/open/stop)
+| X | OK | X | OK | 5.xxx | 8bit unsigned integer (from 0 to 255) (EIS6)
+| X | OK | X | OK | 5.001 | scaling (from 0 to 100%)
+| X | OK | X | OK | 5.003 | angle (from 0 to 360°)
+| X | OK | X | OK | 6.xxx | 8bit signed integer (EIS14)
+| X | OK | X | OK | 7.xxx | 16bit unsigned integer (EIS10)
+| X | OK | X | OK | 8.xxx | 16bit signed integer
+| X | OK | X | OK | 9.xxx | 16 bit floating point number (EIS5)
+| X | OK | X | OK <a href="#id3"><span class="problematic" id="id4">|10.001 | time (EIS3)
+| X | OK | X | OK |11.001 | date (EIS4)
+| X | OK | X | OK |12.xxx | 32bit unsigned integer (EIS11)
+| X | OK | X | OK |13.xxx | 32bit signed integer
+| X | OK | X | OK |14.xxx | 32 bit IEEE 754 floating point number
+| X | OK | X | OK |16.000 | string (max 14 ASCII char) (EIS15)
+| X | OK | X | OK |20.102 | heating mode (comfort/standby/night/frost) |
+| X | OK | X | OK |DT_HVACEib|Gestion HVACMode pour le Hager TB042||</span></a></p>
+<p>Une fois votre fichier de configuration complet vous pouvez démarrer le plugin (le fichier est charger au lancement du plugin) et ajouter vos device dans domogik</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installation du BCUSDK</a></li>
+<li><a class="reference internal" href="#demarrage-automatique-de-eibd">Demarrage automatique de EIBD</a><ul>
+<li><a class="reference internal" href="#ajouter-le-knx-a-domogik">Ajouter le KNX a domogik</a></li>
+<li><a class="reference internal" href="#parametrage-du-plugin">Paramétrage du plugin:</a></li>
+<li><a class="reference internal" href="#parametrage-du-plugin-edition-manuel">Paramétrage du plugin (edition manuel):</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../plugin_knx(english, en)/plugin_knx(english, en).html"
+                        title="previous chapter">plugin_knx(english, en)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_knx_exemple/plugin_knx_exemple.html"
+                        title="next chapter">Exemple de fonctionnement du plugin</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/plugin_knx/plugin_knx.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_knx_exemple/plugin_knx_exemple.html" title="Exemple de fonctionnement du plugin"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_knx(english, en)/plugin_knx(english, en).html" title="plugin_knx(english, en)"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

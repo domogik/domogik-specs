@@ -1,0 +1,188 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Specs of helpers that will use the MQ system &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Template for a member" href="../Spec_member_template/Spec_member_template.html" />
+    <link rel="prev" title="Types for generating UI fields" href="../Spec_field_types/Spec_field_types.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Spec_member_template/Spec_member_template.html" title="Template for a member"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Spec_field_types/Spec_field_types.html" title="Types for generating UI fields"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="specs-of-helpers-that-will-use-the-mq-system">
+<h1>Specs of helpers that will use the MQ system<a class="headerlink" href="#specs-of-helpers-that-will-use-the-mq-system" title="Permalink to this headline">¶</a></h1>
+<p>||__Created:__|07/04/2013
+__Creator:__|Cereal
+__Reviewers:__|
+__Status:__|{GAUGE(value=&gt;10, max=&gt;100, label=&gt;&#8217;&#8216;draft&#8217;&#8216;, perc=&gt;true, labelsize=&gt;50, height=&gt;20, color=&gt;green, bgcolor=&gt;#EEEEEE)}{GAUGE}
+__Target:__|
+__References:__| ||</p>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="problems-with-current-helpers">
+<h2>problems with current helpers<a class="headerlink" href="#problems-with-current-helpers" title="Permalink to this headline">¶</a></h2>
+<p>there are a few problems with the current helpers, i&#8217;ll try to create a list here</p>
+<p><a href="#id1"><span class="problematic" id="id2">*</span></a>usage of the xpl network
+<a href="#id3"><span class="problematic" id="id4">*</span></a>the plugin needs to be stopped (if the plugin uses the same hardware)</p>
+</div>
+<div class="section" id="idea">
+<h2>idea<a class="headerlink" href="#idea" title="Permalink to this headline">¶</a></h2>
+<p>the new helpers will use the mq message system (req/rep), the plugins will be a mq worker, so they can respond to a mq request. This way the plugin can keep running, and over an mq message a certain helper request comes in to do a certain action on the plugin. The plugin can then just call some internal procedures to access the same hardware as the plugin does.</p>
+<p>This gives some advantages:
+#the plugin can run at the same time as the helper (its actually the same code)
+#the system doesn&#8217;t use the xpl network</p>
+</div>
+<div class="section" id="req-rep-messages">
+<h2>req/rep messages<a class="headerlink" href="#req-rep-messages" title="Permalink to this headline">¶</a></h2>
+<p>action: helper.*
+data will be a json with some key/values that are specifick to the helper action</p>
+<div class="section" id="helper-list">
+<h3>helper.list<a class="headerlink" href="#helper-list" title="Permalink to this headline">¶</a></h3>
+<p>request: from ui to plugin
+action: helper.list
+data: None
+=&gt; returns a list of possible helper actions</p>
+</div>
+<div class="section" id="helper-do">
+<h3>helper.do<a class="headerlink" href="#helper-do" title="Permalink to this headline">¶</a></h3>
+<p>request: from ui to plugin
+action: helper.do
+data:
+<a href="#id5"><span class="problematic" id="id6">*</span></a>command = a command that was returned by the helper
+* data = a key/value pair of the params needed for this command</p>
+</div>
+<div class="section" id="helper-help">
+<h3>helper.help<a class="headerlink" href="#helper-help" title="Permalink to this headline">¶</a></h3>
+<p>request: from ui to plugin
+action: helper.help
+data:
+<a href="#id7"><span class="problematic" id="id8">*</span></a>None =&gt; display full help
+or
+<a href="#id9"><span class="problematic" id="id10">*</span></a>comand = a command from list =&gt; display the help for this command</p>
+</div>
+<div class="section" id="helper-result">
+<h3>helper.result<a class="headerlink" href="#helper-result" title="Permalink to this headline">¶</a></h3>
+<p>reply: fromplugin to ui
+action: helper.result
+data:
+<a href="#id11"><span class="problematic" id="id12">*</span></a>request =&gt; the action where this is the result for
+<a href="#id13"><span class="problematic" id="id14">*</span></a>data =&gt; the resulting data</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Specs of helpers that will use the MQ system</a><ul>
+<li><a class="reference internal" href="#problems-with-current-helpers">problems with current helpers</a></li>
+<li><a class="reference internal" href="#idea">idea</a></li>
+<li><a class="reference internal" href="#req-rep-messages">req/rep messages</a><ul>
+<li><a class="reference internal" href="#helper-list">helper.list</a></li>
+<li><a class="reference internal" href="#helper-do">helper.do</a></li>
+<li><a class="reference internal" href="#helper-help">helper.help</a></li>
+<li><a class="reference internal" href="#helper-result">helper.result</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Spec_field_types/Spec_field_types.html"
+                        title="previous chapter">Types for generating UI fields</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Spec_member_template/Spec_member_template.html"
+                        title="next chapter">Template for a member</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Spec_helpers/Spec_helpers.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Spec_member_template/Spec_member_template.html" title="Template for a member"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Spec_field_types/Spec_field_types.html" title="Types for generating UI fields"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

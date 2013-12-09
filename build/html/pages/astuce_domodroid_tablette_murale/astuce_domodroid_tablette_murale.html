@@ -1,0 +1,135 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>astuce_domodroid_tablette_murale &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Installation du plugin KNX" href="../dev_plugin_knx/dev_plugin_knx.html" />
+    <link rel="prev" title="Install" href="../ZoneMinder/ZoneMinder.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../dev_plugin_knx/dev_plugin_knx.html" title="Installation du plugin KNX"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../ZoneMinder/ZoneMinder.html" title="Install"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="astuce-domodroid-tablette-murale">
+<h1>astuce_domodroid_tablette_murale<a class="headerlink" href="#astuce-domodroid-tablette-murale" title="Permalink to this headline">¶</a></h1>
+<p>prérequis: Tablette android rooté</p>
+<p>Objectif:</p>
+<p>Transformer une tablette low cost en ecran tactile murale.</p>
+<p>Problème:
+* L&#8217;écran se verrouille a la mise en veille et l&#8217;application passe en arriere plan
+* La tablette plante après un long moment en veille ou en charge
+* Démarrer automatiquement domodroid parce que madame elle sais pas</p>
+<dl class="docutils">
+<dt>Solution:</dt>
+<dd><ul class="first last simple">
+<li>Installer unlock qui permet de choisir si l&#8217;ecran se verrouille ou non</li>
+<li>Installer SManager pour crée une tache programmer, pour celà crée un nouveau script</li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-json"><pre>#!/system/bin/sh
+su -c reboot</pre>
+</div>
+<p>puis dans menu de l&#8217;application -&gt; Plus -&gt; Advanced -&gt; Ordonnanceur
+Et programmer le lancement du script a votre convenance (pour moi tous le jour a midi</p>
+<ul class="simple">
+<li>Installer &#8220;startup manager&#8221; et ajouter domodroid a vos application.</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../ZoneMinder/ZoneMinder.html"
+                        title="previous chapter">Install</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../dev_plugin_knx/dev_plugin_knx.html"
+                        title="next chapter">Installation du plugin KNX</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/astuce_domodroid_tablette_murale/astuce_domodroid_tablette_murale.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../dev_plugin_knx/dev_plugin_knx.html" title="Installation du plugin KNX"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../ZoneMinder/ZoneMinder.html" title="Install"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

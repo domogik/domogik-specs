@@ -1,0 +1,415 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plugin Onewire &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Plugin xml description file" href="../PluginXmlDescriptionFile/PluginXmlDescriptionFile.html" />
+    <link rel="prev" title="Pagina principale" href="../Pagina principale/Pagina principale.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../PluginXmlDescriptionFile/PluginXmlDescriptionFile.html" title="Plugin xml description file"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Pagina principale/Pagina principale.html" title="Pagina principale"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="plugin-onewire">
+<h1>Plugin Onewire<a class="headerlink" href="#plugin-onewire" title="Permalink to this headline">¶</a></h1>
+<p>^La traduction de cette page n&#8217;est pas terminée.^
+!Plugin onewire
+{HTML}&amp;lt;div class=&amp;quot;to_dev_or_doc&amp;quot;&amp;gt;
+((plugin_onewire_dev|Aller à la page d&#8217;information de développement de ce plugin))
+&amp;lt;/div&amp;gt;{HTML}
+{maketoc}</p>
+<p>!!Objectif
+Ce plugin permet de communiquer avec des dispositifs 1-Wire.</p>
+<p>Pour fonctionner, ce plugin a besoin de OWFS [<a class="reference external" href="http://www.owfs">http://www.owfs</a>.org|OWFS].</p>
+<p>Liste des dispositifs pris en charge :
+||__Composant__|__Fiche technique__|__Version <a href="#id1"><span class="problematic" id="id2">Domogik__</span></a>
+DS18B20        | <a class="reference external" href="http://pdfserv.maxim-ic.com/en/ds/DS18B20.pdf">http://pdfserv.maxim-ic.com/en/ds/DS18B20.pdf</a> | 0.1.0
+DS18S20        | <a class="reference external" href="http://pdfserv.maxim-ic.com/en/ds/DS18S20.pdf">http://pdfserv.maxim-ic.com/en/ds/DS18S20.pdf</a> | 0.1.0
+DS2401         | <a class="reference external" href="http://datasheets.maxim-ic.com/en/ds/DS2401.pdf">http://datasheets.maxim-ic.com/en/ds/DS2401.pdf</a> | 0.1.0
+DS2438         | <a class="reference external" href="http://datasheets.maxim-ic.com/en/ds/DS2438.pdf">http://datasheets.maxim-ic.com/en/ds/DS2438.pdf</a> | dev release||</p>
+<p>Dans les prochaines versions, d&#8217;autres composants seront inclus.</p>
+<p>!!Caractéristiques connues
+!!!Owfs 2.8p2 et owfs 2.8p3 ne fonctionnent pas très bien avec python.
+Veuillez s&#8217;il vous plait, utiliser Owfs __2.7p38__ or __2.8p4__ (recommandé).
+Owfs __2.8p4__ plante avec python2.7, utilisez une version plus récente ou les sources du dépôt</p>
+<p>!Prerequis : installation OWFS
+!!Ubuntu/Debian installation
+Sur Ubuntu ou Debian, il existe des paquets OWFS (www.owfs.org) mais sont trop vieux. Donc, nous allons obtenir la dernière version des sources et les compiler.</p>
+<p>!!!!Outils nécessaires pour compiler OWFS
+Pour commencer, nous avons besoin d&#8217;un compilateur __C <a href="#id1"><span class="problematic" id="id3">compiler__</span></a> pour installer OWFS. Nous utiliserons __gcc__. Pour vérifier si gcc est présent et sa version :
+{CODE()}
+$ gcc &#8211;version
+{CODE}
+Si gcc est présent c&#8217;est Ok, sinon :
+{CODE()}
+# apt-get install gcc
+{CODE}</p>
+<p>Nous avons aussi besoin de make et ed :
+{CODE()}
+# apt-get install make ed
+{CODE}</p>
+<p>Ensuite, nous aurons besoin dans __Autoconf__ version 2.57 ou supérieure. Pour voir si elle est disponible:
+{CODE()}
+$ autoconf &#8211;version
+{CODE}
+Sinon installé-la :
+{CODE()}
+# apt-get install autoconf
+$ autoconf &#8211;version
+version 2.65
+{CODE}</p>
+<p>Nous aurons aussi besoin des librairies de développement USB :
+{CODE()}
+# apt-get install libusb-dev
+{CODE}</p>
+<p>Puis, installer swig :
+{CODE()}
+# apt-get install swig
+{CODE}</p>
+<p>!!!Owfs
+Telecharger OWFS (adapter les lignes à votre version) et extraire le paquet :
+{CODE()}
+# cd /usr/src
+#  wget <a class="reference external" href="http://downloads.sourceforge.net/project/owfs/owfs/2.8p4/owfs-2.8p4.tar.gz">http://downloads.sourceforge.net/project/owfs/owfs/2.8p4/owfs-2.8p4.tar.gz</a>
+# tar xvzf owfs-2.8p4.tar.gz
+# cd owfs-2.8p4
+{CODE}</p>
+<p>Configurer OWFS avec python :
+{CODE()}
+# ./configure &#8211;enable-owpython
+# make
+As root / with sudo :
+# make install
+{CODE}</p>
+<p>ou télécharger OWFS depuis le dépôt des sources :
+{CODE()}
+# sudo apt-get install cvs
+# cd /usr/src
+# cvs -z3 -d:pserver:anonymous&#64;owfs.cvs.sourceforge.net:/cvsroot/owfs co owfs
+# cd owfs
+{CODE}</p>
+<p>Et configurer OWFS avec python :
+{CODE()}
+# autoreconf -i
+# ./configure &#8211;with-python
+# make
+As root / with sudo :
+# make install
+{CODE}</p>
+<p>OWFS est maintenant installé pour python</p>
+<p>!!!!Test OWFS
+Pour tester vous devez faire ceci :
+{CODE()}
+$ python
+&amp;gt;&amp;gt;&amp;gt; import ow
+&amp;gt;&amp;gt;&amp;gt; print ow.__version__
+2.8p4-1.18
+{CODE}</p>
+<p>!!Installation
+Les plugins sont installés depuis la page d&#8217;administration. Voir ((Installing_the_packages|cette page)) pour plus de détails.</p>
+<p>Assurez-vous de bien avoir installer OWFS avant d&#8217;installer le plugin.</p>
+<p>!!Cablage et norme
+Voir [<a class="reference external" href="http://owfs.org/index.php?page=wiring-standards">http://owfs.org/index.php?page=wiring-standards</a>]</p>
+<p>!!Interfaces Onewire
+!!!DS9490R
+{img attId=&amp;quot;258&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;}</p>
+<p>The device address to use for this interface will be __u__</p>
+<p>Here is the description on this interface connection :</p>
+<p>{img attId=&amp;quot;283&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;}</p>
+<p>!!!!Permissions</p>
+<p>Par défaut, vous devez être en root pour l&#8217;accès au réseau OneWire. Pour donner accès à tout le monde sur votre ordinateur et au périphérique OneWire, suivre ces instructions.</p>
+<p>En premier lieu, obtenir les identifiants du fournisseur et du produit:
+{CODE()}
+$ lsusb  | grep DS1490
+Bus 006 Device 013: ID 04fa:2490 Dallas Semiconductor DS1490F 2-in-1 Fob, 1-Wire adapter
+{CODE}</p>
+<p>Ici, l&#8217;ID du fournisseur est 04fa et l&#8217;identification du produit est 2490 (ils seront les mêmes pour tous les DS1490).</p>
+<p>Créer une règle udev pour OneWire dans le fichier __/etc/udev/rules.d/<a href="#id1"><span class="problematic" id="id4">onewire.rules__</span></a> :
+{CODE()}
+SUBSYSTEMS==&amp;quot;usb&amp;quot;, ATTRS{idVendor}==&amp;quot;04fa&amp;quot;, ATTRS{idProduct}==&amp;quot;2490&amp;quot;, SYMLINK+=&amp;quot;onewire&amp;quot;, MODE=&amp;quot;0666&amp;quot;
+{CODE}
+Si vous n&#8217;avez pas de DS9490, vous devez adapter l&#8217;ID du vendeur et l&#8217;ID du produit.</p>
+<p>Il vous suffit de débrancher et rebrancher votre DS9490 disposer d&#8217;autorisations sur elle.</p>
+<p>!!Configuration du plugin
+!!!Paramètres généraux
+{FANCYTABLE(head=&amp;gt;Key~|~Default value~|~Description)}
+device~|~u~|~The 1wire device address. The available values are : __u__ (USB controller), __/dev/<a href="#id1"><span class="problematic" id="id5">ttySO__</span></a> (serial port (adapter le nombre à votre situation)), __remote_system:<a href="#id1"><span class="problematic" id="id6">3003__</span></a> (adresse du serveur OWFS(owserver))
+cache~|~&#8217;&#8216;checked&#8217;&#8216;~|~Checked : utiliser le cache. Unchecked : ne pas utiliser le cache. La lecture des données du réseau 1 Wire est une opération lente, si vous lisez beaucoup de données, il pourrait être utile d&#8217;utiliser le cache. Pour plus d&#8217;information <a class="reference external" href="http://owfs.sourceforge.net/caching.html">http://owfs.sourceforge.net/caching.html</a>
+{FANCYTABLE}</p>
+<p>!!!Autres...
+Il ya d&#8217;autres éléments de configuration qui dépendent des composants. Vous les trouverez dans les chapitres des composants de cette page.</p>
+<p>!!DS18B20
+!!!Comment le brancher
+!!!!Mode parasite
+{img attId=&amp;quot;46&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;}</p>
+<p>!!!!Mode nominal
+{img attId=&amp;quot;44&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;}</p>
+<p>!!Les éléments de configuration
+!!!ds18b20-en
+{FANCYTABLE(head=&amp;gt;Key~|~Default value~|~Description)}
+ds18b20-en~|~&#8217;&#8216;unchecked&#8217;&#8216;~|~activer (ou non) le support des composants DS18B20.
+ds18b20-int~|~60~|~Intervalle entre chaque lecture de composant DS18B20. Si vous souhaitez contrôler la température de votre maison, 60 ou 120s est une bonne valeur. Si vous souhaitez contrôler un endroit où la température peut changer rapidement, vous pouvez mettre une petite valeur (5s par exemple) mais vous devrait mettre __cache__ False pour obtenir des valeurs instantanées.
+ds18b20-res (1)~|~12~|~Résolution de la température lue sur le réseau OneWire. Les valeurs possibles sont: 9, 10, 11, 12.
+{FANCYTABLE}</p>
+<p>__(1)__Notez que la résolution a un impact sur ​​le temps de lecture de la température sur l&#8217;appareil. Sur ((Maxim site|http://www.maxim-ic.com/app-notes/index.mvp/id/4377)) vous trouverez ce tableau qui indique le temps pris pour chaque résolution:</p>
+<p>{FANCYTABLE(head=&amp;gt;Resolution~|~9 bits~|~10 bits~|~11 bits~|~12 bits)}
+Conversion Time (ms) ~|~93.75 ~|~187.5 ~|~375 ~|~750
+LSB (°C) ~|~0.5 ~|~0.25 ~|~0.125 ~|~0.0625
+{FANCYTABLE}</p>
+<p>!!!!Suivi des températures de la maison
+Vous pouvez définir __ds18b20-<a href="#id1"><span class="problematic" id="id7">int__</span></a> entre 60 secondes et 300 secondes (5 minutes) en fonction de la precison que vous voulez avoir. Moins de 60 secondes est inutile, plus de 300 secondes peut être pas suffisant pour gérer la température.</p>
+<p>!!!Création d&#8217;un dispositif pour DS18B20
+Dans l&#8217;administration, aller dans __Organization&amp;gt; <a href="#id1"><span class="problematic" id="id8">Devices__</span></a> . Créer un nouveau périphérique comme ceci:
+{FANCYTABLE(head=&amp;gt;Field~|~Suggested value~|~Description)}
+Name~|~~|~Un nom (&amp;quot;Temperature&amp;quot;, &amp;quot;Temp cuisine&amp;quot;, ... à vous de voir)
+Address~|~~|~L&#8217;Identifiant DS18b20 (vous pouvez l&#8217;obtenir avec cette commande dans le Helpers : __onewire <a href="#id1"><span class="problematic" id="id9">ds18b20__</span></a> qui vous donnera toutes vos DS18B20 détecté)
+Feature~|~__1Wire.Thermometer__~|~
+Usage~|~__Temperature__~|~
+Description~|~~|~une petite description (DS18b20, sonde_1 etc)
+Reference~|~~|~&amp;quot;DS18B20&amp;quot; (Vous pouvez mettre ce que vous souhaitez)
+{FANCYTABLE}</p>
+<p>Exemple :</p>
+<p>{img attId=&amp;quot;179&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;}</p>
+<p>((Setup_your_devices| Attribution des endroits,où vous pouvez maintenant voir la température)):)</p>
+<p>!!DS18S20
+!!!Difference with DS18B20
+The DS18__B__20 component offers 4 resolutions for temperature : 9 ~ 12 bits. The DS18__S__20 offers only a 9bits resolution.</p>
+<p>!!!How to plug
+!!!!Parasit mode
+{IMG(attId=&amp;quot;69&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;)}{IMG}</p>
+<p>!!!!Normal mode
+{IMG(attId=&amp;quot;70&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;)}{IMG}</p>
+<p>!!!Configuration items
+{FANCYTABLE(head=&amp;gt;Key~|~Default value~|~Description)}
+ds18s20-en~|~&#8217;&#8216;unchecked&#8217;&#8216;~|~Enabling (or not) DS18S20 components support.
+ds18s20-int~|~60~|~The interval between each DS18S20 component reading. If you want to monitor your house temperature, 60 or 120s is a good value. If you want to monitor something where temperature can change quickly, you can put a small value (5s for example) but you will have to set __cache__ to False to get instant values.
+{FANCYTABLE}</p>
+<p>!!!Configuration examples
+See DS18S20 component for the examples.</p>
+<p>!!!Creating a device for a DS18S20
+See DS18S20 component for the indications.</p>
+<p>!!DS2401
+!!!How to plug
+!!!!Parasit mode
+{IMG(attId=&amp;quot;63&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;)}{IMG}</p>
+<p>!!!Configuration items
+{FANCYTABLE(head=&amp;gt;Key~|~Default value~|~Description)}
+ds2401-en~|~&#8217;&#8216;unchecked&#8217;&#8216;~|~Enabling (or not) DS2401 components support.
+ds2401-int~|~5~|~Interval between each DS2401 component reading. The interval to set depends on the usage you will have for DS2401 components.
+{FANCYTABLE}</p>
+<p>!!!!Opening sensor for a garage door
+A garage door is something that takes time to close/open, especially when it has a motor. Opening or closing such a door can take up to 15 seconds, so there is no risk that someone opens and closes your door without being &amp;quot;seen&amp;quot; by the DS2401 component (with a 5 seconds value).</p>
+<p>!!!Creating a device for a DS2401
+In administration, go to __Organization &amp;gt; <a href="#id1"><span class="problematic" id="id10">Devices__</span></a> page. Create a new device like this :</p>
+<p>{FANCYTABLE(head=&amp;gt;Field~|~Suggested value~|~Description)}
+Name~|~~|~A name
+Address~|~~|~The DS2401 idid (you can get it with this helper command : __onewire <a href="#id1"><span class="problematic" id="id11">ds2401__</span></a> which will give you all your DS2401 detected)
+Feature~|~__1Wire.Serial Number__~|~
+Usage~|~~|~The appropriate usage (shutter, window, door, ...)
+Description~|~~|~a short description (Placement, usage, etc)
+Reference~|~~|~the device reference (model, etc)
+{FANCYTABLE}</p>
+<p>Example :</p>
+<p>{img attId=&amp;quot;180&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;}</p>
+<p>((Setup_your_devices|Attribute the feature to a place)) and you can now see the status of your DS2401 (present or not)</p>
+<p>!!DS2438 in MS-T module (not in 0.1.0 : in dev release)
+__Notice : as MS-T is only supported actually, only temperature feature is fully supported.__</p>
+<p>{img attId=&amp;quot;284&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;}</p>
+<p>!!!How to plug
+{IMG(attId=&amp;quot;290&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;)}{IMG}</p>
+<p>!!!Configuration items
+{FANCYTABLE(head=&amp;gt;Key~|~Default value~|~Description)}
+ds2438-en~|~&#8217;&#8216;unchecked&#8217;&#8216;~|~Enabling (or not) DS2401 components support.
+ds2438-int~|~60~|~Interval between each DS2438 component reading. Interval to set depends on the usage you will have for DS2438 comopnents.
+{FANCYTABLE}</p>
+<p>!!!Creating a device for a DS2438Z - temperature
+In administration, go to __Organization &amp;gt; <a href="#id1"><span class="problematic" id="id12">Devices__</span></a> page. Create a new device like this :</p>
+<p>{FANCYTABLE(head=&amp;gt;Field~|~Suggested value~|~Description)}
+Name~|~~|~A name
+Address~|~~|~The DS2428 id (you can get it with this helper command : __onewire <a href="#id1"><span class="problematic" id="id13">ds2438__</span></a> which will give you all your DS18B20 detected)
+Feature~|~__1Wire.Thermometer and humidity__~|~
+Usage~|~__Temperature__~|~
+Description~|~~|~a short description (Placement, usage, etc)
+Reference~|~~|~the device reference (model, etc)
+{FANCYTABLE}</p>
+<p>Example :</p>
+<p>{img attId=&amp;quot;376&amp;quot;,stylebox=&amp;quot;border&amp;quot;,align=&amp;quot;center&amp;quot;}</p>
+<p>((Setup_your_devices|Attribute the feature to a place)) and you can now see your temperature.</p>
+<p>!!Helpers
+&#8216;&#8217;To get an introduction to helpers, you can read the ((Plugins_helpers|Helper documentation)). To use a helper, the plugin must be stopped.&#8217;&#8216;</p>
+<p>__Warning :__ for some reasons, it is not a good idea to use both onewire helper and onewire plugin : you could obtain permission issues... These issues could even force you to reboot your computer or wait a long time before using back the plugin or the helper. So, you should only use the helper when the plugin is stopped and shouldn&#8217;t start the plugin when using the helper. It is a sad thing and we will look how to correct these bug (which is linked to the &#8216;&#8217;ow&#8217;&#8217; library). If you have a solution about this, feel free to report it :)</p>
+<p>__Notice about  parameter :__  parameter has the same possible values as defined in &amp;quot;configuration &amp;gt; device&amp;quot;. For the following examples we will use the &amp;quot;u&amp;quot; device which is Usb adaptor.</p>
+<p>!!!onewire all
+__onewire <a href="#id1"><span class="problematic" id="id14">all__</span></a> will list all onewire components found on your 1 wire network.</p>
+<p>Example :
+{CODE()}
+onewire all u
+| Family | Component id | Type    |
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;
+| 28     | C57B2E020000 | DS18B20 |
+| 01     | 4507B2130000 | DS2401  |
+| 81     | 93702C000000 | DS1420  |
+{CODE}</p>
+<p>!!!onewire detail
+__onewire <a href="#id1"><span class="problematic" id="id15">detail__</span></a> will display all attributes of  component.</p>
+<p>Example :
+{CODE()}
+onewire detail u C57B2E020000
+C57B2E020000 attributes :
+- address : 28C57B2E0200005D
+- crc8 : 5D
+- die : C2
+- family : 28
+- fasttemp : 25
+- id : C57B2E020000
+- locator : FFFFFFFFFFFFFFFF
+- power : 0
+- present : 1
+- r_address : 5D0000022E7BC528
+- r_id : 0000022E7BC5
+- r_locator : FFFFFFFFFFFFFFFF
+- temperature : 25.1875
+- temperature10 : 25.25
+- temperature11 : 25.25
+- temperature12 : 25.1875
+- temperature9 : 25
+- temphigh : 75
+- templow : 70
+- trim : 56247
+- trimblanket : 0
+- trimvalid : 0
+- type : DS18B20
+{CODE}</p>
+<p>!!!onewire ds18b20
+__onewire <a href="#id1"><span class="problematic" id="id16">ds18b20__</span></a> will display important data about all DS18B20 components found.</p>
+<p>Example :
+{CODE()}
+onewire ds18b20 u
+DS18B20 : id=C57B2E020000
+- Temperature : 25.125
+- Powered (1) / parasit (0) : 0
+{CODE}</p>
+<p>!!!onewire ds18s20
+__onewire <a href="#id1"><span class="problematic" id="id17">ds18s20__</span></a> will display important data about all DS18S20 components found.</p>
+<p>Example :
+{CODE()}
+onewire ds18s20 u
+DS18S20 : id=F1F0DB010800
+- Temperature : 28.75
+- Powered (1) / parasit (0) : 0
+{CODE}</p>
+<p>!!!onewire ds2401
+__onewire <a href="#id1"><span class="problematic" id="id18">ds2401__</span></a> will display important data about all DS2401 components found.</p>
+<p>Example :
+{CODE()}
+onewire ds2401 u
+DS2401 : id=4507B2130000
+- Present : 1
+{CODE}</p>
+<p>!!!onewire ds2438
+__onewire <a href="#id1"><span class="problematic" id="id19">ds2438__</span></a> will display important data about all DS2438 components found.</p>
+<p>Example :
+{CODE()}
+onewire ds2438 u
+DS2438 : id=F1F0DB010800
+- Temperature : 28.75
+- Humidity : 78
+{CODE}</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Pagina principale/Pagina principale.html"
+                        title="previous chapter">Pagina principale</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../PluginXmlDescriptionFile/PluginXmlDescriptionFile.html"
+                        title="next chapter">Plugin xml description file</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Plugin Onewire/Plugin Onewire.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../PluginXmlDescriptionFile/PluginXmlDescriptionFile.html" title="Plugin xml description file"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Pagina principale/Pagina principale.html" title="Pagina principale"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,209 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>{IMG(attId=”366”)}{IMG} &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="The web interface model" href="../Web_interface_model/Web_interface_model.html" />
+    <link rel="prev" title="Use Case 1 - Address split in 2 sub addresses" href="../Uses_Case_for_v2/Uses_Case_for_v2.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Web_interface_model/Web_interface_model.html" title="The web interface model"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Uses_Case_for_v2/Uses_Case_for_v2.html" title="Use Case 1 - Address split in 2 sub addresses"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="img-attid-366-img">
+<h1>{IMG(attId=&#8221;366&#8221;)}{IMG}<a class="headerlink" href="#img-attid-366-img" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="presentation">
+<h1>Présentation<a class="headerlink" href="#presentation" title="Permalink to this headline">¶</a></h1>
+<p>L&#8217;équipe de Domogik est fière de vous annoncer la première version de son application.
+Cette version 0.1.0 avait plusieurs objectifs principaux qui furent tous atteints :
+* Architecture modulaire et multi-hôtes.
+* Prise en compte de plusieurs technologies en simultané grâce au protocole xPL.
+* Possibilité de créer des IHMs à volonté. Le coeur de Domogik est totalement séparé de la partie graphique. Ainsi n&#8217;importe quelle IHM peut dialoguer avec Domogik en utilisant un point d&#8217;entrée unique.
+* L&#8217;IHM livrée avec Domogik utilise les dernières technologies web.</p>
+<p>Huit plugins sont fournis avec cette version :</p>
+<ul class="simple">
+<li>((plugin_onewire|onewire)) : Support de la technologie 1-wire (DS18B20, DS18S20 and DS2401).</li>
+<li>((plugin_plcbus|plcbus)) : support PlcBus.</li>
+<li>((plugin_x10_heyu|x10_heyu)) : Support X10 (via heyu).</li>
+<li>((plugin_ipx800|ipx800)) : support IPX 800 (cartes relai).</li>
+<li>((plugin_teleinfo|teleinfo)) : les compteurs électriques récents d&#8217;EDF sont pris en charge. Vous pouvez ainsi mesurer votre consommation électrique.</li>
+<li>((plugin_mirror|mirror)) : support du lecteur RFID Mir:ror.</li>
+<li>((plugin_cidmodem|cidmodem)) : gestion du &#8220;caller id&#8221; avec un modem.</li>
+<li>((plugin_wol_ping|wol_ping)) : démarrage à distance d&#8217;ordinateurs et ping.</li>
+</ul>
+<p>{IMG(attId=&#8221;367&#8221;)}{IMG}</p>
+<p>{IMG(attId=&#8221;368&#8221;)}{IMG}</p>
+<p>{IMG(attId=&#8221;369&#8221;)}{IMG}</p>
+<div class="section" id="application-android">
+<h2>Application Android<a class="headerlink" href="#application-android" title="Permalink to this headline">¶</a></h2>
+<p>Une application appelée <a href="#id1"><span class="problematic" id="id2">`Domodroid &lt;https://market.android.com/details?id=org.panel&amp;amp;feature=search\_result&gt;`_</span></a> est disponible sur l&#8217;Android Market et est pleinement opérationnelle avec Domogik 0.1.0.</p>
+</div>
+<div class="section" id="compatibilite">
+<h2>Compatibilité<a class="headerlink" href="#compatibilite" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="partie-serveur">
+<h3>Partie serveur<a class="headerlink" href="#partie-serveur" title="Permalink to this headline">¶</a></h3>
+<p>Domogik devrait fonctionner sur toutes les distributions GNU/Linux avec Python 2.6/2.7.
+Il a été testé par l&#8217;équipe de développement sur les systèmes suivants :
+* Ubuntu
+* Debian
+* Archlinux</p>
+<p>Les architectures suivantes sont supportées :
+* x86 32bits
+* x86 64bits
+* arm</p>
+</div>
+<div class="section" id="partie-cliente">
+<h3>Partie cliente<a class="headerlink" href="#partie-cliente" title="Permalink to this headline">¶</a></h3>
+<p>Un des navigateurs suivants est nécessaire pour utiliser l&#8217;interface web de Domogik :
+* Firefox &gt;= 3.6
+* Chrome &gt;= 5
+Il pourrait y avoir des problèmes avec d&#8217;autres navigateurs (si ils n&#8217;implémentent pas certaines fonctionnalités du HTML 5).</p>
+</div>
+</div>
+<div class="section" id="demandes-connues">
+<h2>Demandes connues<a class="headerlink" href="#demandes-connues" title="Permalink to this headline">¶</a></h2>
+<p>&#8216;&#8217;Ici sont listées des fonctionnalités non encore opérationnelles et qui seront ajoutées dans les prochaines versions.&#8217;&#8217;
+* Gestion des scénarios.
+* Les navigateurs de smartphones ne sont pas supportés en intégralité en raison de l&#8217;utilisation de fonctionnalité avancées par l&#8217;IHM web de Domogik. Une adaptation sera effectuée dans une prochaine version.
+* Traductions françaises : Domogik est pourtant un projet dont le cœur de l&#8217;équipe de développement est française, mais ayant une volonté d&#8217;en faire un projet international, nous avons choisi l&#8217;option d&#8217;utiliser une langue parlée par un nombre important de personnes.
+* Domogik supporte le multi-hôtes mais l&#8217;installateur n&#8217;est pas encore prêt pour ce type d&#8217;installation.
+* Certaines fonctionnalités du x10 et du Plcbus ne sont pas encore implémentées (par exemple &#8216;&#8217;ALL LIGHTS ON&#8217;&#8216;).</p>
+</div>
+<div class="section" id="pour-le-futur">
+<h2>Pour le futur...<a class="headerlink" href="#pour-le-futur" title="Permalink to this headline">¶</a></h2>
+<p>Parlons maintenant un peu du futur de Domogik...</p>
+<p>Plusieurs plugins sont en cours de développement pour les prochaines versions (envoi de SMS, Text To Speech, notifications Android et iPhone, Zibase, ...)</p>
+<p>Concernant l&#8217;interface graphique principale : les personnes qui suivent le projet ont pu remarquer de nombreuses évolutions au niveau de l&#8217;organisation des éléments dans l&#8217;IHM. Nous avons testé plusieurs configurations et nous avons pensé trouver LA solution : les pages doivent être flexibles, modulaires et adaptées aux besoin de chacun! Mais ceci n&#8217;est pas inclus encore dans la version 0.1.0 qui vient de sortir. En effet cette solution est en cours de spécification et de développement. Donc ne râlez pas trop si la version actuelle ne vous convient pas totalement car la prochaine sera vraiment différente !</p>
+<p>Concernant les périphériques mobiles (tablettes, smartphones, etc.), la version actuelle n&#8217;est pas totalement opérationnelle (sauf Android puisqu&#8217;il y a une application dédiée qui a été réalisée). Ainsi nous recherchons des personnes qui seraient intéressées pour développer une version mobile de notre IHM web. D&#8217;ailleurs les développeurs de Blackberry / iPhone sont les bienvenus même si ce n&#8217;est pas réellement urgent.</p>
+<p>Parlons maintenant de la principale fonction manquant encore à Domogik : les scénarios. Nous avons commencé à travailler dessus. Cette fonctionnalité est considérée comme prioritaire et verra le jour dans les toutes prochaines versions.</p>
+<p>Pour ce qui est des plugins, ils sont encore intégrés à Domogik pour le moment. Dans le futur Domogik ne contiendra plus de plugins par défaut, nous allons mettre en place un dépôt (avec un outil permettant facilement d&#8217;en ajouter et de les mettre à jour).</p>
+</div>
+<div class="section" id="comment-signaler-un-bug">
+<h2>Comment signaler un bug ?<a class="headerlink" href="#comment-signaler-un-bug" title="Permalink to this headline">¶</a></h2>
+<p>Vous venez de trouver un bug dans cette version et vous souhaitez nous le signaler ? C&#8217;est simple, il suffit de suivre [ReportABug|ces instructions].</p>
+</div>
+<div class="section" id="developpement-des-plugins">
+<h2>Développement des plugins<a class="headerlink" href="#developpement-des-plugins" title="Permalink to this headline">¶</a></h2>
+<p>Il est actuellement possible de développer vos propres plugins pour Domogik. Il y a plusieurs personnes qui travaillent sur de nouveaux plugins. N&#8217;hésitez pas à nous rejoindre, vous trouverez de l&#8217;aide sur le canal IRC (#domogik sur freenode) ainsi que <a class="reference external" href="http://forum.domogik.org">sur le forum</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">{IMG(attId=&#8221;366&#8221;)}{IMG}</a></li>
+<li><a class="reference internal" href="#presentation">Présentation</a><ul>
+<li><a class="reference internal" href="#application-android">Application Android</a></li>
+<li><a class="reference internal" href="#compatibilite">Compatibilité</a><ul>
+<li><a class="reference internal" href="#partie-serveur">Partie serveur</a></li>
+<li><a class="reference internal" href="#partie-cliente">Partie cliente</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#demandes-connues">Demandes connues</a></li>
+<li><a class="reference internal" href="#pour-le-futur">Pour le futur...</a></li>
+<li><a class="reference internal" href="#comment-signaler-un-bug">Comment signaler un bug ?</a></li>
+<li><a class="reference internal" href="#developpement-des-plugins">Développement des plugins</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Uses_Case_for_v2/Uses_Case_for_v2.html"
+                        title="previous chapter">Use Case 1 - Address split in 2 sub addresses</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Web_interface_model/Web_interface_model.html"
+                        title="next chapter">The web interface model</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Version0.1.0/Version0.1.0.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Web_interface_model/Web_interface_model.html" title="The web interface model"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Uses_Case_for_v2/Uses_Case_for_v2.html" title="Use Case 1 - Address split in 2 sub addresses"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

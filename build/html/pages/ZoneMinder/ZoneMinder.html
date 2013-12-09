@@ -1,0 +1,253 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Install &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="astuce_domodroid_tablette_murale" href="../astuce_domodroid_tablette_murale/astuce_domodroid_tablette_murale.html" />
+    <link rel="prev" title="Protocols" href="../Zone51/Zone51.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../astuce_domodroid_tablette_murale/astuce_domodroid_tablette_murale.html" title="astuce_domodroid_tablette_murale"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Zone51/Zone51.html" title="Protocols"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<p>This page is a draft about reflexions for integrating ZoneMinder with Domogik</p>
+<div class="section" id="install">
+<h1>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h1>
+<p>Download and expand zmxap in /usr/local/zmxap</p>
+<p>making the /var/run/zm dir manually, and making it mode 777 (755 ?), and start zm</p>
+<p>copy  zmxap.conf.sample to zmxap.conf and tune it</p>
+<p>lanch zmxap in /usr/local/zmxap :  sudo perl zmxap.pl</p>
+<p>check des logs :  tail -f /tmp/zmxap.log</p>
+</div>
+<div class="section" id="xpl-specification">
+<h1>Xpl specification<a class="headerlink" href="#xpl-specification" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="alarms">
+<h2>Alarms<a class="headerlink" href="#alarms" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="sent-on-alarm">
+<h3>Sent on alarm :<a class="headerlink" href="#sent-on-alarm" title="Permalink to this headline">¶</a></h3>
+<p>xpl-trig
+{
+...
+}
+zm.alarm
+{
+alarm_id=503     #id
+cause=motion     #other values ?
+state=on         # start of alarm
+zone_data=all    # what the fuck is it ?
+}</p>
+</div>
+<div class="section" id="sent-during-alarm">
+<h3>Sent during alarm :<a class="headerlink" href="#sent-during-alarm" title="Permalink to this headline">¶</a></h3>
+<p>xpl-trig
+{
+...
+}
+zm.alarm
+{
+}</p>
+<p>TODO :</p>
+<p>xap-header
+{
+v=12
+hop=1
+uid=FFEA0901
+class=Message.Display
+source=zm.zoneminder.house:Portail
+pid=16468
+}
+Display.Text
+{
+duration=ARRAY(0x9310d48)
+line1=CCTV - Portail
+line2=ARRAY(0x928f6a8)
+priority=ARRAY(0x9310d68)
+}
+Display.Web
+{
+link=http://<strong>*MON IP*</strong>/zm//index.php?view=event&amp;amp;eid=503
+pic=http://<strong>*MON IP*</strong>/cgi-bin/nph-zms?mode=single&amp;amp;monitor=1&amp;amp;scale=100&amp;amp;rand=1303025131
+refresh=0.1
+}</p>
+</div>
+<div class="section" id="sent-at-the-end-of-alarm">
+<h3>Sent at the end of alarm :<a class="headerlink" href="#sent-at-the-end-of-alarm" title="Permalink to this headline">¶</a></h3>
+<p>xpl-trig
+{
+...
+}
+zm.alarm
+{
+alarm-id=503     # id
+cause=motion     # other values ?
+state=off        # end of alarm
+zone-data=all    # what the fuck is it ?</p>
+<p>frames=179
+alarm-frames=159
+total-score=4879
+max-score=46
+avg-score=30
+duration=30
+}</p>
+<p>external ressources :</p>
+<p>XPL en perl : <a class="reference external" href="https://github.com/beanz/xpl-perl/">https://github.com/beanz/xpl-perl/</a></p>
+<p>Demarage du plugin :</p>
+<p><a class="reference external" href="mailto:chris&#37;&#52;&#48;ubuntu1004">chris<span>&#64;</span>ubuntu1004</a>:~/domogik/src/domogik/xpl/bin$ python ./dump_xpl.py -f
+2011-08-16 20:49:14.383518 - xpl-stat
+{
+hop=1
+source=zm-zonemind.house
+target=*
+}
+hbeat.app
+{
+interval=1
+port=49152
+remote-ip=192.168.1.30
+pid=3238
+}</p>
+<p>2011-08-16 20:49:14.384779 - xpl-stat
+{
+hop=1
+source=zm-zonemind.house
+target=*
+}
+hbeat.app
+{
+interval=1
+port=49152
+remote-ip=192.168.1.30
+pid=3238
+}</p>
+<p>Heartbeat</p>
+<p>2011-08-16 20:50:14.513198 - xpl-stat
+{
+hop=1
+source=zm-zonemind.house
+target=*
+}
+hbeat.app
+{
+interval=1
+port=49152
+remote-ip=192.168.1.30
+pid=3238
+}</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Install</a></li>
+<li><a class="reference internal" href="#xpl-specification">Xpl specification</a><ul>
+<li><a class="reference internal" href="#alarms">Alarms</a><ul>
+<li><a class="reference internal" href="#sent-on-alarm">Sent on alarm :</a></li>
+<li><a class="reference internal" href="#sent-during-alarm">Sent during alarm :</a></li>
+<li><a class="reference internal" href="#sent-at-the-end-of-alarm">Sent at the end of alarm :</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Zone51/Zone51.html"
+                        title="previous chapter">Protocols</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../astuce_domodroid_tablette_murale/astuce_domodroid_tablette_murale.html"
+                        title="next chapter">astuce_domodroid_tablette_murale</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/ZoneMinder/ZoneMinder.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../astuce_domodroid_tablette_murale/astuce_domodroid_tablette_murale.html" title="astuce_domodroid_tablette_murale"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Zone51/Zone51.html" title="Protocols"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,201 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Install the DSM Tool Chain &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Installing Domogik on Ubuntu (Oneiric, Precise)" href="../ubuntu_installation/ubuntu_installation.html" />
+    <link rel="prev" title="During installation" href="../tutorial_howto_debug/tutorial_howto_debug.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../ubuntu_installation/ubuntu_installation.html" title="Installing Domogik on Ubuntu (Oneiric, Precise)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../tutorial_howto_debug/tutorial_howto_debug.html" title="During installation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <p>This tutorial explain how to build the C Hub, provided with Domogik, for Synology Arm, PowerPC platform.</p>
+<p>All the following step can be executed from any Linux OS</p>
+<div class="section" id="install-the-dsm-tool-chain">
+<h1>Install the DSM Tool Chain<a class="headerlink" href="#install-the-dsm-tool-chain" title="Permalink to this headline">¶</a></h1>
+<p>First you need to find you processor type:
+<a class="reference external" href="http://forum.synology.com/wiki/index.php/What_kind_of_CPU_does_my_NAS_have">http://forum.synology.com/wiki/index.php/What_kind_of_CPU_does_my_NAS_have</a></p>
+<p>Then, you need to download the DSM tool chain:
+<a class="reference external" href="http://sourceforge.net/projects/dsgpl/files">http://sourceforge.net/projects/dsgpl/files</a>
+This package contain all compiling tools for your Synology platform.</p>
+<p>Extract it to /usr/local/
+.. code-block:: json</p>
+<blockquote>
+<div><p># tar zxpf gcc343_glibc232_88f5281.tgz –C /usr/local/{CODE}</p>
+<p><a class="reference external" href="http://www.xpl4java.org/xPL4Linux/">http://www.xpl4java.org/xPL4Linux/</a></p>
+</div></blockquote>
+<div class="highlight-json"><pre># cd /tmp
+# wget http://www.xpl4java.org/xPL4Linux/downloads/xPLLib.tgz
+# tar zxpf xPLLib.tgz
+# cd xPLLib</pre>
+</div>
+</div>
+<div class="section" id="build-the-xpl-lib">
+<h1>Build the xPL Lib<a class="headerlink" href="#build-the-xpl-lib" title="Permalink to this headline">¶</a></h1>
+<p>Edit Makefile with your compilator parameters. For PowerPC it&#8217;s:
+.. code-block:: json</p>
+<blockquote>
+<div>CCOPTS =  -mcpu=8548 -mhard-float -mfloat-gprs=double
+LIBS = -lm -lc
+LIBDIR = /usr/local/powerpc-linux-gnuspe/lib
+INCDIR = /usr/local/powerpc-linux-gnuspe/include
+..
+LDOPTS      = -O
+CC  =       /usr/local/powerpc-linux-gnuspe/bin/powerpc-linux-gnuspe-gcc $(CCOPTS)
+LIBCC       =       $(CC) -fPIC
+LD  =       /usr/local/powerpc-linux-gnuspe/bin/powerpc-linux-gnuspe-ld $(LDOPTS)</div></blockquote>
+<p>Use gcc for linking (Thanks Kuri for the tips)
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>libxPL.so: $(LIB_OBJS)</dt>
+<dd>&#64;echo &#8220;Creating libxPL.so...&#8221;
+$(LIBCC) -shared -o libxPL.so $(LIB_OBJS) -L$(LIBDIR) $(LIBS)</dd>
+</dl>
+</div></blockquote>
+<p>Run make
+.. code-block:: json</p>
+<blockquote>
+<div>$ make
+/usr/local/powerpc-linux-gnuspe/bin/powerpc-linux-gnuspe-gcc -mcpu=8548 -mhard-float -mfloat-gprs=double -fPIC -c xPL-io.c
+/usr/local/powerpc-linux-gnuspe/bin/powerpc-linux-gnuspe-gcc -mcpu=8548 -mhard-float -mfloat-gprs=double -fPIC -c xPL-utils.c
+/usr/local/powerpc-linux-gnuspe/bin/powerpc-linux-gnuspe-gcc -mcpu=8548 -mhard-float -mfloat-gprs=double -fPIC -c xPL-service.c
+/usr/local/powerpc-linux-gnuspe/bin/powerpc-linux-gnuspe-gcc -mcpu=8548 -mhard-float -mfloat-gprs=double -fPIC -c xPL-message.c
+/usr/local/powerpc-linux-gnuspe/bin/powerpc-linux-gnuspe-gcc -mcpu=8548 -mhard-float -mfloat-gprs=double -fPIC -c xPL-listeners.c
+/usr/local/powerpc-linux-gnuspe/bin/powerpc-linux-gnuspe-gcc -mcpu=8548 -mhard-float -mfloat-gprs=double -fPIC -c xPL-store.c
+/usr/local/powerpc-linux-gnuspe/bin/powerpc-linux-gnuspe-gcc -mcpu=8548 -mhard-float -mfloat-gprs=double -fPIC -c xPL-config.c
+/usr/local/powerpc-linux-gnuspe/bin/powerpc-linux-gnuspe-gcc -mcpu=8548 -mhard-float -mfloat-gprs=double -fPIC -c xPL-hub.c
+Creating libxPL.so...
+/usr/local/powerpc-linux-gnuspe/bin/powerpc-linux-gnuspe-gcc -mcpu=8548 -mhard-float -mfloat-gprs=double -fPIC -shared -o libxPL.so xPL-io.o xPL-utils.o xPL-service.o xPL-message.o xPL-listeners.o xPL-store.o xPL-config.o xPL-hub.o -L/usr/local/powerpc-linux-gnuspe/lib -lm -lc
+Creating xPL.a...
+ar: creating xPL.a</div></blockquote>
+</div>
+<div class="section" id="build-xpl-hub">
+<h1>Build xPL Hub<a class="headerlink" href="#build-xpl-hub" title="Permalink to this headline">¶</a></h1>
+<p>The hub sources are in the examples sub folder
+.. code-block:: json</p>
+<blockquote>
+<div>cd examples</div></blockquote>
+<p>edit examples/Makefile with your compilator parameters. For PowerPC it&#8217;s:
+.. code-block:: json</p>
+<blockquote>
+<div>LDOPTS      = -O -L/usr/local/powerpc-linux-gnuspe/lib
+CC  =       /usr/local/powerpc-linux-gnuspe/bin/powerpc-linux-gnuspe-gcc $(CCOPTS)
+LD  =       /usr/local/powerpc-linux-gnuspe/bin/powerpc-linux-gnuspe-gcc $(LDOPTS)</div></blockquote>
+<p>run make
+.. code-block:: json</p>
+<blockquote>
+<div>$ make
+/usr/local/powerpc-linux-gnuspe/bin/powerpc-linux-gnuspe-gcc -g -DLINUX -pedantic -Wall -c xPL_Hub.c
+/usr/local/powerpc-linux-gnuspe/bin/powerpc-linux-gnuspe-gcc -O -L/usr/local/powerpc-linux-gnuspe/lib -o xPL_Hub xPL_Hub.o ../xPL.a -g -lm
+/usr/local/powerpc-linux-gnuspe/bin/powerpc-linux-gnuspe-gcc -O -L/usr/local/powerpc-linux-gnuspe/lib -static -o xPL_Hub_static xPL_Hub.o ../xPL.a -g -lm</div></blockquote>
+<p>You should find, in the folder, two builds for the C-Hub:
+xPL_Hub and xPL_Hub_static</p>
+<p>Reference:
+((Synology DiskStation 3rd-Party Apps Integration Guide|http://download.synology.com/download/ds/userguide/Synology%20NAS%20Server%203rd-Party%20Apps%20Integration%20Guide.pdf))</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Install the DSM Tool Chain</a></li>
+<li><a class="reference internal" href="#build-the-xpl-lib">Build the xPL Lib</a></li>
+<li><a class="reference internal" href="#build-xpl-hub">Build xPL Hub</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../tutorial_howto_debug/tutorial_howto_debug.html"
+                        title="previous chapter">During installation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../ubuntu_installation/ubuntu_installation.html"
+                        title="next chapter">Installing Domogik on Ubuntu (Oneiric, Precise)</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/tutorials_SynologyHub/tutorials_SynologyHub.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../ubuntu_installation/ubuntu_installation.html" title="Installing Domogik on Ubuntu (Oneiric, Precise)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../tutorial_howto_debug/tutorial_howto_debug.html" title="During installation"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

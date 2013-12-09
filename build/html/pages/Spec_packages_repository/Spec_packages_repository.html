@@ -1,0 +1,213 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Specifications : packages repository &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Specifications for the Repository" href="../Spec_repository/Spec_repository.html" />
+    <link rel="prev" title="Template for a member" href="../Spec_member_template/Spec_member_template.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Spec_repository/Spec_repository.html" title="Specifications for the Repository"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Spec_member_template/Spec_member_template.html" title="Template for a member"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="specifications-packages-repository">
+<h1>Specifications : packages repository<a class="headerlink" href="#specifications-packages-repository" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>In Domogik 0.4.0 the packages management will be different from the 0.3 release. Here are the main points :
+* packages are no more in Domogik sources : they are available on github repositories (or somewhere else). Basically, a package will now be a zip online file url.
+* we won&#8217;t use anymore a cache feature of the packages list : this is a source of various bugs and there are no real good points on doing this. Now, the packages list will always be downloaded when displaying the related page in domogik admin (or any other UI). We will need so to handle some cache feature (HTTP 200/304) to improve performances.</p>
+<div class="section" id="points-that-are-not-yet-very-clear">
+<h3>Points that are not yet very clear<a class="headerlink" href="#points-that-are-not-yet-very-clear" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Rating system</li>
+<li>How to handle several repositories in the display ?</li>
+<li>Nightly builds</li>
+<li>Branches management for plugin repositories</li>
+<li>How to get a zip from a tag in git ?</li>
+<li>Documentation building</li>
+<li>MD5</li>
+<li>Use github accounts for login on the tool for developpers ?</li>
+<li>Normalizer &#8216;focus&#8217; packages picture format</li>
+</ul>
+</div>
+</div>
+<div class="section" id="global-specifications">
+<h2>Global specifications<a class="headerlink" href="#global-specifications" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="domogik-admin-part-or-any-other-ui">
+<h3>Domogik admin part (or any other UI)<a class="headerlink" href="#domogik-admin-part-or-any-other-ui" title="Permalink to this headline">¶</a></h3>
+<p>For all Components (Domogik admin, user interfaces for icons, ...) (let&#8217;s call it a <em>client</em>)that want to install packages, here is allow it will work :</p>
+<p>The user display the <em>packages</em> main page. This page is only displayed for a <em>stable</em> repository.
+* the page will try to download a json file from the online tool (let&#8217;s call it <em>DRM</em>). the json file will be grab by calling an url with a parameter that contains the needed packages type. Example : GET <a class="reference external" href="http://drm/packages/dmg_version=0.4.0&amp;amp;repo=stable&amp;amp;type=plugin,foo">http://drm/packages/dmg_version=0.4.0&amp;amp;repo=stable&amp;amp;type=plugin,foo</a>. The dmg_version parameter is used to display only the packages compliant with the domogik release. The repo parameter is used to choose the repository from which we want to display the packages. There are 1 &#8220;special&#8221; value for repo : &#8220;stable&#8221;. This means that this is the stable repository of this server. Any other repositories will not be considered as stable and could be used for various purpose : nightly builds, testing, experimental, ...
+* the json file is downloaded
+* the page layout is created. There may be several parts in the page layout : this depends on the client. The layout can be updated when a new client release is installed. In the layout there can be several parts : &#8220;focus on&#8221;, &#8220;more downloaded&#8221;, &#8220;best rated&#8221;, ... This will allow to have nice pages like <a class="reference external" href="https://play.google.com/store">https://play.google.com/store</a> . Each part will get its informations from a section of the json (see json chapter for more informations). Each package displayed on the page will have these informations : icon, type+name, version, start of the description. A click on it should expand it and display all needed informations and the install button.</p>
+<p>The user display an alternate repository <em>packages</em> page.
+* the page will download the json file
+* the page layout is created. For non stable repositories, there is no &#8220;fun&#8221; layout. For each type required, the following will be displayed : a title with the type and the list of all packages</p>
+</div>
+<div class="section" id="json-file">
+<h3>Json file<a class="headerlink" href="#json-file" title="Permalink to this headline">¶</a></h3>
+<p>To allow clients to display nice pages as <a class="reference external" href="https://play.google.com/store">https://play.google.com/store</a>, the json will be split in several sections. The sections will be the same, whatever the types a client requested. Here are some ideas :</p>
+<ul class="simple">
+<li>a section &#8216;repository&#8217; with informations about the repository :</li>
+</ul>
+<p>** type : stable, testing, ...
+** owner (domogik, society, someone, ...)
+** domogik min release compatibility (0.4.0)
+** domogik max release compatibility (999.999.999 by default), will maybe use in the future
+* a section by package type required by the client. Each package contains :
+** TODO
+* a section &#8216;more downloaded&#8217;. Each package contains :
+** type, name. This will be sort of a shorcut to find the package in the package type related section
+* a section &#8216;best rated&#8217;. Content is the same as &#8216;more downloaded&#8217;
+* a section &#8216;lastests&#8217;. Content is the same as &#8216;more downloaded&#8217;
+* a section &#8216;focus&#8217;. This section will be used by the DRM owner to &#8220;suggest&#8221; some packages to user. This may be a new package, a christmas icon theme in december, .... 2 actions can be done : install or go to an url. Each package contains :
+** type : plugin, icon, ... An extra value should be allowed : advertising. This will tell that this is not a package but just sort of an advertising. This could be use for some communication operations later If this extra value is set, there will be no install operation available.
+** name
+** a &#8220;big picture&#8221; link. This picture format should be normalized !
+** optionnal : an url. This could be use to open a dedicated page.</p>
+</div>
+<div class="section" id="drm">
+<h3>DRM<a class="headerlink" href="#drm" title="Permalink to this headline">¶</a></h3>
+<p>!!!!Users
+There will be 2 sort of users that can use DRM :
+* developpers to publish new packages
+* owners to manages packages
+* anonymous</p>
+<p>!!!!Developpers
+A developper can do the following actions :
+* login, logout
+* list its packages
+* add a package (which will be reviewed by an owner before being activated)
+* disable an existing package</p>
+<p>!!!!Owners
+An owner can&#8217;t do the same actions as a developper! If an owner needs to do so, he should create 2 accounts.</p>
+<p>An owner can do the following actions :
+* login, logout
+* list last added packages
+* list all packages and filter/order them
+* validate or not a package and give a description of the result</p>
+<p>!!!!Anonymous
+Anonymous people will have a read only view of the validated packages as already done on repo.domogik.org in 0.3</p>
+</div>
+</div>
+<div class="section" id="detailed-specifications">
+<h2>Detailed specifications<a class="headerlink" href="#detailed-specifications" title="Permalink to this headline">¶</a></h2>
+<p>TODO :)</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Specifications : packages repository</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#points-that-are-not-yet-very-clear">Points that are not yet very clear</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#global-specifications">Global specifications</a><ul>
+<li><a class="reference internal" href="#domogik-admin-part-or-any-other-ui">Domogik admin part (or any other UI)</a></li>
+<li><a class="reference internal" href="#json-file">Json file</a></li>
+<li><a class="reference internal" href="#drm">DRM</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#detailed-specifications">Detailed specifications</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Spec_member_template/Spec_member_template.html"
+                        title="previous chapter">Template for a member</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Spec_repository/Spec_repository.html"
+                        title="next chapter">Specifications for the Repository</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Spec_packages_repository/Spec_packages_repository.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Spec_repository/Spec_repository.html" title="Specifications for the Repository"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Spec_member_template/Spec_member_template.html" title="Template for a member"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

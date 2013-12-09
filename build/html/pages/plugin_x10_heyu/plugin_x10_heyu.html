@@ -1,0 +1,144 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>X10 plugin &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Purpose" href="../plugin_x10cm15a/plugin_x10cm15a.html" />
+    <link rel="prev" title="Plugin wol_ping" href="../plugin_wol_ping/plugin_wol_ping.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_x10cm15a/plugin_x10cm15a.html" title="Purpose"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_wol_ping/plugin_wol_ping.html" title="Plugin wol_ping"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="x10-plugin">
+<h1>X10 plugin<a class="headerlink" href="#x10-plugin" title="Permalink to this headline">¶</a></h1>
+<p>This plugin documentation is now available on [<a class="reference external" href="http://docs.domogik.org/plugin/x10_heyu/dev/en/">http://docs.domogik.org/plugin/x10_heyu/dev/en/</a>]</p>
+<div class="section" id="developper-notes">
+<h2>Developper Notes<a class="headerlink" href="#developper-notes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="xpl-schema">
+<h3>xPL schema<a class="headerlink" href="#xpl-schema" title="Permalink to this headline">¶</a></h3>
+<p>The <a href="#id1"><span class="problematic" id="id2">`x10.basic &lt;http://xplproject.org.uk/wiki/index.php?title=Schema\_-\_X10.BASIC&gt;`_</span></a> schema is used.</p>
+</div>
+<div class="section" id="command">
+<h3>/command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-json"><pre>/command/x10/&lt;address&gt;/on # switch on the lamp / appliance
+/command/x10/&lt;address&gt;/off # switch off the lamp / appliance</pre>
+</div>
+<p>&#8216;&#8217;Only for lamps&#8217;&#8217;
+.. code-block:: json</p>
+<blockquote>
+<div>/command/x10/&lt;address&gt;/dim/&lt;value&gt; # dim units by &lt;level&gt; (1-22) (decrease brightness)
+/command/x10/&lt;address&gt;/bright/&lt;value&gt; # brighten units by &lt;level&gt; (1-22) (increase brightness)</div></blockquote>
+<p>Note that these values are relative.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">X10 plugin</a><ul>
+<li><a class="reference internal" href="#developper-notes">Developper Notes</a><ul>
+<li><a class="reference internal" href="#xpl-schema">xPL schema</a></li>
+<li><a class="reference internal" href="#command">/command</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../plugin_wol_ping/plugin_wol_ping.html"
+                        title="previous chapter">Plugin wol_ping</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_x10cm15a/plugin_x10cm15a.html"
+                        title="next chapter">Purpose</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/plugin_x10_heyu/plugin_x10_heyu.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_x10cm15a/plugin_x10cm15a.html" title="Purpose"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_wol_ping/plugin_wol_ping.html" title="Plugin wol_ping"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

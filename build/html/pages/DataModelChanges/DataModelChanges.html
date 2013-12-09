@@ -1,0 +1,263 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Database modifications &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Parts" href="../Database_building_description/Database_building_description.html" />
+    <link rel="prev" title="Plugins status" href="../CurrentStatus/CurrentStatus.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Database_building_description/Database_building_description.html" title="Parts"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../CurrentStatus/CurrentStatus.html" title="Plugins status"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="database-modifications">
+<h1>Database modifications<a class="headerlink" href="#database-modifications" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="core-device">
+<h2>core_device<a class="headerlink" href="#core-device" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="actual-table">
+<h3>Actual table<a class="headerlink" href="#actual-table" title="Permalink to this headline">¶</a></h3>
+<p>{FANCYTABLE(head=&gt;id~|~name~|~description~|~address~|~reference~|~device_usage_id~|~device_type_id)}
+1~|~Lampe~|~~|~A2~|~2263D~|~light~|~plcbus.dimmer
+2~|~Capteur~|~~|~508587010000~|~DS18B20~|~temperature~|~onewire.thermometer
+{FANCYTABLE}</p>
+</div>
+<div class="section" id="new-table">
+<h3>New table<a class="headerlink" href="#new-table" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>address will be removed</li>
+<li>add a field for unique/multi addresses</li>
+<li>add a field for techno</li>
+<li>device_type can be empty</li>
+</ul>
+<p>{FANCYTABLE(head=&gt;id~|~name~|~description~|~reference~|~technology_id~|~type)}
+1~|~Lampe~|~~|~2263D~|~plcbus~|~plcbus.dimmer
+2~|~Capteur~|~~|~DS18B20~|~onewire~|~onewire.thermometer
+3~|~Volet~|~~|~TXA302~|~knx~|~
+{FANCYTABLE}</p>
+</div>
+</div>
+<div class="section" id="core-device-feature">
+<h2>core_device_feature<a class="headerlink" href="#core-device-feature" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Actual table<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>{FANCYTABLE(head=&gt;id~|~device_id~|~device_feature_model_id)}
+1~|~1~|~plcbus.switch.switch
+2~|~2~|~onewire.thermometer.temperature
+{FANCYTABLE}</p>
+</div>
+<div class="section" id="id2">
+<h3>New table<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>rename table to core_feature</li>
+<li>add feature model info fields</li>
+<li>remove device_type</li>
+<li>add address, type and command fields (for command reference)</li>
+<li>add address, type and key fields (for state reference)</li>
+</ul>
+<p>{FANCYTABLE(head=&gt;id~|~device_id~|~name~|~command_type~|~command_address~|~command_reference~|~state_type~|~state_address~|~state_reference)}
+1~|~1~|~Switch~|~DT_Switch~|~A2~|~~|~DT_Switch~|~A2~|~command
+2~|~2~|~Temperature~|~~|~~|~~|~DT_Temp~|~508587010000~|~temperature
+3~|~3~|~Switch~|~DT_Switch~|~1/1/1~|~~|~DT_Switch~|~1/1/1~|~
+{FANCYTABLE}</p>
+</div>
+<div class="section" id="pre-population-process">
+<h3>Pre-population process<a class="headerlink" href="#pre-population-process" title="Permalink to this headline">¶</a></h3>
+<p>In the actual model, the feature table is automatically populated , based on the device_type, when the device is created.
+In the new model, the device_type is not required anymore (because of customs devices).</p>
+</div>
+</div>
+<div class="section" id="core-device-config">
+<h2>core_device_config<a class="headerlink" href="#core-device-config" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Will be updated for &#8216;core_feature_config&#8217;</li>
+</ul>
+</div>
+<div class="section" id="core-device-type">
+<h2>core_device_type<a class="headerlink" href="#core-device-type" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Will be renamed to &#8216;core_device_model&#8217;</li>
+</ul>
+</div>
+<div class="section" id="core-feature-model">
+<h2>core_feature_model<a class="headerlink" href="#core-feature-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>Actual table<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>{FANCYTABLE(head=&gt;id~|~name~|~feature_type~|~device_type_id~|~parameters~|~value_type~|~stat_key~|~return_confirmation)}
+plcbus.switch.switch~|~Switch~|~actuator~|~plcbus.switch~|~{&#8220;command&#8221;:&#8221;&#8221;,&#8221;value0&amp;amp;quo...~|~binary~|~command~|~1
+onewire.thermometer.temperature~|~Temperature~|~sensor~|~onewire.thermometer~|~{&#8220;unit&#8221;:&#8221;u00B0C&#8221;}~|~number~|~temperature~|~0
+{FANCYTABLE}</p>
+</div>
+<div class="section" id="id4">
+<h3>New table<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>remove fields : parameters, return_confirmation</li>
+<li>add field : command_reference</li>
+<li>rename field : stat_key to state_reference</li>
+<li>change value_type to domogik type field</li>
+</ul>
+<p>{FANCYTABLE(head=&gt;id~|~name~|~device_type_id~|~command_type~|~command_reference~|~state_type~|~state_reference)}
+plcbus.switch.switch~|~Switch~|~aplcbus.switch~|~DT_Switch~|~~|~DT_Switch~|~command
+onewire.thermometer.temperature~|~Temperature~|~onewire.thermometer~|~~|~~|~DT_Temp~|~temperature
+{FANCYTABLE}</p>
+</div>
+</div>
+<div class="section" id="core-device-stats">
+<h2>core_device_stats<a class="headerlink" href="#core-device-stats" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Will be renamed to &#8216;core_feature_states&#8217;</li>
+</ul>
+<div class="section" id="id5">
+<h3>Actual table<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>{FANCYTABLE(head=&gt;date~|~timestamp~|~key~|~device_id~|~value_num~|~value_str)}
+2010-12-26 11:31:45~|~1293359505~|~ping~|~3~|~NULL~|~high
+2010-12-26 11:32:00~|~1293359520~|~temperature~|~2~|~15.25~|~15.25
+{FANCYTABLE}</p>
+</div>
+<div class="section" id="id6">
+<h3>New table<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>device_id will be replaced by feature_id</li>
+<li>key will be removed</li>
+<li>DMG Type will be added for each stats (for easy access)</li>
+</ul>
+<p>{FANCYTABLE(head=&gt;id~|~date~|~timestamp~|~feature_id~|~type~|~value_num~|~value_str)}
+1~|~2010-12-26 11:31:45~|~1293359505~|~6~|~DT_State~|~NULL~|~Active
+2~|~2010-12-26 11:32:00~|~1293359520~|~8~|~DT_Temp~|~15.25~|~15.25
+{FANCYTABLE}</p>
+</div>
+<div class="section" id="core-device-usage">
+<h3>core_device_usage<a class="headerlink" href="#core-device-usage" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Will be removed. Usages are transferred to ((UICommonSettings||UI Common Settings))</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Database modifications</a><ul>
+<li><a class="reference internal" href="#core-device">core_device</a><ul>
+<li><a class="reference internal" href="#actual-table">Actual table</a></li>
+<li><a class="reference internal" href="#new-table">New table</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#core-device-feature">core_device_feature</a><ul>
+<li><a class="reference internal" href="#id1">Actual table</a></li>
+<li><a class="reference internal" href="#id2">New table</a></li>
+<li><a class="reference internal" href="#pre-population-process">Pre-population process</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#core-device-config">core_device_config</a></li>
+<li><a class="reference internal" href="#core-device-type">core_device_type</a></li>
+<li><a class="reference internal" href="#core-feature-model">core_feature_model</a><ul>
+<li><a class="reference internal" href="#id3">Actual table</a></li>
+<li><a class="reference internal" href="#id4">New table</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#core-device-stats">core_device_stats</a><ul>
+<li><a class="reference internal" href="#id5">Actual table</a></li>
+<li><a class="reference internal" href="#id6">New table</a></li>
+<li><a class="reference internal" href="#core-device-usage">core_device_usage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../CurrentStatus/CurrentStatus.html"
+                        title="previous chapter">Plugins status</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Database_building_description/Database_building_description.html"
+                        title="next chapter">Parts</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/DataModelChanges/DataModelChanges.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Database_building_description/Database_building_description.html" title="Parts"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../CurrentStatus/CurrentStatus.html" title="Plugins status"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

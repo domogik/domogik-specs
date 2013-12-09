@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>But &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Plugin cidmodem" href="../plugin_cidmodem/plugin_cidmodem.html" />
+    <link rel="prev" title="plugin_bluez" href="../plugin_bluez/plugin_bluez.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_cidmodem/plugin_cidmodem.html" title="Plugin cidmodem"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_bluez/plugin_bluez.html" title="plugin_bluez"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="but">
+<h1>But<a class="headerlink" href="#but" title="Permalink to this headline">¶</a></h1>
+<p>Pallier à l&#8217;absence actuelle de l&#8217;implémentation des plugins dans Domogik (juin 2011).
+Ce plugin est un exemple qui peut être instancié via copie des fichiers et paramétrage de chaque instance via l&#8217;IHM</p>
+</div>
+<div class="section" id="fichiers">
+<h1>Fichiers<a class="headerlink" href="#fichiers" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-json"><pre># plugin
+src/domogik/xpl/bin/bts_gen.py
+src/share/domogik/plugins/bts_gen.xml
+src/share/domogik/stats/bts/bts.basic-foo.xml  # j'ai mis 'foo' car il sera utilisé par tous et pas à dupliquer donc.
+src/share/domogik/url2xpl/bts/on.xml
+
+# widget
+src/domogik/ui/djangomodo/core/templates/widgets/dmg_4x3_bts/main.js
+src/domogik/ui/djangomodo/core/templates/widgets/dmg_4x3_bts/style.css</pre>
+</div>
+</div>
+<div class="section" id="compatibilite-avec-domogik">
+<h1>Compatibilité avec Domogik<a class="headerlink" href="#compatibilite-avec-domogik" title="Permalink to this headline">¶</a></h1>
+<p>Ce plugin est développé dans la branche 0.1.0.beta2.bts. Les fichiers ne sont donc présents que dans cette branche.</p>
+</div>
+<div class="section" id="principe-de-fonctionnement">
+<h1>Principe de fonctionnement<a class="headerlink" href="#principe-de-fonctionnement" title="Permalink to this headline">¶</a></h1>
+<p>Une instance de scénario a 2 statuts :
+* actif (on) : plugin démarré et scénario actif
+* inactif (off) : plugin démarré et scénario en attente d&#8217;un ordre d&#8217;activation</p>
+<p>Au démarrage, une instance de scénario est inactive.</p>
+<p>Pour activer une instance &#8220;confort&#8221; (par exemple), il faut envoyer le message xpl suivant :
+.. code-block:: json</p>
+<blockquote>
+<div>xpl-cmnd
+{
+...
+}
+bts.basic
+{
+scenario=confort
+}</div></blockquote>
+<p>L&#8217;instance &#8220;confort&#8221; sera activée, toutes les autres seront désactivées.</p>
+<p>Pour envoyer un tel message xpl en ligne de commande :
+.. code-block:: json</p>
+<blockquote>
+<div>cd src/domogik/xpl/bin/
+./send.py xpl-cmnd bts.basic &#8220;scenario=confort&#8221;</div></blockquote>
+</div>
+<div class="section" id="configuration-d-une-instance">
+<h1>Configuration d&#8217;une instance<a class="headerlink" href="#configuration-d-une-instance" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="startup-plugin">
+<h2>startup-plugin<a class="headerlink" href="#startup-plugin" title="Permalink to this headline">¶</a></h2>
+<p>Démarrage auto du scénario (il sera tout de même inactif!) avec Domogik</p>
+</div>
+<div class="section" id="input-entree">
+<h2>input (entrée)<a class="headerlink" href="#input-entree" title="Permalink to this headline">¶</a></h2>
+<p>Nom de l&#8217;entrée du scénario. Il y 2 possibilités :
+* ipx800:&lt;addresse device ipx800&gt;
+* onewire:&lt;addresse device onewire de température&gt;</p>
+<p>Exemples :
+* ipx800:carte1-btn0
+* ipx800:carte2-btn3
+* onewire:C57B2E020000
+* ...</p>
+</div>
+<div class="section" id="threshold-seuil">
+<h2>threshold (seuil)<a class="headerlink" href="#threshold-seuil" title="Permalink to this headline">¶</a></h2>
+<p>Si (et seulement si) il s&#8217;agit d&#8217;une entrée onewire de température, il faudra préciser le seuil. Si la valeur de l&#8217;entrée est au dessus (&gt;=) du seuil on considérera qu&#8217;on est à un état &#8220;haut&#8221;. En dessous, à un état &#8220;bas&#8221;.</p>
+<p>Exemple : 20</p>
+</div>
+<div class="section" id="sorties">
+<h2>Sorties<a class="headerlink" href="#sorties" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="output-x">
+<h3>output-X<a class="headerlink" href="#output-x" title="Permalink to this headline">¶</a></h3>
+<p>Addresse de la sortie n°X. Il a 2 possibilités :
+* ipx800:&lt;addresse device ipx800&gt;
+* x10:&lt;addresse device x10&gt;</p>
+<p>Exemples :
+* ipx800:carte1-led6
+* x10:A3
+* ...</p>
+</div>
+<div class="section" id="level-x">
+<h3>level-X<a class="headerlink" href="#level-x" title="Permalink to this headline">¶</a></h3>
+<p>Niveau logique que devra avoir la sortie pour l&#8217;état &#8220;haut&#8221; de l&#8217;entrée.
+Le niveau opposé sera appliqué pour l&#8217;entrée à l&#8217;état &#8220;bas&#8221;</p>
+</div>
+</div>
+</div>
+<div class="section" id="copier-le-template-pour-creer-une-instance-confort">
+<h1>Copier le template pour créer une instance &#8220;confort&#8221;<a class="headerlink" href="#copier-le-template-pour-creer-une-instance-confort" title="Permalink to this headline">¶</a></h1>
+<p>__Attention!__ : le nom d&#8217;une instance ne doit comporter que des lettres minuscules et faire au maximum 8 caractères!!!</p>
+<div class="section" id="partie-plugin">
+<h2>Partie plugin<a class="headerlink" href="#partie-plugin" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="partie-python">
+<h3>Partie python<a class="headerlink" href="#partie-python" title="Permalink to this headline">¶</a></h3>
+<p>Copier le plugin :
+.. code-block:: json</p>
+<blockquote>
+<div>$ cd src/domogik/xpl/bin
+$ cp bts_gen.py confort.py</div></blockquote>
+<p>Editer le fichier confort.py et modifier la ligne suivante :
+.. code-block:: json</p>
+<blockquote>
+<div>INSTANCE_NAME=&#8221;bts_gen&#8221;</div></blockquote>
+<p>en :
+.. code-block:: json</p>
+<blockquote>
+<div>INSTANCE_NAME=&#8221;confort&#8221;</div></blockquote>
+</div>
+<div class="section" id="partie-xml">
+<h3>Partie xml<a class="headerlink" href="#partie-xml" title="Permalink to this headline">¶</a></h3>
+<p>Copier le plugin :
+.. code-block:: json</p>
+<blockquote>
+<div>$ cd src/share/domogik/plugins/
+$ cp bts_gen.xml confort.xml</div></blockquote>
+<p>Editer le fichier confort.xml et modifier :
+.. code-block:: json</p>
+<blockquote>
+<div>&lt;name&gt;bts_gen&lt;/name&gt;</div></blockquote>
+<p>en :
+.. code-block:: json</p>
+<blockquote>
+<div>&lt;name&gt;confort&lt;/name&gt;</div></blockquote>
+</div>
+<div class="section" id="activer-l-instance">
+<h3>Activer l&#8217;instance<a class="headerlink" href="#activer-l-instance" title="Permalink to this headline">¶</a></h3>
+<p>Lancer :
+.. code-block:: json</p>
+<blockquote>
+<div>$ dmgenplug -f confort</div></blockquote>
+</div>
+</div>
+<div class="section" id="partie-widget">
+<h2>Partie widget<a class="headerlink" href="#partie-widget" title="Permalink to this headline">¶</a></h2>
+<p>__Attention! :__ TOUJOURS FAIRE UNE SAUVEGARDE DU FICHIER AVANT MODIFICATION!
+Editer le fichier __src/domogik/ui/djangomodo/core/templates/widgets/dmg_4x3_bts/<a href="#id3"><span class="problematic" id="id4">main.js__</span></a> tel que décris ci-dessous :</p>
+<div class="section" id="dans-init-function">
+<h3>Dans : _init: function() {<a class="headerlink" href="#dans-init-function" title="Permalink to this headline">¶</a></h3>
+<p>Un bouton du widget correspond à un bloc comme ceci :
+.. code-block:: json</p>
+<blockquote>
+<div><p>var button1 = $(&#8220;&lt;button id=&#8217;button1&#8217; class=&#8217;button&#8217;&gt;A&lt;/button&gt;&#8221;);
+button1.click(function (e) {self.action1();e.stopPropagation();})</p>
+<blockquote>
+<div>.keypress(function (e) {if (e.which == 13 || e.which == 32) {self.action1; e.stopPropagation();}});</div></blockquote>
+<p>this.element.append(button1);</p>
+</div></blockquote>
+<p>Pour ajouter un bouton, il faudra copier ce bloc en adaptant :
+* button1 =&gt; buttonX  (PARTOUT!!!!)
+* action1 =&gt; actionX</p>
+<p>Pour modifier un libellé, il faut modifier la première ligne :
+.. code-block:: json</p>
+<blockquote>
+<div>var buttonX = $(&#8220;&lt;button id=&#8217;buttonX&#8217; class=&#8217;button&#8217;&gt;Mon super libellé&lt;/button&gt;&#8221;);</div></blockquote>
+</div>
+<div class="section" id="plus-loin">
+<h3>Plus loin<a class="headerlink" href="#plus-loin" title="Permalink to this headline">¶</a></h3>
+<p>Si un bouton a été ajouté, ajouter un bloc comme celui-ci :
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>action1: function() {</dt>
+<dd><p class="first">var self = this, o = this.options;
+this.element.startProcessingState();
+rest.get([&#8216;command&#8217;, o.devicetechnology, &#8220;bts_gen&#8221;, &#8220;on&#8221;],</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>function(data) {</dt>
+<dd><p class="first">var status = (data.status).toLowerCase();
+if (status == &#8216;ok&#8217;) {</p>
+<blockquote>
+<div>self.valid(o.featureconfirmation);</div></blockquote>
+<dl class="docutils">
+<dt>} else {</dt>
+<dd>/* Error <a href="#id1"><span class="problematic" id="id2">*</span></a>/
+self.cancel();
+$.notification(&#8216;error&#8217;, data.description);</dd>
+</dl>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p class="last">);</p>
+</dd>
+</dl>
+<p>},</p>
+</div></blockquote>
+<p>En adaptant :
+* action1 =&gt; actionX
+* le nom de l&#8217;instance :
+.. code-block:: json</p>
+<blockquote>
+<div>rest.get([&#8216;command&#8217;, o.devicetechnology, &#8220;bts_gen&#8221;, &#8220;on&#8221;],</div></blockquote>
+<p>devient pour &#8220;confort&#8221; :
+.. code-block:: json</p>
+<blockquote>
+<div>rest.get([&#8216;command&#8217;, o.devicetechnology, &#8220;confort&#8221;, &#8220;on&#8221;],</div></blockquote>
+<p>Si une instance est renommée, il faudra adapter le bon bloc de la même manière qu&#8217;indiqué juste au-dessus.</p>
+</div>
+</div>
+</div>
+<div class="section" id="creer-le-device-et-placer-le-widget">
+<h1>Créer le device et placer le widget<a class="headerlink" href="#creer-le-device-et-placer-le-widget" title="Permalink to this headline">¶</a></h1>
+<p>Cette manipulation est à faire UNE SEULE FOIS. Toute modification du widget (ajout de boutons, etc) sera prise en compte en rafraîchissant la page.</p>
+<div class="section" id="creer-le-device">
+<h2>Créer le device<a class="headerlink" href="#creer-le-device" title="Permalink to this headline">¶</a></h2>
+<p>Créer un device comme ceci :
+{IMG(attId=&#8221;307&#8221;)}{IMG}</p>
+</div>
+<div class="section" id="choisir-le-widget">
+<h2>Choisir le widget<a class="headerlink" href="#choisir-le-widget" title="Permalink to this headline">¶</a></h2>
+<p>Sélectionner ce widget et le placer :
+{IMG(attId=&#8221;306&#8221;)}{IMG}</p>
+</div>
+</div>
+<div class="section" id="annexes">
+<h1>Annexes<a class="headerlink" href="#annexes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="recuperer-la-derniere-version-du-template-bts-gen">
+<h2>Récupérer la dernière version du template &#8220;bts_gen&#8221;<a class="headerlink" href="#recuperer-la-derniere-version-du-template-bts-gen" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>se positionner dans le dossier des sources de domogik</li>
+<li>hg pull</li>
+<li>hg update 0.1.0.beta2.bts</li>
+</ul>
+</div>
+<div class="section" id="insertion-des-donnees-en-base">
+<h2>Insertion des données en base<a class="headerlink" href="#insertion-des-donnees-en-base" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-json"><pre>$ cd src/tools/packages/
+$ ./insert_data.py ../../share/domogik/plugins/bts_gen.xml
+Xml file OK
+Technology bts
+update...
+Device type bts.scenario
+add...
+Device feature model bts.scenario.scenario
+M.P={}
+add...</pre>
+</div>
+</div>
+<div class="section" id="activer-le-plugin">
+<h2>Activer le plugin<a class="headerlink" href="#activer-le-plugin" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-json"><pre>$ dmgenplug -f bts_gen</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">But</a></li>
+<li><a class="reference internal" href="#fichiers">Fichiers</a></li>
+<li><a class="reference internal" href="#compatibilite-avec-domogik">Compatibilité avec Domogik</a></li>
+<li><a class="reference internal" href="#principe-de-fonctionnement">Principe de fonctionnement</a></li>
+<li><a class="reference internal" href="#configuration-d-une-instance">Configuration d&#8217;une instance</a><ul>
+<li><a class="reference internal" href="#startup-plugin">startup-plugin</a></li>
+<li><a class="reference internal" href="#input-entree">input (entrée)</a></li>
+<li><a class="reference internal" href="#threshold-seuil">threshold (seuil)</a></li>
+<li><a class="reference internal" href="#sorties">Sorties</a><ul>
+<li><a class="reference internal" href="#output-x">output-X</a></li>
+<li><a class="reference internal" href="#level-x">level-X</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#copier-le-template-pour-creer-une-instance-confort">Copier le template pour créer une instance &#8220;confort&#8221;</a><ul>
+<li><a class="reference internal" href="#partie-plugin">Partie plugin</a><ul>
+<li><a class="reference internal" href="#partie-python">Partie python</a></li>
+<li><a class="reference internal" href="#partie-xml">Partie xml</a></li>
+<li><a class="reference internal" href="#activer-l-instance">Activer l&#8217;instance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#partie-widget">Partie widget</a><ul>
+<li><a class="reference internal" href="#dans-init-function">Dans : _init: function() {</a></li>
+<li><a class="reference internal" href="#plus-loin">Plus loin</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#creer-le-device-et-placer-le-widget">Créer le device et placer le widget</a><ul>
+<li><a class="reference internal" href="#creer-le-device">Créer le device</a></li>
+<li><a class="reference internal" href="#choisir-le-widget">Choisir le widget</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#annexes">Annexes</a><ul>
+<li><a class="reference internal" href="#recuperer-la-derniere-version-du-template-bts-gen">Récupérer la dernière version du template &#8220;bts_gen&#8221;</a></li>
+<li><a class="reference internal" href="#insertion-des-donnees-en-base">Insertion des données en base</a></li>
+<li><a class="reference internal" href="#activer-le-plugin">Activer le plugin</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../plugin_bluez/plugin_bluez.html"
+                        title="previous chapter">plugin_bluez</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_cidmodem/plugin_cidmodem.html"
+                        title="next chapter">Plugin cidmodem</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/plugin_bts_gen/plugin_bts_gen.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_cidmodem/plugin_cidmodem.html" title="Plugin cidmodem"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_bluez/plugin_bluez.html" title="plugin_bluez"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

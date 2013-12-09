@@ -1,0 +1,168 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Status &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="plugin_xpl2bt" href="../plugin_xpl2bt/plugin_xpl2bt.html" />
+    <link rel="prev" title="Purpose" href="../plugin_x10cm15a/plugin_x10cm15a.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_xpl2bt/plugin_xpl2bt.html" title="plugin_xpl2bt"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_x10cm15a/plugin_x10cm15a.html" title="Purpose"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="status">
+<h1>Status<a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h1>
+<p>First version released</p>
+<blockquote>
+<div>TODO</div></blockquote>
+<hr class="docutils" />
+<ul class="simple">
+<li>Create and use a new xPL message more adapted to media centers.</li>
+</ul>
+</div>
+<div class="section" id="plugin-s-goal">
+<h1>Plugin&#8217;s goal<a class="headerlink" href="#plugin-s-goal" title="Permalink to this headline">¶</a></h1>
+<p>This plugin allows to send notifications to XBMC.</p>
+</div>
+<div class="section" id="xpl-schema">
+<h1>xPL Schema<a class="headerlink" href="#xpl-schema" title="Permalink to this headline">¶</a></h1>
+<p><a href="#id1"><span class="problematic" id="id2">`Schema of the xPL project &lt;http://xplproject.org.uk/wiki/index.php?title=Schema\_-\_OSD.BASIC&gt;`_</span></a></p>
+<ul class="simple">
+<li>command=&#8221;WRITE&#8221;</li>
+<li>delay=&lt;duration of message&gt;</li>
+<li>row=&lt;0 for title, 1 for message&gt;</li>
+<li>text=&lt;titre or message. Depends on row&gt;</li>
+</ul>
+</div>
+<div class="section" id="prerequisites">
+<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div>Dependencies</div></blockquote>
+<hr class="docutils" />
+<p>An XBMC Media Center with web API activated is needed.</p>
+</div>
+<div class="section" id="how-it-works">
+<h1>How it works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h1>
+<p>The xPL client listens to &#8216;&#8217;osd.basic messages&#8217;&#8216;. When two are received (one for the title, the other for the message), it tells to the HTTP API of XBMC to display a notification within a delay. If too much time is elapsed between messages reception (cf &#8216;&#8217;maxdelay&#8217;&#8217; parameter), no notification is send.</p>
+</div>
+<div class="section" id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<p>You need to add the following entries :</p>
+<ul class="simple">
+<li>address : ip:port of XBMC&#8217;s web server</li>
+<li>delay: default delay for displaying notification. This value is used if &#8216;&#8217;delay!0&#8217;&#8217; is in the xPL message.</li>
+<li>maxdelay: the maximum delay between two messages the process will wait for before cancelling notification. This value must be low.</li>
+</ul>
+</div>
+<div class="section" id="developpers-notes">
+<h1>Developpers notes<a class="headerlink" href="#developpers-notes" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://wiki.xbmc.org/index.php?title=JSON_RPC">http://wiki.xbmc.org/index.php?title=JSON_RPC</a></p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Status</a></li>
+<li><a class="reference internal" href="#plugin-s-goal">Plugin&#8217;s goal</a></li>
+<li><a class="reference internal" href="#xpl-schema">xPL Schema</a></li>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#how-it-works">How it works</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#developpers-notes">Developpers notes</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../plugin_x10cm15a/plugin_x10cm15a.html"
+                        title="previous chapter">Purpose</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_xpl2bt/plugin_xpl2bt.html"
+                        title="next chapter">plugin_xpl2bt</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/plugin_xbmc_not/plugin_xbmc_not.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_xpl2bt/plugin_xpl2bt.html" title="plugin_xpl2bt"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_x10cm15a/plugin_x10cm15a.html" title="Purpose"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

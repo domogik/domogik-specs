@@ -1,0 +1,155 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tschacon Plugin &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Purpose" href="../plugin_tts/plugin_tts.html" />
+    <link rel="prev" title="plugin_telldus2" href="../plugin_telldus2/plugin_telldus2.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_tts/plugin_tts.html" title="Purpose"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_telldus2/plugin_telldus2.html" title="plugin_telldus2"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tschacon-plugin">
+<h1>Tschacon Plugin<a class="headerlink" href="#tschacon-plugin" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<p>The aim of this plugin is to manage Chacon / DiO devices with a tellstick usb stick</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>First of all you need to install the <a href="#id1"><span class="problematic" id="id2">`telldus core software &lt;http://developer.telldus.se/wiki/TellStick\_installation\_Linux&gt;`_</span></a> on your server.</p>
+<p>Once installed you should have the &#8216;&#8217;/dev/tellstick&#8217;&#8217; device on your system. You can see it typing :
+.. code-block:: json</p>
+<blockquote>
+<div>ls -alh /dev/tellstick{CODE}Your device interface file&#8217;s primary group is plugdev, so to be able to use it with domogik, add your domogik user to this group :</div></blockquote>
+<div class="highlight-json"><pre>gpasswd -a domogik plugdev{CODE}(use sudo if needed)</pre>
+</div>
+<p>You should now be ok to use your device</p>
+</div>
+<div class="section" id="configuration-pairing-devices">
+<h2>Configuration / Pairing devices<a class="headerlink" href="#configuration-pairing-devices" title="Permalink to this headline">¶</a></h2>
+<p>Configuration of the plugin is straight forward. Enable your plugin in your domogik installation with :
+.. code-block:: json</p>
+<blockquote>
+<div><p>dmgenplug tschacon{CODE}
+and set autostart in the admin UI.</p>
+<p>In the administration panel, go to the &#8216;&#8217;Organization &gt; Devices&#8217;&#8217; page. Create a new device like this :
+Name : Short name
+Description : Describe your device!
+Address : Module address, like &#8220;A1&#8221;
+Reference : only for information string
+Type : tschacon.switch
+Usage : Appliance</p>
+<p>To pair your device with the address you will use in domogik, start adding a new device switch and choose an address for it (must be something like A1, as in the X10 protocole).
+Once done, put your chacon device into learning mode, then power on the device from the UI. Your device should flicker 2 times to tell you the code is learnt. This way, you can register up to 6 codes to each chacon device.</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tschacon Plugin</a><ul>
+<li><a class="reference internal" href="#purpose">Purpose</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#configuration-pairing-devices">Configuration / Pairing devices</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../plugin_telldus2/plugin_telldus2.html"
+                        title="previous chapter">plugin_telldus2</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_tts/plugin_tts.html"
+                        title="next chapter">Purpose</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/plugin_tschacon/plugin_tschacon.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_tts/plugin_tts.html" title="Purpose"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_telldus2/plugin_telldus2.html" title="plugin_telldus2"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

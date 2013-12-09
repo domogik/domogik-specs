@@ -1,0 +1,161 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Prerequisites &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Purpose" href="../plugin_zibase/plugin_zibase.html" />
+    <link rel="prev" title="Purpose" href="../plugin_yweather/plugin_yweather.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_zibase/plugin_zibase.html" title="Purpose"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_yweather/plugin_yweather.html" title="Purpose"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <p>A quick and dirty plugin to test the cron plugin.
+You can create alarms and dawnalarms.</p>
+<div class="section" id="prerequisites">
+<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h1>
+<p>Install the <a href="#id3"><span class="problematic" id="id4">`cron &lt;http://wiki.domogik.org/plugin\_zalarms&gt;`_</span></a> plugin and start it.</p>
+</div>
+<div class="section" id="install-the-plugin">
+<h1>Install the plugin<a class="headerlink" href="#install-the-plugin" title="Permalink to this headline">¶</a></h1>
+<p>This plugin is available in the development sources. Follow this <a href="#id5"><span class="problematic" id="id6">`documentation|nocache &lt;http://wiki.domogik.org/Developers\_installation&gt;`_</span></a> to install them.
+Enable the plugin :
+__sudo dmgenplug -f <a href="#id1"><span class="problematic" id="id2">zalarms__</span></a></p>
+</div>
+<div class="section" id="configure-and-start-the-zalarms-plugin">
+<h1>Configure and start the zalarms plugin<a class="headerlink" href="#configure-and-start-the-zalarms-plugin" title="Permalink to this headline">¶</a></h1>
+<p>Add all the alarms you want using the configuration page of the plugin. And start it.
+All events are sent when the plugin starts. So you can stop it now.
+The jobs you have created are now stored (permanently) in the cron plugin store. If you want to delete them, look at the <a href="#id7"><span class="problematic" id="id8">`cron &lt;http://wiki.domogik.org/plugin\_zalarms&gt;`_</span></a> plugin.</p>
+<p>No words, just some examples :
+First case of use
+<strong>**************</strong></p>
+<p>I want to start my &#8220;christmas&#8221; tree at 7:00 every morning and stop it at 8:00. In the evening, I want to start it at 17:00 and stop it at 21:00. In the weekend, start it at 10:00 and stop it at 21:00.
+I want to send an on (off) command using the xpl-cmnd type, according to the telldus.basic schema to device TS14.
+{IMG(fileId=&#8221;326&#8221;)}{IMG}</p>
+<div class="section" id="second-case-of-use">
+<h2>Second case of use<a class="headerlink" href="#second-case-of-use" title="Permalink to this headline">¶</a></h2>
+<p>Want to be waked up by the dawn the morning. So use the dawnalarm with a dimmer.
+I want to be waked up a 8:00 every saturday and sunday morning. The dawn process must start a 7:00 and use the following levels : 10,20,40,60,80,100.
+The light will start at 7:00 with a level of 10%, and 12 minutes later (60 minutes / (6-1)) the ligth will goes to level 20%. And so on.
+At 8:00, the ligth will be 100%.
+Here is the value to put in the alarm1 configuration zone : SaSu,07:00-08:00,10,20,40,60,80,100
+Actually, your device must use the dim command and the level parameter.
+{IMG(fileId=&#8221;327&#8221;)}{IMG}</p>
+</div>
+<div class="section" id="third-case-of-use-with-plcbus">
+<h2>Third case of use with plcbus<a class="headerlink" href="#third-case-of-use-with-plcbus" title="Permalink to this headline">¶</a></h2>
+<p>Want to shut off all the lights of the home at 0h00 from sunday to thursday and at 1h00 friday and saturday.
+{IMG(fileId=&#8221;336&#8221;)}{IMG}
+Now add a device in Domogik (technology cron / job) and give homeOff as address.
+The last thing to do is to add widgets. Look at the <a href="#id9"><span class="problematic" id="id10">`cron &lt;http://wiki.domogik.org/plugin\_zalarms&gt;`_</span></a> documentation.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Prerequisites</a></li>
+<li><a class="reference internal" href="#install-the-plugin">Install the plugin</a></li>
+<li><a class="reference internal" href="#configure-and-start-the-zalarms-plugin">Configure and start the zalarms plugin</a><ul>
+<li><a class="reference internal" href="#second-case-of-use">Second case of use</a></li>
+<li><a class="reference internal" href="#third-case-of-use-with-plcbus">Third case of use with plcbus</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../plugin_yweather/plugin_yweather.html"
+                        title="previous chapter">Purpose</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_zibase/plugin_zibase.html"
+                        title="next chapter">Purpose</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/plugin_zalarms/plugin_zalarms.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_zibase/plugin_zibase.html" title="Purpose"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_yweather/plugin_yweather.html" title="Purpose"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

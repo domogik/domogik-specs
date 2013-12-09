@@ -1,0 +1,520 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome to Domogik specifications’s documentation! &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="#" />
+    <link rel="next" title="1wire bus creation tutorial" href="pages/1wire_bus_creation_tutorial/1wire_bus_creation_tutorial.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="pages/1wire_bus_creation_tutorial/1wire_bus_creation_tutorial.html" title="1wire bus creation tutorial"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="welcome-to-domogik-specifications-s-documentation">
+<h1>Welcome to Domogik specifications&#8217;s documentation!<a class="headerlink" href="#welcome-to-domogik-specifications-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pages/1wire_bus_creation_tutorial/1wire_bus_creation_tutorial.html">1wire bus creation tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/AdaptNonPythonPlugin/AdaptNonPythonPlugin.html">How to adapt a non-python xpl plugin to domogik</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/AndroidDevelopers/AndroidDevelopers.html">Ideas for future</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Available_icons/Available_icons.html">Available icons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/BTSProjects/BTSProjects.html">Contexte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/BTSProjects/BTSProjects.html#prarequis-du-ca-ta-de-domogik">PrÃ©requis (du cÃ´tÃ© de Domogik)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/BTSProjects/BTSProjects.html#prarequis-du-ca-ta-de-morvion-lycaes">PrÃ©requis (du cÃ´tÃ© de ???Morvion/LycÃ©es)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/BTSProjects/BTSProjects.html#dafinition-d-un-mode-de-communication">DÃ©finition d&#8217;un mode de communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/BTSProjects/BTSProjects.html#evolution-de-la-solution-domogik-de-septembre-2010-a-juin-2011">Evolution de la solution Domogik de septembre 2010 Ã&nbsp; juin 2011</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/BTSProjects/BTSProjects.html#rasultats-produits-par-les-atudiants-licences-et-intaraats-des-deux-parties">RÃ©sultats produits par les Ã©tudiants, licences et intÃ©rÃªts des deux parties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/BTSProjects/BTSProjects.html#assistance-et-support-de-la-part-de-l-aquipe-de-domogik">Assistance et support de la part de l&#8217;Ã©quipe de Domogik</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/BTSProjects/BTSProjects.html#documentation-de-validation-technique">Documentation de validation technique</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Bienvenue/Bienvenue.html">test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Cm15_xpl_tutorial/Cm15_xpl_tutorial.html">Use a CM15a/CM15pro with domogik</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Community/Community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Contact and support/Contact and support.html">Contact and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/CurrentStatus/CurrentStatus.html">Plugins status</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/CurrentStatus/CurrentStatus.html#global-status">Global status</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/DataModelChanges/DataModelChanges.html">Database modifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Database_building_description/Database_building_description.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Database_graphs_improvements/Database_graphs_improvements.html">Pre-compiled data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Database_graphs_improvements/Database_graphs_improvements.html#server-side-formatters">server-side formatters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Database_graphs_improvements/Database_graphs_improvements.html#douglas-peucker-algorithm">Douglas-Peucker Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Database_graphs_improvements/Database_graphs_improvements.html#sequential-data-send">Sequential data send</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Database_structure_first_version/Database_structure_first_version.html">Database : model for the first version of Domogik</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Database_ui_terminal/Database_ui_terminal.html">Database : UI terminal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Developer_documents_howto/Developer_documents_howto.html">Developer documents HOWTO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Developers_database/Developers_database.html">Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Developers_documentation/Developers_documentation.html">Writing Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Developers_general/Developers_general.html">General instructions for developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Developers_internal_communication_system/Developers_internal_communication_system.html">Système interne de communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Developers_notifications/Developers_notifications.html">Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Developers_packages/Developers_packages.html">Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Developers_rinor_rest/Developers_rinor_rest.html">RINOR / REST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Developers_tools/Developers_tools.html">Tools for developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Developers_ui/Developers_ui.html">0.1.x Embedded Web UI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Developers_ui/Developers_ui.html#x-x-domoweb-ui">0.x.x DomoWeb UI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Developers_ui/Developers_ui.html#android-ui">Android UI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Developers_xplheartbeats/Developers_xplheartbeats.html">XPL Heartbeats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Domodroid/Domodroid.html">{IMG(src=&#8221;http://code.google.com/p/domodroid/logo?cct=1319102596&#8221;)}{IMG} Domodroid User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Domodroid/Domodroid.html#domodroid-dev">Domodroid Dev</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/DomodroidRoadmap/DomodroidRoadmap.html">Domodroid roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Domodroid_Src/Domodroid_Src.html">How to use domodroid Source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Domogik_installation_for_0.2.0_beta1/Domogik_installation_for_0.2.0_beta1.html">Standard installation for Domogik 0.2.0-beta1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Domogik_installation_for_developpers/Domogik_installation_for_developpers.html">Domogik installation for developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Domogik_version_numbering/Domogik_version_numbering.html">Domogik&#8217;s version numbering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Domoweb_installation_for_developpers/Domoweb_installation_for_developpers.html">Domoweb installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Download/Download.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/DownloadStatistics/DownloadStatistics.html">Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/DownloadStatistics/DownloadStatistics.html#script">Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/DownloadStatistics/DownloadStatistics.html#usage">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Errors_and_solutions/Errors_and_solutions.html">Errors and solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/ExternalResources/ExternalResources.html">External Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Gallery/Gallery.html">Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/HackWeek/HackWeek.html">DisponibilitÃ©s __Ã&nbsp; dÃ©finir pour le 24 sept au plus tard !__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/HackWeek/HackWeek.html#ville-de-dapart">Ville de dÃ©part</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/HackWeek/HackWeek.html#autres-besoins">Autres besoins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Hauptseite/Hauptseite.html">Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/HomePage/HomePage.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/HomePage/HomePage.html#interested-in-domogik-development">Interested in Domogik development ?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/HomePage/HomePage.html#documentation">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/HomePage/HomePage.html#packages-plugins-and-external-members-development">Packages (plugins and external members) development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/HomePage/HomePage.html#packages-tools-and-docs">Packages tools and docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/HomePage/HomePage.html#specifications">Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/HomePage/HomePage.html#project">Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/HomePage/HomePage.html#domodroid-development">Domodroid development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/HomePage/HomePage.html#tests">Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/HomePage/HomePage.html#releases">Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/I18n/I18n.html">I18n</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Instructions/Instructions.html">How to Manage this Profile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Instructions/Instructions.html#active-features">Active Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Looking_for/Looking_for.html">We are looking for ...</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Manage_the_packages/Manage_the_packages.html">Manage the packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/ManagerAndPackages/ManagerAndPackages.html">Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/ManagerAndPackages/ManagerAndPackages.html#xpl-messages">Xpl messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Mise en place d'un bus 1wire/Mise en place d'un bus 1wire.html">Mise en place d&#8217;un bus 1wire</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Mocks/Mocks.html">List of available mocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Mocks/Mocks.html#how-to-launch-a-mock">How to launch a mock ?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Mocks/Mocks.html#mocks-detail">Mocks Detail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Neopsine/Neopsine.html">Neopsine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/OldHomePage/OldHomePage.html">WARNING</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/OldVersion0.1.0/OldVersion0.1.0.html">OldVersion0.1.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Packages_nightly_builds/Packages_nightly_builds.html">Nightly builds for packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Pagina principale/Pagina principale.html">Pagina principale</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Plugin Onewire/Plugin Onewire.html">Plugin Onewire</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/PluginXmlDescriptionFile/PluginXmlDescriptionFile.html">Plugin xml description file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Plugin_call_a_function_from_lib_module/Plugin_call_a_function_from_lib_module.html">How to call a function / method when something happens in the lib module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Plugin_make_sure_stopping/Plugin_make_sure_stopping.html">Extra things to do when shutting down</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Plugin_setting_timer/Plugin_setting_timer.html">Creating a timer with XplTimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Plugin_using_log_feature/Plugin_using_log_feature.html">Minimal requirement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Plugin_using_log_feature/Plugin_using_log_feature.html#advanced-usage">Advanced usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Plugin_using_log_feature/Plugin_using_log_feature.html#things-to-know">Things to know</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Plugin_weather_recommendations/Plugin_weather_recommendations.html">Weather plugin recommendations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Plugins_development/Plugins_development.html">Developing a plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Plugins_in_Domogik/Plugins_in_Domogik.html">Plugins in Domogik</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/REST_log/REST_log.html">REST /log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/REST_log/REST_log.html#api">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/REST_scenario/REST_scenario.html">Developper Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/REST_stats2/REST_stats2.html">&lt;br /&gt;</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/REST_stats2/REST_stats2.html#purpose-br">Purpose&lt;br /&gt;</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/RINOR_base2/RINOR_base2.html">Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/RINOR_base2/RINOR_base2.html#device-parameters">Device parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/RINOR_base2/RINOR_base2.html#features">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/RINOR_base2/RINOR_base2.html#feature-parameters">Feature parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/RINOR_base2/RINOR_base2.html#device-templates">Device templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/RINOR_base2/RINOR_base2.html#features-states">Features states</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/RINOR_base2/RINOR_base2.html#plugin-config">Plugin config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/RINOR_base2/RINOR_base2.html#pages">Pages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/RINOR_events2/RINOR_events2.html">Events handeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/RINOR_xpl_msgs/RINOR_xpl_msgs.html">Create a new request to get all xpl messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/RINOR_xpl_msgs/RINOR_xpl_msgs.html#create-a-new-request-to-get-filtered-xpl-messages">Create a new request to get filtered xpl messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/RINOR_xpl_msgs/RINOR_xpl_msgs.html#get-next-results-for-an-existing-request">Get next results for an existing request</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/RINOR_xpl_msgs/RINOR_xpl_msgs.html#explicitly-close-an-existing-request">Explicitly close an existing request</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Reduce_DeviceStats/Reduce_DeviceStats.html">Reduce DeviceStats storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Reduce_DeviceStats/Reduce_DeviceStats.html#actualy-algorithm">Actualy algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Reduce_DeviceStats/Reduce_DeviceStats.html#round-algorithm">Round algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Registered HomePage/Registered HomePage.html">Registered HomePage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Release_process/Release_process.html">Release process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/ReportABug/ReportABug.html">Log in (and eventually create an account if you don&#8217;t have one)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/ReportABug/ReportABug.html#create-issue-bug-evolution-request">Create issue/bug/evolution request</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/ReportABug/ReportABug.html#fill-in-report">Fill in report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Scenarios/Scenarios.html">Condition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Scenarios/Scenarios.html#test">Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Scenarios/Scenarios.html#parametres">Parametres</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Scenarios/Scenarios.html#fonctionnement">Fonctionnement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Scenarios/Scenarios.html#exemples">Exemples:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Screenshots/Screenshots.html">Homepage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Section_base_breadcrumb_menus/Section_base_breadcrumb_menus.html">Breadcrumb/Menus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Section_base_header/Section_base_header.html">UI : section &#8220;base header&#8221;</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Section_base_navigation/Section_base_navigation.html">Web UI : Section &#8220;Base navigation&#8221;</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Section_base_spacer/Section_base_spacer.html">Section_base_spacer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Section_base_widgets_matrix/Section_base_widgets_matrix.html">Widgets Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Section_yo_windows_weather/Section_yo_windows_weather.html">Section_yo_windows_weather</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Set_a_udev_rule/Set_a_udev_rule.html">Set a udev rule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Social Media Marketing And Advertising Assistance/Social Media Marketing And Advertising Assistance.html">Social Media Marketing And Advertising Assistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Spec_Domodroid/Spec_Domodroid.html">Spec_Domodroid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Spec_aa/Spec_aa.html">Communication link security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Spec_aa/Spec_aa.html#authentication-identify-the-client">Authentication (Identify the client)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Spec_aa/Spec_aa.html#authorization-what-the-client-can-do">Authorization (What the client can do)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Spec_aa/Spec_aa.html#all-fritz-s-idea">All (Fritz&#8217;s idea)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Spec_developers/Spec_developers.html">Specifications for developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Spec_device_template/Spec_device_template.html">Device template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Spec_devices_models_manager/Spec_devices_models_manager.html">Device models management webapp (specifications)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Spec_domogik_data_types/Spec_domogik_data_types.html">Data types of Domogik</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Spec_field_types/Spec_field_types.html">Types for generating UI fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Spec_helpers/Spec_helpers.html">Specs of helpers that will use the MQ system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Spec_member_template/Spec_member_template.html">Template for a member</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Spec_member_template/Spec_member_template.html#f00-obsolete-implemented-with-xplfromdb-spec">~~#F00:OBSOLETE implemented with xplfromdb spec~~</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Spec_packages_repository/Spec_packages_repository.html">Specifications : packages repository</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Spec_repository/Spec_repository.html">Specifications for the Repository</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Spec_security_ui/Spec_security_ui.html">How to secure UI+REST API access</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Spec_xPL_to_domogik_data_types/Spec_xPL_to_domogik_data_types.html">xPL to Domogik data types transcoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Spec_xplFromDb/Spec_xplFromDb.html">Generate XPL messages from the DB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Terminals/Terminals.html">Terminals registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Tutorial_add_icons/Tutorial_add_icons.html">How to add your own room/area icons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Tutorials/Tutorials.html">Tutorials and external articles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Tutorials/Tutorials.html#external-articles-about-domogik">External articles about Domogik</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Ubuntu_repository/Ubuntu_repository.html">Add a user to manage repository</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Ubuntu_repository/Ubuntu_repository.html#install-reprepro">Install reprepro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Ubuntu_repository/Ubuntu_repository.html#ftp-and-http">Ftp and Http</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Ubuntu_repository/Ubuntu_repository.html#upload-packages-to-the-repository">Upload packages to the repository</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Uses_Case_for_v2/Uses_Case_for_v2.html">Use Case 1 - Address split in 2 sub addresses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Uses_Case_for_v2/Uses_Case_for_v2.html#use-case-2-multi-technology-plugins">Use Case 2 - Multi technology plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Uses_Case_for_v2/Uses_Case_for_v2.html#use-case-3-give-access-to-list-and-ressources-of-usages-by-rinor">Use case 3 - Give access to list and ressources of usages by RINOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Uses_Case_for_v2/Uses_Case_for_v2.html#use-case-4-group-of-features-virtual-devices">Use case 4 - Group of features/ Virtual devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Uses_Case_for_v2/Uses_Case_for_v2.html#use-case-5-can-send-extra-attributes-with-a-command">Use case 5 - Can send extra attributes, with a command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Uses_Case_for_v2/Uses_Case_for_v2.html#use-case-6-calculated-values">Use case 6 - Calculated values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Uses_Case_for_v2/Uses_Case_for_v2.html#use-case-7-specific-target">Use case 7 - Specific Target</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Uses_Case_for_v2/Uses_Case_for_v2.html#use-case-8-multiples-states-command">Use case 8 - Multiples states command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Uses_Case_for_v2/Uses_Case_for_v2.html#use-case-9-the-up-down-and-stop">Use case 9 - The Up, Down and Stop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Version0.1.0/Version0.1.0.html">{IMG(attId=&#8221;366&#8221;)}{IMG}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Version0.1.0/Version0.1.0.html#presentation">Présentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Web_interface_model/Web_interface_model.html">The web interface model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Web_ui_admindesign/Web_ui_admindesign.html">Web_ui_admindesign</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Web_ui_create_devices_window/Web_ui_create_devices_window.html">Web UI : creating new devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Web_ui_design/Web_ui_design.html">Web UI design specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Web_ui_devices_list_window/Web_ui_devices_list_window.html">Devices list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Web_ui_packages/Web_ui_packages.html">Package format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Web_ui_packages/Web_ui_packages.html#django-start">Django Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Web_ui_plugins/Web_ui_plugins.html">Web UI : the plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Web_ui_scenarios/Web_ui_scenarios.html">Web_ui_scenarios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Web_ui_sections/Web_ui_sections.html">Sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Web_ui_views/Web_ui_views.html">Views of the web UI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Web_ui_widgets/Web_ui_widgets.html">DomoWeb Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/WhoIsWho/WhoIsWho.html">Contributions on release 0.1.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/WhoIsWho/WhoIsWho.html#details-about-developers-contributors">Details about developers/contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Widget_CamIPFoscamHeden/Widget_CamIPFoscamHeden.html">Widget_CamIPFoscamHeden</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Widget_analog_clock/Widget_analog_clock.html">Web UI : Widget &#8220;analog clock&#8221;</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Widget_basic_boolean/Widget_basic_boolean.html">Web UI : Widget &#8220;basic boolean&#8221;</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Widget_simple_date/Widget_simple_date.html">Web UI : Widget &#8220;simple date&#8221;</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Widget_yo_windows_weather/Widget_yo_windows_weather.html">Web UI : Widget &#8220;yo window weather&#8221;</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Wiki Help/Wiki Help.html">Wiki Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/Zone51/Zone51.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/ZoneMinder/ZoneMinder.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/ZoneMinder/ZoneMinder.html#xpl-specification">Xpl specification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/astuce_domodroid_tablette_murale/astuce_domodroid_tablette_murale.html">astuce_domodroid_tablette_murale</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/dev_plugin_knx/dev_plugin_knx.html">Installation du plugin KNX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/dev_plugin_knx/dev_plugin_knx.html#id1">Installation du BCUSDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/dev_plugin_knx/dev_plugin_knx.html#protocole">Protocole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/dev_plugin_knx/dev_plugin_knx.html#id2">Installation du BCUSDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/dev_plugin_knx/dev_plugin_knx.html#eibd-et-interactions-avec-eibd">Eibd et interactions avec Eibd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/dev_plugin_knx/dev_plugin_knx.html#tools">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/dev_plugin_knx/dev_plugin_knx.html#dpt-les-plus-utilises">DPT les plus utilisés</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/dev_plugin_knx/dev_plugin_knx.html#schema-xpl">Schéma xpl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/dev_plugin_knx/dev_plugin_knx.html#knx-dans-dmg-maintenant">KNX dans DMG maintenant...</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/device_params/device_params.html">DB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/device_params/device_params.html#adress-filed-replacement">Adress filed replacement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/device_params/device_params.html#xpl-command-message-generation">xpl command message generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/device_params/device_params.html#xpl-stats-trig-message-parsing-stats-manager">xpl stats/trig message parsing (stats manager)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/device_params/device_params.html#questions">Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/dists_tools/dists_tools.html">Maintainer packaging tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/doc_PluginsDevelopment/doc_PluginsDevelopment.html">How to make a Domogik plugin ?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/doc_StandardInstallation/doc_StandardInstallation.html">doc_StandardInstallation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/external_ar_rgb/external_ar_rgb.html">Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/external_ar_rgb/external_ar_rgb.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/external_ar_rgb/external_ar_rgb.html#power-analysis">Power analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/external_ar_rgb/external_ar_rgb.html#load-program-on-arduino">Load program on arduino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/external_ar_rgb/external_ar_rgb.html#install-ar-rgb-plugin-on-domogik">Install ar_rgb plugin on Domogik</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/external_ar_rgb/external_ar_rgb.html#specifications">Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/external_ar_tank/external_ar_tank.html">external_ar_tank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/external_rfxcom/external_rfxcom.html">External member Rfxcom xPL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/external_rfxcom/external_rfxcom.html#developer-notes">Developer notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/external_squeezebox/external_squeezebox.html">external_squeezebox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/fedora_centos_installation/fedora_centos_installation.html">Installing Domogik on Fedora / Centos / Redhat 6</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/installation_guruplug_server/installation_guruplug_server.html">Installation of Domogik on a Guruplug</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/lib_plugin_web_socket/lib_plugin_web_socket.html">Objectif de cette lib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/lib_plugin_web_socket/lib_plugin_web_socket.html#comment-l-inclure-dans-le-plugin">Comment l&#8217;inclure dans le plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/mini_script/mini_script.html">__Mini_Script__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_apushnot/plugin_apushnot.html">Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_apushnot/plugin_apushnot.html#installation-required">Installation required</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_apushnot/plugin_apushnot.html#application-installation-required">Application Installation required</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_apushnot/plugin_apushnot.html#plugin-configuration">Plugin configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_apushnot/plugin_apushnot.html#developper-notes">Developper Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_bluez/plugin_bluez.html">plugin_bluez</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_bts_gen/plugin_bts_gen.html">But</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_bts_gen/plugin_bts_gen.html#fichiers">Fichiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_bts_gen/plugin_bts_gen.html#compatibilite-avec-domogik">Compatibilité avec Domogik</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_bts_gen/plugin_bts_gen.html#principe-de-fonctionnement">Principe de fonctionnement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_bts_gen/plugin_bts_gen.html#configuration-d-une-instance">Configuration d&#8217;une instance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_bts_gen/plugin_bts_gen.html#copier-le-template-pour-creer-une-instance-confort">Copier le template pour créer une instance &#8220;confort&#8221;</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_bts_gen/plugin_bts_gen.html#creer-le-device-et-placer-le-widget">Créer le device et placer le widget</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_bts_gen/plugin_bts_gen.html#annexes">Annexes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_cidmodem/plugin_cidmodem.html">Plugin cidmodem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_cidmodem/plugin_cidmodem.html#developper-notes">Developper notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_cron/plugin_cron.html">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_cron/plugin_cron.html#install-the-plugin">Install the plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_cron/plugin_cron.html#adding-cron-jobs">Adding cron jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_cron/plugin_cron.html#adding-a-device-to-interact-with-a-cron-job">Adding a device to interact with a cron job</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_cron_interface/plugin_cron_interface.html">plugin_cron_interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_dawndusk/plugin_dawndusk.html">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_dawndusk/plugin_dawndusk.html#install-the-plugin">Install the plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_dawndusk/plugin_dawndusk.html#configure-and-start-the-plugin">Configure and start the plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_dawndusk/plugin_dawndusk.html#configuration-examples">Configuration examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_demo/plugin_demo.html">Plugin demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_demodata/plugin_demodata.html">Plugin demodata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_diskfree/plugin_diskfree.html">Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_diskfree/plugin_diskfree.html#plugin-configuration">Plugin configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_diskfree/plugin_diskfree.html#creating-a-device-for-diskfree">Creating a device for Diskfree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_diskfree/plugin_diskfree.html#developper-notes">Developper notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_foscam/plugin_foscam.html">Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_foscam/plugin_foscam.html#prerequisite">Prerequisite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_foscam/plugin_foscam.html#plugin-configuration">Plugin configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_foscam/plugin_foscam.html#developper-notes">Developper Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_gagenda/plugin_gagenda.html">Status</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_gagenda/plugin_gagenda.html#goal-of-module">Goal of module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_gagenda/plugin_gagenda.html#shama-xpl">ShÃ©ma xPL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_gagenda/plugin_gagenda.html#prerequisite">Prerequisite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_gagenda/plugin_gagenda.html#how-it-works">How it works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_gagenda/plugin_gagenda.html#configuration">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_gvsms/plugin_gvsms.html">Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_gvsms/plugin_gvsms.html#resources">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_h2ometer/plugin_h2ometer.html">Plugin h2ometer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_h2ometer/plugin_h2ometer.html#developper-notes">Developper notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_ipushnot/plugin_ipushnot.html">Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_ipushnot/plugin_ipushnot.html#application-installation-required">Application Installation required</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_ipushnot/plugin_ipushnot.html#plugin-configuration">Plugin configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_ipushnot/plugin_ipushnot.html#developper-notes">Developper Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_ipx800/plugin_ipx800.html">Plugin ipx800</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_ipx800/plugin_ipx800.html#developper-notes">Developper notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_karotz/plugin_karotz.html">Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_karotz/plugin_karotz.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_karotz/plugin_karotz.html#plugin-configuration">Plugin configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_karotz/plugin_karotz.html#developper-notes">Developper Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_knx(english, en)/plugin_knx(english, en).html">plugin_knx(english, en)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_knx/plugin_knx.html">Installation du BCUSDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_knx/plugin_knx.html#demarrage-automatique-de-eibd">Demarrage automatique de EIBD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_knx_exemple/plugin_knx_exemple.html">Exemple de fonctionnement du plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_knx_exemple/plugin_knx_exemple.html#interaction-possible-entre-l-ihm-et-le-bus-knx-grace-au-scenario">Interaction possible entre l&#8217;IHM et le bus KNX grâce au scénario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_lighting/plugin_lighting.html">Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_lighting/plugin_lighting.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_lighting/plugin_lighting.html#update-the-plugin-code">Update the plugin code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_lighting/plugin_lighting.html#how-it-works">How it works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_lighting/plugin_lighting.html#using-it-with-an-arduino">Using it with an arduino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_lighting/plugin_lighting.html#old-documentation">Old documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_minido/plugin_minido.html">Minido interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_mirror/plugin_mirror.html">Plugin mirror</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_mirror/plugin_mirror.html#plugin-mirror-developer-information">Plugin mirror - developer information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_mochad/plugin_mochad.html">Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_mochad/plugin_mochad.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_mvhr/plugin_mvhr.html">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_mvhr/plugin_mvhr.html#install-the-plugin">Install the plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_mvhr/plugin_mvhr.html#configure-and-start-the-plugin">Configure and start the plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_mvhr/plugin_mvhr.html#add-a-device">Add a device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_mvhr/plugin_mvhr.html#add-a-widget">Add a widget</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_nbz_tts/plugin_nbz_tts.html">Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_nbz_tts/plugin_nbz_tts.html#prerequisites">prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_nbz_tts/plugin_nbz_tts.html#plugin-configuration">Plugin configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_nbz_tts/plugin_nbz_tts.html#developper-notes">Developper Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_onewire/plugin_onewire.html">Plugin onewire</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_onewire/plugin_onewire.html#plugin-onewire-developer-information">Plugin onewire - developer information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_ozwave/plugin_ozwave.html">OZWAVE plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_ozwave/plugin_ozwave.html#installation-instructions">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_ozwave/plugin_ozwave.html#how-to-use-plugin">How to use plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_ozwave/plugin_ozwave.html#developper-notes">Developper notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_plcbus/plugin_plcbus.html">PLCBUS plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_pyozw/plugin_pyozw.html">python-openzwave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_rfxcom/plugin_rfxcom.html">Plugin for the RFXCOM Usb Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_rfxcom/plugin_rfxcom.html#developer-notes">Developer notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_rfxcom/plugin_rfxcom.html#list">List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_scene/plugin_scene.html">Dépendance:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_scene/plugin_scene.html#installation-du-plugin">Installation du plugin:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_scene/plugin_scene.html#ajouter-une-regle">Ajouter une règle:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_slim/plugin_slim.html">Table of contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_sms/plugin_sms.html">Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_sms/plugin_sms.html#package-installation-required">Package Installation required</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_sms/plugin_sms.html#plugin-configuration">Plugin configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_sms/plugin_sms.html#developper-notes">Developper Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_teleinfo/plugin_teleinfo.html">Plugin teleinfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_teleinfo/plugin_teleinfo.html#developper-notes">Developper notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_telldus/plugin_telldus.html">plugin_telldus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_telldus2/plugin_telldus2.html">plugin_telldus2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_tschacon/plugin_tschacon.html">Tschacon Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_tts/plugin_tts.html">Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_tts/plugin_tts.html#package-installation">Package Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_tts/plugin_tts.html#plugin-configuration">Plugin configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_tts/plugin_tts.html#developper-notes">Developper Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_tv_samsg/plugin_tv_samsg.html">Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_tv_samsg/plugin_tv_samsg.html#how-to-plug">How to plug</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_tv_samsg/plugin_tv_samsg.html#developper-notes">Developper notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_velbus/plugin_velbus.html">Table of contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_water/plugin_water.html">Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_wol_ping/plugin_wol_ping.html">Plugin wol_ping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_wol_ping/plugin_wol_ping.html#plugin-wol-ping-developer-information">Plugin wol_ping - developer information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_x10_heyu/plugin_x10_heyu.html">X10 plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_x10cm15a/plugin_x10cm15a.html">Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_x10cm15a/plugin_x10cm15a.html#how-to-plug">How to plug</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_x10cm15a/plugin_x10cm15a.html#plugin-configuration">Plugin configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_x10cm15a/plugin_x10cm15a.html#creating-x10-devices">Creating x10 devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_x10cm15a/plugin_x10cm15a.html#developper-notes">Developper Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_xbmc_not/plugin_xbmc_not.html">Status</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_xbmc_not/plugin_xbmc_not.html#plugin-s-goal">Plugin&#8217;s goal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_xbmc_not/plugin_xbmc_not.html#xpl-schema">xPL Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_xbmc_not/plugin_xbmc_not.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_xbmc_not/plugin_xbmc_not.html#how-it-works">How it works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_xbmc_not/plugin_xbmc_not.html#configuration">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_xbmc_not/plugin_xbmc_not.html#developpers-notes">Developpers notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_xpl2bt/plugin_xpl2bt.html">plugin_xpl2bt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_xpl2ser/plugin_xpl2ser.html">plugin_xpl2ser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_xpl_time/plugin_xpl_time.html">Plugin xpl_time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_xpl_time/plugin_xpl_time.html#developper-notes">Developper notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_yweather/plugin_yweather.html">Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_yweather/plugin_yweather.html#known-features">Known features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_yweather/plugin_yweather.html#plugin-configuration">Plugin configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_yweather/plugin_yweather.html#creating-a-device">Creating a device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_yweather/plugin_yweather.html#helpers">Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_yweather/plugin_yweather.html#developper-notes">Developper notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_zalarms/plugin_zalarms.html">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_zalarms/plugin_zalarms.html#install-the-plugin">Install the plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_zalarms/plugin_zalarms.html#configure-and-start-the-zalarms-plugin">Configure and start the zalarms plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_zibase/plugin_zibase.html">Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_zibase/plugin_zibase.html#protocol-list">Protocol list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_zibase/plugin_zibase.html#plugin-configuration">Plugin configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_zibase/plugin_zibase.html#creating-devices-for-zibase">Creating devices for ZiBase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_zibase/plugin_zibase.html#helpers">Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_zibase/plugin_zibase.html#developper-notes">Developper Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/plugin_zwave/plugin_zwave.html">Table of contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/rest_newurl_lookup/rest_newurl_lookup.html">New URL lookup sequence for rest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/robert_project/robert_project.html">Uses Cases for General Interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/test/test.html">test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/test_doc_moved/test_doc_moved.html">test_doc_moved</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/test_fritz/test_fritz.html">Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/test_fritz/test_fritz.html#part-2">Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/test_fritz_en/test_fritz_en.html">Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/test_fritz_en/test_fritz_en.html#part-2">Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/test_mirelsol/test_mirelsol.html">test_mirelsol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/traduction/traduction.html">traduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/traduction_fr/traduction_fr.html">traduction_fr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/tutorial_howto_debug/tutorial_howto_debug.html">During installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/tutorial_howto_debug/tutorial_howto_debug.html#domogik-startup">Domogik Startup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/tutorials_SynologyHub/tutorials_SynologyHub.html">Install the DSM Tool Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/tutorials_SynologyHub/tutorials_SynologyHub.html#build-the-xpl-lib">Build the xPL Lib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/tutorials_SynologyHub/tutorials_SynologyHub.html#build-xpl-hub">Build xPL Hub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/ubuntu_installation/ubuntu_installation.html">Installing Domogik on Ubuntu (Oneiric, Precise)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/xPL_Domogik_system_schema/xPL_Domogik_system_schema.html">System schema of Domogik in xPL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/xPL_calendar_schema/xPL_calendar_schema.html">xPL calendar schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/xPL_process_information/xPL_process_information.html">Get process information over the xPL network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/xplProcol/xplProcol.html">xplProcol</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to Domogik specifications&#8217;s documentation!</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pages/1wire_bus_creation_tutorial/1wire_bus_creation_tutorial.html"
+                        title="next chapter">1wire bus creation tutorial</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="pages/1wire_bus_creation_tutorial/1wire_bus_creation_tutorial.html" title="1wire bus creation tutorial"
+             >next</a> |</li>
+        <li><a href="#">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

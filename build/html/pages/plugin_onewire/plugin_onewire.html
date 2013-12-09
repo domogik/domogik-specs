@@ -1,0 +1,193 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plugin onewire &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="OZWAVE plugin" href="../plugin_ozwave/plugin_ozwave.html" />
+    <link rel="prev" title="Purpose" href="../plugin_nbz_tts/plugin_nbz_tts.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_ozwave/plugin_ozwave.html" title="OZWAVE plugin"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_nbz_tts/plugin_nbz_tts.html" title="Purpose"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="plugin-onewire">
+<h1>Plugin onewire<a class="headerlink" href="#plugin-onewire" title="Permalink to this headline">¶</a></h1>
+<p>This plugin documentation is now available on [<a class="reference external" href="http://docs.domogik.org/plugin/onewire/dev/en/">http://docs.domogik.org/plugin/onewire/dev/en/</a>]</p>
+</div>
+<div class="section" id="plugin-onewire-developer-information">
+<h1>Plugin onewire - developer information<a class="headerlink" href="#plugin-onewire-developer-information" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="how-to-add-a-new-component-support">
+<h2>How to add a new component support ?<a class="headerlink" href="#how-to-add-a-new-component-support" title="Permalink to this headline">¶</a></h2>
+<p>||TODO all following points||
+* add options,
+* create class,
+* call class with options if correct option enabled
+* update description xml file for options
+* update stats xml file
+* xpl-stat/xpl-trig
+* rules to choose xpl schema</p>
+</div>
+<div class="section" id="xpl-stat-or-xpl-trig">
+<h2>xpl-stat or xpl-trig<a class="headerlink" href="#xpl-stat-or-xpl-trig" title="Permalink to this headline">¶</a></h2>
+<p>When a value is read and sent by 1 wire plugin, here is the rule which must be followed :
+.. code-block:</p>
+<div class="highlight-python"><pre>IF  DIFFERENT FROM
+THEN use xpl-trig
+ELSE use xpl-stat</pre>
+</div>
+</div>
+<div class="section" id="ds18b20-ds18s20-ds2438">
+<h2>DS18B20, DS18S20, DS2438<a class="headerlink" href="#ds18b20-ds18s20-ds2438" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="xpl-messages">
+<h3>xPL messages<a class="headerlink" href="#xpl-messages" title="Permalink to this headline">¶</a></h3>
+<p>When temperature changes for a DS18B20 (or DS18S20) component :
+.. code-block:</p>
+<div class="highlight-python"><pre>xpl-stat
+{
+...
+}
+sensor.basic
+{
+device=
+current=
+type=temp
+}</pre>
+</div>
+<p>When temperature doesn&#8217;t change :
+.. code-block:</p>
+<div class="highlight-python"><pre>xpl-trig
+{
+...
+}
+sensor.basic
+{
+device=
+current=
+type=temp
+}</pre>
+</div>
+<p>For DS2438, for the humidity the same messages will be used with __type=humidity__</p>
+</div>
+</div>
+<div class="section" id="related-links">
+<h2>Related links<a class="headerlink" href="#related-links" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://owfs.sourceforge.net/install.html">http://owfs.sourceforge.net/install.html</a>
+<a class="reference external" href="http://tomasz.korwel.net/2006/07/02/owfs-instalation-on-ubuntu-606/">http://tomasz.korwel.net/2006/07/02/owfs-instalation-on-ubuntu-606/</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Plugin onewire</a></li>
+<li><a class="reference internal" href="#plugin-onewire-developer-information">Plugin onewire - developer information</a><ul>
+<li><a class="reference internal" href="#how-to-add-a-new-component-support">How to add a new component support ?</a></li>
+<li><a class="reference internal" href="#xpl-stat-or-xpl-trig">xpl-stat or xpl-trig</a></li>
+<li><a class="reference internal" href="#ds18b20-ds18s20-ds2438">DS18B20, DS18S20, DS2438</a><ul>
+<li><a class="reference internal" href="#xpl-messages">xPL messages</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#related-links">Related links</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../plugin_nbz_tts/plugin_nbz_tts.html"
+                        title="previous chapter">Purpose</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_ozwave/plugin_ozwave.html"
+                        title="next chapter">OZWAVE plugin</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/plugin_onewire/plugin_onewire.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_ozwave/plugin_ozwave.html" title="OZWAVE plugin"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_nbz_tts/plugin_nbz_tts.html" title="Purpose"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

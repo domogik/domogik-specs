@@ -1,0 +1,163 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>New URL lookup sequence for rest &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Uses Cases for General Interactions" href="../robert_project/robert_project.html" />
+    <link rel="prev" title="Table of contents" href="../plugin_zwave/plugin_zwave.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../robert_project/robert_project.html" title="Uses Cases for General Interactions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_zwave/plugin_zwave.html" title="Table of contents"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="new-url-lookup-sequence-for-rest">
+<h1>New URL lookup sequence for rest<a class="headerlink" href="#new-url-lookup-sequence-for-rest" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="old-way">
+<h2>Old way<a class="headerlink" href="#old-way" title="Permalink to this headline">¶</a></h2>
+<p>have a bunch of if cycle to reach the correct function to call</p>
+</div>
+<div class="section" id="new-purposed-way">
+<h2>New purposed way<a class="headerlink" href="#new-purposed-way" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-json"><div class="highlight"><pre>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>caption=&#8221;example&#8221;,wrap=&#8221;0&#8221;</dt>
+<dd><dl class="first last docutils">
+<dt>urls = {</dt>
+<dd><blockquote class="first">
+<div>&#8216;^//$&#8217;:                                                                                   &#8216;rest_status&#8217;,
+&#8216;^/plugin/list$&#8217;:                                                                        &#8216;_rest_plugin_list&#8217;,
+&#8216;^/plugin/detail/(?P&lt;host&gt;[a-z]+)/(?P&lt;id&gt;[a-z]+)$&#8217;:                                      &#8216;_rest_plugin_detail&#8217;,
+&#8216;^/plugin/dependency/(?P&lt;host&gt;[a-z]+)/(?P&lt;id&gt;[a-z]+)$&#8217;:                                  &#8216;_rest_plugin_dependency&#8217;,
+&#8216;^/plugin/udev-rule/(?P&lt;host&gt;[a-z]+)/(?P&lt;id&gt;[a-z]+)$&#8217;:                                   &#8216;_rest_plugin_udev_rule&#8217;,
+&#8216;^/plugin/(?P&lt;command&gt;enable|disable)/(?P&lt;host&gt;[a-z]+)/(?P&lt;plugin&gt;[a-z]+)$&#8217;:             &#8216;_rest_plugin_enable_disable&#8217;,</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="section" id="how-this-works">
+<h3>how this works:<a class="headerlink" href="#how-this-works" title="Permalink to this headline">¶</a></h3>
+<p>when an url is passed to the processRequest class the &#8216;do_for_all_methode&#8217; function is called,</p>
+<p>this function will test each url inside the above list and see if the passed url is matched to any of them, if its matched it will return an python object with all matched criteria, then the function thats defined as the value for this matched url will be called with all matched parameters:</p>
+<p>example 1:
+url = /plugin/list
+matched items = {}
+called function = self._rest_plugin_list()</p>
+<p>example 2:
+url = /plugin/enable/igor/velbus
+matched items = {command: enable, host: igor, plugin: velbus}
+called function = self._rest_plugin_enable_disable( command=enable, host=igor, plugin=velbus)</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">New URL lookup sequence for rest</a><ul>
+<li><a class="reference internal" href="#old-way">Old way</a></li>
+<li><a class="reference internal" href="#new-purposed-way">New purposed way</a><ul>
+<li><a class="reference internal" href="#how-this-works">how this works:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../plugin_zwave/plugin_zwave.html"
+                        title="previous chapter">Table of contents</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../robert_project/robert_project.html"
+                        title="next chapter">Uses Cases for General Interactions</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/rest_newurl_lookup/rest_newurl_lookup.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../robert_project/robert_project.html" title="Uses Cases for General Interactions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_zwave/plugin_zwave.html" title="Table of contents"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

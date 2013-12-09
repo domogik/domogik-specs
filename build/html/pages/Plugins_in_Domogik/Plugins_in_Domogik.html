@@ -1,0 +1,186 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plugins in Domogik &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="REST /log" href="../REST_log/REST_log.html" />
+    <link rel="prev" title="Developing a plugin" href="../Plugins_development/Plugins_development.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../REST_log/REST_log.html" title="REST /log"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Plugins_development/Plugins_development.html" title="Developing a plugin"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="plugins-in-domogik">
+<h1>Plugins in Domogik<a class="headerlink" href="#plugins-in-domogik" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="plugin-list">
+<h2>Plugin list<a class="headerlink" href="#plugin-list" title="Permalink to this headline">¶</a></h2>
+<p>||{img fileId=343} | The plugins end user documentation has migrated to a new tool. It is now available on <a class="reference external" href="http://repo.domogik.org/package/">http://repo.domogik.org/package/</a> .__ Only specification pages for packages which are not yet in nightly builds will remain on this page.||</p>
+<div class="section" id="plugins-with-the-doc-still-not-migrated">
+<h3>Plugins with the doc still not migrated<a class="headerlink" href="#plugins-with-the-doc-still-not-migrated" title="Permalink to this headline">¶</a></h3>
+<p>||__Plugin__|__Description______|__Target release <a href="#id31"><span class="problematic" id="id32">version__</span></a>
+((external_ar_rgb|ar_rgb)) | Manage RGB leds with an arduino | 0.2.0 (finished)
+((plugin_xbmc_not|xbmc_not)) <a href="#id1"><span class="problematic" id="id2">|Send notifications to a XBMC Media Center|obsolete (will be replaced by a full xbmc plugin)
+((plugin_gagenda|gagenda)) |Get events from a Google agenda|0.2.0
+((plugin_yweather|yweather)) |Get ((Plugin_weather_recommendations|weather)) data|0.2.0
+((plugin_zwave|zwave)) |Zwave|</span></a>?
+((plugin_ozwave|ozwave)) <a href="#id3"><span class="problematic" id="id4">|An alternative plugin for Zwave devices|</span></a>?
+((plugin_knx|knx)) <a href="#id5"><span class="problematic" id="id6">|KNX|</span></a> 0.2.0 (using a config file) 0.3.0 (Multi address device)
+((plugin_x10cm15a|x10_cm15a)) <a href="#id7"><span class="problematic" id="id8">|Use X10 devices with cm15a|</span></a>?
+((plugin_mochad|mochad)) <a href="#id9"><span class="problematic" id="id10">|Use Mochad to manage X10 devices with cm15 or cm19|</span></a> waiting for testers
+((plugin_rfxcom|rfxcom))|New usb Rfxcom| 0.2.0
+((external_rfxcom|rfxcom))|Rfxcom xPL version| 0.2.0
+((plugin_sms|sms)) <a href="#id11"><span class="problematic" id="id12">|Send SMS with Orange, SFR, Bouygues|</span></a> OK for Orange &amp;amp; SFR - waiting for tests for Bouygues
+((plugin_tts|tts)) <a href="#id13"><span class="problematic" id="id14">|Text To Speech|Version with festival TTS - OK
+((plugin_zibase|zibase)) |Control Zibase | OK for lamp, appliance, Oregon temp and Oregon temp/hyg, waiting for tests of other sensors
+((plugin_ipushnot|ipushnot)) |Send iPhone notification|waiting for tests
+((plugin_apushnot|apushnot)) |Send android notification|waiting for tests
+((plugin_tschacon|tschacon)) |Use Tellstick to manage chacon devices|waiting for tests
+((plugin_nbz_tts|nbz_tts)) |Send message to nabaztag|</span></a>&#8211;Don&#8217;t work since Violet&#8217;s server is down&#8211; Will now use wizz.cc and opennabjab
+((plugin_xpl2ser|xpl2ser)) <a href="#id15"><span class="problematic" id="id16">|Send xPL messages to a serial device (Arduino)|waiting for Arduino part
+((plugin_foscam|foscam))   |Control Foscam command relay|</span></a>?
+((plugin_diskfree|diskfree)) <a href="#id17"><span class="problematic" id="id18">|Send disk usages over xPL|</span></a>?
+((external_ar_tank|ar_tank)) | Get a tank level with an Arduino | ?
+((external_squeezebox|SqueezeBox)) <a href="#id19"><span class="problematic" id="id20">|Control you SqueezeBox Center|0.2.0
+((plugin_dawndusk|dawndusk)) |Send dawn,dusk and day/night messages over xPL|0.2.0
+((plugin_telldus|telldus)) |Another plugin to manage Tellstick and Tellstick Duo|0.2.0
+((plugin_velbus|Velbus)) |Plugin for Velbus Home Automation System from Velleman|0.1.0
+((plugin_karotz|karotz)) |Control Karotz |Ok for tts , LED and ears under development|</span></a>
+((plugin_bluez|bluez)) <a href="#id21"><span class="problematic" id="id22">|Detect bluetooth phones |0.2.0||</span></a></p>
+</div>
+<div class="section" id="ideas">
+<h3>Ideas<a class="headerlink" href="#ideas" title="Permalink to this headline">¶</a></h3>
+<p>||__Plugin__|__Description__
+((plugin_gvsms|gvsms)) <a href="#id23"><span class="problematic" id="id24">|Send free text messages (SMS) with Google Voice
+((plugin_tv_samsg|tv_samsg)) |Control a Samsung television with a serial port
+((plugin_snmp|snmp)) |Collect SNMP statistics (OIDs are configurable)|</span></a>
+((plugin_cron|cron)) <a href="#id25"><span class="problematic" id="id26">|A cron server over XPL|</span></a>
+((plugin_lighting|lighting)) <a href="#id27"><span class="problematic" id="id28">|A lighting implementation||</span></a></p>
+</div>
+<div class="section" id="school-projects">
+<h3>School projects<a class="headerlink" href="#school-projects" title="Permalink to this headline">¶</a></h3>
+<p>||__Plugin__|__Description__|__Target release <a href="#id31"><span class="problematic" id="id33">version__</span></a>
+((plugin_bts_gen|bts_gen))|Generic scenario plugin for a bts project|BTS project only for the moment
+((plugin_water|water))|Water|prototype not ended. For example only||</p>
+</div>
+<div class="section" id="other">
+<h3>Other<a class="headerlink" href="#other" title="Permalink to this headline">¶</a></h3>
+<p>||__Nom__|__Description__
+((plugin_pyozw|py-openzwave)) <a href="#id29"><span class="problematic" id="id30">|py-openzwave installation methode (require for ozwave plugin)||</span></a></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Plugins in Domogik</a><ul>
+<li><a class="reference internal" href="#plugin-list">Plugin list</a><ul>
+<li><a class="reference internal" href="#plugins-with-the-doc-still-not-migrated">Plugins with the doc still not migrated</a></li>
+<li><a class="reference internal" href="#ideas">Ideas</a></li>
+<li><a class="reference internal" href="#school-projects">School projects</a></li>
+<li><a class="reference internal" href="#other">Other</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Plugins_development/Plugins_development.html"
+                        title="previous chapter">Developing a plugin</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../REST_log/REST_log.html"
+                        title="next chapter">REST /log</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Plugins_in_Domogik/Plugins_in_Domogik.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../REST_log/REST_log.html" title="REST /log"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Plugins_development/Plugins_development.html" title="Developing a plugin"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

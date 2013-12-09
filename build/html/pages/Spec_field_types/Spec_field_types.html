@@ -1,0 +1,210 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Types for generating UI fields &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Specs of helpers that will use the MQ system" href="../Spec_helpers/Spec_helpers.html" />
+    <link rel="prev" title="Data types of Domogik" href="../Spec_domogik_data_types/Spec_domogik_data_types.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Spec_helpers/Spec_helpers.html" title="Specs of helpers that will use the MQ system"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Spec_domogik_data_types/Spec_domogik_data_types.html" title="Data types of Domogik"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="types-for-generating-ui-fields">
+<h1>Types for generating UI fields<a class="headerlink" href="#types-for-generating-ui-fields" title="Permalink to this headline">¶</a></h1>
+<p>||__Created:__|8/07/2012
+__Creator:__|Ferllings
+__Reviewers:__|
+__Status:__|{GAUGE(value=&gt;50, max=&gt;100, label=&gt;&#8217;&#8216;draft&#8217;&#8216;, perc=&gt;true, labelsize=&gt;50, height=&gt;20, color=&gt;green, bgcolor=&gt;#EEEEEE)}{GAUGE}
+__Target:__|?
+__References:__|((Spec_device_template|Device template))||
+.. toctree:</p>
+<p>The following types are used to define a data value type and generate the appropriate field in the UI.</p>
+<blockquote>
+<div>Type: boolean</div></blockquote>
+<hr class="docutils" />
+<p>Validation: Validates that the value is True (e.g. the check box is checked) if the field has required=true.
+Errors: required</p>
+<blockquote>
+<div>Type: string</div></blockquote>
+<hr class="docutils" />
+<p>Parameters:
+<a href="#id1"><span class="problematic" id="id2">*</span></a>max_length:int (optional)
+<a href="#id3"><span class="problematic" id="id4">*</span></a>min_length:int (optional)
+<a href="#id5"><span class="problematic" id="id6">*</span></a>mask:str (optional) (9: Any digit character, A: Any letter character, <a href="#id7"><span class="problematic" id="id8">*</span></a>: Any letter or digit character)
+<a href="#id9"><span class="problematic" id="id10">*</span></a>multilignes:bool (optional)
+Validation: Validates max_length or min_length, if they are provided. Otherwise, all inputs are valid.
+Errors: required, max_length, min_length</p>
+<blockquote>
+<div>Type: choice</div></blockquote>
+<hr class="docutils" />
+<p>Parameters:
+<a href="#id11"><span class="problematic" id="id12">*</span></a>choices : An iterable (e.g., a list or tuple) of 2-tuples to use as choices for this field.
+Validation: Validates that the given value exists in the list of choices.
+Errors: required, invalid_choice</p>
+<blockquote>
+<div>Type: multiplechoice</div></blockquote>
+<hr class="docutils" />
+<p>Will return a list of values separated with &#8216;,&#8217;
+Parameters:
+<a href="#id13"><span class="problematic" id="id14">*</span></a>choices : An iterable (e.g., a list or tuple) of 2-tuples to use as choices for this field.
+Validation: Validates that the given values exists in the list of choices.
+Errors: required, invalid_choice</p>
+<blockquote>
+<div>Type: date</div></blockquote>
+<hr class="docutils" />
+<p>format is &#8216;DD/MM/YYYY&#8217;
+Parameters:
+Validation: Validates that the given value respect the particular date format.
+Errors: required, invalid</p>
+<blockquote>
+<div>Type: time</div></blockquote>
+<hr class="docutils" />
+<p>format is &#8216;HH:MM:SS&#8217;
+Parameters:
+Validation: Validates that the given value respect the particular time format.
+Errors: required, invalid</p>
+<blockquote>
+<div>Type: datetime</div></blockquote>
+<hr class="docutils" />
+<p>format is &#8216;YYYY-MM-DD HH:MM:SS&#8217;
+Parameters:
+Validation: Validates that the given value respect the particular datetime format.
+Errors: required, invalid</p>
+<blockquote>
+<div>Type: float</div></blockquote>
+<hr class="docutils" />
+<p>Parameters:
+<a href="#id15"><span class="problematic" id="id16">*</span></a>max_value:int (optional)
+<a href="#id17"><span class="problematic" id="id18">*</span></a>min_value:int (optional)
+These control the range of values permitted in the field.
+Validation: Validates that the given value is an float.
+Errors: required, invalid, max_value, min_value</p>
+<blockquote>
+<div>Type: integer</div></blockquote>
+<hr class="docutils" />
+<p>Parameters:
+<a href="#id19"><span class="problematic" id="id20">*</span></a>max_value:int (optional)
+<a href="#id21"><span class="problematic" id="id22">*</span></a>min_value:int (optional)
+These control the range of values permitted in the field.
+Validation: Validates that the given value is an integer.
+Errors: required, invalid, max_value, min_value</p>
+<blockquote>
+<div>Type: email</div></blockquote>
+<hr class="docutils" />
+<p>Validation: Validates that the given value is a valid email address.
+Parameters:
+<a href="#id23"><span class="problematic" id="id24">*</span></a>max_length:int (optional)
+<a href="#id25"><span class="problematic" id="id26">*</span></a>min_length:int (optional)
+Errors: required, invalid</p>
+<blockquote>
+<div>Type: ipv4</div></blockquote>
+<hr class="docutils" />
+<p>Validation: Validates that the given value is a valid IPv4 address.
+Errors: required, invalid</p>
+<blockquote>
+<div>Type: url</div></blockquote>
+<hr class="docutils" />
+<p>Parameters:
+<a href="#id27"><span class="problematic" id="id28">*</span></a>max_length:int (optional)
+<a href="#id29"><span class="problematic" id="id30">*</span></a>min_length:int (optional)
+Validation: Validates that the given value is a valid URL.
+Errors: required, invalid</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Spec_domogik_data_types/Spec_domogik_data_types.html"
+                        title="previous chapter">Data types of Domogik</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Spec_helpers/Spec_helpers.html"
+                        title="next chapter">Specs of helpers that will use the MQ system</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Spec_field_types/Spec_field_types.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Spec_helpers/Spec_helpers.html" title="Specs of helpers that will use the MQ system"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Spec_domogik_data_types/Spec_domogik_data_types.html" title="Data types of Domogik"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

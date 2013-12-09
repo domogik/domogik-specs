@@ -1,0 +1,165 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Minimal requirement &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Weather plugin recommendations" href="../Plugin_weather_recommendations/Plugin_weather_recommendations.html" />
+    <link rel="prev" title="Creating a timer with XplTimer" href="../Plugin_setting_timer/Plugin_setting_timer.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Plugin_weather_recommendations/Plugin_weather_recommendations.html" title="Weather plugin recommendations"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Plugin_setting_timer/Plugin_setting_timer.html" title="Creating a timer with XplTimer"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <p>Domogik implements logging features, so you must use them when you develop your own plugin.</p>
+<div class="section" id="minimal-requirement">
+<h1>Minimal requirement<a class="headerlink" href="#minimal-requirement" title="Permalink to this headline">¶</a></h1>
+<p>Here, we want ot use default log file : myplugin.log.</p>
+<p>First, you have to include XplPlugin (your plugin main class will inherit from it) and logger which wil provide you access to logging features :
+.. code-block:: json</p>
+<p>colors=&#8217;python&#8217;</p>
+<blockquote>
+<div>from domogik.xpl.common.plugin import XplPlugin</div></blockquote>
+<p>Then, as usual, declare your plugin (xpl/bin/&lt;myplugin&gt;.py) as an inheritance of XplPlugin :
+.. code-block:: json</p>
+<p>colors=&#8217;python&#8217;</p>
+<blockquote>
+<div>class MyPlugin(XplPlugin):</div></blockquote>
+<p>And in your ___init___() function, after calling XplPlugin.___init___() as usual and you can access log feature directly with self.log :
+.. code-block:: json</p>
+<p>colors=&#8217;python&#8217;</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>def __init__(self):</dt>
+<dd><p class="first">XplPlugin.__init__(self, name = &#8216;myplugin&#8217;)</p>
+<p class="last"># log info
+self.log.info(&#8220;This is an info&#8221;)
+self.log.debug(&#8220;This is debug&#8221;)
+self.log.warning(&#8220;This is a warning&#8221;)
+self.log.error(&#8220;This is an error&#8221;)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Next, in order to be able to log from your plugin lib part (xpl/lib/myplugin.py), simply pass self.log as an argument to your __init__ functions of your library classes ;)</p>
+</div>
+<div class="section" id="advanced-usage">
+<h1>Advanced usage<a class="headerlink" href="#advanced-usage" title="Permalink to this headline">¶</a></h1>
+<p>When you want to use more than one log file, you can declare a new logger like this :
+.. code-block:: json</p>
+<p>colors=&#8217;python&#8217;</p>
+<blockquote>
+<div>log_new = logger.Logger(&#8216;myplugin-newlog&#8217;)
+self._log_new = log_new.get_logger()
+self._log_new.info(&#8220;This is an info&#8221;)</div></blockquote>
+</div>
+<div class="section" id="things-to-know">
+<h1>Things to know<a class="headerlink" href="#things-to-know" title="Permalink to this headline">¶</a></h1>
+<p>There is no need for you to write a dedicated log line to indicate that plugin is starting. Call to XplPlugin._init_ will do this like this :
+.. code-block:: json</p>
+<blockquote>
+<div>2010-06-18 10:48:08,585 domogik-myplugin INFO &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-
+2010-06-18 10:48:08,585 domogik-myplugin INFO Starting plugin &#8216;myplugin&#8217; (new manager instance)</div></blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Minimal requirement</a></li>
+<li><a class="reference internal" href="#advanced-usage">Advanced usage</a></li>
+<li><a class="reference internal" href="#things-to-know">Things to know</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Plugin_setting_timer/Plugin_setting_timer.html"
+                        title="previous chapter">Creating a timer with XplTimer</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Plugin_weather_recommendations/Plugin_weather_recommendations.html"
+                        title="next chapter">Weather plugin recommendations</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Plugin_using_log_feature/Plugin_using_log_feature.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Plugin_weather_recommendations/Plugin_weather_recommendations.html" title="Weather plugin recommendations"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Plugin_setting_timer/Plugin_setting_timer.html" title="Creating a timer with XplTimer"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

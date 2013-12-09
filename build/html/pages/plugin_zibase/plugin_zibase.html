@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Purpose &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Table of contents" href="../plugin_zwave/plugin_zwave.html" />
+    <link rel="prev" title="Prerequisites" href="../plugin_zalarms/plugin_zalarms.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_zwave/plugin_zwave.html" title="Table of contents"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_zalarms/plugin_zalarms.html" title="Prerequisites"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="purpose">
+<h1>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h1>
+<p>TODO: ZiBase description</p>
+</div>
+<div class="section" id="protocol-list">
+<h1>Protocol list<a class="headerlink" href="#protocol-list" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>VISONIC433 : Protocol VISIONIC with frequency 433 MHz</li>
+<li>VISONIC868 : Protocol VISIONIC with frequency 868 MHz</li>
+<li>CHACON : Protocol CHACON for CHACON V2 + DIO series</li>
+<li>DOMIA : Protocol DOMIA for CHACON V1 + low cost devices</li>
+<li>X10 : Protocol RF X10</li>
+<li>ZWAVE : Protocol ZWAVE</li>
+<li>RFS10 : Protocol RFS10/TS10</li>
+<li>XDD433AL : Protocol X2D alarme with frequency 433 MHz</li>
+<li>XDD868AL : Protocol X2D alarme with frequency 868 MHz</li>
+<li>XDD868INSH : Protocol X2D inter/shutter</li>
+<li>XDD868PILOT : Protocol X2D Pilot Wire</li>
+<li>XDD868BOAC : Protocol X2D Boiler/AC</li>
+</ul>
+</div>
+<div class="section" id="plugin-configuration">
+<h1>Plugin configuration<a class="headerlink" href="#plugin-configuration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="enabling-plugin">
+<h2>Enabling plugin<a class="headerlink" href="#enabling-plugin" title="Permalink to this headline">¶</a></h2>
+<p>You can enable plugin by using:
+.. code-block:: json</p>
+<blockquote>
+<div>dmgenplug zibase</div></blockquote>
+<p>You just have to reload administration page to see the plugin in the list.</p>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>In Domogik administration, go to zibase configuration page.</p>
+<div class="section" id="ip">
+<h3>ip<a class="headerlink" href="#ip" title="Permalink to this headline">¶</a></h3>
+<p>IP of the ZiBase.</p>
+</div>
+<div class="section" id="interface">
+<h3>interface<a class="headerlink" href="#interface" title="Permalink to this headline">¶</a></h3>
+<p>Network interface to connect your PC to your local network.</p>
+</div>
+<div class="section" id="port">
+<h3>port<a class="headerlink" href="#port" title="Permalink to this headline">¶</a></h3>
+<p>Listening port for the reception of messages from the ZiBase.</p>
+</div>
+<div class="section" id="envar">
+<h3>envar<a class="headerlink" href="#envar" title="Permalink to this headline">¶</a></h3>
+<p>Enable reading internal variable</p>
+</div>
+<div class="section" id="interv">
+<h3>interv<a class="headerlink" href="#interv" title="Permalink to this headline">¶</a></h3>
+<p>Interval between each reading of the internal variables (in secondes)</p>
+</div>
+</div>
+<div class="section" id="start-plugin">
+<h2>Start plugin<a class="headerlink" href="#start-plugin" title="Permalink to this headline">¶</a></h2>
+<p>You can now start the plugin (start button).</p>
+</div>
+</div>
+<div class="section" id="creating-devices-for-zibase">
+<h1>Creating devices for ZiBase<a class="headerlink" href="#creating-devices-for-zibase" title="Permalink to this headline">¶</a></h1>
+<p>In administration, go to Organization &gt; Devices page to create tour devices.</p>
+<div class="section" id="actuators">
+<h2>Actuators<a class="headerlink" href="#actuators" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="lamp-device">
+<h3>lamp device<a class="headerlink" href="#lamp-device" title="Permalink to this headline">¶</a></h3>
+<p>Create a new device like this:</p>
+<ul class="simple">
+<li>Name : &#8220;Living room&#8221; (or whatever you want)</li>
+<li>Description : a short description (Placement, usage ,etc)</li>
+<li>Address : &lt;__Address <a href="#id1"><span class="problematic" id="id2">device__</span></a>&gt;:&lt;__protocol__&gt;. you should put : __G1:<a href="#id1"><span class="problematic" id="id3">CHACON__</span></a> or __G2:<a href="#id1"><span class="problematic" id="id4">X10__</span></a> or __G3:<a href="#id1"><span class="problematic" id="id5">DOMIA__</span></a></li>
+<li>Reference : &#8220;Zibase&#8221; (or whatever you want)</li>
+<li>Usage : &#8220;Light&#8221; (for example)</li>
+<li>Feature :</li>
+</ul>
+<p>** ZiBase.Switch provides only on/off
+** ZiBase.Dimmer provides on/off and dim/bright</p>
+<p>Examples :
+{IMG(fileId=&#8221;268|267&#8221;)}{IMG}</p>
+<p>((Setup_your_devices|Attribute the features to a place and you will be able to control your lamp.))</p>
+</div>
+<div class="section" id="appliance-device">
+<h3>appliance device<a class="headerlink" href="#appliance-device" title="Permalink to this headline">¶</a></h3>
+<p>Create a new device like this:</p>
+<ul class="simple">
+<li>Name : &#8220;Swimming pump&#8221; (or whatever you want)</li>
+<li>Description : a short description (Placement, usage ,etc)</li>
+<li>Address : &lt;__Address <a href="#id1"><span class="problematic" id="id6">device__</span></a>&gt;:&lt;__protocol__&gt;. you should put : __G1:<a href="#id1"><span class="problematic" id="id7">CHACON__</span></a> or __G2:<a href="#id1"><span class="problematic" id="id8">X10__</span></a> or __G3:<a href="#id1"><span class="problematic" id="id9">DOMIA__</span></a></li>
+<li>Reference : &#8220;Zibase&#8221; (or whatever you want)</li>
+<li>Usage : &#8220;Appliance&#8221; (for example)</li>
+<li>Feature : ZiBase.Switch</li>
+</ul>
+<p>((Setup_your_devices|Attribute the features to a place and you can now control your appliance.))</p>
+</div>
+</div>
+<div class="section" id="sensors">
+<h2>Sensors<a class="headerlink" href="#sensors" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="sensors-list">
+<h3>Sensors list<a class="headerlink" href="#sensors-list" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Oregon rain</li>
+<li>Oregon U.V (*)</li>
+<li>Oregon Anemometer</li>
+<li>Oregon Thermometer</li>
+<li>Oregon Thermometer / Hygrometer</li>
+<li>OWL CM119 / CM130</li>
+<li>Digimax TS10 (*)</li>
+<li>ON/OFF Sensor (*)</li>
+</ul>
+<p>(*) Sensor not tested</p>
+</div>
+<div class="section" id="add-a-new-sensor">
+<h3>Add a new sensor<a class="headerlink" href="#add-a-new-sensor" title="Permalink to this headline">¶</a></h3>
+<p>Create a new sensor like this:</p>
+<ul class="simple">
+<li>Name : &#8220;Swimming temp&#8221; (or whatever you want)</li>
+<li>Description : a short description (Placement, usage ,etc)</li>
+<li>Address : &lt;__Address <a href="#id1"><span class="problematic" id="id10">device__</span></a>&gt; (Sensor ID in zibase configurator)</li>
+</ul>
+<p>{IMG(fileId=&#8221;274&#8221;)}{IMG}
+* Reference : &#8220;Zibase&#8221; (or whatever you want)
+* Usage : &#8220;Temperature&#8221; (for example)
+* Feature : ZiBase.Oregon Temperature</p>
+</div>
+</div>
+<div class="section" id="internal-variable">
+<h2>Internal variable<a class="headerlink" href="#internal-variable" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="add-an-internal-variable-reading">
+<h3>Add an internal variable reading<a class="headerlink" href="#add-an-internal-variable-reading" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Name : &#8220;Internal var&#8221; (or whatever you want)</li>
+<li>Description : a short description (Usage ,etc)</li>
+<li>Address : &#8220;VAR&#8221; &amp;amp; &lt;__number of the internal <a href="#id1"><span class="problematic" id="id11">variable__</span></a>&gt; ( for example : VAR1 for the internal variable number 1)</li>
+<li>Reference : &#8220;Zibase&#8221; (or whatever you want)</li>
+<li>Usage : whatever you want</li>
+<li>Feature : ZiBase.Internal VARs</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="helpers">
+<h1>Helpers<a class="headerlink" href="#helpers" title="Permalink to this headline">¶</a></h1>
+<p>&#8216;&#8217;To get an introduction to helpers, you can read the ((Plugins_helpers|Helper documentation)). To use a helper, the plugin must be stopped.&#8217;&#8216;</p>
+</div>
+<div class="section" id="developper-notes">
+<h1>Developper Notes<a class="headerlink" href="#developper-notes" title="Permalink to this headline">¶</a></h1>
+<p>TODO:xpl schema</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Purpose</a></li>
+<li><a class="reference internal" href="#protocol-list">Protocol list</a></li>
+<li><a class="reference internal" href="#plugin-configuration">Plugin configuration</a><ul>
+<li><a class="reference internal" href="#enabling-plugin">Enabling plugin</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li><a class="reference internal" href="#ip">ip</a></li>
+<li><a class="reference internal" href="#interface">interface</a></li>
+<li><a class="reference internal" href="#port">port</a></li>
+<li><a class="reference internal" href="#envar">envar</a></li>
+<li><a class="reference internal" href="#interv">interv</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#start-plugin">Start plugin</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#creating-devices-for-zibase">Creating devices for ZiBase</a><ul>
+<li><a class="reference internal" href="#actuators">Actuators</a><ul>
+<li><a class="reference internal" href="#lamp-device">lamp device</a></li>
+<li><a class="reference internal" href="#appliance-device">appliance device</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sensors">Sensors</a><ul>
+<li><a class="reference internal" href="#sensors-list">Sensors list</a></li>
+<li><a class="reference internal" href="#add-a-new-sensor">Add a new sensor</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#internal-variable">Internal variable</a><ul>
+<li><a class="reference internal" href="#add-an-internal-variable-reading">Add an internal variable reading</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#helpers">Helpers</a></li>
+<li><a class="reference internal" href="#developper-notes">Developper Notes</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../plugin_zalarms/plugin_zalarms.html"
+                        title="previous chapter">Prerequisites</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_zwave/plugin_zwave.html"
+                        title="next chapter">Table of contents</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/plugin_zibase/plugin_zibase.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_zwave/plugin_zwave.html" title="Table of contents"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_zalarms/plugin_zalarms.html" title="Prerequisites"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

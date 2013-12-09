@@ -1,0 +1,185 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>How to adapt a non-python xpl plugin to domogik &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Ideas for future" href="../AndroidDevelopers/AndroidDevelopers.html" />
+    <link rel="prev" title="1wire bus creation tutorial" href="../1wire_bus_creation_tutorial/1wire_bus_creation_tutorial.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../AndroidDevelopers/AndroidDevelopers.html" title="Ideas for future"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../1wire_bus_creation_tutorial/1wire_bus_creation_tutorial.html" title="1wire bus creation tutorial"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <p>Note : this page is actually a draft for the reflexion on facilities to adapt external plugins to Domogik</p>
+<div class="section" id="how-to-adapt-a-non-python-xpl-plugin-to-domogik">
+<h1>How to adapt a non-python xpl plugin to domogik<a class="headerlink" href="#how-to-adapt-a-non-python-xpl-plugin-to-domogik" title="Permalink to this headline">¶</a></h1>
+<p>To make a non-domogik plugin work with Domogik, you have several things to do :</p>
+<div class="section" id="give-info-to-manager-when-plugins-is-asked-to">
+<h2>1 - Give info to manager when plugins is asked to<a class="headerlink" href="#give-info-to-manager-when-plugins-is-asked-to" title="Permalink to this headline">¶</a></h2>
+<p>When you launch plugin with option &#8220;config&#8221;, You should obtain on stdout something like that :</p>
+<p>||TODO : complete with last evolutions||</p>
+<div class="highlight-json"><pre>$ my_plugin.pl config
+IS_DOMOGIK_PLUGIN = True
+DOMOGIK_PLUGIN_TECHNOLOGY = "rfid"
+DOMOGIK_PLUGIN_DESCRIPTION = "Use Mir:ror device"
+DOMOGIK_PLUGIN_VERSION = "0.1"
+DOMOGIK_PLUGIN_DOCUMENTATION_LINK = "http://wiki.domogik.org/tiki-index.php?page=plugins/Mirror"
+DOMOGIK_PLUGIN_CONFIGURATION=[
+      {"id" : 0,
+       "key" : "startup-plugin",
+       "description" : "Automatically start plugin at Domogik startup",
+       "default" : "False"},
+      {"id" : 1,
+       "key" : "device",
+       "description" : "Mir:ror device (ex : /dev/hidraw0)",
+       "default" : "/dev/hidraw0"},
+      {"id" : 2,
+       "key" : "nbmaxtry",
+       "description" : "Max number of tries to open Mir:ror device",
+       "default" : 5,
+      {"id" : 3,
+       "key" : "interval",
+       "description" : "Delay between each try to open Mir:ror device",
+       "default" : 10}]</pre>
+</div>
+<p>The plugin must stop after displaying this.</p>
+<p>These informations will be used by Domogik Manager (which at startup will launch each plugin with &#8220;config&#8221; option) to get informations about plugins. These informations will be get by REST server with /plugin/list/&lt;plugin name&gt; and /plugin/detail/&lt;plugin name&gt; to give informations to UI.</p>
+<p>By setting these informations, you will be able to configure your plugin directly from UI!</p>
+</div>
+<div class="section" id="implement-f-option">
+<h2>2 - Implement &#8220;-f&#8221; option<a class="headerlink" href="#implement-f-option" title="Permalink to this headline">¶</a></h2>
+<p>Without -f option, plugin must launch itself in background.</p>
+<p>With -f option, plugin should launch itself on foreground.</p>
+</div>
+<div class="section" id="stop-plugin-when-requested">
+<h2>3 - Stop plugin when requested<a class="headerlink" href="#stop-plugin-when-requested" title="Permalink to this headline">¶</a></h2>
+<p>When plugin receives this xpl message, it should stop itself.
+||TODO : update if it changed||</p>
+<div class="highlight-json"><pre>DOMOGIK.SYSTEM
+{
+COMMAND=command to send
+HOST=name of the host where a component should be started/stopped
+[PLUGIN=name of the plugin concerned by the command]
+[FORCE=0||1]
+}</pre>
+</div>
+</div>
+<div class="section" id="get-config-with-xpl-queries">
+<h2>4 - Get config with xPL queries<a class="headerlink" href="#get-config-with-xpl-queries" title="Permalink to this headline">¶</a></h2>
+<p>At startup, plugin should get configuration from Domogik database. To do this, plugin will ask with a xPL message on network for its configuration. The Database Manager will reply to this request with the config values</p>
+<p>||TODO : describe xpl dialog here||</p>
+</div>
+<div class="section" id="where-the-plugin-should-be-put">
+<h2>5 - Where the plugin should be put ?<a class="headerlink" href="#where-the-plugin-should-be-put" title="Permalink to this headline">¶</a></h2>
+<p>||TODO : see if we use an external folder dedicated to non-python plugins||</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">How to adapt a non-python xpl plugin to domogik</a><ul>
+<li><a class="reference internal" href="#give-info-to-manager-when-plugins-is-asked-to">1 - Give info to manager when plugins is asked to</a></li>
+<li><a class="reference internal" href="#implement-f-option">2 - Implement &#8220;-f&#8221; option</a></li>
+<li><a class="reference internal" href="#stop-plugin-when-requested">3 - Stop plugin when requested</a></li>
+<li><a class="reference internal" href="#get-config-with-xpl-queries">4 - Get config with xPL queries</a></li>
+<li><a class="reference internal" href="#where-the-plugin-should-be-put">5 - Where the plugin should be put ?</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../1wire_bus_creation_tutorial/1wire_bus_creation_tutorial.html"
+                        title="previous chapter">1wire bus creation tutorial</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../AndroidDevelopers/AndroidDevelopers.html"
+                        title="next chapter">Ideas for future</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/AdaptNonPythonPlugin/AdaptNonPythonPlugin.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../AndroidDevelopers/AndroidDevelopers.html" title="Ideas for future"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../1wire_bus_creation_tutorial/1wire_bus_creation_tutorial.html" title="1wire bus creation tutorial"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

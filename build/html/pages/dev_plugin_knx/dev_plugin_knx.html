@@ -1,0 +1,565 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installation du plugin KNX &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="DB" href="../device_params/device_params.html" />
+    <link rel="prev" title="astuce_domodroid_tablette_murale" href="../astuce_domodroid_tablette_murale/astuce_domodroid_tablette_murale.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../device_params/device_params.html" title="DB"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../astuce_domodroid_tablette_murale/astuce_domodroid_tablette_murale.html" title="astuce_domodroid_tablette_murale"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <p>__Notice : this plugin is still in <a href="#id9"><span class="problematic" id="id10">specication__</span></a></p>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="installation-du-plugin-knx">
+<h1>Installation du plugin KNX<a class="headerlink" href="#installation-du-plugin-knx" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installation-du-bcusdk">
+<h2>Installation du BCUSDK<a class="headerlink" href="#installation-du-bcusdk" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+<div class="section" id="id1">
+<h1>Installation du BCUSDK<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>Le BCUSDK contient des outils qui permettent la communication entre le PC et le bus via une interface</p>
+<p>Pour ubuntu
+Installer directement via launchpad
+Ajouter dans le fichier /etc/apt/sources.list
+.. code-block:: json</p>
+<blockquote>
+<div><p>deb <a class="reference external" href="http://ppa.launchpad.net/mkoegler/bcusdk/ubuntu">http://ppa.launchpad.net/mkoegler/bcusdk/ubuntu</a> YOUR_UBUNTU_VERSION_HERE main
+deb-src <a class="reference external" href="http://ppa.launchpad.net/mkoegler/bcusdk/ubuntu">http://ppa.launchpad.net/mkoegler/bcusdk/ubuntu</a> YOUR_UBUNTU_VERSION_HERE main</p>
+<p>sudo apt-get update
+sudo apt-get install bcusdk</p>
+</div></blockquote>
+<p>Sinon
+.. code-block:: json</p>
+<blockquote>
+<div><p>Installer php5 via synaptic
+apt-get install gcc
+apt-get install g++
+apt-get install make
+apt-get install libmysqlclient15-dev</p>
+<p>wget <a class="reference external" href="http://sourceforge.net/projects/bcusdk/files/pthsem/pthsem_2.0.8.tar.gz">http://sourceforge.net/projects/bcusdk/files/pthsem/pthsem_2.0.8.tar.gz</a>
+wget <a class="reference external" href="http://sourceforge.net/projects/bcusdk/files/bcusdk/bcusdk_0.0.5.tar.gz">http://sourceforge.net/projects/bcusdk/files/bcusdk/bcusdk_0.0.5.tar.gz</a>
+tar -xzf pthsem_2.0.8.tar.gz
+tar -xzf bcusdk_0.0.5.tar.gz</p>
+<p>cd pthsem-2.0.8/
+./configure
+make
+make test
+make install
+export LD_LIBRARY_PATH=/usr/local/lib</p>
+<p>cd ..
+cd bcusdk-0.0.5/
+./configure &#8211;enable-onlyeibd &#8211;enable-eibnetiptunnel &#8211;enable-usb &#8211; enable-eibnetipserver &#8211;enable-ft12
+make
+make install</p>
+</div></blockquote>
+<p>EIBD est prêt a fonctionner</p>
+<p>Les paramètre eibd doivent être rentrer dans le fichier /etc/init.d/knxeibd au niveau de la ligne
+.. code-block:: json</p>
+<blockquote>
+<div>EIBD_DAEMON_OPTS=&#8221;&#8211;pid-file=$EIBD_PIDFILE paramètre</div></blockquote>
+<p>par exemple le paramètre peuvent être:
+Interface IP: -i -d -D ipt:adressIP
+Interface Serie:-i -d -D bcu1:/dev/ttyS0</p>
+<p>Une fois paramètrer vous devez faire se lancer EIBD avant domogik, si vous avez défini le lancement automatique de domogik regarder dans /etc/rcX.d/ la valeur de l&#8217;ordre de lancement (voir update-rc.d) et définir correctement l&#8217;ordre</p>
+<div class="highlight-json"><pre>sudo update-rc.d knxeibd defaults 19</pre>
+</div>
+<p>Paramètrage du plugin:
+Pour palier a l&#8217;absence d&#8217;adresse multiple une solution a été adopté:
+Un fichier de configuration est placé dans /var/log/domogik/knx.txt</p>
+<p>La structure du fichier est la suivante:
+datatype: adr_dmg: adr_cmd: adr_stat: end</p>
+<p>exemple:
+.. code-block:: json</p>
+<blockquote>
+<div>datatype:DT_Switch adr_dmg:lampe1 adr_cmd:1/1/5 adr_stat:1/1/0 end</div></blockquote>
+<p>L&#8217;adresse dmg n&#8217;a pas de structure propre, un nom un numéro convient a condition qu&#8217;il soit unique.</p>
+<p>Les datatypes défini sont:
+DT_Switch (0 ou 1)
+DT_Scaling (Valeur 0-100% code 0-FFh) utilisé pour les variateurs
+DT_Percent (valeur en % de 0-250)
+DT_UpDown (pour les volets)
+DT_Angle (de 0 à 360°)
+DT_HCACMode (gestion de chauffage 4 ordres)</p>
+<p>Une fois votre fichier de configuration complet vous pouvez démarrer le plugin (le fichier est charger au lancement du plugin) et ajouter vos device dans domogik en indiquant l&#8217;adresse adr_dmg</p>
+</div>
+<div class="section" id="protocole">
+<h1>Protocole<a class="headerlink" href="#protocole" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="ressources">
+<h2>Ressources<a class="headerlink" href="#ressources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Explication des bases : <a class="reference external" href="http://www.openremote.org/display/knowledge/Technical+Overview+of+KNX#TechnicalOverviewofKNX-ETSEngineeringToolSoftware">http://www.openremote.org/display/knowledge/Technical+Overview+of+KNX#TechnicalOverviewofKNX-ETSEngineeringToolSoftware</a></li>
+</ul>
+</div>
+<div class="section" id="generalite">
+<h2>Généralité<a class="headerlink" href="#generalite" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Un émetteur (interrupteur, capteur, etc...) n&#8217;émet qu&#8217;une seul adresse de groupe.</li>
+<li>Un actionneur peux avoir plusieurs groupes.</li>
+<li>Les adresses de groupes représentent un ordre ou une information. En fait, elle sert de lien entre le ou les émetteurs, et le ou les récepteurs.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id2">
+<h1>Installation du BCUSDK<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h1>
+<p>Le BCUSDK contient des outils qui permettent la communication entre le PC et le bus via une interface</p>
+<p>Pour ubuntu
+Installer directement via launchpad
+Ajouter
+.. code-block:: json</p>
+<blockquote>
+<div><p>deb <a class="reference external" href="http://ppa.launchpad.net/mkoegler/bcusdk/ubuntu">http://ppa.launchpad.net/mkoegler/bcusdk/ubuntu</a> YOUR_UBUNTU_VERSION_HERE main
+deb-src <a class="reference external" href="http://ppa.launchpad.net/mkoegler/bcusdk/ubuntu">http://ppa.launchpad.net/mkoegler/bcusdk/ubuntu</a> YOUR_UBUNTU_VERSION_HERE</p>
+<p>à votre source.list
+sudo apt-get update
+sudo apt-get install bcusdk</p>
+</div></blockquote>
+<p>Sinon
+.. code-block:: json</p>
+<blockquote>
+<div><p>Installer php5 via synaptic
+apt-get install gcc
+apt-get install g++
+apt-get install make
+apt-get install libmysqlclient15-dev</p>
+<p>wget <a class="reference external" href="http://sourceforge.net/projects/bcusdk/files/pthsem/pthsem_2.0.8.tar.gz">http://sourceforge.net/projects/bcusdk/files/pthsem/pthsem_2.0.8.tar.gz</a>
+wget <a class="reference external" href="http://sourceforge.net/projects/bcusdk/files/bcusdk/bcusdk_0.0.5.tar.gz">http://sourceforge.net/projects/bcusdk/files/bcusdk/bcusdk_0.0.5.tar.gz</a>
+tar -xzf pthsem_2.0.8.tar.gz
+tar -xzf bcusdk_0.0.5.tar.gz</p>
+<p>cd pthsem-2.0.8/
+./configure
+make
+make test
+make install
+export LD_LIBRARY_PATH=/usr/local/lib</p>
+<p>cd ..
+cd bcusdk-0.0.5/
+./configure &#8211;enable-onlyeibd &#8211;enable-eibnetiptunnel &#8211;enable-usb &#8211; enable-eibnetipserver &#8211;enable-ft12
+make
+make install</p>
+</div></blockquote>
+<p>EIBD est prêt a fonctionner</p>
+<p>Erreur: lors de mon install sur une Ubuntu server 11.04 j&#8217;ai eu l&#8217;erreur suivante en lançant eibd:
+blablab error loading libraries: libpthsem.so.20 ....</p>
+<p>J&#8217;ai vite trouver la réponse sur le net et voici la démarche a suivre</p>
+<p>la commande ldd /usr/local/bin/eibd affiche les librairies utilisé par eibd et leur emplacement la ligne libpthsem.so.20 affiche not found</p>
+<p>Vérifier que libpthsem.so.20 est bien présent dans /usr/local/lib
+Éditer le fichier /etc/ld.so.conf et ajouter la ligne:
+include /usr/local/lib</p>
+<p>Enregistrer et quitter</p>
+<p>en root lancer la commande ldconfig</p>
+<p>relancer la commande ldd /usr/local/bin/eibd cette fois ci le chemin devrai être correct et eibd fonctionne.</p>
+<div class="section" id="fonctions">
+<h2>Fonctions<a class="headerlink" href="#fonctions" title="Permalink to this headline">¶</a></h2>
+<p>Les fonctions suivantes sont utilisable avec eibd:
+groupsocketlisten: éoute le trafic bus en permance
+groupwrite, groupswrite: écrit des données sur le bus
+groupread: demande une valeur d&#8217;une adresse de groupe
+groupresponse, groupsresponse: répond à une demande de valeur</p>
+<p>les &#8216;s&#8217; dans les fonctions correspondent à des données courtes, l&#8217;absence de s indique une donnée longue.</p>
+</div>
+<div class="section" id="messages">
+<h2>Messages<a class="headerlink" href="#messages" title="Permalink to this headline">¶</a></h2>
+<p>Les messages sont constitués de:</p>
+<p>L&#8217;adresse de l&#8217;émetteur (séparé par des .)
+L&#8217;adresse de groupe (séparé par de /)
+Des données (ordre ou état)</p>
+<ul class="simple">
+<li>L&#8217;adresse de l&#8217;émetteur est l&#8217;adresse physique</li>
+<li>L&#8217;adresse de groupe indique à qui est destiné le message,(sauf en mode prog).</li>
+</ul>
+<p>Par exemple, je veux allumer 5 ampoules avec un interrupteur, je les joins tous par la même adresse de groupe.
+Mon interrupteur envoie donc 1 sur l&#8217;adresse de groupe A/B/C, tous les participants voient passer le télégramme, et les ampoules avec l&#8217;adresse de groupe A/B/C s&#8217;allument.</p>
+<p>Les sorties d&#8217;état ainsi que les informations type températures sont diffusées de la même manière.
+Dans l&#8217;exemple précédent, l&#8217;ampoule 1 peut par exemple envoyer son état en B/B/C à chaque modification ou sur demande.</p>
+<p>exemple de message vue par groupsocketlisten d&#8217;EIBD ou 1/1/1 est un groupe qui commande une sortie A et ou le groupe 2/1/1 est le groupe d&#8217;état de cette sortie
+.. code-block:: json</p>
+<blockquote>
+<div><p>Read from 1.2.1 to 2/1/1   # le module 1.2.1 demande l&#8217;état du groupe 2/1/1 qui est l&#8217;état de ma lampe</p>
+<p>Response from 1.1.2 to 2/1/1: 01 # le module 1.1.2 répond que le 2/1/1 est a 1</p>
+<p>Write from 1.2.1 to 1/1/1: 00 # 1.2.1 en déduit que l&#8217;action a faire est de mettre a 0 la lampe en commandant le groupe de commande 1/1/1</p>
+<p>Write from 1.1.2 to 2/1/1: 00 # le module répond donc en écrivant le groupe 2/1/1 est a 0</p>
+</div></blockquote>
+</div>
+<div class="section" id="type-de-message">
+<h2>Type de message<a class="headerlink" href="#type-de-message" title="Permalink to this headline">¶</a></h2>
+<p><a href="#id3"><span class="problematic" id="id4">*</span></a>s : short : moins de 6 bits
+<a href="#id5"><span class="problematic" id="id6">*</span></a>l : long : jusqu&#8217;à 3 octets</p>
+<div class="section" id="short">
+<h3>short<a class="headerlink" href="#short" title="Permalink to this headline">¶</a></h3>
+<p>Utiliser __groupswrite__.</p>
+<p>en shell:
+.. code-block:: json</p>
+<blockquote>
+<div>groupswrite ip:127.0.0.1 1/1/1 1</div></blockquote>
+<p>Écrit la valeur 1 dans un message de moins de 6bits sur le groupe 1/1/1
+long
+<strong>*</strong></p>
+<p>Utiliser __groupwrite__.
+.. code-block:: json</p>
+<blockquote>
+<div>groupwrite ip:127.0.0.1 1/1/1 1</div></blockquote>
+<p>Écrit la valeur 1 dans un message de plus de 6bits sur le groupe 1/1/1</p>
+</div>
+</div>
+<div class="section" id="variation">
+<h2>Variation<a class="headerlink" href="#variation" title="Permalink to this headline">¶</a></h2>
+<p>La variation est une commande &#8220;+&#8221; ou &#8220;-&#8221; suivie d&#8217;une commande d&#8217;arrêt. A ne pas utiliser depuis l&#8217;UI donc.
+Privilégier les pourcentages.</p>
+</div>
+<div class="section" id="comment-faire-la-difference-entre-un-on-off-une-montee-descente-etc">
+<h2>Comment faire la différence entre un on/off, une montée descente, etc ?<a class="headerlink" href="#comment-faire-la-difference-entre-un-on-off-une-montee-descente-etc" title="Permalink to this headline">¶</a></h2>
+<p>Il n&#8217;y a pas de différence, la donnée est la même. Si une adresse de groupe contient un volet et un éclairage, l&#8217;envoi d&#8217;un 1 sur cette adresse provoquera l&#8217;allumage de la lumière et la descente du volet.</p>
+<p>Un on/off c&#8217;est 0 ou 1
+Monter descente c&#8217;est 0 ou 1</p>
+<p>Varier la lumière + c&#8217;est 09 la lumière augmente jusqu&#8217;à ce qu&#8217;on envoie un 08
+Varier la lumière - c&#8217;est 01 puis 00 ces 2 message sont en type s
+mais on peux aussi envoyer la valeur en % mais ce n&#8217;est pas géré par la même adresse de groupe. Même si c&#8217;est la même sortie et c&#8217;est un message de type long.</p>
+<p>Les groupes sont des commandes ou des informations.
+Par exemple, sur un module de sortie, il est possible de déclencher un allumage ou un allumage-minuterie, en commandant 2 adresses de groupe différente. Par contre l&#8217;adresse de groupe qui indique l&#8217;état de la lampe sera la même dans les deux cas.</p>
+<p>ex:
+Pour l&#8217;allumage simple envoie 1 à l&#8217;adresse 1/2/3
+Pour l&#8217;allumage-minuterie envoie 1 à l&#8217;adresse 1/2/4
+L&#8217;état de la lampe sera toujours envoyé en 1/3/3</p>
+</div>
+</div>
+<div class="section" id="eibd-et-interactions-avec-eibd">
+<h1>Eibd et interactions avec Eibd<a class="headerlink" href="#eibd-et-interactions-avec-eibd" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id7">
+<h2>Ressources<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://wiki.erazor-zone.de/wiki:projects:linux:eib">http://wiki.erazor-zone.de/wiki:projects:linux:eib</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="tools">
+<h1>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="wireshark">
+<h2>Wireshark<a class="headerlink" href="#wireshark" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://www.auto.tuwien.ac.at/a-lab/wireshark-plugin-for-knxnet/ip.html">https://www.auto.tuwien.ac.at/a-lab/wireshark-plugin-for-knxnet/ip.html</a></li>
+</ul>
+<p>commandes en shell d&#8217;EIBD:
+groupsocketlisten: affiche tous les messages passant sur le bus jusqu&#8217;à interruption.</p>
+<p>Les messages sont du type:
+&#8220;Write from X.Y.Z to X/Y/Z: Value&#8221;
+or
+&#8220;Read from X.Y.Z to X/Y/Z&#8221;</p>
+<p>&#8220;Response from X.Y.Z to X/Y/Z: Value&#8221;</p>
+<p>groupwrite: envoi un message sur le bus et acquitte avec un:&#8221;Send request&#8221; puis termine.</p>
+<p>Nota: les messages envoyé via le localhost et lu par le localhost on l&#8217;adresse 0.0.0 si le message est envoyé par une autre machine via l&#8217;interface il prend l&#8217;adresse physique de l&#8217;interface.
+Par exemple si 2 serveurs contrôlent le bus (1 de gestion et 1 de visualisation)</p>
+</div>
+</div>
+<div class="section" id="dpt-les-plus-utilises">
+<h1>DPT les plus utilisés<a class="headerlink" href="#dpt-les-plus-utilises" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><ul class="simple">
+<li>1.001: switching (on/off) (EIS1)</li>
+</ul>
+</div></blockquote>
+<p>&#8211;    * 3.007: dimming (control of dimmer using up/down/stop) (EIS2)&#8211; Ne pas utilisé dans domogik, en fonction du lag commande incertaine
+&#8211;    * 3.008: blinds (control of blinds using close/open/stop)&#8211; Idem ci dessus</p>
+<blockquote>
+<div><ul class="simple">
+<li>5.xxx: 8bit unsigned integer (from 0 to 255) (EIS6)</li>
+<li>5.001: scaling (from 0 to 100%)</li>
+<li>5.003: angle (from 0 to 360°)</li>
+<li>6.xxx: 8bit signed integer (EIS14)</li>
+<li>7.xxx: 16bit unsigned integer (EIS10)</li>
+<li>8.xxx: 16bit signed integer</li>
+<li>9.xxx: 16 bit floating point number (EIS5)</li>
+<li>10.001: time (EIS3)</li>
+<li>11.001: date (EIS4)</li>
+<li>12.xxx: 32bit unsigned integer (EIS11)</li>
+<li>13.xxx: 32bit signed integer</li>
+<li>14.xxx: 32 bit IEEE 754 floating point number</li>
+<li>16.000: string (max 14 ASCII char) (EIS15)</li>
+<li>20.102: heating mode (comfort/standby/night/frost)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="schema-xpl">
+<h1>Schéma xpl<a class="headerlink" href="#schema-xpl" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>xpl-cmnd : utilisé pour exécuter une commande sur le bus : Write,Read,Response</li>
+<li>xpl-trig : utilisé quand la boucle eibd &#8220;write&#8221; reçoit des &#8220;write&#8221; (Changement d&#8217;état) ou une confirmation de commande</li>
+<li>xpl-stat : utilisé quand eibd reçoit un message de type &#8220;Responce&#8221; (retour d&#8217;un état)</li>
+</ul>
+<p>On remplace les / séparateurs de l&#8217;adresse de groupe par : afin d&#8217;éviter les problèmes avec rest.</p>
+<div class="section" id="xpl-cmnd">
+<h2>xpl-cmnd<a class="headerlink" href="#xpl-cmnd" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-json"><pre>xpl-cmnd
+{
+...
+}
+knx.basic
+{
+command=&lt;commande knx : Write,Read ou Response&gt;
+group=&lt;addrese du groupe à qui on envoie la commande&gt;
+type=&lt;s|l : short ou long ou none pour un read&gt;
+data: &lt;valeur si write none si read&gt;
+}</pre>
+</div>
+<p>Exemple :
+.. code-block:: json</p>
+<blockquote>
+<div>xpl-cmnd
+{
+hop=1
+source=xpl-knx.domogikserver
+target=*
+}
+knx.basic
+{
+command=Write
+group=1:1:1
+type=s
+data=1
+}</div></blockquote>
+<div class="highlight-json"><pre>xpl-cmnd
+{
+hop=1
+source=xpl-knx.domogikserver
+target=*
+}
+knx.basic
+{
+command=Read
+group=1:1:1
+type=none
+data=none
+}</pre>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>xpl-cmnd<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-json"><pre>xpl-cmnd
+{
+...
+}
+knx.basic
+{
+command=&lt;Write, Write ack, Read, Read ack, Response, Response ack&gt; ack est ajouté pour identifier un ack a d'un xpl-cmnd
+group=&lt;addresse du groupe émettant la réponse&gt;
+type=&lt;s|l : short ou long&gt;
+data=&lt;valeur de la donnée
+}</pre>
+</div>
+<p>Exemple :
+.. code-block:: json</p>
+<blockquote>
+<div>xpl-trig
+{
+hop=1
+source=xpl-knx.domogikserver
+target=*
+}
+knx.basic
+{
+command=Write
+group=1:1:1
+type=s
+data=00
+}</div></blockquote>
+</div>
+<div class="section" id="xpl-stat">
+<h2>xpl-stat<a class="headerlink" href="#xpl-stat" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-json"><pre>xpl-stat
+{
+...
+}
+knx.basic
+{
+command=&lt;Responce&gt;
+group=&lt;addresse du groupe émettant la réponse&gt;
+type=&lt;s|l : short ou long&gt;
+data=&lt;valeur de la donnée
+}</pre>
+</div>
+<p>Exemple :
+.. code-block:: json</p>
+<blockquote>
+<div>xpl-stat
+{
+hop=1
+source=xpl-knx.domogikserver
+target=*
+}
+knx.basic
+{
+command=Response
+group=1:1:1
+type=s
+data=00
+}</div></blockquote>
+<p>((plugin_knx_exemple|Des exemples içi))</p>
+</div>
+</div>
+<div class="section" id="knx-dans-dmg-maintenant">
+<h1>KNX dans DMG maintenant...<a class="headerlink" href="#knx-dans-dmg-maintenant" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="le-probleme">
+<h2>Le problème<a class="headerlink" href="#le-probleme" title="Permalink to this headline">¶</a></h2>
+<p>Actuellement domogik n&#8217;intègre dans ça base qu&#8217;une seul adresse par device.
+Hors en KNX on peu en avoir 2 voir plus.
+Il faut donc modifier la base de donnée tel qu&#8217;elle existe et celà demande un gros travaille prévue pour la date du: &#8220;Un jour&#8221;
+Il y a aussi le problème que l&#8217;interprétation des donnée du bus est laisser a l&#8217;appréciation des composants du bus (qui le savent lors de leur programmation) mais qui n&#8217;est pas communiqué (le datatype)</p>
+</div>
+<div class="section" id="le-palliatif">
+<h2>Le palliatif<a class="headerlink" href="#le-palliatif" title="Permalink to this headline">¶</a></h2>
+<p>J&#8217;ai pensé a un palliatif, afin que l&#8217;existant de Domogik puisse faire fonctionner et visualisé correctement les états je vais crée un fichier text de configuration des composant KNX qui permettra d&#8217;avoir des adresse d&#8217;état et de command pour une même adresse dans domogik.</p>
+<p>Ce fichier contiendra l&#8217;adresse du device domogik (quelconque) une adresse de commande, une adresse d&#8217;état, et le type de donnée.</p>
+<p>Ce fichier sera consulter par le plugin afin de faire un lien entre les adresses reçu et les adresses de domogik.</p>
+<p>par exemple le fichier serait constitué de ligne semblable a celle ci.
+.. code-block:: json</p>
+<blockquote>
+<div>datatype:on/off\\Adr_dmg:193\\adr_cmd:1/1/1\\adr_stat:1/1/0</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installation du plugin KNX</a><ul>
+<li><a class="reference internal" href="#installation-du-bcusdk">Installation du BCUSDK</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Installation du BCUSDK</a></li>
+<li><a class="reference internal" href="#protocole">Protocole</a><ul>
+<li><a class="reference internal" href="#ressources">Ressources</a></li>
+<li><a class="reference internal" href="#generalite">Généralité</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">Installation du BCUSDK</a><ul>
+<li><a class="reference internal" href="#fonctions">Fonctions</a></li>
+<li><a class="reference internal" href="#messages">Messages</a></li>
+<li><a class="reference internal" href="#type-de-message">Type de message</a><ul>
+<li><a class="reference internal" href="#short">short</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#variation">Variation</a></li>
+<li><a class="reference internal" href="#comment-faire-la-difference-entre-un-on-off-une-montee-descente-etc">Comment faire la différence entre un on/off, une montée descente, etc ?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#eibd-et-interactions-avec-eibd">Eibd et interactions avec Eibd</a><ul>
+<li><a class="reference internal" href="#id7">Ressources</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tools">Tools</a><ul>
+<li><a class="reference internal" href="#wireshark">Wireshark</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dpt-les-plus-utilises">DPT les plus utilisés</a></li>
+<li><a class="reference internal" href="#schema-xpl">Schéma xpl</a><ul>
+<li><a class="reference internal" href="#xpl-cmnd">xpl-cmnd</a></li>
+<li><a class="reference internal" href="#id8">xpl-cmnd</a></li>
+<li><a class="reference internal" href="#xpl-stat">xpl-stat</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#knx-dans-dmg-maintenant">KNX dans DMG maintenant...</a><ul>
+<li><a class="reference internal" href="#le-probleme">Le problème</a></li>
+<li><a class="reference internal" href="#le-palliatif">Le palliatif</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../astuce_domodroid_tablette_murale/astuce_domodroid_tablette_murale.html"
+                        title="previous chapter">astuce_domodroid_tablette_murale</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../device_params/device_params.html"
+                        title="next chapter">DB</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/dev_plugin_knx/dev_plugin_knx.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../device_params/device_params.html" title="DB"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../astuce_domodroid_tablette_murale/astuce_domodroid_tablette_murale.html" title="astuce_domodroid_tablette_murale"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

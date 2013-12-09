@@ -1,0 +1,146 @@
+Pre-compiled data
+==================
+
+
+For graphs that uses the stats/interval url, it basically make avg data grouped by year, month, etc...
+Those data can be pre-compiled and stored in tables, as the same time the data is received.
+
+This could be done for year/month/day/hour/min
+
+Value example, for a specific minute 2013/06/13 12:48:
+||Sensor id|year   |month|day|   hour|   minute|   avg|   min|   max
+1|2013|06|13|12|48|   11.0|10.0|12.0||
+
+Value example, for a specific month 2013/06:
+||Sensor id|year   |month|day|   hour|   minute|   avg|   min|   max
+1|2013|06|null|null|null|   11.0|10.0|12.0||
+
+Every minute the script should process all sensor (that we require graphs) and calculate all avg/min/max for the previous interval(s)
+If no data is found for an interval, the values are marked as NULL.
+
+server-side formatters
+=======================
+
+
+On client side, the data are (most of the time) re-processed in order to create the data structure that is supported by the graph lib.
+So that would be very usefull to receive the data directly in the appropriate format.
+
+In order to do it, the client will provide some template, to describe how the data should formatted.
+
+For example with highcharts format:
+
+.. code-block:: json
+
+
+    [
+       [1333065600000, 12.0 ],
+       [1333065600000, 11.6 ],
+    ...
+    ]
+
+
+So the template can be something like:
+
+.. code-block:: json
+
+
+    "[{js_timestamp}, {value}]"{CODE}
+    
+    or something more describing:
+    
+.. code-block:: json
+
+
+    {
+      'type': 'array',
+      'values' : {
+               '0' : 'js_timestamp',
+               '1' : 'value',
+      }
+    }
+
+
+
+Douglas-Peucker Algorithm
+==========================
+
+
+http://faitmain.org//volume-2/surveillance-digues.html
+https://fr.wikipedia.org/wiki/Algorithme_de_Douglas-Peucker
+
+Sequential data send
+=====================
+
+
+Progressing loading could be used to quickly display the first results.
+So the data could be send in sequences.
+
+Let says we have a graph with 20 values:
+.. code-block:: json
+
+
+    | 1| 2| 3| 4| 5| 6| 7| 8| 9|10|11|12|13|14|15|16|17|18|19|20|{CODE}
+    
+    2 types of sequences can be used:
+    
+    Linear
+    *******
+    
+    The first x values can be send, then the next x values, etc...
+    1) First sequence
+.. code-block:: json
+
+
+    | 1| 2| 3| 4| 5|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |{CODE}
+2) Next sequence
+.. code-block:: json
+
+
+    |  |  |  |  |  | 6| 7| 8| 9|10|  |  |  |  |  |  |  |  |  |  |{CODE}
+    3) Next sequence
+.. code-block:: json
+
+
+    |  |  |  |  |  |  |  |  |  |  |11|12|13|14|15|  |  |  |  |  |{CODE}
+4) Last sequence
+.. code-block:: json
+
+
+    |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |16|17|18|19|20|{CODE}
+    
+    Spread
+    *******
+    
+    For the first sequence a value for each x position, then the value on x+x/2 position, etc..
+    1)
+.. code-block:: json
+
+
+    | 1|  |  |  |  |  | 7|  |  |  |  |  |13|  |  |  |  |  |19|  |{CODE}
+2)
+.. code-block:: json
+
+
+    |  |  |  | 4|  |  |  |  |  |10|  |  |  |  |  |16|  |  |  |  |{CODE}
+    3)
+.. code-block:: json
+
+
+    |  | 2|  |  |  |  |  | 8|  |  |  |  |  |14|  |  |  |  |  |20|{CODE}
+4)
+.. code-block:: json
+
+
+    |  |  |  |  | 5|  |  |  |  |  |11|  |  |  |  |  |17|  |  |  |{CODE}
+    5)
+.. code-block:: json
+
+
+    |  |  | 3|  |  |  |  |  | 9|  |  |  |  |  |15|  |  |  |  |  |{CODE}
+6)
+.. code-block:: json
+
+
+    |  |  |  |  |  | 6|  |  |  |  |  |12|  |  |  |  |  |18|  |  |{CODE}
+    
+    

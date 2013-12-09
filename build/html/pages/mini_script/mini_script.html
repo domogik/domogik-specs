@@ -1,0 +1,267 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>__Mini_Script__ &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Purpose" href="../plugin_apushnot/plugin_apushnot.html" />
+    <link rel="prev" title="Objectif de cette lib" href="../lib_plugin_web_socket/lib_plugin_web_socket.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_apushnot/plugin_apushnot.html" title="Purpose"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../lib_plugin_web_socket/lib_plugin_web_socket.html" title="Objectif de cette lib"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="mini-script">
+<h1>__Mini_Script__<a class="headerlink" href="#mini-script" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="objectif">
+<h2>__Objectif__<a class="headerlink" href="#objectif" title="Permalink to this headline">¶</a></h2>
+<p>Lancer une action si une condition est réunie ou non réunie.</p>
+</div>
+<div class="section" id="condition">
+<h2>__Condition:__<a class="headerlink" href="#condition" title="Permalink to this headline">¶</a></h2>
+<p>Ces conditions peuvent être:</p>
+<ul class="simple">
+<li>device A (=,&gt;,&lt;,!=) valeur X</li>
+<li>device A (=,&gt;,&lt;,!=) valeur X (and, or, !or) device B (=,&gt;,&lt;,!=) valeur Y</li>
+<li>device A (=,&gt;,&lt;,!=) device B</li>
+</ul>
+</div>
+<div class="section" id="action">
+<h2>__Action:__<a class="headerlink" href="#action" title="Permalink to this headline">¶</a></h2>
+<p>Envoyer un message xpl avec l&#8217;état True ou False de la scène et éventuellement une commande Rinor</p>
+</div>
+<div class="section" id="description">
+<h2>__Description__<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ihm">
+<h3>__IHM:__<a class="headerlink" href="#ihm" title="Permalink to this headline">¶</a></h3>
+<p>Sur 2 pages, une destinée la création, et une pour la gestion des scènes</p>
+<dl class="docutils">
+<dt>&#8216;&#8217;-Page Creator:&#8217;&#8216;</dt>
+<dd>&#8211; Création d&#8217;une scène (le plugin scène initialise une class Mscene et l&#8217;enregistre dans un fichier)</dd>
+<dt>&#8216;&#8217;-Page Manage:&#8217;&#8216;</dt>
+<dd>&#8211; Démarrer/arrêter une scène (interne à la class Mscene active ou stop les listener liée aux devices)
+&#8211; Supprimer une scène (le plugin scène stop la Mscene et supprime la ligne du fichier)</dd>
+</dl>
+</div>
+<div class="section" id="plugin-scene">
+<h3>__Plugin <a href="#id1"><span class="problematic" id="id2">Scène__</span></a><a class="headerlink" href="#plugin-scene" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Ce plugin crée des objets de class Mscene à partir d&#8217;information contenues dans un message XPL</li>
+<li>Ce plugin crée des objets de class Mscene à partir d&#8217;information contenues dans un fichier</li>
+<li>Ce plugin gère la suppression des Mscene (stop la class Mscene et la supprime du fichier)</li>
+</ul>
+</div>
+<div class="section" id="script-scene-class-mscene">
+<h3>__Script Scène (Class Mscene)__<a class="headerlink" href="#script-scene-class-mscene" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>&#8216;&#8217;Init:&#8217;&#8216;</dt>
+<dd><ul class="first last simple">
+<li>Enregistre toutes les variables données en argument dans des variables globales à la class MScene.</li>
+<li>Lance un listener qui écoute les messages adresser à la scène uniquement afin de réceptionner les ordres start/stop</li>
+<li>Appelle la fonction start</li>
+</ul>
+</dd>
+<dt>&#8216;&#8217;Start:&#8217;&#8216;</dt>
+<dd><ul class="first last simple">
+<li>Interroge Rinor pour récupérer le latest de la key_stat des devices définis.</li>
+<li>Lance des listeners qui écoute de façon précise le bus (schema, xpl-trig, device) pour les devices</li>
+<li>Envoi un message notifiant que la scène est lancée.</li>
+</ul>
+</dd>
+<dt>&#8216;&#8217;Stop:&#8217;&#8216;</dt>
+<dd><ul class="first last simple">
+<li>Détruit les listeners des devices</li>
+<li>Envoi un message notifiant que la scène est stoppée.</li>
+</ul>
+</dd>
+</dl>
+<p>&#8211;TODO&#8211;
+&#8216;&#8217;Delete&#8217;&#8216;</p>
+<blockquote>
+<div><ul class="simple">
+<li>Détruit le listerner de la scene</li>
+<li>Appelle stop</li>
+</ul>
+</div></blockquote>
+<p>&#8216;&#8217;cmd_device:&#8217;&#8217;
+S&#8217;active lorsqu&#8217;un message xpl adressé à l&#8217;un des devices:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Sauvegarde la donnée dans une variable</li>
+<li>Lance la fonction de test de condition</li>
+</ul>
+</div></blockquote>
+<dl class="docutils">
+<dt>&#8216;&#8217;Test:&#8217;&#8216;</dt>
+<dd><ul class="first simple">
+<li>Vérifie si les tests de la scène sont vrai ou faux:</li>
+<li>Si vrai:</li>
+</ul>
+<blockquote>
+<div>&#8211; Envoi un message xpl avec le nom de la scène et la valeur true (message xpl-trig si changement sinon xpl-stat)
+&#8211; Exécute la commande via Rinor si défini (seulement si xpl-trig)</div></blockquote>
+<ul class="simple">
+<li>Si Faux:</li>
+</ul>
+<blockquote class="last">
+<div>&#8211; Envoi un message xpl avec le nom de la scène et la valeur false (message xpl-trig si changement sinon xpl-stat)
+&#8211; Exécute la commande Rinor si défini (seulement si xpl-trig)</div></blockquote>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="commentaire-de-dev">
+<h2>__Commentaire de dev.__<a class="headerlink" href="#commentaire-de-dev" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>IHM</div></blockquote>
+<hr class="docutils" />
+<p>Toutes les informations nécessaires sont dans /base/feature/list</p>
+<div class="section" id="script-mscene">
+<h3>Script (Mscene)<a class="headerlink" href="#script-mscene" title="Permalink to this headline">¶</a></h3>
+<p>La création d&#8217;un script nécessite:</p>
+<p>En - les valeurs optionnels et + les valeurs obligatoires</p>
+<ul class="simple">
+<li>type_test: Test effectuer entre les 2 conditions (and, or, &gt;, &lt;, !=)</li>
+</ul>
+<ul class="simple">
+<li>rest_server: adresse ip et port (transmiss ip:port) du service REST</li>
+<li>Device 1 -&gt; - {id_device,key_stat1,test1,value1}: id du premier device a tester, la clé d&#8217;entrée (temperature, data...), le test (&gt;, &lt;, !=), la valeur du test (on, off, numérique etc...)</li>
+</ul>
+<ul class="simple">
+<li>Device 2 -&gt; - {id_device,key_stat2,test2,value2} idem mais pour un 2eme device</li>
+<li>Commande 1-&gt; - {technologie1, adress_1, value_out1} technologie de la commande de sortie (knx, X10 ...) l&#8217;adresse du device, la valeur a commander</li>
+<li>Commande 2-&gt; - {technologie2, adress_2, value_out2}</li>
+</ul>
+<p>commande 1 est utilisée si la condition est remplie, sinon c&#8217;est la commande 2, l&#8217;envoie d&#8217;un ordre est optionnel, dans les 2 cas un message xpl sera émit avec l&#8217;état de la scène afin qu&#8217;elle puisse être réutilisée dans une autre scène.</p>
+</div>
+<div class="section" id="plugin">
+<h3>Plugin<a class="headerlink" href="#plugin" title="Permalink to this headline">¶</a></h3>
+<p>Écoute les messages Xpl</p>
+<p>Les messages réceptionnés sont:</p>
+<p>-Création: on généré un objet Mscene avec les informations fournie
+-Suppression: stop la scène et efface la ligne du fichier de config</p>
+<blockquote>
+<div>Ajout d&#8217;un usage spécifique aux scene:</div></blockquote>
+<hr class="docutils" />
+<p>INSERT INTO <cite>core_device_usage</cite> (<cite>id</cite>, <cite>name</cite>, <cite>description</cite>, <cite>default_options</cite>) VALUES
+(&#8216;scene&#8217;, &#8216;Scene&#8217;, &#8216;Special for Scene plugin&#8217;, &#8216;{ &amp;amp;quot;actuator&amp;amp;quot;: { &amp;amp;quot;binary&amp;amp;quot;: {&amp;amp;quot;state0&amp;amp;quot;:&amp;amp;quot;False&amp;amp;quot;, &amp;amp;quot;state1&amp;amp;quot;:&amp;amp;quot;True&amp;amp;quot;}, &amp;amp;quot;range&amp;amp;quot;: {&amp;amp;quot;step&amp;amp;quot;:10, &amp;amp;quot;unit&amp;amp;quot;:&amp;amp;quot;%&amp;amp;quot;}, &amp;amp;quot;trigger&amp;amp;quot;: {}, &amp;amp;quot;number&amp;amp;quot;: {} }, &amp;amp;quot;sensor&amp;amp;quot;: {&amp;amp;quot;boolean&amp;amp;quot;: {}, &amp;amp;quot;number&amp;amp;quot;: {}, &amp;amp;quot;string&amp;amp;quot;: {} } }&#8217;);</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">__Mini_Script__</a><ul>
+<li><a class="reference internal" href="#objectif">__Objectif__</a></li>
+<li><a class="reference internal" href="#condition">__Condition:__</a></li>
+<li><a class="reference internal" href="#action">__Action:__</a></li>
+<li><a class="reference internal" href="#description">__Description__</a><ul>
+<li><a class="reference internal" href="#ihm">__IHM:__</a></li>
+<li><a class="reference internal" href="#plugin-scene">__Plugin Scène__</a></li>
+<li><a class="reference internal" href="#script-scene-class-mscene">__Script Scène (Class Mscene)__</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#commentaire-de-dev">__Commentaire de dev.__</a><ul>
+<li><a class="reference internal" href="#script-mscene">Script (Mscene)</a></li>
+<li><a class="reference internal" href="#plugin">Plugin</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../lib_plugin_web_socket/lib_plugin_web_socket.html"
+                        title="previous chapter">Objectif de cette lib</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_apushnot/plugin_apushnot.html"
+                        title="next chapter">Purpose</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/mini_script/mini_script.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_apushnot/plugin_apushnot.html" title="Purpose"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../lib_plugin_web_socket/lib_plugin_web_socket.html" title="Objectif de cette lib"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

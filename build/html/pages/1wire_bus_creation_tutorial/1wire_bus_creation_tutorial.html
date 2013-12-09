@@ -1,0 +1,126 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1wire bus creation tutorial &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="How to adapt a non-python xpl plugin to domogik" href="../AdaptNonPythonPlugin/AdaptNonPythonPlugin.html" />
+    <link rel="prev" title="Welcome to Domogik specifications’s documentation!" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../AdaptNonPythonPlugin/AdaptNonPythonPlugin.html" title="How to adapt a non-python xpl plugin to domogik"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../../index.html" title="Welcome to Domogik specifications’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="wire-bus-creation-tutorial">
+<h1>1wire bus creation tutorial<a class="headerlink" href="#wire-bus-creation-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>^La traduction de cette page n&#8217;est pas terminée.^</p>
+<p>Here is an example on how to create a 1wire bus.</p>
+<p>I use a DS1420 interface. It is equipped with an RJ11 port. Unfortunately, I only have RJ45 cables, so I decided to continue with RJ45 connectors instead of RJ11 which are less and less commonly available.</p>
+<p>Let&#8217;s start creating an RJ11-RJ45 cable. I used an old phone RJ11 plug. The operation is pretty simple, just cut the cable at an extremity and place an RJ45 connector with the 4 cables using the 4 middle connectors. Then make sure to put the cables in the same order as on the other side with the RJ11 connector.</p>
+<p>{img fileId=&#8221;162&#8221; thumb=&#8221;y&#8221; alt=&#8221;&#8221; rel=&#8221;box[g]&#8221;}</p>
+<p>I have used a simple RJ45 cable extension connector.</p>
+<p>{img fileId=&#8221;163&#8221; thumb=&#8221;y&#8221; alt=&#8221;&#8221; rel=&#8221;box[g]&#8221;}</p>
+<p>Open the extension connector by using a screwdriver and we will solder our component inside. In my case it will be a temperature sensor of type DS1820B.</p>
+<p>{img fileId=&#8221;164&#8221; thumb=&#8221;y&#8221; alt=&#8221;&#8221; rel=&#8221;box[g]&#8221;}</p>
+<p>With my extension connection, unfortunately I was unable to solder on it, the tin wouldn&#8217;t stick on it. So I replaced the contacts by copper ones.</p>
+<p>{img fileId=&#8221;165&#8221; thumb=&#8221;y&#8221; alt=&#8221;&#8221; rel=&#8221;box[g]&#8221;}</p>
+<p>After all soldering done, it remains to check if it works. The easiest way is to use OnewireViewer software,  <a class="reference external" href="http://www.maxim-ic.com/products/ibutton/software/1wire/OneWireViewer.cfm">Maxim website download page</a>. If everything is fine, you&#8217;ll see your interface and your sensor :  you&#8217;ll be able to read the temperature from it.</p>
+<p>{img fileId=&#8221;166&#8221; thumb=&#8221;y&#8221; alt=&#8221;&#8221; rel=&#8221;box[g]&#8221;}</p>
+<p>The advantages of using such a mounting schema is the low cost of implementation and the easy way to serialize the components on the same bus.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../../index.html"
+                        title="previous chapter">Welcome to Domogik specifications&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../AdaptNonPythonPlugin/AdaptNonPythonPlugin.html"
+                        title="next chapter">How to adapt a non-python xpl plugin to domogik</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/1wire_bus_creation_tutorial/1wire_bus_creation_tutorial.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../AdaptNonPythonPlugin/AdaptNonPythonPlugin.html" title="How to adapt a non-python xpl plugin to domogik"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../../index.html" title="Welcome to Domogik specifications’s documentation!"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

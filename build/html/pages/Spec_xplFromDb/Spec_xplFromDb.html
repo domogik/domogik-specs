@@ -1,0 +1,652 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Generate XPL messages from the DB &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Terminals registration" href="../Terminals/Terminals.html" />
+    <link rel="prev" title="xPL to Domogik data types transcoding" href="../Spec_xPL_to_domogik_data_types/Spec_xPL_to_domogik_data_types.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Terminals/Terminals.html" title="Terminals registration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Spec_xPL_to_domogik_data_types/Spec_xPL_to_domogik_data_types.html" title="xPL to Domogik data types transcoding"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="generate-xpl-messages-from-the-db">
+<h1>Generate XPL messages from the DB<a class="headerlink" href="#generate-xpl-messages-from-the-db" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="original-idea">
+<h2>Original idea<a class="headerlink" href="#original-idea" title="Permalink to this headline">¶</a></h2>
+<p>((Spec_device_template|Device Template))
+DB schema
+==========</p>
+<p>{IMG(attId=&#8221;439&#8221;)}{IMG}
+table description
+<strong>**************</strong></p>
+<p><a href="#id1"><span class="problematic" id="id2">*</span></a>Device =&gt; holds each device known by domogik
+<a href="#id3"><span class="problematic" id="id4">*</span></a>Command =&gt; every possible command that can be sent, there can be multiple commands for each device, the command can be an xplcommand if the xpl_command_id is not Null
+<a href="#id5"><span class="problematic" id="id6">*</span></a>Command_param =&gt; the needed parameters for this command (typically the result of a widget action)
+<a href="#id7"><span class="problematic" id="id8">*</span></a>xplcommand =&gt; if a command is an xplcommand we can find the definition of this xplcommand here, an xpl command can have a xplstat linked to it
+<a href="#id9"><span class="problematic" id="id10">*</span></a>Xplcommand_param =&gt; the parameters that have to be in the xpl message, these parameters together with the command parameters will define the xpl message to sent
+<a href="#id11"><span class="problematic" id="id12">*</span></a>XplStat =&gt; All xplstat messages that domogic can know. This message can either be linked to a xplCommand or to a sensor
+<a href="#id13"><span class="problematic" id="id14">*</span></a>XplStat_param =&gt; the parameters for each xplstat message (used for filtering)
+<a href="#id15"><span class="problematic" id="id16">*</span></a>Sensors =&gt; used inside the stat manager define what parameters need to be stored inside the db</p>
+</div>
+<div class="section" id="upgrading">
+<h2>Upgrading<a class="headerlink" href="#upgrading" title="Permalink to this headline">¶</a></h2>
+<p>Upgrading will be difficult, so everything will be deleted except the device_stats.
+We will keep the old devices but will not return them in rets urls (address field should be null to be able to return devices)</p>
+<p>The admin can then create the new devices and we will create an upgrade interface, this inetrface will do the folowing
+#  link an old device to a new device id</p>
+<blockquote>
+<div><ul class="simple">
+<li>/base/device/listold =&gt; get all the old devices</li>
+<li>/base/device/list =&gt; will get the new devices</li>
+<li>/base/sensor/list-by-device =&gt; get all sensors for the device</li>
+<li>/base/migrate/&lt;old dev id&gt;/&lt;new dev id&gt;/&lt;new sensor id&gt;</li>
+</ul>
+</div></blockquote>
+<p>#  select the sensor to import the data to
+#  rest url will insert the data into the the sensor_history table to keep the history</p>
+</div>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="plugin-json">
+<h3>Plugin JSON<a class="headerlink" href="#plugin-json" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-json"><div class="highlight"><pre>
+</pre></div>
+</div>
+<p>caption=&#8221;New json for plugins&#8221;</p>
+<blockquote>
+<div><blockquote>
+<div><p>{
+&#8220;configuration&#8221;: [</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd>&#8220;default&#8221;: &#8220;False&#8221;,
+&#8220;description&#8221;: &#8220;Automatically start plugin at Domogik startup&#8221;,
+&#8220;id&#8221;: &#8220;0&#8221;,
+&#8220;interface&#8221;: &#8220;no&#8221;,
+&#8220;key&#8221;: &#8220;startup-plugin&#8221;,
+&#8220;optionnal&#8221;: &#8220;no&#8221;,
+&#8220;options&#8221;: [],
+&#8220;type&#8221;: &#8220;boolean&#8221;</dd>
+</dl>
+<p>},
+{</p>
+<blockquote>
+<div><p>&#8220;default&#8221;: &#8220;0&#8221;,
+&#8220;description&#8221;: &#8220;define the connection type to velbus&#8221;,
+&#8220;id&#8221;: &#8220;1&#8221;,
+&#8220;interface&#8221;: &#8220;no&#8221;,
+&#8220;key&#8221;: &#8220;connection-type&#8221;,
+&#8220;optionnal&#8221;: &#8220;no&#8221;,
+&#8220;options&#8221;: [</p>
+<blockquote>
+<div>&#8220;serial&#8221;,
+&#8220;socket&#8221;</div></blockquote>
+<p>],
+&#8220;type&#8221;: &#8220;enum&#8221;</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div>&#8220;default&#8221;: &#8220;/dev/ttyACM0&#8221;,
+&#8220;description&#8221;: &#8220;velbus device (/dev/ttyACM0 for serial, or ip:port for socket&#8221;,
+&#8220;id&#8221;: &#8220;2&#8221;,
+&#8220;interface&#8221;: &#8220;no&#8221;,
+&#8220;key&#8221;: &#8220;device&#8221;,
+&#8220;optionnal&#8221;: &#8220;no&#8221;,
+&#8220;options&#8221;: [],
+&#8220;type&#8221;: &#8220;string&#8221;</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>],
+&#8220;xpl_commands&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;set_level_bin&#8221;: {</dt>
+<dd><p class="first">&#8220;name&#8221;: &#8220;blah&#8221;,
+&#8220;schema&#8221;: &#8220;lighting.basic&#8221;,
+&#8220;xplstat_name&#8221;: &#8220;get_level&#8221;,
+&#8220;parameters&#8221;: {</p>
+<blockquote class="last">
+<div><blockquote>
+<div><dl class="docutils">
+<dt>&#8220;static&#8221;: [</dt>
+<dd><dl class="first docutils">
+<dt>{</dt>
+<dd>&#8220;key&#8221;: &#8220;stat&#8221;,
+&#8220;value&#8221;: &#8220;stat&#8221;</dd>
+</dl>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>],
+&#8220;device_type&#8221;: [</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd>&#8220;key&#8221;: &#8220;channel&#8221;,
+&#8220;description&#8221;: &#8220;The channel number&#8221;,
+&#8220;type&#8221;: &#8220;integer&#8221;,
+&#8220;max_value&#8221;: 4,
+&#8220;min_value&#8221;: 1</dd>
+</dl>
+<p>},
+{</p>
+<blockquote>
+<div>&#8220;key&#8221;: &#8220;address&#8221;,
+&#8220;description&#8221;: &#8220;The decimal address&#8221;,
+&#8220;type&#8221;: &#8220;integer&#8221;,
+&#8220;max_value&#8221;: 255,
+&#8220;min_value&#8221;: 0</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>],
+&#8220;device&#8221;: [</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd>&#8220;key&#8221;: &#8220;dummy&#8221;,
+&#8220;description&#8221;: &#8220;a dummy param&#8221;,
+&#8220;type&#8221;: &#8220;string&#8221;</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+</dd>
+</dl>
+<p>},
+&#8220;set_level_range&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;name&#8221;: &#8220;set_level_range&#8221;,
+&#8220;schema&#8221;: &#8220;lighting.basic&#8221;,
+&#8220;xplstat_name&#8221;: &#8220;get_level&#8221;,
+&#8220;parameters&#8221;: {</p>
+<blockquote>
+<div><blockquote>
+<div><dl class="docutils">
+<dt>&#8220;static&#8221;: [</dt>
+<dd><blockquote class="first">
+<div><dl class="docutils">
+<dt>{</dt>
+<dd>&#8220;key&#8221;: &#8220;stat&#8221;,
+&#8220;value&#8221;: &#8220;stat&#8221;</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p class="last">],</p>
+</dd>
+<dt>&#8220;device_type&#8221;: [</dt>
+<dd><dl class="first docutils">
+<dt>{</dt>
+<dd>&#8220;key&#8221;: &#8220;channel&#8221;,
+&#8220;description&#8221;: &#8220;The channel number&#8221;,
+&#8220;type&#8221;: &#8220;integer&#8221;,
+&#8220;max_value&#8221;: 4,
+&#8220;min_value&#8221;: 1</dd>
+</dl>
+<p>},
+{</p>
+<blockquote>
+<div>&#8220;key&#8221;: &#8220;address&#8221;,
+&#8220;description&#8221;: &#8220;The decimal address&#8221;,
+&#8220;type&#8221;: &#8220;integer&#8221;,
+&#8220;max_value&#8221;: 255,
+&#8220;min_value&#8221;: 0</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>],
+&#8220;device&#8221;: []</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+&#8220;xpl_stats&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;get_level&#8221;: {</dt>
+<dd><p class="first">&#8220;name&#8221;: &#8220;get_level&#8221;,
+&#8220;schema&#8221;: &#8220;lighting.device&#8221;,
+&#8220;parameters&#8221;: {</p>
+<blockquote class="last">
+<div><blockquote>
+<div><dl class="docutils">
+<dt>&#8220;static&#8221;: [</dt>
+<dd><dl class="first docutils">
+<dt>{</dt>
+<dd>&#8220;key&#8221;: &#8220;stat&#8221;,
+&#8220;value&#8221;: &#8220;stat&#8221;</dd>
+</dl>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>],
+&#8220;device_type&#8221;: [</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd>&#8220;key&#8221;: &#8220;channel&#8221;,
+&#8220;description&#8221;: &#8220;The channel number&#8221;,
+&#8220;type&#8221;: &#8220;integer&#8221;,
+&#8220;max_value&#8221;: 4,
+&#8220;min_value&#8221;: 1</dd>
+</dl>
+<p>},
+{</p>
+<blockquote>
+<div>&#8220;key&#8221;: &#8220;address&#8221;,
+&#8220;description&#8221;: &#8220;The decimal address&#8221;,
+&#8220;type&#8221;: &#8220;integer&#8221;,
+&#8220;max_value&#8221;: 255,
+&#8220;min_value&#8221;: 0</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>],
+&#8220;device&#8221;: [],
+&#8220;dynamic&#8221;: [</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd>&#8220;key&#8221;: &#8220;level&#8221;,
+&#8220;sensor&#8221;: &#8220;level&#8221;</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>},
+&#8220;commands&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;set_level_bin&#8221;: {</dt>
+<dd><blockquote class="first">
+<div><p>&#8220;name&#8221;: &#8220;Switch On or Off&#8221;,
+&#8220;return_confirmation&#8221;: true,
+&#8220;params&#8221;: [</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd>&#8220;key&#8221;: &#8220;level&#8221;,
+&#8220;value_type&#8221;: &#8220;binary&#8221;,
+&#8220;values&#8221;: [0, 255]</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>],
+&#8220;xpl_command&#8221;: &#8220;set_level_bin&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;set_level_range&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;name&#8221;: &#8220;Set to a level&#8221;,
+&#8220;return_confirmation&#8221;: true,
+&#8220;params&#8221;: [</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd>&#8220;key&#8221;: &#8220;level&#8221;,
+&#8220;value_type&#8221;: &#8220;range&#8221;,
+&#8220;values&#8221;: [0, 255]</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>],
+&#8220;xpl_command&#8221;: &#8220;set_level_bin&#8221;</p>
+</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>},
+&#8220;sensors&#8221;: {
+&#8220;level&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;name&#8221;: &#8220;level&#8221;,</dt>
+<dd>&#8220;unit&#8221;: &#8220;%&#8221;,
+&#8220;value_type&#8221;: &#8220;range&#8221;,
+&#8220;values&#8221;: [0, 100]</dd>
+</dl>
+</div></blockquote>
+<p>}
+},
+&#8220;device_types&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;velbus.relay&#8221;: {</dt>
+<dd>&#8220;id&#8221;: &#8220;velbus.relay&#8221;,
+&#8220;description&#8221;: &#8220;Switch one channel on a device&#8221;,
+&#8220;name&#8221;: &#8220;Switch&#8221;,
+&#8220;commands&#8221;: [&#8220;set_level_bin&#8221;],
+&#8220;sensors&#8221;: [&#8220;level&#8221;]</dd>
+</dl>
+<p>},
+&#8220;velbus.dimmer&#8221;: {</p>
+<blockquote>
+<div>&#8220;id&#8221;: &#8220;velbus.dimmer&#8221;,
+&#8220;description&#8221;: &#8220;Dim one channel on a device&#8221;,
+&#8220;id&#8221;: &#8220;velbus.dimmer&#8221;,
+&#8220;name&#8221;: &#8220;Dimmer&#8221;,
+&#8220;commands&#8221;: [&#8220;set_level_bin&#8221;, &#8220;set_level_range&#8221;],
+&#8220;sensors&#8221;: [&#8220;level&#8221;]</div></blockquote>
+<p>},
+&#8220;velbus.shutter&#8221;: {</p>
+<blockquote>
+<div>&#8220;id&#8221;: &#8220;velbus.shutter&#8221;,
+&#8220;description&#8221;: &#8220;Shutter control (up, down)&#8221;,
+&#8220;name&#8221;: &#8220;Shutter&#8221;,
+&#8220;xpl_commands&#8221;: [&#8220;set_blind&#8221;]</div></blockquote>
+<p>},
+&#8220;velbus.temp&#8221;: {</p>
+<blockquote>
+<div>&#8220;id&#8221;: &#8220;velbus.temp&#8221;,
+&#8220;description&#8221;: &#8220;Temperature Sensor&#8221;,
+&#8220;name&#8221;: &#8220;Temperature&#8221;</div></blockquote>
+<p>},
+&#8220;velbus.input&#8221;: {</p>
+<blockquote>
+<div>&#8220;id&#8221;: &#8220;velbus.input&#8221;,
+&#8220;description&#8221;: &#8220;Input contact&#8221;,
+&#8220;name&#8221;: &#8220;Input&#8221;</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+&#8220;files&#8221;: [</p>
+<blockquote>
+<div>&#8220;src/share/domogik/plugins/velbus.json&#8221;,
+&#8220;src/share/domogik/design/plugin/velbus/icon.png&#8221;,
+&#8220;src/domogik_packages/xpl/bin/velbus.py&#8221;,
+&#8220;src/domogik_packages/xpl/lib/velbus.py&#8221;,
+&#8220;src/domogik_packages/xpl/helper/velbus.py&#8221;</div></blockquote>
+<p>],
+&#8220;identity&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;author&#8221;: &#8220;Maikel Punie&#8221;,
+&#8220;author_email&#8221;: &#8220;<a class="reference external" href="mailto:maikel&#46;puni&#37;&#52;&#48;gmail&#46;com">maikel<span>&#46;</span>puni<span>&#64;</span>gmail<span>&#46;</span>com</a>&#8221;,
+&#8220;category&#8221;: &#8220;velbus&#8221;,
+&#8220;changelog&#8221;: &#8220;0.1.0n- relays onlyn- serial comunication only n0.2.0n- added socket comunicationn0.3.0n- added dimmer supportn0.4.0n- added blind (up/down) supportn0.5.0n- added temperature sensor support&#8221;,
+&#8220;dependencies&#8221;: [</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd>&#8220;id&#8221;: &#8220;pyserial (&gt;=2.6)&#8221;,
+&#8220;type&#8221;: &#8220;python&#8221;</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>],
+&#8220;description&#8221;: &#8220;velbus interface&#8221;,
+&#8220;documentation&#8221;: &#8220;<a class="reference external" href="http://wiki.domogik.org/plugin_velbus">http://wiki.domogik.org/plugin_velbus</a>&#8221;,
+&#8220;domogik_min_version&#8221;: &#8220;0.2.0&#8221;,
+&#8220;id&#8221;: &#8220;velbus&#8221;,
+&#8220;type&#8221;: &#8220;plugin&#8221;,
+&#8220;version&#8221;: &#8220;0.5.0&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;json_version&#8221;: 2,
+&#8220;technology&#8221;: {</p>
+<blockquote>
+<div>&#8220;description&#8221;: &#8220;Velbus <a class="reference external" href="http://www.velbus.eu">http://www.velbus.eu</a>&#8221;,
+&#8220;id&#8221;: &#8220;velbus&#8221;,
+&#8220;name&#8221;: &#8220;Velbus&#8221;</div></blockquote>
+<p>},
+&#8220;udev-rules&#8221;: [</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd>&#8220;description&#8221;: &#8220;Velbus USB interface&#8221;,
+&#8220;filename&#8221;: &#8220;velbus.rules&#8221;,
+&#8220;model&#8221;: &#8220;VMB1USB&#8221;,
+&#8220;rule&#8221;: &#8220;SUBSYSTEM==&#8221;tty&#8221; ATTRS(manufacturer)==&#8221;Velleman Projects&#8221; ATTRS{product}==&#8221;VMB1USB Velbus USB interface&#8221; SYMLINK+=&#8221;velbus&#8221; MODE=&#8221;0666&#8221;&#8220;</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+</div>
+<div class="section" id="command-sending">
+<h3>Command sending<a class="headerlink" href="#command-sending" title="Permalink to this headline">¶</a></h3>
+<p>a new rest url is created
+.. code-block:: json</p>
+<blockquote>
+<div><p>/cmd/&lt;command Id&gt;/&lt;param 1&gt;/&lt;val 1&gt;/.../&lt;param N&gt;/&lt;val N&gt;{CODE}</p>
+<p>The param fields have to match the fields inside command_param table for the given command id.</p>
+<p>If the command has an associated XPL command then the xplcommand will be sent onto the network using the parameters from the commd_param table together with the parameters from the xplcommand table</p>
+<blockquote>
+<div>GUI add device steps</div></blockquote>
+<p>#select the correct device_type
+#rinor will request the device specifick parameters (device section in json file) for the needed commands and for the needed stats (/base/device/params/&lt;device_type&gt;)
+#display the input fields for this device
+#add the device (/base/device/add), this will create the needed commands, xplcommands, xplstats and sensors
+#add the devicetype parameters (/base/device/addglobal), this will append these parameters to all xplmessages associated with the device
+#add the device specifick parameters to a specifick xpl command or xplstat (/base/device/xpl(COMMAND|STAT)params/</p>
+<p><a href="#id17"><span class="problematic" id="id18">*</span></a>/plugin/json/&lt;id&gt;
+<a href="#id19"><span class="problematic" id="id20">*</span></a>/base/device/params/(?P&lt;dev_type_id&gt;[.a-z0-9]+)</p>
+</div></blockquote>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+       <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;OK&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;code&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+       <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;deviceparams&quot;</span><span class="p">:</span>
+       <span class="p">[</span>
+           <span class="p">{</span>
+               <span class="nt">&quot;xpl_stat&quot;</span><span class="p">:</span>
+               <span class="p">[</span>
+                   <span class="p">{</span>
+                       <span class="nt">&quot;params&quot;</span><span class="p">:</span>
+                       <span class="p">[</span>
+                       <span class="p">],</span>
+                       <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;get_level&quot;</span><span class="p">,</span>
+                       <span class="nt">&quot;schema&quot;</span><span class="p">:</span> <span class="s2">&quot;lighting.device&quot;</span>
+                   <span class="p">},</span>
+                   <span class="p">{</span>
+                       <span class="nt">&quot;params&quot;</span><span class="p">:</span>
+                       <span class="p">[</span>
+                       <span class="p">],</span>
+                       <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;get_level&quot;</span><span class="p">,</span>
+                       <span class="nt">&quot;schema&quot;</span><span class="p">:</span> <span class="s2">&quot;lighting.device&quot;</span>
+                   <span class="p">}</span>
+               <span class="p">],</span>
+               <span class="nt">&quot;xpl_cmd&quot;</span><span class="p">:</span>
+               <span class="p">[</span>
+                   <span class="p">{</span>
+                       <span class="nt">&quot;params&quot;</span><span class="p">:</span>
+                       <span class="p">[</span>
+                           <span class="p">{</span>
+                               <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                               <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;a dummy param&quot;</span><span class="p">,</span>
+                               <span class="nt">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy&quot;</span>
+                           <span class="p">}</span>
+                       <span class="p">],</span>
+                       <span class="nt">&quot;xplstat_name&quot;</span><span class="p">:</span> <span class="s2">&quot;get_level&quot;</span><span class="p">,</span>
+                       <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;set_level_bin&quot;</span><span class="p">,</span>
+                       <span class="nt">&quot;schema&quot;</span><span class="p">:</span> <span class="s2">&quot;lighting.basic&quot;</span>
+                   <span class="p">},</span>
+                   <span class="p">{</span>
+                       <span class="nt">&quot;params&quot;</span><span class="p">:</span>
+                       <span class="p">[</span>
+                           <span class="p">{</span>
+                               <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                               <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;a dummy param&quot;</span><span class="p">,</span>
+                               <span class="nt">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy&quot;</span>
+                           <span class="p">}</span>
+                       <span class="p">],</span>
+                       <span class="nt">&quot;xplstat_name&quot;</span><span class="p">:</span> <span class="s2">&quot;get_level&quot;</span><span class="p">,</span>
+                       <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;set_level_bin&quot;</span><span class="p">,</span>
+                       <span class="nt">&quot;schema&quot;</span><span class="p">:</span> <span class="s2">&quot;lighting.basic&quot;</span>
+                   <span class="p">}</span>
+               <span class="p">],</span>
+               <span class="nt">&quot;global&quot;</span><span class="p">:</span>
+               <span class="p">[</span>
+                   <span class="p">{</span>
+                       <span class="nt">&quot;max_value&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                       <span class="nt">&quot;min_value&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                       <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+                       <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;The channel number&quot;</span><span class="p">,</span>
+                       <span class="nt">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;channel&quot;</span>
+                   <span class="p">},</span>
+                   <span class="p">{</span>
+                       <span class="nt">&quot;max_value&quot;</span><span class="p">:</span> <span class="mi">255</span><span class="p">,</span>
+                       <span class="nt">&quot;min_value&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                       <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+                       <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;The decimal address&quot;</span><span class="p">,</span>
+                       <span class="nt">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;address&quot;</span>
+                   <span class="p">}</span>
+               <span class="p">]</span>
+           <span class="p">}</span>
+       <span class="p">]</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p><em>/base/device/add =&gt; will add a device and the xpl command + stats into the db
+/base/device/params/(?P&lt;dev_type_id&gt;[.a-z0-9]+) =&gt; will return the needed parameters for this device type
+*/base/device/addglobal/id/(?P&lt;id&gt;[0-9]+)/.</em> =&gt; will add the &#8216;device_type&#8217; parameters to every command/stat message
+<a href="#id21"><span class="problematic" id="id22">*</span></a>/base/device/xplcmdparams/id/(?P&lt;id&gt;[0-9]+)/&lt;key1&gt;/&lt;value1&gt;/... =&gt; will addd the key/value pairs to the xpl command
+<a href="#id23"><span class="problematic" id="id24">*</span></a>/base/device/xplstatparams/id/(?P&lt;id&gt;[0-9]+)/&lt;key1&gt;/&lt;value1&gt;/... =&gt; will addd the key/value pairs to the xpl stat message
+<a href="#id25"><span class="problematic" id="id26">*</span></a>/cmd/id/&lt;id&gt;/&lt;key1&gt;/&lt;value1&gt;/&lt;key2&gt;/&lt;value2&gt;/.... =&gt; sends out the xplcommand</p>
+<p>the urls below need an update (not a fixed format yet)
+<a href="#id27"><span class="problematic" id="id28">*</span></a>/base/xplcommand/add/schema/&lt;schema&gt;/reference/&lt;ref&gt;/device_id/&lt;devid&gt;/stat_id/&lt;statid&gt;
+<a href="#id29"><span class="problematic" id="id30">*</span></a>/base/xplstat/add/schema/&lt;schema&gt;/reference/&lt;ref&gt;/device_id/&lt;devid&gt;/
+<a href="#id31"><span class="problematic" id="id32">*</span></a>/base/xplcommandparam/add/stat_id/&lt;statId&gt;/key/&lt;key&gt;/value/&lt;value&gt;/static/&lt;static&gt;
+<a href="#id33"><span class="problematic" id="id34">*</span></a>/base/xplstatparam/add/stat_id/&lt;statId&gt;/key/&lt;key&gt;/value/&lt;value&gt;/static/&lt;static&gt;
+<a href="#id35"><span class="problematic" id="id36">*</span></a>/base/xplcommand/update/id/&lt;id&gt;/schema/&lt;schema&gt;/reference/&lt;ref&gt;/device_id/&lt;devid&gt;/stat_id/&lt;statid&gt;
+<a href="#id37"><span class="problematic" id="id38">*</span></a>/base/xplstat/udpate/id/&lt;id&gt;/schema/&lt;schema&gt;/reference/&lt;ref&gt;/device_id/&lt;devid&gt;/
+<a href="#id39"><span class="problematic" id="id40">*</span></a>/base/xplcommandparam/update/stat_id/&lt;statId&gt;/key/&lt;key&gt;/value/&lt;value&gt;/static/&lt;static&gt;
+<a href="#id41"><span class="problematic" id="id42">*</span></a>/base/xplstatparam/update/stat_id/&lt;statId&gt;/key/&lt;key&gt;/value/&lt;value&gt;/static/&lt;static&gt;
+<a href="#id43"><span class="problematic" id="id44">*</span></a>/base/xplcommand/delete/id/&lt;id&gt;
+<a href="#id45"><span class="problematic" id="id46">*</span></a>/base/xplstat/delete/id/&lt;id&gt;
+<a href="#id47"><span class="problematic" id="id48">*</span></a>/base/xplcommandparam/delete/stat_id/&lt;statId&gt;/key/&lt;key&gt;
+<a href="#id49"><span class="problematic" id="id50">*</span></a>/base/xplstatparam/delete/stat_id/&lt;statId&gt;/key/&lt;key&gt;</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Generate XPL messages from the DB</a><ul>
+<li><a class="reference internal" href="#original-idea">Original idea</a></li>
+<li><a class="reference internal" href="#upgrading">Upgrading</a></li>
+<li><a class="reference internal" href="#implementation">Implementation</a><ul>
+<li><a class="reference internal" href="#plugin-json">Plugin JSON</a></li>
+<li><a class="reference internal" href="#command-sending">Command sending</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Spec_xPL_to_domogik_data_types/Spec_xPL_to_domogik_data_types.html"
+                        title="previous chapter">xPL to Domogik data types transcoding</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Terminals/Terminals.html"
+                        title="next chapter">Terminals registration</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Spec_xplFromDb/Spec_xplFromDb.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Terminals/Terminals.html" title="Terminals registration"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Spec_xPL_to_domogik_data_types/Spec_xPL_to_domogik_data_types.html" title="xPL to Domogik data types transcoding"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

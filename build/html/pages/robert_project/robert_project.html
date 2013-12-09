@@ -1,0 +1,221 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Uses Cases for General Interactions &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="test" href="../test/test.html" />
+    <link rel="prev" title="New URL lookup sequence for rest" href="../rest_newurl_lookup/rest_newurl_lookup.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../test/test.html" title="test"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../rest_newurl_lookup/rest_newurl_lookup.html" title="New URL lookup sequence for rest"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="uses-cases-for-general-interactions">
+<h1>Uses Cases for General Interactions<a class="headerlink" href="#uses-cases-for-general-interactions" title="Permalink to this headline">¶</a></h1>
+<p>This document purpose is for listing simple to more complex interaction with Domogik system, and start to clarify the general notions that are going to be needed to move to a more interactive, intuitive, intelligent system.</p>
+<p>Nothing in this document will target a specific hardware or technology.
+A &#8216;command&#8217; could be a simple button, a vocal sentence, ...
+A &#8216;notification&#8217; could be a text message on a screen, a TTS sentence, ...
+An &#8216;event&#8217;, can be a sensor event, a date/time, ...</p>
+<div class="section" id="mail">
+<h2>#Mail<a class="headerlink" href="#mail" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="description">
+<h3>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h3>
+<p>The mailman just dropped an envelop in the mailbox, outside the house.
+And the system will notify the user(s)
+Notions
+<strong>****</strong></p>
+<p>The event simply update the a general state.
+__state__: mail(s) in the mailbox (on/off, or 0...999 if possible)</p>
+<p>This change of state, will result into notification actions, but it depends of general context
+__state__: does notifications are allowed for this particular time (night?)
+__state__: does notification are not in conflict with any other general __state__ (do not disturb, holiday, ...)</p>
+<p>It depends also on users specific context
+So for each user, that (generally) want to be notified for this event:
+__location__: does the user is at home? outside? at work connected with his phone?
+__state__: does the user available? (doing home work, at the phone, ...)
+__preference__: Does the user want to be notified on real time? when he comes back?
+__preference__: what is the preferred way for notification? TTS? via TXTmsg/email if not at home? Message on screen?</p>
+</div>
+</div>
+<div class="section" id="general-speech-type-command">
+<h2>#General speech type command<a class="headerlink" href="#general-speech-type-command" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Description<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>A user send a vocal command: &#8220;Please, turn on the light&#8221;
+Notions
+<strong>****</strong></p>
+<p>The first thing to identify is the __target__ of the command
+Is the __target__ indicated in the vocal command? If not how to reduce the number of possible targets?
+How many &#8216;light&#8217; devices are available? (For unique devices like TV, the target will be more easy to find)
+Where is the user located? How many &#8216;light&#8217; in the same __location__?</p>
+<p>If many __target__ are possible, the system can ask for more details about the target.</p>
+<p>When the __target__ is found, the next step is to identify the __user__ that request the action.
+Does the user use a specific terminal, with __authentication__?
+If it is not possible to identify the __user__, then the user is considered as Guest.</p>
+<p>Does the user has the right for this command?
+Does the target action can be regulated by general __state__? (light at 50% if during the night)</p>
+<p>If so does the user have __preferences__ for this command? (the user may have set the light at 70% the last time at the same time period)</p>
+</div>
+</div>
+<div class="section" id="shopping-list-speech-command">
+<h2>#Shopping list (speech command)<a class="headerlink" href="#shopping-list-speech-command" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>Description<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>A user initiate a vocal command: &#8220;Please, add to the shopping list&#8221;
+Then, he can add some items :
+&#8220;water&#8221;
+&#8220;milk&#8221;
+..
+And to finish the list :
+&#8220;thats is all&#8221; / &#8220;end&#8221; / ...</p>
+<p>Later, the user can retrieve the shopping list : &#8220;Please give me the shopping list&#8221;</p>
+</div>
+<div class="section" id="notions">
+<h3>Notions<a class="headerlink" href="#notions" title="Permalink to this headline">¶</a></h3>
+<p>The system must be able to start to listen for a list of vocal items and append them in a list in memory.
+The system must be able to detect the end of the list
+The system must be able to store permanently the list and complete it when requested
+The system must be able to give back the list when needed. It could be on various format : voice, texte, email (&#8220;send the shopping list to my wife&#8221;), ...</p>
+<p>Can we have as many shopping lists (some notes finally) as we want ?
+&#8220;Please, add to XXXXXXXXXX&#8221;</p>
+</div>
+</div>
+<div class="section" id="speech-photo-and-glasses-screens-interactions">
+<h2># Speech, photo and glasses/screens interactions<a class="headerlink" href="#speech-photo-and-glasses-screens-interactions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>Description<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>The user plug a usb key with some photo/schematics in a &#8220;electric plan&#8221; folder
+He wears his glasses and ask &#8220;Please, display the pictures from the folder electric plan of the usb key on my glasses&#8221;
+The system loads the picture and display them on the glasses
+Then the user can do some actions : &#8220;next&#8221;, &#8220;previous&#8221;, &#8220;end&#8221;</p>
+</div>
+<div class="section" id="id4">
+<h3>Notions<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>This is a quite advanced usage : get some data, send them to a component (which will make a copy or act as a proxy) and display them on a device. The device can be glasses, screens, tablets</p>
+<p>The command may also be done with a drag and drop on a user interface instead of a voice control</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Uses Cases for General Interactions</a><ul>
+<li><a class="reference internal" href="#mail">#Mail</a><ul>
+<li><a class="reference internal" href="#description">Description</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#general-speech-type-command">#General speech type command</a><ul>
+<li><a class="reference internal" href="#id1">Description</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#shopping-list-speech-command">#Shopping list (speech command)</a><ul>
+<li><a class="reference internal" href="#id2">Description</a></li>
+<li><a class="reference internal" href="#notions">Notions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#speech-photo-and-glasses-screens-interactions"># Speech, photo and glasses/screens interactions</a><ul>
+<li><a class="reference internal" href="#id3">Description</a></li>
+<li><a class="reference internal" href="#id4">Notions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../rest_newurl_lookup/rest_newurl_lookup.html"
+                        title="previous chapter">New URL lookup sequence for rest</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../test/test.html"
+                        title="next chapter">test</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/robert_project/robert_project.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../test/test.html" title="test"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../rest_newurl_lookup/rest_newurl_lookup.html" title="New URL lookup sequence for rest"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

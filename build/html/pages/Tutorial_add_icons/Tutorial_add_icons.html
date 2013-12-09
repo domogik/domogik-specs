@@ -1,0 +1,160 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>How to add your own room/area icons &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Tutorials and external articles" href="../Tutorials/Tutorials.html" />
+    <link rel="prev" title="Terminals registration" href="../Terminals/Terminals.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Tutorials/Tutorials.html" title="Tutorials and external articles"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Terminals/Terminals.html" title="Terminals registration"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="how-to-add-your-own-room-area-icons">
+<h1>How to add your own room/area icons<a class="headerlink" href="#how-to-add-your-own-room-area-icons" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="add-your-icon-s-in-django-s-folder">
+<h2>#Add your icon(s) in Django&#8217;s folder<a class="headerlink" href="#add-your-icon-s-in-django-s-folder" title="Permalink to this headline">¶</a></h2>
+<p>Put you icon somewhere in Django design folder. Usually in the &#8216;&#8217;images&#8217; folter of the current skin theme.
+Your icon has to be declined in three differents size: 16x16, 32x32 and 64x64:</p>
+<p>&#8216;&#8217;__src/domogik/ui/djangodomo/core/templates/design/skins/default/images/<a href="#id3"><span class="problematic" id="id4">room__</span></a>&#8216;&#8217;
+.. code-block:: json</p>
+<blockquote>
+<div>bathroom_16.png  bedroom_16.png  garage_16.png  kidsroom_16.png  kitchen_16.png  office_16.png  tvlounge_16.png
+bathroom_32.png  bedroom_32.png  garage_32.png  kidsroom_32.png  kitchen_32.png  office_32.png  tvlounge_32.png
+bathroom_64.png  bedroom_64.png  garage_64.png  kidsroom_64.png  kitchen_64.png  office_64.png  tvlounge_64.png</div></blockquote>
+</div>
+<div class="section" id="configure-the-icon-path">
+<h2>#Configure the icon path<a class="headerlink" href="#configure-the-icon-path" title="Permalink to this headline">¶</a></h2>
+<p>Open the icon css file:
+&#8216;&#8217;__src/domogik/ui/djangodomo/core/templates/design/skins/default/css/<a href="#id3"><span class="problematic" id="id5">ui-icon.css__</span></a>&#8216;&#8217;</p>
+<p>Add css class for each icon format, prefixed by icon64-room-<em>, icon32-room-</em> or icon16-room-* (same for icon64-area-<a href="#id1"><span class="problematic" id="id2">*</span></a>)</p>
+<p>For example:
+.. code-block:: json</p>
+<blockquote>
+<div>.icon64-room-myicon { background-image:url(../images/room/myicon_64.png);}
+.icon32-room-myicon { background-image:url(../images/room/myicon_32.png);}
+.icon16-room-myicon { background-image:url(../images/room/myicon_16.png);}</div></blockquote>
+</div>
+<div class="section" id="declare-the-new-icon">
+<h2>#Declare the new icon<a class="headerlink" href="#declare-the-new-icon" title="Permalink to this headline">¶</a></h2>
+<p>Open the icon js file:
+&#8216;&#8217;__src/domogik/ui/djangodomo/core/templates/design/js/<a href="#id3"><span class="problematic" id="id6">dmg.icons.js__</span></a>&#8216;&#8217;</p>
+<p>Add the icon id (should mach the id used in the css classes), in one of the 2 icons lists</p>
+<div class="highlight-json"><pre>var area_icons = ["grndfloor", "firstfloor", "basement"];
+var room_icons = ["kitchen", "bedroom", "tvlounge", "bathroom", "office", 'kidsroom', 'garage'];</pre>
+</div>
+<p>For example:
+.. code-block:: json</p>
+<blockquote>
+<div><p>var room_icons = [&#8220;kitchen&#8221;, &#8220;bedroom&#8221;, &#8220;tvlounge&#8221;, &#8220;bathroom&#8221;, &#8220;office&#8221;, &#8216;kidsroom&#8217;, &#8216;garage&#8217;, &#8216;myicon&#8217;];{CODE}</p>
+<p>Don&#8217;t forget to refresh your browser (ie: ctrl+F5 for firefox).</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">How to add your own room/area icons</a><ul>
+<li><a class="reference internal" href="#add-your-icon-s-in-django-s-folder">#Add your icon(s) in Django&#8217;s folder</a></li>
+<li><a class="reference internal" href="#configure-the-icon-path">#Configure the icon path</a></li>
+<li><a class="reference internal" href="#declare-the-new-icon">#Declare the new icon</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Terminals/Terminals.html"
+                        title="previous chapter">Terminals registration</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Tutorials/Tutorials.html"
+                        title="next chapter">Tutorials and external articles</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Tutorial_add_icons/Tutorial_add_icons.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Tutorials/Tutorials.html" title="Tutorials and external articles"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Terminals/Terminals.html" title="Terminals registration"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

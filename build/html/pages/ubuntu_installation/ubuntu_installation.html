@@ -1,0 +1,232 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installing Domogik on Ubuntu (Oneiric, Precise) &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="System schema of Domogik in xPL" href="../xPL_Domogik_system_schema/xPL_Domogik_system_schema.html" />
+    <link rel="prev" title="Install the DSM Tool Chain" href="../tutorials_SynologyHub/tutorials_SynologyHub.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../xPL_Domogik_system_schema/xPL_Domogik_system_schema.html" title="System schema of Domogik in xPL"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../tutorials_SynologyHub/tutorials_SynologyHub.html" title="Install the DSM Tool Chain"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="installing-domogik-on-ubuntu-oneiric-precise">
+<h1>Installing Domogik on Ubuntu (Oneiric, Precise)<a class="headerlink" href="#installing-domogik-on-ubuntu-oneiric-precise" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="full-installation">
+<h2>Full installation<a class="headerlink" href="#full-installation" title="Permalink to this headline">¶</a></h2>
+<p>First of all, you must have mysql running on a host of your network. You also need the admin user and password.
+Your mysql server must be running before starting installation of domogik, otherwise the installation will not finish properly.
+If you don&#8217;t have one, install mysql-server on your computer and verify it is running.
+.. code-block:: json</p>
+<blockquote>
+<div>service mysql status</div></blockquote>
+<p>If not, start it</p>
+<div class="highlight-json"><pre>sudo service mysql start</pre>
+</div>
+<p>Add the following sources to your apt configuration.
+For Oneiric (i386,amd64 and armel) :</p>
+<div class="highlight-json"><pre>deb http://bibi21000.gallet.info/ubuntu oneiric universe</pre>
+</div>
+<p>For Precise (i386 and amd64, armel will come soon) :</p>
+<div class="highlight-json"><pre>deb http://bibi21000.gallet.info/ubuntu precise universe</pre>
+</div>
+<p>Get the gpg keys to authenticate packages.</p>
+<div class="highlight-json"><pre>wget -O - http://bibi21000.gallet.info/ubuntu/maintainers.keys | sudo apt-key add -</pre>
+</div>
+<p>Open synaptic and reload indexes.</p>
+<p>Look for domogik in the search engine and select domogik-full.</p>
+<p>Apply updates</p>
+<p>{IMG(fileId=&#8221;322&#8221;
+{IMG}
+The interface to use with xplhub.
+If your computer is connected to a wired network, you should use eth0.
+With wifi, you should try wlan0. Otherwise use lo</p>
+<p>{IMG(fileId=&#8221;323&#8221;
+{IMG}
+Domogik need to create a database to finish its installation.
+If you have a dedicated mysql server on your network, use it. If not, use localhost to connect to the previously installed mysql-server.
+You also need the password of the admin user. It will be used to create the database.</p>
+<p>{IMG(fileId=&#8221;324&#8221;
+{IMG}
+Domogik use a special user to connect to the database. It&#8217;s also possible to change the name of the database used by domogik.</p>
+<p>{IMG(fileId=&#8221;325&#8221;
+{IMG}
+The interface Domogik should bind to. It MUST be the same as xplhub.</p>
+<p>Wait a litlle and that&#8217;s all.</p>
+<p>Open Firefox and connect the ip address associated with the interface previously defined on port 40404.
+If you use lo, connect to <a class="reference external" href="http://127.0.0.1:40404/">http://127.0.0.1:40404/|nocache</a>
+If you choose etho or wlan0, yous should try something like <a class="reference external" href="http://192.168.X.Y:40404/">http://192.168.X.Y:40404/</a></p>
+</div>
+<div class="section" id="remove-domogik">
+<h2>Remove domogik<a class="headerlink" href="#remove-domogik" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>You can completely remove domogik using the purge command. It will erase all your configuration files and the database too. That&#8217;s said.
+If you had a problem to your first installation, it&#8217;s a good idea to purge domogik, and restart a clean one.
+In a terminal, the following command will purge domogik and all data :</div></blockquote>
+<div class="highlight-json"><pre>#sudo apt-get purge xplhub domoweb domogik-full domogik-primary domogik-secondary domogik-mysql domogik-postgresql domogik-common</pre>
+</div>
+</div>
+<div class="section" id="packages-available">
+<h2>Packages available<a class="headerlink" href="#packages-available" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="classical-installation">
+<h3>Classical installation<a class="headerlink" href="#classical-installation" title="Permalink to this headline">¶</a></h3>
+<p>If you want to install domogik and domoweb on the same computer, you need to install this package :</p>
+<div class="highlight-json"><pre>#sudo apt-get install domogik-full</pre>
+</div>
+</div>
+<div class="section" id="primary-server">
+<h3>Primary server<a class="headerlink" href="#primary-server" title="Permalink to this headline">¶</a></h3>
+<p>If you want to install a primary server, install this package :</p>
+<div class="highlight-json"><pre>#sudo apt-get install domogik-primary</pre>
+</div>
+</div>
+<div class="section" id="secondary-server">
+<h3>Secondary server<a class="headerlink" href="#secondary-server" title="Permalink to this headline">¶</a></h3>
+<p>If you want to install a secondary server, install this package :</p>
+<div class="highlight-json"><pre>#sudo apt-get install domogik-secondary</pre>
+</div>
+<p>The configuration is sligthly different. You only need to set the ip address and the port of the main rest server of your network.
+PS : Not tested. If you want to use it, contact-me on IRC, Forum or Developpers Mailing List (preferred)</p>
+</div>
+<div class="section" id="using-postgresql">
+<h3>Using postgresql<a class="headerlink" href="#using-postgresql" title="Permalink to this headline">¶</a></h3>
+<p>Domogik should work with postgresql
+If you want to ude postgresql instead of mysql, add the package &#8220;domogik-postgresql&#8221;:
+For example, to install a primary server with postgresql</p>
+<div class="highlight-json"><pre>#sudo apt-get install domogik-primary domogik-postgresqlPS : Not tested. If you want to use it, contact-me on IRC, Forum or Developpers Mailing List (preferred)</pre>
+</div>
+</div>
+<div class="section" id="installing-domoweb">
+<h3>Installing Domoweb<a class="headerlink" href="#installing-domoweb" title="Permalink to this headline">¶</a></h3>
+<p>Warning : there is a missing dependence in domoweb.
+The WebUi could be install on every computer on the network.</p>
+<div class="highlight-json"><pre>#apt-get install domoweb</pre>
+</div>
+</div>
+<div class="section" id="using-apache-with-domoweb">
+<h3>Using apache with domoweb<a class="headerlink" href="#using-apache-with-domoweb" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-json"><pre>#sudo apt-get install domoweb-apache2PS : Not tested. If you want to use it, contact-me on IRC, Forum or Developpers Mailing List (preferred)</pre>
+</div>
+</div>
+</div>
+<div class="section" id="developpers">
+<h2>Developpers<a class="headerlink" href="#developpers" title="Permalink to this headline">¶</a></h2>
+<p>Installing a package repository for ubuntu : <a class="reference external" href="http://wiki.domogik.org/ubuntu_repository">http://wiki.domogik.org/ubuntu_repository</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installing Domogik on Ubuntu (Oneiric, Precise)</a><ul>
+<li><a class="reference internal" href="#full-installation">Full installation</a></li>
+<li><a class="reference internal" href="#remove-domogik">Remove domogik</a></li>
+<li><a class="reference internal" href="#packages-available">Packages available</a><ul>
+<li><a class="reference internal" href="#classical-installation">Classical installation</a></li>
+<li><a class="reference internal" href="#primary-server">Primary server</a></li>
+<li><a class="reference internal" href="#secondary-server">Secondary server</a></li>
+<li><a class="reference internal" href="#using-postgresql">Using postgresql</a></li>
+<li><a class="reference internal" href="#installing-domoweb">Installing Domoweb</a></li>
+<li><a class="reference internal" href="#using-apache-with-domoweb">Using apache with domoweb</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#developpers">Developpers</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../tutorials_SynologyHub/tutorials_SynologyHub.html"
+                        title="previous chapter">Install the DSM Tool Chain</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../xPL_Domogik_system_schema/xPL_Domogik_system_schema.html"
+                        title="next chapter">System schema of Domogik in xPL</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/ubuntu_installation/ubuntu_installation.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../xPL_Domogik_system_schema/xPL_Domogik_system_schema.html" title="System schema of Domogik in xPL"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../tutorials_SynologyHub/tutorials_SynologyHub.html" title="Install the DSM Tool Chain"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

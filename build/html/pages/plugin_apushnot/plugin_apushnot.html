@@ -1,0 +1,218 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Purpose &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="plugin_bluez" href="../plugin_bluez/plugin_bluez.html" />
+    <link rel="prev" title="__Mini_Script__" href="../mini_script/mini_script.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_bluez/plugin_bluez.html" title="plugin_bluez"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../mini_script/mini_script.html" title="__Mini_Script__"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="purpose">
+<h1>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h1>
+<p>This plugin allows sending notification to your <a class="reference external" href="http://www.android.com/">Android</a> device.</p>
+<p>It use the free <a class="reference external" href="https://notifrier.appspot.com/">Notifry] application and you can download it from [https://market.android.com/details?id=com.notifry.android&amp;amp;feature=search_result|Android Market</a>.</p>
+<p>Android and Android Market are <a class="reference external" href="http://www.google.com/about/corporate/company/">Google</a>&#8216;s mark.</p>
+<p>this service is free.
+author of this plugin: <a class="reference external" href="mailto:Kriss&#37;&#52;&#48;domogik&#46;org">Kriss<span>&#64;</span>domogik<span>&#46;</span>org</a></p>
+</div>
+<div class="section" id="installation-required">
+<h1>Installation required<a class="headerlink" href="#installation-required" title="Permalink to this headline">¶</a></h1>
+<p>You need to install python-cjson package on your Domogik&#8217;s server.
+.. code-block:: json</p>
+<blockquote>
+<div>easy_install python-cjson</div></blockquote>
+</div>
+<div class="section" id="application-installation-required">
+<h1>Application Installation required<a class="headerlink" href="#application-installation-required" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-json"><pre>install the Notifry apps from Android Market to your Android device.
+When install is finish, launch this app and register your account (a google account like gmail) and create your source (give the name you want).</pre>
+</div>
+</div>
+<div class="section" id="plugin-configuration">
+<h1>Plugin configuration<a class="headerlink" href="#plugin-configuration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="enabling-plugin">
+<h2>Enabling plugin<a class="headerlink" href="#enabling-plugin" title="Permalink to this headline">¶</a></h2>
+<p>You can enable plugin by using :
+.. code-block:: json</p>
+<blockquote>
+<div>dmgenplug apushnot</div></blockquote>
+<p>You just have to reload administration page to see the plugin in the list.</p>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="startup-plugin">
+<h3>startup-plugin<a class="headerlink" href="#startup-plugin" title="Permalink to this headline">¶</a></h3>
+<p>You can enable or disable the auto-start of the plugin.</p>
+</div>
+<div class="section" id="name">
+<h3>name<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h3>
+<p>It is necessary to indicate an alias (what you want) for your 32 character key.</p>
+</div>
+<div class="section" id="source">
+<h3>source<a class="headerlink" href="#source" title="Permalink to this headline">¶</a></h3>
+<p>It is necessary to indicate your 32 character key generated by Notifry&#8217;s service.</p>
+<p>{img fileId=&#8221;275&#8221; thumb=&#8221;y&#8221; rel=&#8221;box[g]&#8221;}</p>
+<p>You can create more alias with the &#8220;add interface&#8221; button.
+Once the configuration is done, you can start the plugin (start button).</p>
+</div>
+</div>
+</div>
+<div class="section" id="developper-notes">
+<h1>Developper Notes<a class="headerlink" href="#developper-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="how-the-online-plugin-to-test-of-order">
+<h2>How the online plugin to test of order?<a class="headerlink" href="#how-the-online-plugin-to-test-of-order" title="Permalink to this headline">¶</a></h2>
+<p>In a final one, since the catalog xpl/bin it is necessary to launch the order.
+.. code-block:: json</p>
+<blockquote>
+<div>./apushnot.py -f</div></blockquote>
+<p>In a final other, since the catalog xpl/bin it is necessary to launch the order.
+.. code-block:: json</p>
+<blockquote>
+<div>./send.py xpl-cmnd sendmsg.push &#8220;to=youralias,title=yourtitle,body=yourmessage&#8221;</div></blockquote>
+<p>where youralias is the alias you have configure in the configuration page of the plugin
+where yourtitle is the title of your message
+where yourmessage is the message that must be transmitted</p>
+<div class="section" id="xpl-cmnd-structure">
+<h3>XPL-CMND Structure<a class="headerlink" href="#xpl-cmnd-structure" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-json"><pre>sendmsg.push
+{
+to=&lt;Email address, User ID or Phone Number&gt;
+title=&lt;titleof the message&gt; (optional)
+body=&lt;Message body&gt;
+signature=&lt;signature of the message&gt; (optional)
+}</pre>
+</div>
+<ul class="simple">
+<li>[<a href="#id1"><span class="problematic" id="id2">|</span></a>sendmsg.push]</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Purpose</a></li>
+<li><a class="reference internal" href="#installation-required">Installation required</a></li>
+<li><a class="reference internal" href="#application-installation-required">Application Installation required</a></li>
+<li><a class="reference internal" href="#plugin-configuration">Plugin configuration</a><ul>
+<li><a class="reference internal" href="#enabling-plugin">Enabling plugin</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li><a class="reference internal" href="#startup-plugin">startup-plugin</a></li>
+<li><a class="reference internal" href="#name">name</a></li>
+<li><a class="reference internal" href="#source">source</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#developper-notes">Developper Notes</a><ul>
+<li><a class="reference internal" href="#how-the-online-plugin-to-test-of-order">How the online plugin to test of order?</a><ul>
+<li><a class="reference internal" href="#xpl-cmnd-structure">XPL-CMND Structure</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../mini_script/mini_script.html"
+                        title="previous chapter">__Mini_Script__</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_bluez/plugin_bluez.html"
+                        title="next chapter">plugin_bluez</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/plugin_apushnot/plugin_apushnot.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_bluez/plugin_bluez.html" title="plugin_bluez"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../mini_script/mini_script.html" title="__Mini_Script__"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,167 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Système interne de communication &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Notifications" href="../Developers_notifications/Developers_notifications.html" />
+    <link rel="prev" title="General instructions for developers" href="../Developers_general/Developers_general.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Developers_notifications/Developers_notifications.html" title="Notifications"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Developers_general/Developers_general.html" title="General instructions for developers"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="systeme-interne-de-communication">
+<h1>Système interne de communication<a class="headerlink" href="#systeme-interne-de-communication" title="Permalink to this headline">¶</a></h1>
+<p>__But__ : refonte du système de communication interne en vue de rationnalisation du code existant / ajout de fonctionnalités supplémentaires.</p>
+<blockquote>
+<div>Communication interne</div></blockquote>
+<hr class="docutils" />
+<p>Pour certaines actions internes à Domogik, la communication via xpl est limitée.
+L&#8217;idée serait d&#8217;avoir un second réseau de communication, pour les échanges liés au fonctionnement de Domogik, et n&#8217;ayant pas d&#8217;intérèt pour les éléments domotiques.
+Parmi les fonctionnalités qu&#8217;il serait interessant d&#8217;avoir:
+* pouvoir passer plusieurs types de données, voir des objets
+* Chiffrement des données
+* Niveaux de priorité entre les messages, avec un niveau &#8216;real time&#8217; pour les événements importants
+* Gérer des échanges asynchrones de type commande/réponse. Cas pratique : installation d&#8217;un package, demande pour désactiver un plugin (pas stopper!), ...
+* Gérer des échanges asynchrones de type commande/multiples réponses. Cas pratique : rest demande au manager d&#8217;installer un package. Le manager va renvoyer plusieurs réponses en fonction de l&#8217;avancement : 20%, 50%, 80%, fini. Ca permet d&#8217;avoir un meilleur rendu utilisateur.
+* Gérer les absences de réponses à une commande (timeout).</p>
+<p>Il serait utile de pouvoir integer les helpers dans ce réseau, de façon à pouvoir bénéficier de plus de fonctionnalités, et de pouvoir reproduire un comportement &#8216;terminal&#8217;.
+&#8216;&#8217;Note de Fritz : le cas des helpers est particulier... à voir si c&#8217;est vraiment judicieux!&#8217;&#8216;</p>
+<p>Ainsi que pour les plugins, d&#8217;avoir la possibilité de récupérer des données depuis la base.</p>
+<div class="section" id="flux-mixtes-xpl-second-canal">
+<h2>Flux mixtes xpl/second canal<a class="headerlink" href="#flux-mixtes-xpl-second-canal" title="Permalink to this headline">¶</a></h2>
+<p>Dans certains cas il pourrait être judicieux de mixer xpl et le second canal de communication.</p>
+<p>Cas pratique : auto discovery (qui sera implémenté côté plugins dans XplPlugin). Lorsqu&#8217;un plugin détecte un device non connu pour sa techno, il envoie un xpl pour le signaler (avec techno/adresse/type/reference). Rest doit intercepter ce message xPL. Ensuite il serait judicieux que ce message soit transformé en message du second canal et soit diffusé. Ainsi les IHMs utilisées (quelles qu&#8217;elles soient) pourraient notifier ce nouveau device et proposer de le créer.</p>
+</div>
+<div class="section" id="limiter-le-second-canal">
+<h2>Limiter le second canal<a class="headerlink" href="#limiter-le-second-canal" title="Permalink to this headline">¶</a></h2>
+<p>Le second canal devrait être limité aux échanges IHMs&lt;=&gt;rest&lt;=&gt;managers. Les plugins doivent utiliser uniquement xpl pour communiquer.</p>
+<blockquote>
+<div>Evénements internes</div></blockquote>
+<hr class="docutils" />
+<p>Pour les UI, il serait grandement bénéficiable de pouvoir récupérer (sur tout écran et pas seulement depuis l&#8217;admin) toutes sortes d&#8217;événements relatifs au fonctionnement de Domogik:
+* demarrage/arrêt de plugins
+* modification de la base
+* installations de packages
+* executions de scenarios
+* ...
+Tout cela au sein d&#8217;un même flux d&#8217;évenements</p>
+</div>
+<div class="section" id="logs">
+<h2>Logs<a class="headerlink" href="#logs" title="Permalink to this headline">¶</a></h2>
+<p>Voir si ça pourrait permettre de remonter facilement les logs (à la demande) des différents hôtes vers rest ou les ihms.</p>
+</div>
+<div class="section" id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<p>Ne pas oublier de prendre en compte Domodroid :
+* aspect déconnexion du réseau</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Système interne de communication</a><ul>
+<li><a class="reference internal" href="#flux-mixtes-xpl-second-canal">Flux mixtes xpl/second canal</a></li>
+<li><a class="reference internal" href="#limiter-le-second-canal">Limiter le second canal</a></li>
+<li><a class="reference internal" href="#logs">Logs</a></li>
+<li><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Developers_general/Developers_general.html"
+                        title="previous chapter">General instructions for developers</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Developers_notifications/Developers_notifications.html"
+                        title="next chapter">Notifications</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Developers_internal_communication_system/Developers_internal_communication_system.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Developers_notifications/Developers_notifications.html" title="Notifications"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Developers_general/Developers_general.html" title="General instructions for developers"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

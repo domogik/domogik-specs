@@ -1,0 +1,462 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plugin for the RFXCOM Usb Model &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Dépendance:" href="../plugin_scene/plugin_scene.html" />
+    <link rel="prev" title="python-openzwave" href="../plugin_pyozw/plugin_pyozw.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_scene/plugin_scene.html" title="Dépendance:"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_pyozw/plugin_pyozw.html" title="python-openzwave"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="plugin-for-the-rfxcom-usb-model">
+<h1>Plugin for the RFXCOM Usb Model<a class="headerlink" href="#plugin-for-the-rfxcom-usb-model" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<p>This plugin handle the <a class="reference external" href="http://www.rfxcom.com/transceivers.htm#12103">new RFXCOM Usb model</a>.</p>
+<p>{img attId=&#8221;381&#8221;,stylebox=&#8221;border&#8221;,align=&#8221;center&#8221;}</p>
+<p>In this page, it will be explainder how to :
+#Know where you can find your Rfxcom in Linux
+#Upgrade the firmware of the USB Rfxcom and use Rfxcom utilities
+#Configure your device under Linux, in order to be use in Domogik
+#Find a device/sensor</p>
+</div>
+<div class="section" id="know-where-the-rfxcom-device-is-in-linux">
+<h2>Know where the Rfxcom device is in Linux<a class="headerlink" href="#know-where-the-rfxcom-device-is-in-linux" title="Permalink to this headline">¶</a></h2>
+<p>In Linux, a peripheral is usually available in &#8220;/dev&#8221; folder. Linux will create new files in order for you (and for the software) to communicate with the device.
+In order to know where is the &#8220;device file&#8221; corresponding to your Rfxcom, plug your device in your computer, and issue a &#8220;dmesg&#8221; command as root.
+You should see something similar to this :
+.. code-block:: json</p>
+<blockquote>
+<div>[67273.205914] usb 1-1.2: new full speed USB device number 6 using xhci_hcd
+[67273.234518] ftdi_sio 1-1.2:1.0: FTDI USB Serial Device converter detected
+[67273.234576] usb 1-1.2: Detected FT232RL
+[67273.234579] usb 1-1.2: Number of endpoints 2
+[67273.234582] usb 1-1.2: Endpoint 1 MaxPacketSize 64
+[67273.234584] usb 1-1.2: Endpoint 2 MaxPacketSize 64
+[67273.234587] usb 1-1.2: Setting MaxPacketSize 64
+[67273.240229] usb 1-1.2: FTDI USB Serial Device converter now attached to ttyUSB0</div></blockquote>
+<p>Yeah, I know, this is not very meaningful, but we&#8217;ll cover that. You have an important information : the news device is &#8220;now attached to ttyUSB0&#8221;. You can find the relevant file in &#8220;/dev/ttyUSB0&#8221;.
+In order to be sure that this is your rfxcom device, issue :
+.. code-block:: json</p>
+<blockquote>
+<div># udevadm info &#8211;query=all &#8211;name ttyUSB0
+P: /devices/pci0000:00/0000:00:06.0/usb4/4-4/4-4:1.0/ttyUSB0/tty/ttyUSB0
+N: ttyUSB0
+S: serial/by-id/usb-RFXCOM_RFXtrx433_03VGWYV5-if00-port0
+S: serial/by-path/pci-0000:00:06.0-usb-0:4:1.0-port0
+E: DEVLINKS=/dev/serial/by-id/usb-RFXCOM_RFXtrx433_03VGWYV5-if00-port0 /dev/seri                                                                                                                               al/by-path/pci-0000:00:06.0-usb-0:4:1.0-port0
+E: DEVNAME=/dev/ttyUSB0
+E: DEVPATH=/devices/pci0000:00/0000:00:06.0/usb4/4-4/4-4:1.0/ttyUSB0/tty/ttyUSB0
+E: ID_BUS=usb
+E: ID_MODEL=RFXtrx433
+E: ID_MODEL_ENC=RFXtrx433
+E: ID_MODEL_FROM_DATABASE=FT232 USB-Serial (UART) IC
+E: ID_MODEL_ID=6001
+E: ID_PATH=pci-0000:00:06.0-usb-0:4:1.0
+E: ID_PATH_TAG=pci-0000_00_06_0-usb-0_4_1_0
+E: ID_REVISION=0600
+E: ID_SERIAL=RFXCOM_RFXtrx433_03VGWYV5
+E: ID_SERIAL_SHORT=03VGWYV5
+E: ID_TYPE=generic
+E: ID_USB_DRIVER=ftdi_sio
+E: ID_USB_INTERFACES=:ffffff:
+E: ID_USB_INTERFACE_NUM=00
+E: ID_VENDOR=RFXCOM
+E: ID_VENDOR_ENC=RFXCOM
+E: ID_VENDOR_FROM_DATABASE=Future Technology Devices International, Ltd
+E: ID_VENDOR_ID=0403
+E: MAJOR=188
+E: MINOR=0
+E: SUBSYSTEM=tty
+E: UDEV_LOG=3
+E: USEC_INITIALIZED=82954257684</div></blockquote>
+<p>There some information here. Notice the ID_VENDOR and the ID_MODEL. That&#8217;s indeed your Rfxcom !</p>
+</div>
+<div class="section" id="upgrade-the-firmware-of-the-usb-rfxcom">
+<h2>Upgrade the firmware of the USB Rfxcom<a class="headerlink" href="#upgrade-the-firmware-of-the-usb-rfxcom" title="Permalink to this headline">¶</a></h2>
+<p>If you don&#8217;t have the last firmware, don&#8217;t hesitate to upgrade it. We will just cover the firmware upgrade under linux. Under Windows, it&#8217;s pretty straigtforward, just follow the &#8220;Rfxcom user guide&#8221; located <a class="reference external" href="http://www.rfxcom.com/downloads.htm">here</a>
+Install Mono
+<strong>**********</strong></p>
+<p>First of all, you need to install &#8220;mono&#8221;, in order to be able to use Rfxcom&#8217;s firmware update or the Rfxcom manager.
+RFXCOM utilities can be run with __mono__ under GNU/Linux. To install &#8220;mono&#8221; on Debian :
+.. code-block:: json</p>
+<blockquote>
+<div># apt-get install mono-runtime
+# apt-get install libmono-microsoft-visualbasic8.0-cil</div></blockquote>
+<div class="section" id="upload-a-new-firmware">
+<h3>Upload a new firmware<a class="headerlink" href="#upload-a-new-firmware" title="Permalink to this headline">¶</a></h3>
+<p>!!!!Download the last firmware
+Download the last firware for your hardware, <a class="reference external" href="http://www.rfxcom.com/downloads.htm">on this page</a>
+.. code-block:: json</p>
+<blockquote>
+<div># wget <a class="reference external" href="http://www.rfxcom.com/documents/RFXtrx433_firmware.zip">http://www.rfxcom.com/documents/RFXtrx433_firmware.zip</a>
+# unzip RFXtrx433_firmware.zip</div></blockquote>
+<p>You will have a &#8221;.hex&#8221; file unzipped from the archive.
+!!!!Launch the utility
+Download __RFXflash.exe__ on <a class="reference external" href="http://www.rfxcom.com/documents/RFXflash.zip">the official RFXCOM website</a>.
+Launch __RFXflash.exe :
+.. code-block:: json</p>
+<blockquote>
+<div>$ mono RFXflash.exe</div></blockquote>
+<p>!!!!Upload firmware
+We have see in the previous section that your device should be recognised as &#8220;/dev/ttyUSB0&#8221; (or something similar). Select it now.
+Click on the icon &#8216;&#8217;Connect to device&#8217;&#8216;. You should read now :
+.. code-block:: json</p>
+<blockquote>
+<div><p>Connecting...</p>
+<p>Device found...</p>
+</div></blockquote>
+<p>{img attId=&#8221;382&#8221;,stylebox=&#8221;border&#8221;,align=&#8221;center&#8221;}</p>
+<p>Click on the icon &#8216;&#8217;Open HEX File&#8217;&#8216;.</p>
+<p>{img attId=&#8221;383&#8221;,stylebox=&#8221;border&#8221;,align=&#8221;center&#8221;}</p>
+<p>Select the firmware. Click on &#8216;&#8217;Open&#8217;&#8216;.</p>
+<p>{img attId=&#8221;384&#8221;,stylebox=&#8221;border&#8221;,align=&#8221;center&#8221;}</p>
+<p>You should read now :
+.. code-block:: json</p>
+<blockquote>
+<div>HEX file imported...</div></blockquote>
+<p>{img attId=&#8221;385&#8221;,stylebox=&#8221;border&#8221;,align=&#8221;center&#8221;}</p>
+<p>Click on the icon &#8216;&#8217;Write Device&#8217;&#8216;. You should read now :
+.. code-block:: json</p>
+<blockquote>
+<div><p>Erasing...
+Erasing: 13A00</p>
+<p>Finished operation...
+Not connected...
+Connecting...
+Device found...
+Erase step finished...
+Start Writing Program memory</p>
+<p>Finished operation...</p>
+</div></blockquote>
+<p>{img attId=&#8221;386&#8221;,stylebox=&#8221;border&#8221;,align=&#8221;center&#8221;}</p>
+<p>Now, click on the icon &#8216;&#8217;Normal execution mode to end the flash process&#8217;&#8216;. You RFXCOM is upgraded with a new firmware.</p>
+<p>{img attId=&#8221;387&#8221;,stylebox=&#8221;border&#8221;,align=&#8221;center&#8221;}</p>
+</div>
+</div>
+<div class="section" id="configure-your-device-under-linux-in-order-to-be-use-in-domogik">
+<h2>Configure your device under Linux, in order to be use in Domogik<a class="headerlink" href="#configure-your-device-under-linux-in-order-to-be-use-in-domogik" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we will do two things :
+<em>Create a udev rule to map your Rfxcom to a meaningful &#8220;device file&#8221;.
+*Allow domogik user to talk to your Rfxcom
+Create a udev rule for the Rfxcom.
+**********************************</em></p>
+<p>Currently, your Rfxcom is known as &#8220;/dev/ttyUSB0&#8221; (by default). This is not very convenient nor meaningful. We will then create a new udev rule that will create a link called &#8220;/dev/rfxcom&#8221; that will point to &#8220;/dev/ttyUSB0&#8221;.
+!!!!Gather information about your device
+Use &#8220;udevadm&#8221; command to gather information about your device :
+.. code-block:: json</p>
+<blockquote>
+<div># udevadm info &#8211;query=all &#8211;name ttyUSB0
+P: /devices/pci0000:00/0000:00:06.0/usb4/4-4/4-4:1.0/ttyUSB0/tty/ttyUSB0
+N: ttyUSB0
+S: serial/by-id/usb-RFXCOM_RFXtrx433_03VGWYV5-if00-port0
+S: serial/by-path/pci-0000:00:06.0-usb-0:4:1.0-port0
+E: DEVLINKS=/dev/serial/by-id/usb-RFXCOM_RFXtrx433_03VGWYV5-if00-port0 /dev/seri                                                                                                                               al/by-path/pci-0000:00:06.0-usb-0:4:1.0-port0
+E: DEVNAME=/dev/ttyUSB0
+E: DEVPATH=/devices/pci0000:00/0000:00:06.0/usb4/4-4/4-4:1.0/ttyUSB0/tty/ttyUSB0
+E: ID_BUS=usb
+E: ID_MODEL=RFXtrx433
+E: ID_MODEL_ENC=RFXtrx433
+E: ID_MODEL_FROM_DATABASE=FT232 USB-Serial (UART) IC
+E: ID_MODEL_ID=6001
+E: ID_PATH=pci-0000:00:06.0-usb-0:4:1.0
+E: ID_PATH_TAG=pci-0000_00_06_0-usb-0_4_1_0
+E: ID_REVISION=0600
+E: ID_SERIAL=RFXCOM_RFXtrx433_03VGWYV5
+E: ID_SERIAL_SHORT=03VGWYV5
+E: ID_TYPE=generic
+E: ID_USB_DRIVER=ftdi_sio
+E: ID_USB_INTERFACES=:ffffff:
+E: ID_USB_INTERFACE_NUM=00
+E: ID_VENDOR=RFXCOM
+E: ID_VENDOR_ENC=RFXCOM
+E: ID_VENDOR_FROM_DATABASE=Future Technology Devices International, Ltd
+E: ID_VENDOR_ID=0403
+E: MAJOR=188
+E: MINOR=0
+E: SUBSYSTEM=tty
+E: UDEV_LOG=3
+E: USEC_INITIALIZED=82954257684</div></blockquote>
+<p>Those information will be useful to determinate for sure that this device is your Rfxcom. We will use several information, flagged above as &#8220;SUBSYSTEM&#8221;, &#8220;ID_VENDOR&#8221; and &#8220;ID_MODEL&#8221;. With that, we will be sure that we&#8217;ll be talking to our Rfxcom.
+!!!!Create a udev rule.
+<a href="#id1"><span class="problematic" id="id2">*</span></a>Create a new file, in folder &#8220;/etc/udev/rules.d&#8221;. Let&#8217;s call it &#8220;71-rfxcom.rules&#8221;.
+<a href="#id3"><span class="problematic" id="id4">*</span></a>Enter those information in the file :
+.. code-block:: json</p>
+<blockquote>
+<div>SUBSYSTEM==&#8221;tty&#8221;, ENV{ID_MODEL}==&#8221;RFXtrx433&#8221;, ENV{ID_VENDOR}==&#8221;RFXCOM&#8221;, SYMLINK+=&#8221;rfxcom&#8221;,  MODE=&#8221;0666&#8221;</div></blockquote>
+<p>The &#8220;SUBSYSTEM&#8221;, the &#8220;ENV{ID_MODEL}&#8221; and &#8220;ENV{ID_VENDOR}&#8221; values must be coherent with what you have found above.
+<a href="#id5"><span class="problematic" id="id6">*</span></a>Ask udev to rediscover your device :
+.. code-block:: json</p>
+<blockquote>
+<div># udevadm test $(udevadm info &#8211;query path &#8211;name ttyUSB0)</div></blockquote>
+<p>Your device should now be re-discovered, let&#8217;s confirm it :
+.. code-block:: json</p>
+<blockquote>
+<div># ls -l /dev/rfxcom
+lrwxrwxrwx 1 root root 7 juin  18 23:24 /dev/rfxcom -&gt; ttyUSB0</div></blockquote>
+<div class="section" id="allow-domogik-to-use-the-rfxcom">
+<h3>Allow domogik to use the Rfxcom.<a class="headerlink" href="#allow-domogik-to-use-the-rfxcom" title="Permalink to this headline">¶</a></h3>
+<p>Now that the Rfxcom is know &#8220;/dev/rfxcom&#8221; by the system, let&#8217;s allow Domogik to use it.
+At this point, you should have installed at least Domogik. Normally, the setup should have asked for the creation of a user (by default, it&#8217;s called &#8220;domogik&#8221;).
+Now, we must allow the &#8220;domogik&#8221; user to talk to the Rfxcom.
+The Rfxcom device file have some specific rights : &#8220;root&#8221; is the owner, but &#8220;dialout&#8221; is the group. This group is used to allow users to use &#8220;modem&#8221;-type devices, and the Rfxcom is being discovered as one of this type by the system. The only thing we have to do is to add &#8220;domogik&#8221; to the group &#8220;dialout&#8221;.
+.. code-block:: json</p>
+<blockquote>
+<div># adduser domogik dialout</div></blockquote>
+<p>That&#8217;s all, &#8220;domogik&#8221; will be able to use the Rfxcom, thanks to the &#8220;group&#8221; rights (read and write)
+.. code-block:: json</p>
+<blockquote>
+<div># ls -l /dev/ttyUSB0
+crw-rw&#8212;T 1 root dialout 188, 0 juin  18 23:24 /dev/ttyUSB0</div></blockquote>
+</div>
+</div>
+<div class="section" id="how-to-find-a-device-address-for-a-sensor">
+<h2>How to find a device address for a sensor<a class="headerlink" href="#how-to-find-a-device-address-for-a-sensor" title="Permalink to this headline">¶</a></h2>
+<p>You can launch the __dump_xpl.py__ tool to see all xpl messages and try to catch the on
+.. code-block:: json</p>
+<blockquote>
+<div>$ ./dump_xpl.py -f
+2011-07-24 11:56:08.590840 - xpl-trig
+{
+hop=1
+source=rfxcom-lan.0004a31bb6ac
+target=*
+}
+sensor.basic
+{
+device=th2 0x5803
+type=temp
+current=21.8
+units=c
+}</div></blockquote>
+</div>
+<div class="section" id="usb-model-known-features">
+<h2>Usb model known features<a class="headerlink" href="#usb-model-known-features" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="unit-code-forced-to-1-with-homeasy-products-with-a-program-learn-button">
+<h3>Unit code forced to 1 with Homeasy products with a program/learn button<a class="headerlink" href="#unit-code-forced-to-1-with-homeasy-products-with-a-program-learn-button" title="Permalink to this headline">¶</a></h3>
+<p>Actually Domogik can&#8217;t handle addresses split in 2 parts. So, the unit code is for the moment forced to &#8220;1&#8221; for all these devices in Domogik.
+So, the remote command of this <a class="reference external" href="http://www.planete-domotique.com/autres/par-technologie/chacon-sans-fils/telecommande-3-canaux-3-modules-prise-on-off-2300w-di-o.html">this kind of product</a> can be use only for 1 plug if you set all the three plugs on unit 1.</p>
+<p>This issue will be fixed with Domogik next database model.</p>
+</div>
+</div>
+<div class="section" id="address-formats">
+<h2>Address formats<a class="headerlink" href="#address-formats" title="Permalink to this headline">¶</a></h2>
+<p>{FANCYTABLE(head=&gt;Device type~|~Description~|~Address format)}
+x10.basic - X10 lighting~|~X10 lighting or ARC messages.~|~(house code(device code)) house code = A to P device code = 1 to 16. Device code is not present in case of all_lights_on/off.
+ac.basic – AC code remotes and wall switches~|~AC type remotes or AC type RF wall switches (with program/learn button)~|~(0x1-0x3ffffff) The address used by the AC device. In the RF protocol this is a 26bit value, which should be specified as a hexadecimal number with a leading 0x. Never use an address with all zeroes!
+x10.security~|~Visonic PowerCode/CodeSecure security or Chacon, Avidsen, NEXA smoke detector~|~(device id) The id is a hex number between 0x0 and 0xffffff. It is also referred to as the device address.
+remote.basic~|~PC Remote, Medion remote, ATI Remote or ATI Remote Plus~|~(rf|ati|medion|ati_plus) pc is an X10 PC Remote, address is only used at cursor commands. ati is an ATI remote. medion is for the medion remote. ati_plus is an ATI-Plus remote. Address is the remote hex channel from 0x0 to 0xF.
+Digimax~|~~|~(digimax 0x(hex device id))
+RFXSensor~|~~|~(rfxsensor 0x(hex device id))
+RFXMeter~|~~|~(rfxmeter 0x(hex device id))
+sensor.basic – RFXLAN I/O lines~|~~|~(io0-io7) IO line to control
+sensor.basic – Mertik-Maxitrol~|~~|~(0x0-0xF) mertik address is a hex code 0x0 to 0xF
+Oregon sensors~|~Temperature, Temp-Hygro, Rain Gauge, Anemometer, UV sensor, Body Weight Monitor, Ampere meter, Power meter~|~(temp1-4|th1-6|thb1-2|rain1-2|wind1-3|uv1-2|weight1-2|elec1-3) 0x(hex sensor id)
+{FANCYTABLE}</p>
+</div>
+<div class="section" id="links">
+<h2>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h2>
+<p><a href="#id7"><span class="problematic" id="id8">*</span></a><a class="reference external" href="http://www.rfxcom.com/downloads.htm">http://www.rfxcom.com/downloads.htm</a>
+<a href="#id9"><span class="problematic" id="id10">*</span></a><a class="reference external" href="http://www.rfxcom.com/documents/xPL.zip">Latest xPL firmware for the RFXLAN</a>
+<a href="#id11"><span class="problematic" id="id12">*</span></a><a class="reference external" href="http://www.rfxcom.com/documents/RFXCOM%20implementation%20xPL.pdf">RFXxPL xPL implementation on RFXLAN documentation</a></p>
+</div>
+</div>
+<div class="section" id="developer-notes">
+<h1>Developer notes<a class="headerlink" href="#developer-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="xpl">
+<h2>xPL<a class="headerlink" href="#xpl" title="Permalink to this headline">¶</a></h2>
+<p>All xpl messages are make in <a class="reference external" href="http://www.rfxcom.com/documents/RFXCOM%20implementation%20xPL.pdf">the same way the RFXCOM Lan xPL generates them</a>.</p>
+</div>
+<div class="section" id="set-up-addresses-and-examples">
+<h2>Set up addresses and examples<a class="headerlink" href="#set-up-addresses-and-examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="di-o-pdr-2300">
+<h3>DI.O PDR-2300<a class="headerlink" href="#di-o-pdr-2300" title="Permalink to this headline">¶</a></h3>
+<p>!!!!Delete learned addresses
+Plug the module.
+Call this command before the led stop blinking : ./send.py xpl-cmnd ac.basic &#8220;address=0x1,unit=1,__command=group_off__&#8221;
+The plugged light should blink twice for acknowlegment.
+!!!!Learn a new address
+Plug the module.
+Call this command before the led stop blinking : ./send.py xpl-cmnd ac.basic &#8220;__address=0x111__,unit=1,__command=on__&#8221;
+The plugged light should blink twice for acknowlegment.</p>
+</div>
+<div class="section" id="chacon-54561-54565-54566-54567-54581-54582-54585-54585">
+<h3>Chacon 54561, 54565, 54566, 54567, 54581, 54582, 54585, 54585<a class="headerlink" href="#chacon-54561-54565-54566-54567-54581-54582-54585-54585" title="Permalink to this headline">¶</a></h3>
+<p>!!!!Delete learned addresses
+Plug the module. Press the button until the led blinks (about 6 seconds). Press the button one more time. The plugged light should blink twice for acknowlegment.</p>
+<p>!!!!Learn a new address
+Plug the module. Press the button. Call this command before the led stop blinking : ./send.py xpl-cmnd ac.basic &#8220;__address=0x111__,unit=1,__command=on__&#8221;
+The plugged light should blink twice for acknowlegment.</p>
+<p>!!!!Play with the light
+.. code-block:: json</p>
+<blockquote>
+<div>$ ./send.py xpl-cmnd ac.basic &#8220;address=0x0038abfe,unit=10,command=off&#8221;
+$ ./send.py xpl-cmnd ac.basic &#8220;address=0x0038abfe,unit=10,command=on&#8221;
+$ ./send.py xpl-cmnd ac.basic &#8220;address=0x0038abfe,unit=10,command=preset,level=1&#8221;</div></blockquote>
+</div>
+</div>
+</div>
+<div class="section" id="list">
+<h1>List<a class="headerlink" href="#list" title="Permalink to this headline">¶</a></h1>
+<p>{FANCYTABLE(head=&gt;Type | Subtype    | Description                                                            | status         | Remarks)}
+Lighting1           | x10           | X10 lighting devices                                                   | Dev(x) Test( ) | &#8220;All off&#8221; and &#8220;All on&#8221; are implemented but xml and features not activated</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">arc           | ARC is the protocol used by different brands with units having code wheels A-P/1-16: KlikAanKlikUit, NEXA, CHACON, HomeEasy, Proove, DomiaLite | Dev(x) Test( ) |</div>
+<div class="line">elro          | ELRO AB400D                                                            | Dev(x) Test( ) | ..</div>
+<div class="line">waveman       | Waveman                                                                | Dev(x) Test( ) | ..</div>
+<div class="line">chacon        | Chacon EMW200                                                          | Dev(x) Test( ) | ..</div>
+<div class="line">impuls        | Impuls                                                                 | Dev(x) Test( ) | ..</div>
+</div>
+</div></blockquote>
+<dl class="docutils">
+<dt>Lighting2           | ac            | AC is the protocol used by different brands with units having a learning mode button: KlikAanKlikUit, NEXA, CHACON, HomeEasy UK | Dev(x) Test( ) <a href="#id13"><span class="problematic" id="id14">|</span></a>\Unit code is restricted to &#8220;1&#8221; with Domogik actual database model.&lt;br/&gt; Group command is implemented but xml and features not activated.</dt>
+<dd><div class="first last line-block">
+<div class="line">homeeasy_eu   | Homeeasy EU                                                            | Dev(x) Test( )</div>
+</div>
+</dd>
+</dl>
+<p>Lighting3           | koppla        | Ikea Koppla                                                            | Dev(x) Test( ) |
+Lighting4           | pt2262        | PT2262 - futur use                                                     | Dev( ) Test( ) |
+Lighting5           | lightwaverf   | LightwaveRF Siemens - futur use                                        | Dev( ) Test( ) |
+Lighting6           | novatys       | Novatys - futur use                                                    | Dev( ) Test( ) |
+Curtain1            | harrison      | Harrison curtains                                                      | Dev(x) Test( ) | &#8220;on&#8221; open curtains, &#8220;off&#8221; close, &#8220;dim&#8221; or &#8220;bright&#8221; stop and &#8220;all_light_*&#8221; set program mode</p>
+<p>{FANCYTABLE}</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Plugin for the RFXCOM Usb Model</a><ul>
+<li><a class="reference internal" href="#purpose">Purpose</a></li>
+<li><a class="reference internal" href="#know-where-the-rfxcom-device-is-in-linux">Know where the Rfxcom device is in Linux</a></li>
+<li><a class="reference internal" href="#upgrade-the-firmware-of-the-usb-rfxcom">Upgrade the firmware of the USB Rfxcom</a><ul>
+<li><a class="reference internal" href="#upload-a-new-firmware">Upload a new firmware</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configure-your-device-under-linux-in-order-to-be-use-in-domogik">Configure your device under Linux, in order to be use in Domogik</a><ul>
+<li><a class="reference internal" href="#allow-domogik-to-use-the-rfxcom">Allow domogik to use the Rfxcom.</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#how-to-find-a-device-address-for-a-sensor">How to find a device address for a sensor</a></li>
+<li><a class="reference internal" href="#usb-model-known-features">Usb model known features</a><ul>
+<li><a class="reference internal" href="#unit-code-forced-to-1-with-homeasy-products-with-a-program-learn-button">Unit code forced to 1 with Homeasy products with a program/learn button</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#address-formats">Address formats</a></li>
+<li><a class="reference internal" href="#links">Links</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#developer-notes">Developer notes</a><ul>
+<li><a class="reference internal" href="#xpl">xPL</a></li>
+<li><a class="reference internal" href="#set-up-addresses-and-examples">Set up addresses and examples</a><ul>
+<li><a class="reference internal" href="#di-o-pdr-2300">DI.O PDR-2300</a></li>
+<li><a class="reference internal" href="#chacon-54561-54565-54566-54567-54581-54582-54585-54585">Chacon 54561, 54565, 54566, 54567, 54581, 54582, 54585, 54585</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#list">List</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../plugin_pyozw/plugin_pyozw.html"
+                        title="previous chapter">python-openzwave</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_scene/plugin_scene.html"
+                        title="next chapter">Dépendance:</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/plugin_rfxcom/plugin_rfxcom.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_scene/plugin_scene.html" title="Dépendance:"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_pyozw/plugin_pyozw.html" title="python-openzwave"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

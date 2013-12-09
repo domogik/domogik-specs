@@ -1,0 +1,364 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Communication link security &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Specifications for developers" href="../Spec_developers/Spec_developers.html" />
+    <link rel="prev" title="Spec_Domodroid" href="../Spec_Domodroid/Spec_Domodroid.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Spec_developers/Spec_developers.html" title="Specifications for developers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Spec_Domodroid/Spec_Domodroid.html" title="Spec_Domodroid"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="communication-link-security">
+<h1>Communication link security<a class="headerlink" href="#communication-link-security" title="Permalink to this headline">¶</a></h1>
+<p>How to secure the link between the client, and the MQ? SSL?
+Maybe we can differenciate local links (plugins, core, ...) and external links (UI, remote dmg servers)</p>
+</div>
+<div class="section" id="authentication-identify-the-client">
+<h1>Authentication (Identify the client)<a class="headerlink" href="#authentication-identify-the-client" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cereal-s-idea">
+<h2>Cereal&#8217;s idea<a class="headerlink" href="#cereal-s-idea" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>req/rep</div></blockquote>
+<hr class="docutils" />
+<p>user (physical person) =&gt; rest:
+* digest hash in http header
+* inside rest do the authentication and authorization on the request
+* create a hash (digest)
+* send the zmq message to hadnle the request
+zmq receiver:
+* authenticathe the hash
+* check authorizzation
+* do action
+* reply</p>
+<blockquote>
+<div>pub/sub</div></blockquote>
+<hr class="docutils" />
+<p>no solution yet, depends on the routing, if we use an mq router, this one can handle AA for pub/sub</p>
+<div class="section" id="hash-generation">
+<h3>hash generation<a class="headerlink" href="#hash-generation" title="Permalink to this headline">¶</a></h3>
+<p>~~#C00:Do not see the need for hash as it no more secure than user/pass~~
+yes it is, as we generate the a new hash for every request we will not be vulnerable for
+<a href="#id1"><span class="problematic" id="id2">*</span></a>reply attacks
+<a href="#id3"><span class="problematic" id="id4">*</span></a>password sniffing (as the password is not sent over the line)
+<a href="#id5"><span class="problematic" id="id6">*</span></a>(partly) men in the middle attacks</p>
+<p>sender:
+* generate hash
+* store hash in authentication storage
+* send message</p>
+<p>receiver:
+* check hash in authentication storage
+* do action</p>
+<p>hash keys:
+* timestamp in minuts (so the hash is only valid for one minuts) (NOT sure about this ....)
+* username
+* hashed user password that is stored in the db
+* random key (from domogik config)</p>
+<blockquote>
+<div>use cases</div></blockquote>
+<hr class="docutils" />
+<p>!!!! request coming in from over rest url
+# rest authenticates the user
+# rest check authorization
+* if ok =&gt; do action
+* if nok =&gt; sent http 404
+# do the action</p>
+<p>if the action is a zmq action, add an authenticator in the zmq message identifying this user (coming from the rest url)</p>
+<p>on receive of the zmq message:
+# check the authenticator to do authorzation and authentication
+# do the action
+# send response back</p>
+<p>!!!! action coming from scenarios
+# scenarios is another user
+# so admin decides what actions a scenario user can take, the same flowchart applies as in a request coming from rest</p>
+<p>{IMG(attId=&#8221;440&#8221;)}{IMG}</p>
+</div>
+</div>
+</div>
+<div class="section" id="authorization-what-the-client-can-do">
+<h1>Authorization (What the client can do)<a class="headerlink" href="#authorization-what-the-client-can-do" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id7">
+<h2>Cereal&#8217;s idea<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p>authorization is based on user/groups and acls, a user can have multiple groups and a group can have multiple acls.</p>
+<div class="section" id="what-is-an-acl">
+<h3>What is an ACL<a class="headerlink" href="#what-is-an-acl" title="Permalink to this headline">¶</a></h3>
+<p>An acl or access control list is an identification to either an command, sensor or a whole device. Together with this linking a couple of fields are stored to keep track of the access control.</p>
+<p>If nothing is defined, we don&#8217;t have access, default = reject access</p>
+<p>These fields depend on the object type:
+<a href="#id8"><span class="problematic" id="id9">*</span></a>Object = Device: the possible ACLS are:
+#view : view all commands/sensors of this device
+#activate : activate all commands for this device
+<a href="#id10"><span class="problematic" id="id11">*</span></a>Object = Command: the possible ACLS are:
+#view : view the status off the command
+#activate : activate this command
+<a href="#id12"><span class="problematic" id="id13">*</span></a>Object = Sensor: the possible ACLS are:
+#view : view the sensor data for this sensor
+#activate : NA</p>
+<p>There is some linking between the device and commands/sensors, if the ACL is linked to a device this ACL will be used for all commands/sensors linked to this device, except if another ACl restricts access to a specific sensor/command.</p>
+</div>
+<div class="section" id="acl-examples">
+<h3>ACL examples<a class="headerlink" href="#acl-examples" title="Permalink to this headline">¶</a></h3>
+<p>We have the following defined
+Device A with command Ac1 Ac2 Ac3 and sensors As1 As2 As3
+Device B with command Bc1 Bc2 and sensors Bs1
+Device C with no commands and sensors Cs1 Cs2 Cs3</p>
+<p>and we have the following ACLS
+||Obeject Type   <a href="#id14"><span class="problematic" id="id15">|Object|View|Activate
+Device|A|1|1
+Device|B|1|0
+Command|Bc1|1|1
+Sensor|Cs3|1|0||</span></a></p>
+<p>This will result in the following access:
+* full control of all commands and sensors of device A
+* Full VIEW control of device B no activate control except for command BC1
+* No access to device C, except for view on sensor C3</p>
+<blockquote>
+<div>Ferllings idea</div></blockquote>
+<hr class="docutils" />
+<p>This system is based on the idea that right may vary based on four criteria:
+The user, the locations of the user/feature, the terminal used and the state of the domotic system.</p>
+<blockquote>
+<div>Levels</div></blockquote>
+<hr class="docutils" />
+<p>Levels numbers describe the credential level for users.
+2 fixed levels define the minimal and maximal values :
+* Level 0 : (For admin users)
+* Level 9 : (For guest/non logged users)</p>
+<p>Any other Level numbers (between 1 and 8) can be created to organize users hierarchy.
+example:
+* Level 1 : Parents
+* Level 2 : Children
+* Level 3 : Friends and Occasional visitors</p>
+<blockquote>
+<div>Locations and Terminals</div></blockquote>
+<hr class="docutils" />
+<p>Features access can be different, based on the user location and feature location.
+3 locations type have been identified:
+* Local : The user and the requested feature are in the same room or defined zone.
+* remote : The user is in a different room/zone from the requested feature.
+* outside : The user is outside the house/building (insecure connection via Internet)</p>
+<p>Specific terminal can also have specific limited level (specially for guest access).
+For example, a embedded touchscreen, can only be allowed to access local features.</p>
+<blockquote>
+<div>States</div></blockquote>
+<hr class="docutils" />
+<p>Specific domotic states can also influence features access.
+For example, If we do not want children to be able to access some feature, when there is no parent at home.</p>
+<p>States can be set manually, using cron/calendar or using scenarios.
+Some examples: Alarm on, Parent not at home, Holiday, Party at home, etc...</p>
+<blockquote>
+<div>Features access</div></blockquote>
+<hr class="docutils" />
+<p>To access a feature a user will need an equal or higher access level, than is the level set for this feature.
+* For sensors, access will allow the user to view the sensor value.
+* For commands, access will allow the user to launch the command.
+Each sensor/command, will have a default set of requested level, for access:</p>
+<p>{FANCYTABLE( head=&#8221;Sensor/Command|Zone|Local|Remote|Outside&#8221;, headaligns=&#8221;left|center&#8221;)}
+Temperature|Bedroom|Level 9|Level 9|Level 8
+Light switch|Bedroom|Level 9|Level 8|Level 0
+{FANCYTABLE}
+Explanation:
+* The temperature value can be viewed on any local or remote location, without login, but outside access will require login with minimal Level 8 access.
+* Light switch can be activated on the same room, with guest access (no login). From other remote locations Level 8 is required, and Level 0 (admin) from outside (internet) access.</p>
+<p>As explained those default access can be changed based on terminal/state.
+Example 1: I want my smartphone to have full access, without login needed, inside the house.</p>
+<p>{FANCYTABLE( head=&#8221;Sensor/Command|Zone|//Local|//Remote|//Outside&#8221;, headaligns=&#8221;left|center&#8221;)}
+||DEFAULT|T.SMARTPHONE|DEFAULT|T.SMARTPHONE|DEFAULT|T.SMARTPHONE
+Light switch|Bedroom|Level 9|Level 9|Level 8|Level 9|Level 0|Level 0
+{FANCYTABLE}</p>
+<p>Example 2: I want prevent my son for watching the TV, when I am not at home.
+{FANCYTABLE( head=&#8221;Sensor/Command|Zone|//Local|//Remote|//Outside&#8221;, headaligns=&#8221;left|center&#8221;)}
+||DEFAULT|S.NOPARENT|DEFAULT|S.NOPARENT|DEFAULT|S.NOPARENT
+TV|Livingroom|Level 9|None|Level 8|None|Level 0|Level 0
+{FANCYTABLE}</p>
+</div>
+</div>
+</div>
+<div class="section" id="all-fritz-s-idea">
+<h1>All (Fritz&#8217;s idea)<a class="headerlink" href="#all-fritz-s-idea" title="Permalink to this headline">¶</a></h1>
+<p>Note : the points below doesn&#8217;t describe exactily the authentication and authorisation process as I assume we could implement different modules for these features. So, I will use generic functions for these features and in these generic functions we will do what we want.
+Note : basically, this work like this : an ecryption layed to protect the data. The first time a client connects to the server, it tries to authenticate : if it is a success, a token is given to the client. And then, the client will always add the token in its sub or req messages.</p>
+<p>There are 3 topics :</p>
+<ol class="arabic simple">
+<li>encrypt the data</li>
+<li>authentication</li>
+<li>authorisation</li>
+</ol>
+<div class="section" id="encrypt-data">
+<h2>Encrypt data<a class="headerlink" href="#encrypt-data" title="Permalink to this headline">¶</a></h2>
+<p>This feature will allow to send clear id/password/hash in the json content of the MQ
+This must be activated/deactivated with an option in domogik.cfg. This will allow to debug the MQ in dev mode, and eventually to deactivate ssl on small configurations like raspberry for better performances (but with a security hole)</p>
+<p>To allow a real security we need to do a handshake.</p>
+<p>On Domogik side, the ssl public and private keys can be managed during the installation and there will be no additionnal actions to do for the users.</p>
+<p>For the UI, the main issue is how to do the keys exchange ? There will be a manual action to do... About domoweb, it can be a key file copy.
+About Domodroid (and others), I actually don&#8217;t know</p>
+</div>
+<div class="section" id="authentication-done-with-a-req-rep-and-authorisation-for-all-messages">
+<h2>Authentication (done with a req/rep) and authorisation (for all messages)<a class="headerlink" href="#authentication-done-with-a-req-rep-and-authorisation-for-all-messages" title="Permalink to this headline">¶</a></h2>
+<p>As the flow is encrypted, we can write login/password or any other needed item as clear data in the json. This could be a json dedicated part. Example :</p>
+<div class="highlight-json"><pre>req : authentication
+{
+    "security" : { "id" : "clientname" },
+    ...
+}</pre>
+</div>
+<p>The client sends to the MQ server an auth request. On the server, a generic function &#8220;checkAuthentication()&#8221; is called with the security json part as parameter. Then, some code is called from this function to check the auth. So we could be able to change easily the auth management by using some auth modules. The function will return True (user granted) or False (user denied).</p>
+<p>If the user is not granted, an error will be sent :</p>
+<div class="highlight-json"><pre>rep : authentication.failed
+{
+    "security" : { "id" : "clientname", "message" : "You are not granted" },
+    ...
+
+}</pre>
+</div>
+<p>If the user is granted, a token will be given to the client with an expirationd date :</p>
+<div class="highlight-json"><pre>rep : authentication.success
+{
+    "security" : { "id" : "clientname", "token" : "some_uuid_token", "timestamp" : "123456788899999" },
+    ...
+
+}</pre>
+</div>
+<p>Then, the client will just have to include the token in all its MQ &#8220;sub&#8221; or &#8220;pub&#8221; or &#8220;rep&#8221; or &#8220;req&#8221; messages :</p>
+<div class="highlight-json"><pre>req : somereq
+{
+    "token" : "some_uuid_token",
+    ...
+}</pre>
+</div>
+<p>When a message is received on the server, first the token is checked :
+1. the function &#8220;checkToken(token)&#8221; is called with the token as parameter. It returns true/false.
+* True : the token is valid, we can continue.
+* False, the token is not valid. In this case, if this is a sub/req message, an error response is returned. Else, nothing is done (as no response is waited by the client for a pub or a rep message).
+2. the function &#8220;checkAuthorisation(token, some_parameter_which_define_the_feature)&#8221; is called to check if the user (identified by a token) is allowed to do the action (rep, req, sub, pub). It returns True, False
+* True : the client is granted, we can continue.
+* False : the client is not granted. In this case, if this is a sub/req message, an error response is returned. Else, nothing is done (as no response is waited by the client for a pub or a rep message).</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Communication link security</a></li>
+<li><a class="reference internal" href="#authentication-identify-the-client">Authentication (Identify the client)</a><ul>
+<li><a class="reference internal" href="#cereal-s-idea">Cereal&#8217;s idea</a><ul>
+<li><a class="reference internal" href="#hash-generation">hash generation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#authorization-what-the-client-can-do">Authorization (What the client can do)</a><ul>
+<li><a class="reference internal" href="#id7">Cereal&#8217;s idea</a><ul>
+<li><a class="reference internal" href="#what-is-an-acl">What is an ACL</a></li>
+<li><a class="reference internal" href="#acl-examples">ACL examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#all-fritz-s-idea">All (Fritz&#8217;s idea)</a><ul>
+<li><a class="reference internal" href="#encrypt-data">Encrypt data</a></li>
+<li><a class="reference internal" href="#authentication-done-with-a-req-rep-and-authorisation-for-all-messages">Authentication (done with a req/rep) and authorisation (for all messages)</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Spec_Domodroid/Spec_Domodroid.html"
+                        title="previous chapter">Spec_Domodroid</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Spec_developers/Spec_developers.html"
+                        title="next chapter">Specifications for developers</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Spec_aa/Spec_aa.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Spec_developers/Spec_developers.html" title="Specifications for developers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Spec_Domodroid/Spec_Domodroid.html" title="Spec_Domodroid"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

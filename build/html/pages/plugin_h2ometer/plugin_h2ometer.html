@@ -1,0 +1,213 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plugin h2ometer &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Purpose" href="../plugin_ipushnot/plugin_ipushnot.html" />
+    <link rel="prev" title="Purpose" href="../plugin_gvsms/plugin_gvsms.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_ipushnot/plugin_ipushnot.html" title="Purpose"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_gvsms/plugin_gvsms.html" title="Purpose"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="plugin-h2ometer">
+<h1>Plugin h2ometer<a class="headerlink" href="#plugin-h2ometer" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="developper-notes">
+<h1>Developper notes<a class="headerlink" href="#developper-notes" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="plugin-objective">
+<h2>Plugin Objective<a class="headerlink" href="#plugin-objective" title="Permalink to this headline">¶</a></h2>
+<p>This plugin is used to measure water consumption using a diy modified water counter. It may work with a water meter with a pulse output but has never been tested.
+It is also platform dependant. It must be installed on domogik running on a raspberry pi.</p>
+</div>
+<div class="section" id="water-meter-modification">
+<h2>Water meter modification<a class="headerlink" href="#water-meter-modification" title="Permalink to this headline">¶</a></h2>
+<p>Different kind of modifications can be done. The objective of the modification is to get an impulse on a raspberry gpio for each liter consumed.
+For my part, i use a photo sensor placed around the needle that indicate 1/10 liter. With that method i have no hardware modification to do on the water meter and i have 1 impulse / 1 liter.</p>
+</div>
+<div class="section" id="electrical-schematic">
+<h2>Electrical schematic<a class="headerlink" href="#electrical-schematic" title="Permalink to this headline">¶</a></h2>
+<p>If your water meter is just near your raspberry you could use a very simple schematic with the photo sensor.</p>
+<p>{IMG(src=&#8221;display345&#8221;)}{IMG}</p>
+<p>R1 is used to generate current through the IR led and must be around 330 ohms.
+R2 is a pullup that maintain the GPIO of the raspberry pi at high level when there is no signal.
+The value must be between 5k to 50k (electronic is very indulgent !!).</p>
+<p>If your water meter is far away (some meters) this schematic could be not very efficient.
+So, i use this schematic</p>
+<p>{IMG(src=&#8221;display346&#8221;)}{IMG}</p>
+<p>I use a shmitt trigger to re-arrange the signal into a proper square form. It will also invert the signal, but each impuls will generate a rising and a falling edge so there is no importance on the value of the signal.
+R2 and C1 must be near the trigger.</p>
+</div>
+<div class="section" id="installing-the-plugin">
+<h2>Installing the plugin<a class="headerlink" href="#installing-the-plugin" title="Permalink to this headline">¶</a></h2>
+<p>You must install quick2Wire python api and quick2wire-gpio-admin in ordre to read gpio from the Raspberry pi.
+<a class="reference external" href="https://github.com/quick2wire/quick2wire-python-api/blob/master/doc/getting-started-with-gpio.md">https://github.com/quick2wire/quick2wire-python-api/blob/master/doc/getting-started-with-gpio.md</a>
+This library as the opposite of others has the big advantage that there is no need of root rights to read a gpio event with interrupts.</p>
+<p>So you must install quick2Wire python api to read GPIO</p>
+<div class="highlight-json"><div class="highlight"><pre>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>caption=&#8221;quick2wire gpio api installation&#8221;</dt>
+<dd>git clone <a class="reference external" href="https://github.com/quick2wire/quick2wire-python-api.git">https://github.com/quick2wire/quick2wire-python-api.git</a>
+cd quick2wire-python-api/
+sudo python setup.py install</dd>
+</dl>
+<p>And you must install also quick2wire-gpio-admin which permit to configure GPIO</p>
+<div class="highlight-json"><div class="highlight"><pre>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>caption=&#8221;quick2wire-gpio-admin Installation&#8221;</dt>
+<dd>git clone git://github.com/quick2wire/quick2wire-gpio-admin.git
+cd quick2wire-gpio-admin/
+make
+sudo make install</dd>
+</dl>
+<p>The default user used by domogik must be added to gpio user group
+.. code-block:: json</p>
+<dl class="docutils">
+<dt>caption=&#8221;Adding user to gpio group&#8221;</dt>
+<dd><p class="first">sudo adduser $USER gpio{CODE}</p>
+<p>There is many parameters in the configuration part of the plugin</p>
+<p>!!!!startup-plugin
+It will indicate if the plugin must be start at Domogik startup</p>
+<p>!!!!pin
+This parameter indicate the pin number of the raspberry pi where the impuls has to be read. the number used here is the real pin number not the GPIO.
+For example GPIO 4 is defined on pin 7 of the header. So you must enter 7 in the configuration.
+{IMG(src=&#8221;<a class="reference external" href="http://elinux.org/images/2/2a/GPIOs.png">http://elinux.org/images/2/2a/GPIOs.png</a>&#8221;
+{IMG}</p>
+<p>!!!!interval
+This parameter indicate the interval in minute between to data logging in database</p>
+<p>!!!!current-val
+This parameter indicate the current consumption in liters. It can be adjusted if there is a gap between real value and computed value or it can be used to initialize the value with your water meter value.</p>
+<p>!!!!xpl-cmnd
+There is no usage of xpl-cmnd with this plugin</p>
+<p class="last">!!!!xpl-stat
+The SENSOR.BASIC xPL schema is used in this module : <a class="reference external" href="http://xplproject.org.uk/wiki/index.php?title=Schema_-_SENSOR.BASIC">http://xplproject.org.uk/wiki/index.php?title=Schema_-_SENSOR.BASIC</a></p>
+</dd>
+</dl>
+<div class="highlight-json"><pre>CONTROL.BASIC
+{
+DEVICE=h2ometer
+TYPE=liters
+CURRENT=&lt;Current value in liters&gt;
+}</pre>
+</div>
+<p>!!!!xpl-trig
+There is no usage of xpl-trig with this plugin</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Plugin h2ometer</a></li>
+<li><a class="reference internal" href="#developper-notes">Developper notes</a><ul>
+<li><a class="reference internal" href="#plugin-objective">Plugin Objective</a></li>
+<li><a class="reference internal" href="#water-meter-modification">Water meter modification</a></li>
+<li><a class="reference internal" href="#electrical-schematic">Electrical schematic</a></li>
+<li><a class="reference internal" href="#installing-the-plugin">Installing the plugin</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../plugin_gvsms/plugin_gvsms.html"
+                        title="previous chapter">Purpose</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_ipushnot/plugin_ipushnot.html"
+                        title="next chapter">Purpose</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/plugin_h2ometer/plugin_h2ometer.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_ipushnot/plugin_ipushnot.html" title="Purpose"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_gvsms/plugin_gvsms.html" title="Purpose"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

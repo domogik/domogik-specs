@@ -1,0 +1,212 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Package format &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Web UI : the plugins" href="../Web_ui_plugins/Web_ui_plugins.html" />
+    <link rel="prev" title="Devices list" href="../Web_ui_devices_list_window/Web_ui_devices_list_window.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Web_ui_plugins/Web_ui_plugins.html" title="Web UI : the plugins"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Web_ui_devices_list_window/Web_ui_devices_list_window.html" title="Devices list"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <p>{IMG(src=&#8221;<a class="reference external" href="https://docs.google.com/drawings/pub?id=1270aD9hLpPgboPCYwBNqCuZfS1ISzNEtMeO3a0VAo9g&amp;amp;w=960&amp;amp;h=720">https://docs.google.com/drawings/pub?id=1270aD9hLpPgboPCYwBNqCuZfS1ISzNEtMeO3a0VAo9g&amp;amp;w=960&amp;amp;h=720</a>&#8221;)}{IMG}</p>
+<div class="section" id="package-format">
+<h1>Package format<a class="headerlink" href="#package-format" title="Permalink to this headline">¶</a></h1>
+<p>The package is compressed in tar.gz format, with:
+<a href="#id1"><span class="problematic" id="id2">*</span></a>The XML definition file
+<a href="#id3"><span class="problematic" id="id4">*</span></a>A package icon, size 96x96px (displayed on the package installation list)
+<a href="#id5"><span class="problematic" id="id6">*</span></a>A package sample image, ~~#F00:size to define~~ (displayed on the package information page)
+<a href="#id7"><span class="problematic" id="id8">*</span></a>All the icon a &#8216;images&#8217; sub folder
+Each icon are square format and named based on the id and size (eg. &#8216;iconid_16.png&#8217;)
+XML Format
+===========</p>
+<div class="highlight-json"><pre>&lt;package type="icons_page" version="1"&gt;
+  &lt;id&gt;packageid&lt;/id&gt;
+  &lt;description&gt;
+  My icons set
+  &lt;/description&gt;
+  &lt;changelog&gt;0.1 - set creation&lt;/changelog&gt;
+  &lt;version&gt;0.1&lt;/version&gt;
+  &lt;generated&gt;2012-01-30 21:51&lt;/generated&gt;
+  &lt;author&gt;Me&lt;/author&gt;
+  &lt;author-email&gt;me@domogik.org&lt;/author-email&gt;
+  &lt;icons&gt;
+    &lt;icon&gt;
+      &lt;id&gt;iconid&lt;/id&gt;
+      &lt;type&gt;png&lt;/type&gt;
+      &lt;label&gt;My Icon&lt;/label&gt;
+      &lt;size&gt;64&lt;/size&gt;
+      &lt;size&gt;32&lt;/size&gt;
+      &lt;size&gt;16&lt;/size&gt;
+    &lt;/icon&gt;
+  &lt;/icons&gt;
+&lt;/package&gt;</pre>
+</div>
+</div>
+<div class="section" id="django-start">
+<h1>Django Start<a class="headerlink" href="#django-start" title="Permalink to this headline">¶</a></h1>
+<p><a href="#id9"><span class="problematic" id="id10">*</span></a>The packages list is loaded form the disk to the DomoWeb database (1).
+So packages can be installed manually.
+<a href="#id11"><span class="problematic" id="id12">**</span></a>The XML version is checked for compatibility with DomoWeb
+<a href="#id13"><span class="problematic" id="id14">**</span></a>If the CSS does not exist, it is generated</p>
+<blockquote>
+<div>Package installation</div></blockquote>
+<hr class="docutils" />
+<p><a href="#id15"><span class="problematic" id="id16">*</span></a>The packages list is updated along with the cache update, but in a separate request from DomoWeb (2)
+<a href="#id17"><span class="problematic" id="id18">*</span></a>The list of packages is displayed on the primary host page, with all the other packages lists
+~~#F00:(add mockup)~~
+<a href="#id19"><span class="problematic" id="id20">*</span></a>The package lists are generated from the actual installed list + the combined list from the repositories
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>FOREACH package FROM list_repositories</dt>
+<dd><dl class="first docutils">
+<dt>IF package IS IN list_domoweb</dt>
+<dd><p class="first">add package in list_installed
+IF package version &gt; installed version</p>
+<blockquote>
+<div>set update possible</div></blockquote>
+<p class="last">END IF</p>
+</dd>
+<dt>ELSE</dt>
+<dd><dl class="first docutils">
+<dt>IF xml version IS OK</dt>
+<dd>add package in list_available</dd>
+</dl>
+<p class="last">END</p>
+</dd>
+</dl>
+<p class="last">END IF</p>
+</dd>
+</dl>
+<p>END FOREACH</p>
+</div></blockquote>
+<ul class="simple">
+<li>More information and sample view is displayed on click to the &#8220;Info&#8221; button</li>
+</ul>
+<p>The information is grabbed from repo.domogik.org using AJAX, and displayed in a window.
+~~#F00:(add mockup)~~
+* On &#8220;Install&#8221; click, DomoWeb download the package, and check the XML version (3)
+* DomoWeb extract the package to /usr/share/domoweb/icons/page/(id du package) (4)
+* DomoWeb generates the CSS file based on the XML informations
+** The CSS format will be:
+.. code-block:: json</p>
+<blockquote>
+<div><blockquote>
+<div>.packageid_iconid.icon64 { background-image:url(../images/iconid_64.png);}
+.packageid_iconid.icon32 { background-image:url(../images/iconid_32.png);}
+.packageid_iconid.icon16 { background-image:url(../images/iconid_16.png);}</div></blockquote>
+<p>Set icon for a Page</p>
+</div></blockquote>
+<hr class="docutils" />
+<dl class="docutils">
+<dt>~~#F00:(add mockup)~~</dt>
+<dd>Apply icon style</dd>
+</dl>
+<hr class="docutils" />
+<p>Only apply class=&#8221;packageid_iconid icon32&#8221;</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Package format</a></li>
+<li><a class="reference internal" href="#django-start">Django Start</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Web_ui_devices_list_window/Web_ui_devices_list_window.html"
+                        title="previous chapter">Devices list</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Web_ui_plugins/Web_ui_plugins.html"
+                        title="next chapter">Web UI : the plugins</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Web_ui_packages/Web_ui_packages.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Web_ui_plugins/Web_ui_plugins.html" title="Web UI : the plugins"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Web_ui_devices_list_window/Web_ui_devices_list_window.html" title="Devices list"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,225 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Weather plugin recommendations &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Developing a plugin" href="../Plugins_development/Plugins_development.html" />
+    <link rel="prev" title="Minimal requirement" href="../Plugin_using_log_feature/Plugin_using_log_feature.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Plugins_development/Plugins_development.html" title="Developing a plugin"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Plugin_using_log_feature/Plugin_using_log_feature.html" title="Minimal requirement"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="weather-plugin-recommendations">
+<h1>Weather plugin recommendations<a class="headerlink" href="#weather-plugin-recommendations" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="rules-for-all-weather-plugins">
+<h2>Rules for all weather plugins<a class="headerlink" href="#rules-for-all-weather-plugins" title="Permalink to this headline">¶</a></h2>
+<p>All weather plugins (online services or local station/sensors) should respect the following rules :</p>
+<div class="section" id="getting-current-data-and-previsionnal-data-must-be-separated-features-and-could-be-disabled">
+<h3>Getting current data and previsionnal data must be separated features and could be disabled<a class="headerlink" href="#getting-current-data-and-previsionnal-data-must-be-separated-features-and-could-be-disabled" title="Permalink to this headline">¶</a></h3>
+<p>The idea is to allow the possibility for a user with a local weather station (or local sensors) to use with a plugin his local station (instead of online service data) and to use previsionnal data from an online service.</p>
+</div>
+<div class="section" id="for-each-location-plugins-should-have-2-options-to-set-the-location">
+<h3>For each location, plugins should have 2 options to set the location<a class="headerlink" href="#for-each-location-plugins-should-have-2-options-to-set-the-location" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>the first is related to the hardware or online service (ex : The city code is in Yahoo Weather API is different from the Google one)</li>
+<li>the second is related to the device address : this is the one the user chooses (ex : &#8220;my_home&#8221;) and allow to use data from different plugins in the same widget</li>
+</ul>
+</div>
+<div class="section" id="current-data-use-sensor-basic-schema">
+<h3>Current data use sensor.basic schema<a class="headerlink" href="#current-data-use-sensor-basic-schema" title="Permalink to this headline">¶</a></h3>
+<p>For current data, &#8216;&#8217;__sensor.basic__&#8217;&#8217; xPL schema should be used :</p>
+<div class="highlight-json"><pre>xpl-stat
+{
+...
+}
+sensor.basic
+{
+device = ...
+type = ...
+current = ...
+[ units = ... ]
+}</pre>
+</div>
+<p>!!!!Device
+&#8216;&#8217;Device&#8217;&#8217; will be the address of the device the user set in the plugin configuration.</p>
+<p>!!!!Type
+Here are the possible values for the type :
+||__Data__                      <a href="#id1"><span class="problematic" id="id2">|__Type in sensor.basic__   |__Key name in database__ (cf stats xml file)
+temperature                     |temp                       |temperature
+atmosphere pressure (barometer) |pressure                   |pressure
+atmosphere humidity             |humidity                   |humidity
+atmosphere visibility           |visibility *               |visibility
+atmosphere rising               |rising *                   |rising
+wind chill                      |chill *                    |chill
+wind direction                  |direction                  |direction
+wind speed                      |speed                      |speed
+uv index                        |uv                         |uv
+rainfall                        |rainfall *                 |rainfall
+drew point                      |drewpoint *                |drewpoint
+condition code                  |condition-code *           |condition-code
+condition text                  |condition-text *           |condition-text       ||</span></a></p>
+<p>&#8216;&#8217;*&#8217;&#8217; these type are not indicated on the official xPL website for &#8216;&#8217;sensor.basic&#8217;&#8216;.</p>
+<p>!!!!Current
+Current value for device / type</p>
+<p>!!!!Units (optionnal)
+If available, unit of the data</p>
+</div>
+<div class="section" id="previsionnal-data-use-weather-basic-schema">
+<h3>Previsionnal data use weather.basic schema<a class="headerlink" href="#previsionnal-data-use-weather-basic-schema" title="Permalink to this headline">¶</a></h3>
+<p>For previsionnal data, &#8216;&#8217;__weather.basic__&#8217;&#8217; xPL schema should be used.</p>
+<div class="highlight-json"><pre>xpl-stat
+{
+...
+}
+weather.basic
+{
+device = &lt;address of the device set in the plugin config page&gt;
+day = &lt;YYYYMMDD&gt;
+day-part* = &lt;morning, afternoon, evening, night&gt;
+city = &lt;city ; ex : Paris&gt;
+country* = &lt;country ; ex : France&gt;
+region* = &lt;region if available (US)&gt;
+unit-temperature = &lt;c (celcius), f (farenheit)&gt;
+unit-distance = &lt;km, miles&gt;
+unit-pressure = &lt;mb, ...&gt;
+unit-speed = &lt;km/h, ...&gt;
+wind-chill* = &lt;number&gt;
+wind-direction* = &lt;number&gt;
+wind-speed* = &lt;number&gt;
+atmosphere-humidity* = &lt;number&gt;
+atmosphere-visibility* = &lt;number&gt;
+atmosphere-pressure* = &lt;number&gt;
+atmosphere-rising* = &lt;number&gt;
+picture-url* = &lt;url of current condition picture&gt;
+condition-code = &lt;number&gt;
+condition-text = &lt;ex : "Party cloud", etc&gt;
+temperature* = &lt;number&gt;
+temperature-high* = &lt;number&gt;
+temperature-low* = &lt;number&gt;
+uv* = &lt;number&gt;
+barometer*= &lt;number&gt;
+rainfall* = &lt;number&gt;
+drew-point* = &lt;number&gt;
+}</pre>
+</div>
+<p>&#8216;&#8217;*&#8217;&#8217; are optionnal keys</p>
+<p>Depending on the weather service used, some data will be used or not. It is possible that some data is missing in this schema. Please, fell free to tell us or to complete this schema.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Weather plugin recommendations</a><ul>
+<li><a class="reference internal" href="#rules-for-all-weather-plugins">Rules for all weather plugins</a><ul>
+<li><a class="reference internal" href="#getting-current-data-and-previsionnal-data-must-be-separated-features-and-could-be-disabled">Getting current data and previsionnal data must be separated features and could be disabled</a></li>
+<li><a class="reference internal" href="#for-each-location-plugins-should-have-2-options-to-set-the-location">For each location, plugins should have 2 options to set the location</a></li>
+<li><a class="reference internal" href="#current-data-use-sensor-basic-schema">Current data use sensor.basic schema</a></li>
+<li><a class="reference internal" href="#previsionnal-data-use-weather-basic-schema">Previsionnal data use weather.basic schema</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Plugin_using_log_feature/Plugin_using_log_feature.html"
+                        title="previous chapter">Minimal requirement</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Plugins_development/Plugins_development.html"
+                        title="next chapter">Developing a plugin</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Plugin_weather_recommendations/Plugin_weather_recommendations.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Plugins_development/Plugins_development.html" title="Developing a plugin"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Plugin_using_log_feature/Plugin_using_log_feature.html" title="Minimal requirement"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,377 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>OZWAVE plugin &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="PLCBUS plugin" href="../plugin_plcbus/plugin_plcbus.html" />
+    <link rel="prev" title="Plugin onewire" href="../plugin_onewire/plugin_onewire.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_plcbus/plugin_plcbus.html" title="PLCBUS plugin"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_onewire/plugin_onewire.html" title="Plugin onewire"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ozwave-plugin">
+<h1>OZWAVE plugin<a class="headerlink" href="#ozwave-plugin" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<p>Z-Wave is a wireless ecosystem that lets all your home electronics talk to each other, and to you, via remote control. This plugin allows to control zwave devices.</p>
+<p>It uses open source <a class="reference external" href="http://code.google.com/p/open-zwave/">library openZwave c++ project|nocache</a> and py-openzwave as interfacing cython,
+The Zwave network manager is directly integrated into the plugin</p>
+<p>Simple action/sensor of devices have access via domogik devices (widgets).
+Viewing and setting Zwave devices is accessed via a special plugin page from the admin panel.</p>
+<p>Actualy only supported by domogik develop branch default.
+Development is in progress, features will get gradually</p>
+</div>
+<div class="section" id="controller-devices-compatibility-list">
+<h2>Controller/devices Compatibility List<a class="headerlink" href="#controller-devices-compatibility-list" title="Permalink to this headline">¶</a></h2>
+<p>Following interfaces are supported and verify with domogik:
+* Aeon Labs Z-Stick Series 2</p>
+<p>Others controllers are supported by openzwave, ` you can check here|nocache &lt;<a class="reference external" href="http://code.google.com/p/open-zwave/wiki/Controller_Compatibility_List">http://code.google.com/p/open-zwave/wiki/Controller_Compatibility_List</a>&gt;`_</p>
+<p>Following devices are supported :
+* Everspring ST814
+* Everspring (C.T.) HSM02
+* Fibaro FGS211
+* Fibaro FGS221</p>
+</div>
+</div>
+<div class="section" id="installation-instructions">
+<h1>Installation instructions<a class="headerlink" href="#installation-instructions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="prerequisite">
+<h2>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this headline">¶</a></h2>
+<p>Domogik ((Installation_for_developpers|developpers installation)) ~~#00C:(default branch)~~
+You need to install python-openzwave :
+((plugin_pyozw|python-openzwave))</p>
+</div>
+<div class="section" id="create-an-udev-rules-for-controller">
+<h2>Create an udev rules for controller<a class="headerlink" href="#create-an-udev-rules-for-controller" title="Permalink to this headline">¶</a></h2>
+<p>Currently, your PC controller is known as &#8220;/dev/ttyUSBx&#8221; (by default). This is not very convenient nor meaningful. We will then create a new udev rule that will create a link called &#8220;/dev/zwave&#8221; that will point to &#8220;/dev/ttyUSBx&#8221;.
+Gather information about your device controller (USB)
+<strong>**************************************************</strong></p>
+<p>Use &#8220;lsusb&#8221; command for listing of USB devices, check before and after plug your USB controller.
+.. code-block:: json</p>
+<blockquote>
+<div>$ lsusb
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 004 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 005 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 006 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 007 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 008 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 009 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 005 Device 002: ID 0040:073d
+Bus 004 Device 002: ID 10c4:ea60 Cygnal Integrated Products, Inc. CP210x Composite Device
+Bus 004 Device 006: ID 0403:6001 Future Technology Devices International, Ltd FT232 USB-Serial (UART) IC
+Bus 007 Device 002: ID 0b05:179c ASUSTek Computer, Inc.</div></blockquote>
+<p>Use &#8220;ls /dev/ttyUSB*&#8221; to check your num USB, check before and after plug your USB controller.
+* Before
+.. code-block:: json</p>
+<blockquote>
+<div>$ ls /dev/ttyUSB*
+/dev/ttyUSB2</div></blockquote>
+<ul class="simple">
+<li>After USB plug</li>
+</ul>
+<div class="highlight-json"><pre>$ ls /dev/ttyUSB*
+/dev/ttyUSB0  /dev/ttyUSB2</pre>
+</div>
+<p>Use &#8220;udevadm&#8221; command to gather information about your device :
+.. code-block:: json</p>
+<blockquote>
+<div><p>$ udevadm info  -a -n /dev/ttyUSB0</p>
+<p>Udevadm info starts with the device specified by the devpath and then
+walks up the chain of parent devices. It prints for every device
+found, all possible attributes in the udev rules key format.
+A rule to match, can be composed by the attributes of the device
+and the attributes from one single parent device.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>looking at device &#8216;/devices/pci0000:00/0000:00:12.0/usb4/4-3/4-3:1.0/ttyUSB0/tty/ttyUSB0&#8217;:</dt>
+<dd>KERNEL==&#8221;ttyUSB0&#8221;
+SUBSYSTEM==&#8221;tty&#8221;
+DRIVER==&#8221;&#8220;</dd>
+<dt>looking at parent device &#8216;/devices/pci0000:00/0000:00:12.0/usb4/4-3/4-3:1.0/ttyUSB0&#8217;:</dt>
+<dd>KERNELS==&#8221;ttyUSB0&#8221;
+SUBSYSTEMS==&#8221;usb-serial&#8221;
+DRIVERS==&#8221;cp210x&#8221;
+ATTRS{port_number}==&#8221;0&#8221;</dd>
+<dt>looking at parent device &#8216;/devices/pci0000:00/0000:00:12.0/usb4/4-3/4-3:1.0&#8217;:</dt>
+<dd>KERNELS==&#8221;4-3:1.0&#8221;
+SUBSYSTEMS==&#8221;usb&#8221;
+DRIVERS==&#8221;cp210x&#8221;
+ATTRS{bInterfaceNumber}==&#8221;00&#8221;
+ATTRS{bAlternateSetting}==&#8221; 0&#8221;
+ATTRS{bNumEndpoints}==&#8221;02&#8221;
+ATTRS{bInterfaceClass}==&#8221;ff&#8221;
+ATTRS{bInterfaceSubClass}==&#8221;00&#8221;
+ATTRS{bInterfaceProtocol}==&#8221;00&#8221;
+ATTRS{supports_autosuspend}==&#8221;1&#8221;
+ATTRS{interface}==&#8221;CP2102 USB to UART Bridge Controller&#8221;</dd>
+<dt>looking at parent device &#8216;/devices/pci0000:00/0000:00:12.0/usb4/4-3&#8217;:</dt>
+<dd>KERNELS==&#8221;4-3&#8221;
+SUBSYSTEMS==&#8221;usb&#8221;
+DRIVERS==&#8221;usb&#8221;
+ATTRS{configuration}==&#8221;&#8221;
+ATTRS{bNumInterfaces}==&#8221; 1&#8221;
+ATTRS{bConfigurationValue}==&#8221;1&#8221;
+ATTRS{bmAttributes}==&#8221;80&#8221;
+ATTRS{bMaxPower}==&#8221;100mA&#8221;
+ATTRS{urbnum}==&#8221;10835&#8221;
+ATTRS{idVendor}==&#8221;10c4&#8221;
+ATTRS{idProduct}==&#8221;ea60&#8221;
+ATTRS{bcdDevice}==&#8221;0100&#8221;
+ATTRS{bDeviceClass}==&#8221;00&#8221;
+ATTRS{bDeviceSubClass}==&#8221;00&#8221;
+ATTRS{bDeviceProtocol}==&#8221;00&#8221;
+ATTRS{bNumConfigurations}==&#8221;1&#8221;
+ATTRS{bMaxPacketSize0}==&#8221;64&#8221;
+ATTRS{speed}==&#8221;12&#8221;
+ATTRS{busnum}==&#8221;4&#8221;
+ATTRS{devnum}==&#8221;2&#8221;
+ATTRS{devpath}==&#8221;3&#8221;
+ATTRS{version}==&#8221; 1.10&#8221;
+ATTRS{maxchild}==&#8221;0&#8221;
+ATTRS{quirks}==&#8221;0x0&#8221;
+ATTRS{avoid_reset_quirk}==&#8221;0&#8221;
+ATTRS{authorized}==&#8221;1&#8221;
+ATTRS{manufacturer}==&#8221;Silicon Labs&#8221;
+ATTRS{product}==&#8221;CP2102 USB to UART Bridge Controller&#8221;
+ATTRS{serial}==&#8221;0001&#8221;</dd>
+<dt>looking at parent device &#8216;/devices/pci0000:00/0000:00:12.0/usb4&#8217;:</dt>
+<dd>KERNELS==&#8221;usb4&#8221;
+SUBSYSTEMS==&#8221;usb&#8221;
+DRIVERS==&#8221;usb&#8221;
+ATTRS{configuration}==&#8221;&#8221;
+ATTRS{bNumInterfaces}==&#8221; 1&#8221;
+ATTRS{bConfigurationValue}==&#8221;1&#8221;
+ATTRS{bmAttributes}==&#8221;e0&#8221;
+ATTRS{bMaxPower}==&#8221;  0mA&#8221;
+ATTRS{urbnum}==&#8221;134&#8221;
+ATTRS{idVendor}==&#8221;1d6b&#8221;
+ATTRS{idProduct}==&#8221;0001&#8221;
+ATTRS{bcdDevice}==&#8221;0300&#8221;
+ATTRS{bDeviceClass}==&#8221;09&#8221;
+ATTRS{bDeviceSubClass}==&#8221;00&#8221;
+ATTRS{bDeviceProtocol}==&#8221;00&#8221;
+ATTRS{bNumConfigurations}==&#8221;1&#8221;
+ATTRS{bMaxPacketSize0}==&#8221;64&#8221;
+ATTRS{speed}==&#8221;12&#8221;
+ATTRS{busnum}==&#8221;4&#8221;
+ATTRS{devnum}==&#8221;1&#8221;
+ATTRS{devpath}==&#8221;0&#8221;
+ATTRS{version}==&#8221; 1.10&#8221;
+ATTRS{maxchild}==&#8221;5&#8221;
+ATTRS{quirks}==&#8221;0x0&#8221;
+ATTRS{avoid_reset_quirk}==&#8221;0&#8221;
+ATTRS{authorized}==&#8221;1&#8221;
+ATTRS{manufacturer}==&#8221;Linux 3.0.0-24-generic ohci_hcd&#8221;
+ATTRS{product}==&#8221;OHCI Host Controller&#8221;
+ATTRS{serial}==&#8221;0000:00:12.0&#8221;
+ATTRS{authorized_default}==&#8221;1&#8221;</dd>
+<dt>looking at parent device &#8216;/devices/pci0000:00/0000:00:12.0&#8217;:</dt>
+<dd>KERNELS==&#8221;0000:00:12.0&#8221;
+SUBSYSTEMS==&#8221;pci&#8221;
+DRIVERS==&#8221;ohci_hcd&#8221;
+ATTRS{vendor}==&#8221;0x1002&#8221;
+ATTRS{device}==&#8221;0x4397&#8221;
+ATTRS{subsystem_vendor}==&#8221;0x1043&#8221;
+ATTRS{subsystem_device}==&#8221;0x8496&#8221;
+ATTRS{class}==&#8221;0x0c0310&#8221;
+ATTRS{irq}==&#8221;18&#8221;
+ATTRS{local_cpus}==&#8221;00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000003&#8221;
+ATTRS{local_cpulist}==&#8221;0-1&#8221;
+ATTRS{numa_node}==&#8221;-1&#8221;
+ATTRS{dma_mask_bits}==&#8221;32&#8221;
+ATTRS{consistent_dma_mask_bits}==&#8221;32&#8221;
+ATTRS{broken_parity_status}==&#8221;0&#8221;
+ATTRS{msi_bus}==&#8221;&#8220;</dd>
+<dt>looking at parent device &#8216;/devices/pci0000:00&#8217;:</dt>
+<dd>KERNELS==&#8221;pci0000:00&#8221;
+SUBSYSTEMS==&#8221;&#8221;
+DRIVERS==&#8221;&#8220;</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+<p>Those information will be useful to determinate for sure that this device is your Zwave controller. We will use several information, flagged above as &#8220;DRIVERS&#8221;, &#8220;ATTRS{manufacturer}&#8221; and &#8220;ATTRS{product}&#8221;. With that, we will be sure that we&#8217;ll be talking to our controller. You can chose others attributs.
+Create rule.
+<strong>*********</strong></p>
+<p><a href="#id1"><span class="problematic" id="id2">*</span></a>Create a new file, in folder &#8220;/etc/udev/rules.d&#8221;. Let&#8217;s call it &#8220;98-usbcp210x.rules&#8221;.
+<a href="#id3"><span class="problematic" id="id4">*</span></a>Enter those information in the file :
+.. code-block:: json</p>
+<blockquote>
+<div># for z-Stick serie 2 to domogik /dev/zwave
+DRIVERS==&#8221;usb&#8221;, ATTRS{manufacturer}==&#8221;Silicon Labs&#8221;, ATTRS{product}==&#8221;CP2102 USB to UART Bridge Controller&#8221;, SYMLINK+=&#8221;zwave&#8221;, MODE=&#8221;0666&#8221;</div></blockquote>
+<p>The &#8220;DRIVERS&#8221;, &#8220;ATTRS{manufacturer}&#8221;, &#8220;ATTRS{product}&#8221; values must be coherent with what you have found above.
+<a href="#id5"><span class="problematic" id="id6">*</span></a>Ask udev to rediscover your device :
+.. code-block:: json</p>
+<blockquote>
+<div># udevadm test $(udevadm info &#8211;query path &#8211;name ttyUSB0)</div></blockquote>
+<p><a href="#id7"><span class="problematic" id="id8">*</span></a>Your device should now be re-discovered, let&#8217;s confirm it :
+.. code-block:: json</p>
+<blockquote>
+<div>$ ls -l /dev/zwave
+lrwxrwxrwx 1 root root 7 2012-08-27 00:46 /dev/zwave -&gt; ttyUSB0</div></blockquote>
+</div>
+</div>
+<div class="section" id="how-to-use-plugin">
+<h1>How to use plugin<a class="headerlink" href="#how-to-use-plugin" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="configure-plugin">
+<h2>Configure plugin<a class="headerlink" href="#configure-plugin" title="Permalink to this headline">¶</a></h2>
+<p>TODO : Images and comments.
+{img fileId=338,stylebox=&#8221;border&#8221;,align=&#8221;center&#8221;}</p>
+</div>
+<div class="section" id="get-zwave-network-informations">
+<h2>Get Zwave network informations<a class="headerlink" href="#get-zwave-network-informations" title="Permalink to this headline">¶</a></h2>
+<p>TODO : Images and comments.
+{img fileId=339,stylebox=&#8221;border&#8221;,align=&#8221;center&#8221;}
+{img fileId=340,stylebox=&#8221;border&#8221;,align=&#8221;center&#8221;}</p>
+</div>
+<div class="section" id="configure-domogik-devices">
+<h2>Configure domogik devices<a class="headerlink" href="#configure-domogik-devices" title="Permalink to this headline">¶</a></h2>
+<p>TODO : Images and comments.</p>
+<p>AdressTy : &#8216;homename-1&#8217;.NodeId.instance
+Example : ZWHome.5.1
+{img fileId=341,stylebox=&#8221;border&#8221;,align=&#8221;center&#8221;}
+{img fileId=342,stylebox=&#8221;border&#8221;,align=&#8221;center&#8221;}</p>
+</div>
+</div>
+<div class="section" id="developper-notes">
+<h1>Developper notes<a class="headerlink" href="#developper-notes" title="Permalink to this headline">¶</a></h1>
+<p>TODO : .....</p>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://code.google.com/p/open-zwave">An opensource project for zwave</a></li>
+<li><a class="reference external" href="http://www.digiwave.dk/en/programming/an-introduction-to-the-z-wave-protocol">Introduction to zwave protocol</a></li>
+<li><a class="reference external" href="http://www.digiwave.dk/en/programming/an-introduction-to-z-wave-programming-in-c">Introduction to zwave programming in C</a></li>
+<li><a href="#id9"><span class="problematic" id="id10">`Zwave API - LinuxMCE wiki &lt;http://wiki.linuxmce.org/index.php/ZWave\_API&gt;`_</span></a></li>
+<li><a href="#id11"><span class="problematic" id="id12">`Python development &lt;http://z-wave.alsenet.com/index.php/Main\_Page&gt;`_</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">OZWAVE plugin</a><ul>
+<li><a class="reference internal" href="#purpose">Purpose</a></li>
+<li><a class="reference internal" href="#controller-devices-compatibility-list">Controller/devices Compatibility List</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation-instructions">Installation instructions</a><ul>
+<li><a class="reference internal" href="#prerequisite">Prerequisite</a></li>
+<li><a class="reference internal" href="#create-an-udev-rules-for-controller">Create an udev rules for controller</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#how-to-use-plugin">How to use plugin</a><ul>
+<li><a class="reference internal" href="#configure-plugin">Configure plugin</a></li>
+<li><a class="reference internal" href="#get-zwave-network-informations">Get Zwave network informations</a></li>
+<li><a class="reference internal" href="#configure-domogik-devices">Configure domogik devices</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#developper-notes">Developper notes</a><ul>
+<li><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../plugin_onewire/plugin_onewire.html"
+                        title="previous chapter">Plugin onewire</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_plcbus/plugin_plcbus.html"
+                        title="next chapter">PLCBUS plugin</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/plugin_ozwave/plugin_ozwave.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_plcbus/plugin_plcbus.html" title="PLCBUS plugin"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_onewire/plugin_onewire.html" title="Plugin onewire"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

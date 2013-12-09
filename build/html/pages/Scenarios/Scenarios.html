@@ -1,0 +1,362 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Condition &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Homepage" href="../Screenshots/Screenshots.html" />
+    <link rel="prev" title="Log in (and eventually create an account if you don’t have one)" href="../ReportABug/ReportABug.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Screenshots/Screenshots.html" title="Homepage"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../ReportABug/ReportABug.html" title="Log in (and eventually create an account if you don’t have one)"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<p>Le développement des scénarios se fait dans la branche &#8220;scenario&#8221;.</p>
+<p>Le but est de créer un module indépendant (non inclu dans RINOR). Dans sa première version, celui ci écoutera sur le xPL.
+Cette écoute obligera à reparser les XML des plugins. Dès que 0MQ pourra être utilisé, celui ci le sera à la place de xPL.</p>
+<p>Les scénarios se découpent en 4 parties :
+* condition
+* test
+* parametre
+* action</p>
+<div class="section" id="condition">
+<h1>Condition<a class="headerlink" href="#condition" title="Permalink to this headline">¶</a></h1>
+<p>Une condition est une modélisation en JSON d&#8217;une expression booléenne regroupant des tests, par exemple :</p>
+<div class="highlight-json"><pre>python
+
+   { "AND" : {
+           "OR" : {
+               "one-uuid" : {
+                   "param_name_1" : {
+                       "token1" : "value",
+                       "token2" : "othervalue"
+                   },
+                   "param_name_2" : {
+                       "token3" : "foo"
+                   }
+               },
+               "another-uuid" : {
+                   "param_name_1" : {
+                       "token4" : "bar"
+                   }
+               }
+           },
+           "yet-another-uuid" : {
+               "param_name_1" : {
+                   "url" : "http://google.fr",
+                   "interval" : "5"
+               }
+           }
+       }
+   }</pre>
+</div>
+<p>ce qui représente une condition du type &#8220;( A OR B ) AND C&#8221;, ou, pour reprendre le nommage uuid/paramètre/token :
+.. code-block:: json</p>
+<blockquote>
+<div>(one-uuid (param_name_1 (token1,token2) OR another-uuid(param_name_1(token4)) AND yet-another-uuid(param_name_1(url,interval)</div></blockquote>
+<p>Chaque &#8220;clé&#8221; d&#8217;une condition peut être :
+* Un opérateur booléen (AND, OR ou NOT), la valeur est alors une &#8220;sous condition&#8221; (ex. le &#8220;OR&#8221; ci dessus)
+* un identifieur unique d&#8217;un test, la valeur est alors une liste de paramètres (ex. les &#8220;<a href="#id1"><span class="problematic" id="id2">*</span></a>-uuid&#8221; ci desssus).</p>
+</div>
+<div class="section" id="test">
+<h1>Test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h1>
+<p>Un test est un objet comparant 2 éléments entre eux. Chaque élément (opérateur de comparaison compris) est appelé &#8220;paramètre&#8221;.
+Aucune intelligence (action de récupération d&#8217;un état/d&#8217;une donnéeà n&#8217;est présente dans les tests. Celle ci est déportée dans les paramètres.</p>
+<p>Un test se contente de définir une liste de paramètres ainsi que leurs attributs et d&#8217;évaluer les valeurs retournées par les paramètres lorsque cela est nécessaire.</p>
+<p>L&#8217;évaluation est faite par une méthode devant systématiquement être définie lors de l&#8217;ajout d&#8217;un nouveau test.
+Une classe générique est fournie aux dévelopeurs de test de façon à n&#8217;avoir besoin d&#8217;écrire que la logique elle même.</p>
+<p>Un test ressemble à :
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>python</dt>
+<dd><dl class="first last docutils">
+<dt>class TextInPageTest(AbstractTest):</dt>
+<dd><p class="first">&#8220;&#8221;&#8221; Simple test to check if a word is contained in an url
+&#8220;&#8221;&#8220;</p>
+<dl class="last docutils">
+<dt>def __init__(self, log, xpl = None, trigger = None):</dt>
+<dd>AbstractTest.__init__(self, log, xpl, trigger)
+self.add_parameter(&#8220;url&#8221;, &#8220;url_value.UrlParameter&#8221;)
+self.add_parameter(&#8220;text&#8221;, &#8220;text.TextParameter&#8221;)</dd>
+<dt>def evaluate(self):</dt>
+<dd><p class="first">&#8220;&#8221;&#8221; Evaluate if the text appears in the content of the page referenced by url
+&#8220;&#8221;&#8221;
+p = self.get_raw_parameters()
+u = p[&#8220;url&#8221;]
+t = p[&#8220;text&#8221;]
+if u.evaluate() == None or t.evaluate() == None:</p>
+<blockquote>
+<div>return None</div></blockquote>
+<dl class="last docutils">
+<dt>else:</dt>
+<dd>return t.evaluate() in u.evaluate()</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<p>Ce test permet de vérifier si un texte est présent dans le contenu récupéré à une url donnée.
+Il prend 2 paramètres définis ligne 7 et 8 :</p>
+<ul class="simple">
+<li>un paramètre &#8220;url&#8221;</li>
+<li>un paramètre &#8220;text&#8221;</li>
+</ul>
+<p>Dans la méthode &#8216;&#8217;evaluate&#8217;&#8216;, chaque paramètre est évalué par un appel à sa propre méthode &#8216;&#8217;evaluate&#8217;&#8216;.
+Ce que fait l&#8217;évaluation d&#8217;un paramètre dépend de chaque paramètre.</p>
+<p>Une valeur doit être renvoyée par cette méthode si le paramètre peut être évalué.</p>
+<p>&#8216;&#8217;&#8216;None&#8217;&#8216;&#8217; doit être renvoyé si le paramètre n&#8217;a pas pu être évalué.</p>
+<p>Ici, si l&#8217;une des 2 évaluations renvoie &#8216;&#8217;&#8216;None&#8217;&#8216;&#8217;, on retourne  &#8216;&#8217;&#8216;None&#8217;&#8216;&#8217; à notre tour.
+Dans cet exemple, t.evaluate() est supposé retourner le texte à trouver, et u.evaluate() le contenu d&#8217;une page web.</p>
+<p>Si les 2 valeurs sont retournées, on teste alors si le texte est présent dans le contenu de la page.</p>
+<p>La méthode &#8216;&#8217;evaluate&#8217;&#8217; d&#8217;un test doit renvoyer un booléen si l&#8217;évaluation a pu être faite, et &#8216;&#8217;&#8216;None&#8217;&#8216;&#8217; sinon.</p>
+</div>
+<div class="section" id="parametres">
+<h1>Parametres<a class="headerlink" href="#parametres" title="Permalink to this headline">¶</a></h1>
+<p>Les paramètres sont les éléments les plus &#8220;primitifs&#8221; d&#8217;un scénario. Ce sont les éléments de base représentant un &#8220;objet&#8221;.
+Un paramètre possède un certain nombre d&#8217;attributs pouvant être configurés.</p>
+<p>Le nombre de paramètres sera probablement un ensemble fini assez restreint, on peut par exemple penser aux paramètres suivants :</p>
+<ul class="simple">
+<li>Chaine de caractère</li>
+<li>Url/page web</li>
+<li>opérateur de comparaison (&lt;,&gt;,=, etc ...)</li>
+<li>Etat d&#8217;un device domototique</li>
+<li>Etc ...</li>
+</ul>
+<p>Un paramètre a un certain nombre d&#8217;attributs :</p>
+<ul class="simple">
+<li>un type : c&#8217;est une description &#8220;en un mot&#8221; de ce que fait le paramètre. Son but premier est de permettre aux UIs d&#8217;adapter la saisie (par exemple, un type &#8220;text&#8221; ou un type &#8220;device&#8221; pourra être présenté différemment). Il n&#8217;y a pas de contrainte explicite sur cet attribut, il est cependant bon de limiter le nombre de valeurs différentes entre les paramètres si cela n&#8217;est pas nécessaire.</li>
+<li>Une liste de valeurs (facultatif) : Cette liste sera fournie aux UIs pour leur permettre de restreindre le choix aux utilisateurs.</li>
+<li>Une liste de filtres (facultatif) : Idem que précédemment, ceci a pour but de permettre aux UIs de fournir unemodélisation la plusprécise possible. Cette liste de filtre (sous forme de clé: valeur) devrait permettre aux UIs de restreindre certains choix (par exemple, forcer un housecode dans un sous ensemble).</li>
+<li>Une valeur par défaut (facultatif) : Idem que précédemment, l&#8217;UI devrait présélectionner cette valeur si elle existe</li>
+<li>Des &#8216;&#8217;&#8216;entrées&#8217;&#8216;&#8217; : Ces entrées définissent la liste des attributs du paramètre. L&#8217;UI devra récupérer cette liste et permettra à l&#8217;utilisateur de définir une valeur pour chaque attribut, afin de configurer le paramètre. Par exemple, pour un paramètre &#8220;chaine de caractère&#8221;, un seul attribut sera nécessaire : la chaîne. Pour un paramètre de type &#8220;url&#8221;, 2 attributs seront nécessaires : l&#8217;url et l&#8217;interval entre chaque récupération du contenu. Une entrée est spécifiée par :</li>
+</ul>
+<p>** son nom
+** son type (de même que le type des paramètres) est un mot permettant de préciser le type de l&#8217;attribut pour adapter la présentation de la saisie
+** une description en quelques mots sur ce que devrait contenir l&#8217;attribut.</p>
+<p>Un exemple de paramètre est :
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>python</dt>
+<dd><dl class="first last docutils">
+<dt>class UrlParameter(AbstractParameter):</dt>
+<dd><p class="first">&#8220;&#8221;&#8221; This parameter looks periodically at some URL and return the content of the page
+&#8220;&#8221;&#8220;</p>
+<dl class="last docutils">
+<dt>def __init__(self, log, xpl, trigger = None):</dt>
+<dd>AbstractParameter.__init__(self, log, xpl, trigger)
+self.set_type(&#8220;url&#8221;)
+self.add_expected_entry(&#8220;urlpath&#8221;, &#8220;string&#8221;, &#8220;Url the script will fetch&#8221;)
+self.add_expected_entry(&#8220;interval&#8221;, &#8220;integer&#8221;, &#8220;Interval between 2 fetch in second&#8221;)
+self.set_default_value(&#8220;interval&#8221;, &#8220;10&#8221;)
+self._result = None
+self._event = Event()
+self._fetch_thread = Thread(target=self._fetch,name=&#8221;UrlParameter.fetch&#8221;)
+self._fetch_thread.start()</dd>
+<dt>def _fetch(self):</dt>
+<dd><p class="first">&#8220;&#8221;&#8221; This method will fetch the url peridodically and put the result in self._result
+It whould be called in some thread
+&#8220;&#8221;&#8221;
+while not self._event.is_set():</p>
+<blockquote class="last">
+<div><p>p =  self.get_parameters()
+if &#8220;urlpath&#8221; in p:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>try:</dt>
+<dd>u = urlopen(p[&#8220;urlpath&#8221;])</dd>
+<dt>except:</dt>
+<dd>self._log.warn(&#8220;urlopen : Exception occured : %s&#8221; % sys.exc_info()[0])
+self._result = None</dd>
+<dt>else:</dt>
+<dd>self._result = &#8220;n&#8221;.join(u.readlines())
+self.call_trigger()</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>if &#8220;interval&#8221; in p:</dt>
+<dd>self._event.wait(int(p[&#8220;interval&#8221;]))</dd>
+<dt>else:</dt>
+<dd>self._event.wait(10)</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt>def evaluate(self):</dt>
+<dd>&#8220;&#8221;&#8221; return contents of url or none&#8221;
+&#8220;&#8221;&#8221;
+return self._result</dd>
+<dt>def destroy(self):</dt>
+<dd>&#8220;&#8221;&#8221; Destroy fetch thread
+&#8220;&#8221;&#8221;
+self._event.set()
+self._fetch_thread.join()</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<p>Ce paramètre étend d&#8217;une classe permettant de fournir les fonctionnalités de base.</p>
+<p>Le constructeur effectue la configuration du paramètre, à savoir :
+* défini un type &#8220;url&#8221; (pouvant permettre une vérification du format aupèrs des UI
+* ajoute 2 attributs :
+** urlpath, de type &#8220;string&#8221;, décrit comme &#8220;Url that will be fetch&#8221;
+** interval, de type integer, décrit comme l&#8217;interval entre 2 fetch
+* défini la valeur par défaut de l&#8217;interval à &#8220;10&#8221;.</p>
+<p>De plus, quelques configurations propre à ce paramètre sont ajoutées (création d&#8217;un event, et démarrage d&#8217;un thread pour la méthode _fetch).</p>
+<p>La méthode &#8216;&#8217;_fetch&#8217;&#8217; est une méthode propre à ce paramètre, qui contient la logique du paramètre. C&#8217;est une boucle qui récupère le contenu de l&#8217;url toutes les X secondes</p>
+<p>La méthode &#8216;&#8217;evaluate&#8217;&#8217; surcharge celle de la classe parent, et se contente de retourner le contenu de la page web (initialisé à &#8216;&#8217;&#8216;None&#8217;&#8216;&#8217; dans le constructeur).</p>
+<p>La méthode &#8216;&#8217;destroy&#8217;&#8217; surcharg celle de la classe parent, elle permet d&#8217;ajouter des actions à effectuer à l&#8217;arrêt du scénario (ici, arrêter le thread).</p>
+</div>
+<div class="section" id="fonctionnement">
+<h1>Fonctionnement<a class="headerlink" href="#fonctionnement" title="Permalink to this headline">¶</a></h1>
+<p>Le &#8220;workflow&#8221; d&#8217;un scénario est supposé être le suivant :</p>
+<p># L&#8217;utilisateur demande la création d&#8217;une nouvelle condition par l&#8217;UI
+# L&#8217;UI récupère la liste des tests et de leurs paramètres auprès du module de scénario (avec proxy via RINOR ou via la MQ éventuellement)
+# Le module renvoie la liste des tests avec pour chacun les paramètres nécessaires
+# L&#8217;UI permet à l&#8217;utilisateur, via un outil de modélisation, de créer une expression booléenne.
+## Lorsque l&#8217;utilisateur veut créer un test, l&#8217;UI devra :
+* Modéliser ce test pour l&#8217;utilisateur (avec les éventuelles restrictions/précisions définies pour les paramètres)
+* Demander au module (avec proxy via RINOR ou via la MQ éventuellement, de façon asynchrone ou non) de créer une instance de ce test. Le module renverra alors un identifiant unique pour cette instance. Il n&#8217;est pas nécessaire que le module crée l&#8217;instance à ce moment là, mais seulement lors de la réalisation de la condition
+# Lorsque l&#8217;utilisateur a modélisé sa condition, l&#8217;UI génère le JSON et l&#8217;envoie au module, qui se chargera alors de :
+## Créer les tests et les associer aux uuids
+## Créer la condition avec le JSON et la liste des tests</p>
+<p>Il reste encore à préciser la façon dont les actions seront déclenchées. Vraissemblablement, un objet &#8220;Action&#8221; va être créé, utilisant lui aussi les paramètres.
+Une liste d&#8217;actions (paramétrée) pourra alors être associée à une condition donnée pour définir un scénario complet.
+Chaque action pourra, à travers le gestionnaire de scénario, récupérer les valeurs des paramètres entrés par l&#8217;utilisateur ou récupérées par le systeme.</p>
+</div>
+<div class="section" id="exemples">
+<h1>Exemples:<a class="headerlink" href="#exemples" title="Permalink to this headline">¶</a></h1>
+<p>Si la luminosité intérieur est inférieure à la luminosité extérieure alors que les volets sont fermés et que l&#8217;utilisateur veut allumer la lumière alors on ouvre les volets de la pièce</p>
+<p>Si la luminosité est supérieure a x% et que la température est supérieure à x°C alors on ferme les volets de la façade (1 ou plusieurs volets selon les technologies)</p>
+<p>Si l&#8217;heure est comprise entre 22h et 3h et que le % d&#8217;humidité est inférieur a X% mettre l&#8217;arrosage en route</p>
+<p>Si la fenêtre est ouverte mettre le chauffage hors-gel.</p>
+<p>Mettre le chauffage hors-gel dans toute les pièces communicantes avec une pièce dont la fenêtre est ouverte.</p>
+<p>Si la température intérieure est supérieure à 23°C et la température extérieure inférieure à 20°C alors mettre la VMC en marche forcée</p>
+<p>Si l&#8217;alarme se déclenche, enregistrer avec les caméras IP, envoyer un E-mail et envoyer un SMS et appeler un N° prédéfini dans Asterisk</p>
+<p>Si je mets l&#8217;alarme en route et qu&#8217;une fenêtre est ouverte, fermer le volet de la fenêtre</p>
+<p>S&#8217;il manque un élément sur le mirro:r j&#8217;active la messagerie Asterisk de l&#8217;utilisateur concerné</p>
+<p>Si un élément revient sur le mirro:r je fais des annonces via les Nabaz:tag (mail, appel en absence, nb de message)</p>
+<p>Si un élément reviens sur le mirro:r et qu&#8217;un est déjà présent je l&#8217;annonce via les Nabaz:tag</p>
+<p>S&#8217;il n&#8217;y a plus d&#8217;élément sur le mirro:r j&#8217;active l&#8217;alarme, je mets le chauffage en température réduite</p>
+<p>Thermostat :
+Si (jour de la semaine / : ex:dimanche) alors laisser température normale (cteN à atteindre) entre 9h et 22h
+Si (jour de la semaine / : ex:lundi) alors laisser température normale (cteN à atteindre) entre 7h et 9h et..   sinon température basse(CteB à atteindre).
+Test régulier température thermostat &gt; CteN ou CteB), vérifie heure et jour alors redemarrage ou arret chauffage,
+Trois valeurs définies pour chauffage :  CteN, CteB, CteHG (hors gel).
+CteHG pour les absences prolongées ou vacances.
+Quatre boutons-poussoir minimun : CteHG pendant x heures (ou jours), CteN, CteB, Prog1 (suit les si, si, si des exemples précédents)</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Condition</a></li>
+<li><a class="reference internal" href="#test">Test</a></li>
+<li><a class="reference internal" href="#parametres">Parametres</a></li>
+<li><a class="reference internal" href="#fonctionnement">Fonctionnement</a></li>
+<li><a class="reference internal" href="#exemples">Exemples:</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../ReportABug/ReportABug.html"
+                        title="previous chapter">Log in (and eventually create an account if you don&#8217;t have one)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Screenshots/Screenshots.html"
+                        title="next chapter">Homepage</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Scenarios/Scenarios.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Screenshots/Screenshots.html" title="Homepage"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../ReportABug/ReportABug.html" title="Log in (and eventually create an account if you don’t have one)"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

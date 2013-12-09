@@ -1,0 +1,202 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Devices &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Events handeling" href="../RINOR_events2/RINOR_events2.html" />
+    <link rel="prev" title="&lt;br /&gt;" href="../REST_stats2/REST_stats2.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../RINOR_events2/RINOR_events2.html" title="Events handeling"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../REST_stats2/REST_stats2.html" title="&lt;br /&gt;"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="devices">
+<h1>Devices<a class="headerlink" href="#devices" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-json"><pre>/base/device/list
+/base/device/add/name/&lt;name&gt;/description/&lt;description&gt;/reference/&lt;reference&gt;/usage_id/&lt;usage id&gt;/technology_id/&lt;technology id&gt;/type/&lt;type&gt;
+/base/device/update/&lt;id&gt;/name/&lt;name&gt;/description/&lt;description&gt;/reference/&lt;reference&gt;/usage_id/&lt;usage id&gt;
+/base/device/del/&lt;id&gt;</pre>
+</div>
+<p>{REMARKSBOX(type=&gt;note)}
+device technology and device type can not be updated after creation
+{REMARKSBOX}</p>
+</div>
+<div class="section" id="device-parameters">
+<h1>Device parameters<a class="headerlink" href="#device-parameters" title="Permalink to this headline">¶</a></h1>
+<p>~~#C00:__To update with database model__~~</p>
+</div>
+<div class="section" id="features">
+<h1>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-json"><pre>/base/feature/list/by-id/&lt;id&gt;
+/base/feature/list/by-device_id/&lt;id&gt;
+/base/feature/add/device_id/&lt;device_id&gt;/name/&lt;name&gt;/command_type/&lt;DMG type&gt;/command_address/&lt;command address&gt;/command_reference/&lt;command reference&gt;/state_type/&lt;DMG type&gt;/state_address/&lt;state address&gt;/state_reference/&lt;state reference&gt;
+/base/feature/update/&lt;id&gt;/name/&lt;name&gt;/command_type/&lt;DMG type&gt;/command_address/&lt;command address&gt;/command_reference/&lt;command reference&gt;/state_type/&lt;DMG type&gt;/state_address/&lt;state address&gt;/state_reference/&lt;state reference&gt;
+/base/feature/del/by-id/&lt;id&gt;
+/base/feature/del/by-device_id/&lt;id&gt;</pre>
+</div>
+<p>{REMARKSBOX(type=&gt;note)}
+device_id can not be updated
+{REMARKSBOX}</p>
+</div>
+<div class="section" id="feature-parameters">
+<h1>Feature parameters<a class="headerlink" href="#feature-parameters" title="Permalink to this headline">¶</a></h1>
+<p>~~#C00:__To update with database model__~~
+.. code-block:: json</p>
+<blockquote>
+<div>/base/feature_config/set/feature_id/&lt;feature id&gt;/key/&lt;key&gt;/value/&lt;value&gt;
+/base/feature_config/del/by-feature_id/&lt;feature id&gt;
+/base/feature_config/del/by-key/&lt;feature id&gt;/&lt;key&gt;</div></blockquote>
+</div>
+<div class="section" id="device-templates">
+<h1>Device templates<a class="headerlink" href="#device-templates" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-json"><pre>/base/device_template/list/by-id/&lt;device type&gt;{CODE}
+{REMARKSBOX(type=&gt;note
+
+There is no need for writing REST urls as they are updated using the xml process
+{REMARKSBOX}
+
+Feature templates
+==================</pre>
+</div>
+<div class="highlight-json"><pre>/base/feature_template/list/by-device_id/&lt;device type&gt;{CODE}</pre>
+</div>
+<p>{REMARKSBOX(type=&gt;note)}
+There is no need for writing REST urls as they are updated using the xml process
+{REMARKSBOX}</p>
+</div>
+<div class="section" id="features-states">
+<h1>Features states<a class="headerlink" href="#features-states" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-json"><pre>/states/&lt;feature id&gt;/all
+/states/&lt;feature id&gt;/latest
+/states/&lt;feature id&gt;/last/&lt;number of item to get&gt;
+/states/&lt;feature id&gt;/from/&lt;start time&gt; {/to/&lt;end time&gt;}
+/states/&lt;feature id&gt;/from/&lt;start time&gt; {/to/&lt;end time&gt;}/interval/&lt;year, month, week, day, hour, minute, second&gt;/selector/&lt;min(number only), max(number only), avg(number only), first, last, x&gt;</pre>
+</div>
+</div>
+<div class="section" id="plugin-config">
+<h1>Plugin config<a class="headerlink" href="#plugin-config" title="Permalink to this headline">¶</a></h1>
+<p>~~#C00:__To update with database model__~~
+.. code-block:: json</p>
+<blockquote>
+<div>/plugin/config/set/name/&lt;plugin name&gt;/hostname/&lt;hostname&gt;/key/&lt;key&gt;/value/&lt;value&gt; {/interface/&lt;interface number : 0..n&gt;}</div></blockquote>
+</div>
+<div class="section" id="pages">
+<h1>Pages<a class="headerlink" href="#pages" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-json"><pre>/base/page/list
+/base/page/add/name/&lt;name&gt;/description/&lt;description&gt;/parent/&lt;parent id&gt;
+/base/page/update/&lt;id&gt;/name/&lt;name&gt;/description/&lt;description&gt;/parent/&lt;parent id&gt;
+/base/page/del/&lt;id&gt;
+/base/page/view/&lt;id&gt;
+/base/page/tree/&lt;id&gt;
+/base/page/path/&lt;id&gt;</pre>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Devices</a></li>
+<li><a class="reference internal" href="#device-parameters">Device parameters</a></li>
+<li><a class="reference internal" href="#features">Features</a></li>
+<li><a class="reference internal" href="#feature-parameters">Feature parameters</a></li>
+<li><a class="reference internal" href="#device-templates">Device templates</a></li>
+<li><a class="reference internal" href="#features-states">Features states</a></li>
+<li><a class="reference internal" href="#plugin-config">Plugin config</a></li>
+<li><a class="reference internal" href="#pages">Pages</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../REST_stats2/REST_stats2.html"
+                        title="previous chapter">&lt;br /&gt;</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../RINOR_events2/RINOR_events2.html"
+                        title="next chapter">Events handeling</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/RINOR_base2/RINOR_base2.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../RINOR_events2/RINOR_events2.html" title="Events handeling"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../REST_stats2/REST_stats2.html" title="&lt;br /&gt;"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

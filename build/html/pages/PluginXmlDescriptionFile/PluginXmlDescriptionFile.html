@@ -1,0 +1,273 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plugin xml description file &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="How to call a function / method when something happens in the lib module" href="../Plugin_call_a_function_from_lib_module/Plugin_call_a_function_from_lib_module.html" />
+    <link rel="prev" title="Plugin Onewire" href="../Plugin Onewire/Plugin Onewire.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Plugin_call_a_function_from_lib_module/Plugin_call_a_function_from_lib_module.html" title="How to call a function / method when something happens in the lib module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Plugin Onewire/Plugin Onewire.html" title="Plugin Onewire"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="plugin-xml-description-file">
+<h1>Plugin xml description file<a class="headerlink" href="#plugin-xml-description-file" title="Permalink to this headline">¶</a></h1>
+<p>~~#F00:__IMPORTANT NOTICE : This page is only about Domogik 0.1.0__~~</p>
+<p>~~#F00:For Domogik &gt;= 0.2, see [Packages_info_json] ~~</p>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="xml-description-file">
+<h2>Xml description file<a class="headerlink" href="#xml-description-file" title="Permalink to this headline">¶</a></h2>
+<p>A description file (xml format) must be created for each plugin. It describes, plugin (name, technology, where is online documentation, etc) and configuration options (short description, more details are in plugin&#8217;s online documentation).</p>
+</div>
+<div class="section" id="template">
+<h2>Template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-json"><pre>&lt;package type="plugin"&gt;
+  &lt;id&gt;&lt;!--plugin id(same as python file name without .py)--&gt;&lt;/id&gt;
+  &lt;description&gt;&lt;!--The plugin description (could eb multiline)--&gt;&lt;/description&gt;
+  &lt;changelog&gt;&lt;!-- multiline changelog Ex :
+0.2.0
+* feature A
+* feature B
+
+0.1.0
+* create plugin --&gt;
+  &lt;/changelog&gt;
+  &lt;technology&gt;&lt;!--technology--&gt;&lt;/technology&gt;
+  &lt;version&gt;&lt;!--plugin version : change it when publishing a new version--&gt;&lt;/version&gt;
+  &lt;documentation&gt;&lt;!--url for online documentation about plugin--&gt;&lt;/documentation&gt;
+  &lt;domogik-min-version&gt;&lt;!-- domogik minimum version requirement --&gt;&lt;/domogik-min-version&gt;
+  &lt;author&gt;&lt;!-- plugin's author --&gt;&lt;/author&gt;
+  &lt;author-email&gt;&lt;!-- plugin's author email --&gt;&lt;/author-email&gt;
+  &lt;configuration-keys&gt;
+    &lt;key&gt;
+      &lt;!-- if you want to set several options for multi interfaces, add this entry to link them to an interface group :
+      &lt;interface&gt;yes&lt;/interface&gt;
+      --&gt;
+      &lt;!-- if the parameter is optionnal (example : login/password for a relayboard which can need or not auth) :
+      &lt;optionnal&gt;yes&lt;/optionnal&gt;
+      --&gt;
+      &lt;order-id&gt;&lt;!--id only used to order configuration keys (0...n)--&gt;&lt;/order-id&gt;
+      &lt;name&gt;&lt;!--key name : 14 caracters maximum. Available caracters : "[a-z][0-9]" and "-" --&gt;&lt;/name&gt;
+      &lt;description&gt;&lt;!--key description. Should length at most 80 caracters. If you want to make more, do it in the documentation. Don't use any ','.--&gt;&lt;/description&gt;
+      &lt;type&gt;&lt;!-- type of key data : boolean, number, string, enum. Only used by for a nicer display--&gt;&lt;/type&gt;
+      &lt;!-- the following is only used in case of type enum --&gt;
+      &lt;options&gt;
+           &lt;option&gt;&lt;!-- option to select --&gt;&lt;/option&gt;
+           &lt;option&gt;&lt;!-- option to select --&gt;&lt;/option&gt;
+      &lt;/options&gt;
+      &lt;!-- end enum specific --&gt;
+      &lt;default-value&gt;&lt;!--defualt or recommended value for key configuration--&gt;&lt;/default-value&gt;
+    &lt;/key&gt;
+    &lt;key&gt;
+      &lt;!-- .... --&gt;
+    &lt;/key&gt;
+  &lt;/configuration-keys&gt;
+  &lt;files&gt;
+    &lt;file path="&lt;!-- /path/to/first/file/needed/by/plugin --&gt;"/&gt;
+    &lt;file path="&lt;!-- /path/to/second/file/needed/by/plugin --&gt;"/&gt;
+    &lt;!-- ... --&gt;
+  &lt;/files&gt;
+  &lt;dependencies&gt;
+    &lt;dep type="python=" id="pyserial (&gt;=2.5)"/&gt;&lt;!-- example for a python dependency (distutils2 format). Ex : 'pyserial (&gt;=2.5)', 'foo (&gt;1.0, &lt;1.8)', ... --&gt;
+    &lt;dep type="plugin" id="xpl_time"/&gt;&lt;!-- example for a plugin dependency : another plugin must run in order this one could be functionnal --&gt;
+    &lt;dep type="other" id="owfs"/&gt;&lt;!-- example for another dependency (example : owfs for onewire, which need a manual installation --&gt;
+    &lt;!-- ... --&gt;
+  &lt;/dependencies&gt;
+  &lt;udev-rules&gt;  &lt;!-- the list (optionnal) of possible udev rules for the plugin--&gt;
+    &lt;rule model="the device model" description="long description of the model" filename="foo.rules"&gt;
+DEFINE HERE THE UDEV RULE TO WRITE IN foo.rules FILE
+    &lt;/rule&gt;
+    &lt;!-- ... --&gt;
+  &lt;/udev-rules&gt;
+
+  &lt;!-- ---- Database data ----
+       The following data are isnerted in database when plugin is installed
+       They are used by Rest to give the UI the informations they needs to display technology, features, etc
+
+       To get mroe info about all foolowing data, please read http://wiki.domogik.org/DevelopersDatabase for "0.1.0 model"
+  --&gt;
+  &lt;device_technology&gt;
+    &lt;id&gt;&lt;!-- technology id. Available caracters : "[a-z][0-9]". Example : relayboard --&gt;&lt;/id&gt;
+    &lt;name&gt;&lt;!-- Displayed name of technology. Example : Relay board --&gt;&lt;/name&gt;
+    &lt;description&gt;&lt;!-- Description of technology. Example : Relay boards monitoring and controlling --&gt;&lt;/description&gt;
+  &lt;/device_technology&gt;
+  &lt;device_types&gt;
+    &lt;device_type&gt;
+      &lt;id&gt;&lt;!-- device type id. Available caracters : "[a-z][0-9]". Should be formatted like this : &lt;technology&gt;.&lt;type&gt;. Example : relayboard.relay --&gt;&lt;/id&gt;
+      &lt;device_technology_id&gt;&lt;!-- technology id. Example : relayboard --&gt;&lt;/device_technology_id&gt;
+      &lt;name&gt;&lt;!-- Displayed name of device type. Example : Relay --&gt;&lt;/name&gt;
+      &lt;description&gt;&lt;!-- Description of device type. Example : Relay --&gt;&lt;/description&gt;
+    &lt;/device_type&gt;
+    &lt;device_type&gt;
+      &lt;!-- another device type --&gt;
+    &lt;/device_type&gt;
+  &lt;/device_types&gt;
+  &lt;device_feature_models&gt;
+    &lt;device_feature_model&gt;
+      &lt;id&gt;&lt;!-- device feature model id. Available caracters : "[a-z][0-9]". Should be formatted like this : &lt;technology&gt;.&lt;type&gt;. Example : relayboard.relay.switch --&gt;&lt;/id&gt;
+      &lt;name&gt;&lt;!-- Displayed name of device feature model. Example : Switch --&gt;&lt;/name&gt;
+      &lt;feature_type&gt;&lt;!-- feature type : actuator, sensor. Example : actuator--&gt;&lt;/feature_type&gt;
+      &lt;device_type_id&gt;&lt;!-- device type id. Example : relayboard.relay --&gt;&lt;/device_type_id&gt;
+      &lt;parameters&gt;
+          &lt;!-- parameters for web UI. Example : {&amp;amp;quot;output&amp;amp;quot;:&amp;amp;quot;&amp;amp;quot;,&amp;amp;quot;value0&amp;amp;quot;:&amp;amp;quot;low&amp;amp;quot;, &amp;amp;quot;value1&amp;amp;quot;:&amp;amp;quot;high&amp;amp;quot;}--&gt;
+      &lt;/parameters&gt;
+      &lt;value_type&gt;&lt;!-- type of value returned by xpl messages : binary, number, string, etc (depanding on feature type : see online documentation) --&gt;&lt;/value_type&gt;
+      &lt;stat_key&gt;&lt;!-- stat key in database. Example : output --&gt;&lt;/stat_key&gt;
+      &lt;return_confirmation&gt;&lt;!--For an actuator, will device return a confirmaton ? 1=yes, 0=no. Example : 1--&gt;&lt;/return_confirmation&gt;
+    &lt;/device_feature_model&gt;
+    &lt;device_feature_model&gt;
+      &lt;!-- another device feature model --&gt;
+    &lt;/device_feature_model&gt;
+  &lt;/device_feature_models&gt;
+&lt;/package&gt;</pre>
+</div>
+<p>__Notice :__ for __database <a href="#id1"><span class="problematic" id="id2">part__</span></a> of the xml files, it is not very simple to fill it. With the next data model, we will make it differently, so it will be less difficult ;)</p>
+<p>Feel free to come on irc to ask for our help or to use the mailing list.</p>
+</div>
+<div class="section" id="template-specific-elements-for-hardware-type">
+<h2>Template : specific elements for &#8220;hardware&#8221; type<a class="headerlink" href="#template-specific-elements-for-hardware-type" title="Permalink to this headline">¶</a></h2>
+<p>Set type = hardware
+.. code-block:: json</p>
+<blockquote>
+<div>&lt;package type=&#8221;hardware&#8221;&gt;</div></blockquote>
+<p>Set no configuration element :
+.. code-block:: json</p>
+<blockquote>
+<div>&lt;configuration-keys/&gt;</div></blockquote>
+<p>Add vendor id and device id :
+.. code-block:: json</p>
+<blockquote>
+<div>&lt;vendor-id&gt;&lt;!&#8211;hardware vendor id&#8211;&gt;&lt;/vendor-id&gt;
+&lt;device-id&gt;&lt;!&#8211;hardware device id&#8211;&gt;&lt;/device-id&gt;</div></blockquote>
+<p>If external files are provided (for example sketch files for an arduino, etc), list them :
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&lt;external_files&gt;</dt>
+<dd>&lt;file path=&#8221;src/external/hardware/&lt;name for related &#8216;hardware&#8217; plugin&gt;/&lt;file 1&gt;&#8221;/&gt;
+&lt;file path=&#8221;src/external/hardware/&lt;name for related &#8216;hardware&#8217; plugin&gt;/&lt;file 2&gt;&#8221;/&gt;
+...</dd>
+</dl>
+<p>&lt;/external_files&gt;</p>
+</div></blockquote>
+</div>
+<div class="section" id="load-new-data-in-database">
+<h2>Load new data in database<a class="headerlink" href="#load-new-data-in-database" title="Permalink to this headline">¶</a></h2>
+<p>If you update any __&lt;device*&gt;__ part of the xml, you will have to reload this file in database. This could be done like this :
+.. code-block:: json</p>
+<blockquote>
+<div>cd src/tools/packages
+./insert_data.py ../../share/domogik/plugins/&lt;your plugin name&gt;.xml</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Plugin xml description file</a><ul>
+<li><a class="reference internal" href="#xml-description-file">Xml description file</a></li>
+<li><a class="reference internal" href="#template">Template</a></li>
+<li><a class="reference internal" href="#template-specific-elements-for-hardware-type">Template : specific elements for &#8220;hardware&#8221; type</a></li>
+<li><a class="reference internal" href="#load-new-data-in-database">Load new data in database</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Plugin Onewire/Plugin Onewire.html"
+                        title="previous chapter">Plugin Onewire</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Plugin_call_a_function_from_lib_module/Plugin_call_a_function_from_lib_module.html"
+                        title="next chapter">How to call a function / method when something happens in the lib module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/PluginXmlDescriptionFile/PluginXmlDescriptionFile.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Plugin_call_a_function_from_lib_module/Plugin_call_a_function_from_lib_module.html" title="How to call a function / method when something happens in the lib module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Plugin Onewire/Plugin Onewire.html" title="Plugin Onewire"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

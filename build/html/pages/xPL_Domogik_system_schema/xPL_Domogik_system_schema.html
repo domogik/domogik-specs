@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>System schema of Domogik in xPL &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="xPL calendar schema" href="../xPL_calendar_schema/xPL_calendar_schema.html" />
+    <link rel="prev" title="Installing Domogik on Ubuntu (Oneiric, Precise)" href="../ubuntu_installation/ubuntu_installation.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../xPL_calendar_schema/xPL_calendar_schema.html" title="xPL calendar schema"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../ubuntu_installation/ubuntu_installation.html" title="Installing Domogik on Ubuntu (Oneiric, Precise)"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="system-schema-of-domogik-in-xpl">
+<h1>System schema of Domogik in xPL<a class="headerlink" href="#system-schema-of-domogik-in-xpl" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="xpl-dialog-between-rest-and-manager">
+<h2>xPL dialog between REST and Manager<a class="headerlink" href="#xpl-dialog-between-rest-and-manager" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="command">
+<h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
+<p>xpl-cmnd :
+.. code-block:: json</p>
+<blockquote>
+<div>DOMOGIK.SYSTEM
+{
+COMMAND=command to send
+HOST=name of the host where a component should be started/stopped
+[PLUGIN=name of the plugin concerned by the command]
+}</div></blockquote>
+<p>COMMAND can have one of the following values :
+* start
+* stop
+* list
+* detail
+* enable
+* disable</p>
+</div>
+<div class="section" id="common-features">
+<h3>Common features<a class="headerlink" href="#common-features" title="Permalink to this headline">¶</a></h3>
+<p>To start and stop features :
+.. code-block:: json</p>
+<blockquote>
+<div>xpl-trig
+{
+...
+}
+DOMOGIK.SYSTEM
+{
+COMMAND=&lt;start|stop&gt;
+HOST=Host sending the message
+[PLUGIN=name of the plugin concerned by the command)
+[ERROR=error|message if error occurs, 255 char max]
+}</div></blockquote>
+</div>
+<div class="section" id="list-features">
+<h3>List features<a class="headerlink" href="#list-features" title="Permalink to this headline">¶</a></h3>
+<p>xpl-trig format :
+.. code-block:: json</p>
+<blockquote>
+<div>DOMOGIK.SYSTEM
+{
+COMMAND=LIST
+HOST = Host sending the message
+[PLUGIN0-TYPE = &lt;type : plugin, hardware&gt;]
+[PLUGIN0-NAME = &lt;name&gt;]
+[PLUGIN0-TECHNO = &lt;technology&gt;]
+[PLUGIN0-STATUS = &lt;status&gt;]
+[PLUGIN0-HOST = &lt;host&gt;]
+[PLUGIN1-TYPE = ]
+[PLUGIN1-NAME = ]
+[PLUGIN1-TECHN0 = ]
+[PLUGIN1-STATUS = ]
+[PLUGIN1-HOST = ]
+...
+}</div></blockquote>
+</div>
+<div class="section" id="detail-of-a-feature">
+<h3>Detail of a feature<a class="headerlink" href="#detail-of-a-feature" title="Permalink to this headline">¶</a></h3>
+<p>xpl-trig format :
+.. code-block:: json</p>
+<blockquote>
+<div><p>DOMOGIK.SYSTEM
+{
+COMMAND=DETAIL
+HOST = &lt;Plugin host&gt;
+PLUGIN-NAME = &lt;plugin name&gt;
+TECHNOLOGY = &lt;plugin technology&gt;
+DESCRIPTION0 = &lt;plugin description part 0&gt;
+[DESCRIPTION1 = &lt;plugin description part 1&gt;]
+[...]
+[DESCRIPTIONN = &lt;plugin description part N&gt;]
+STATUS = &lt;plugin status&gt;
+VERSION = &lt;plugin version&gt;
+DOCUMENTATION = &lt;plugin link to find documentation&gt;
+[CFG0-KEY = &lt;key&gt;]
+[CFG0-TYPE = &lt;key type (boolean, string, number, list)&gt;]
+[CFG0-DESC = &lt;key description&gt;]
+[CFG0-LIST = &lt;values for list separated by comma (only if TYPE = &#8220;LIST/list&#8221;)&gt;]
+[CFG0-DEFAULT = &lt;default value for key&gt;]
+[CFG0-INT = &lt;yes | no : is config item an element of the interface ?&gt;]
+[CFG0-OPT = &lt;yes | no : is it an optionnal element (for info only) ?&gt;]
+[CFG1-KEY = ]
+[CFG1-TYPE = ]
+[CFG1-DESC = ]
+[CFG1-LIST = ]
+[CFG1-DEFAULT = ]
+[CFG1-INT = ]
+[CFG1-OPT = ]</p>
+<p>}</p>
+</div></blockquote>
+<p>__Important notice : only one group is <a href="#id1"><span class="problematic" id="id2">allowed__</span></a></p>
+<p>__Important notice : key &#8216;nb-int&#8217; is used to register number of defined interfaces for UI display and xPL usage. See REST /plugin/config/* methods for UI usage and Query.config for plugins usage.__</p>
+</div>
+<div class="section" id="enable-disable-plugins-on-a-host">
+<h3>Enable/disable plugins on a host<a class="headerlink" href="#enable-disable-plugins-on-a-host" title="Permalink to this headline">¶</a></h3>
+<p>Command :
+.. code-block:: json</p>
+<blockquote>
+<div>xpl-cmnd
+{
+}
+domogik.system
+{
+command=&lt;enable|disable&gt;
+host=&lt;target host&gt;
+plugin=&lt;name&gt;
+}</div></blockquote>
+<p>Response :
+.. code-block:: json</p>
+<blockquote>
+<div>xpl-cmnd
+{
+}
+domogik.package
+{
+command=&lt;enable|disable&gt;
+host=&lt;target host&gt;
+plugin=&lt;name&gt;
+[error = &lt;error message&gt;]
+}</div></blockquote>
+</div>
+</div>
+<div class="section" id="xpl-dialog-between-rest-and-manager-hardware-specific">
+<h2>xPL dialog between REST and Manager &#8212; hardware specific<a class="headerlink" href="#xpl-dialog-between-rest-and-manager-hardware-specific" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="detail-of-the-feature">
+<h3>Detail of the feature<a class="headerlink" href="#detail-of-the-feature" title="Permalink to this headline">¶</a></h3>
+<p>Notice : this evolution is made because hardware detail gives information about hardware (real and read only info) : for plugins, the detail gives a list of parameters and the possibility to set them. Moreover, a hardware can&#8217;t be started/stopped, so related buttons are not needed.</p>
+<p>New xpl-trig format :
+.. code-block:: json</p>
+<blockquote>
+<div>DOMOGIK.SYSTEM
+{
+COMMAND=DETAIL
+HOST = &lt;Hardware host&gt;
+PLUGIN = &lt;plugin name&gt;
+TECHNOLOGY = &lt;plugin technology&gt;
+DESCRIPTION = &lt;plugin description&gt;
+STATUS = &lt;plugin status&gt;
+VERSION = &lt;plugin version&gt;
+DOCUMENTATION = &lt;plugin link to find documentation&gt;
+[CFG0-KEY = &lt;key&gt;]
+[CFG0-VALUE = &lt;value&gt;]
+[CFG1-KEY = ]
+[CFG1-VALUE = ]
+...
+}</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">System schema of Domogik in xPL</a><ul>
+<li><a class="reference internal" href="#xpl-dialog-between-rest-and-manager">xPL dialog between REST and Manager</a><ul>
+<li><a class="reference internal" href="#command">Command</a></li>
+<li><a class="reference internal" href="#common-features">Common features</a></li>
+<li><a class="reference internal" href="#list-features">List features</a></li>
+<li><a class="reference internal" href="#detail-of-a-feature">Detail of a feature</a></li>
+<li><a class="reference internal" href="#enable-disable-plugins-on-a-host">Enable/disable plugins on a host</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#xpl-dialog-between-rest-and-manager-hardware-specific">xPL dialog between REST and Manager &#8212; hardware specific</a><ul>
+<li><a class="reference internal" href="#detail-of-the-feature">Detail of the feature</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../ubuntu_installation/ubuntu_installation.html"
+                        title="previous chapter">Installing Domogik on Ubuntu (Oneiric, Precise)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../xPL_calendar_schema/xPL_calendar_schema.html"
+                        title="next chapter">xPL calendar schema</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/xPL_Domogik_system_schema/xPL_Domogik_system_schema.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../xPL_calendar_schema/xPL_calendar_schema.html" title="xPL calendar schema"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../ubuntu_installation/ubuntu_installation.html" title="Installing Domogik on Ubuntu (Oneiric, Precise)"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

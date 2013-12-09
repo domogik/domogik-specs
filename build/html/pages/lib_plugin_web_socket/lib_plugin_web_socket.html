@@ -1,0 +1,157 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Objectif de cette lib &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="__Mini_Script__" href="../mini_script/mini_script.html" />
+    <link rel="prev" title="Installation of Domogik on a Guruplug" href="../installation_guruplug_server/installation_guruplug_server.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../mini_script/mini_script.html" title="__Mini_Script__"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../installation_guruplug_server/installation_guruplug_server.html" title="Installation of Domogik on a Guruplug"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="objectif-de-cette-lib">
+<h1>Objectif de cette lib<a class="headerlink" href="#objectif-de-cette-lib" title="Permalink to this headline">¶</a></h1>
+<p>Cette lib a pour objectif de créer une communication entre l&#8217;ui (domoweb) et le plugin pour les messages liés à la configuration du plugin grâce à une page spécial dans l&#8217;ui.</p>
+</div>
+<div class="section" id="comment-l-inclure-dans-le-plugin">
+<h1>Comment l&#8217;inclure dans le plugin<a class="headerlink" href="#comment-l-inclure-dans-le-plugin" title="Permalink to this headline">¶</a></h1>
+<p>Vous pouvez vous référer à l&#8217;exemple wstemplate.py présent sur le dépôt.
+Importer les lib
+=================</p>
+<div class="highlight-json"><pre>from wsuiserver import BroadcastServer
+import time
+import threading</pre>
+</div>
+<div class="section" id="initialiser-votre-web-socket-server">
+<h2>Initialiser votre web socket server<a class="headerlink" href="#initialiser-votre-web-socket-server" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-json"><pre>self._wsPort = port
+self._log = None
+self.serverUI =  BroadcastServer(self._wsPort,  self.cb_ServerWS,  self._log) #</pre>
+</div>
+<p>&#8220;wsPort&#8221; doit être propre à votre plugin, référez vous à la liste des ports déjà utilisés dans la documentation de domogik (network_port)
+&#8220;cb_ServerWS&#8221; fait référence à la fonction de votre plugin qui traitera vos messages.
+Fonction recevant les messages (cb_ServerWS)
+=============================================</p>
+<div class="highlight-json"><pre>def cb_ServerWS(self, message):
+...
+...</pre>
+</div>
+<p>&#8220;message&#8221; est de type dictionnaire
+Répondre à un message
+======================</p>
+<div class="highlight-json"><pre>self.serverUI.sendAck(ackMsg){CODE}
+"ackMsg" est de type dictionnaire
+Arreter web socket server
+==========================</pre>
+</div>
+<div class="highlight-json"><pre>self.serverUI.close(){CODE}</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Objectif de cette lib</a></li>
+<li><a class="reference internal" href="#comment-l-inclure-dans-le-plugin">Comment l&#8217;inclure dans le plugin</a><ul>
+<li><a class="reference internal" href="#initialiser-votre-web-socket-server">Initialiser votre web socket server</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../installation_guruplug_server/installation_guruplug_server.html"
+                        title="previous chapter">Installation of Domogik on a Guruplug</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../mini_script/mini_script.html"
+                        title="next chapter">__Mini_Script__</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/lib_plugin_web_socket/lib_plugin_web_socket.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../mini_script/mini_script.html" title="__Mini_Script__"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../installation_guruplug_server/installation_guruplug_server.html" title="Installation of Domogik on a Guruplug"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

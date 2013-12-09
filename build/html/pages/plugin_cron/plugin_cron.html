@@ -1,0 +1,591 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Prerequisites &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="plugin_cron_interface" href="../plugin_cron_interface/plugin_cron_interface.html" />
+    <link rel="prev" title="Plugin cidmodem" href="../plugin_cidmodem/plugin_cidmodem.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_cron_interface/plugin_cron_interface.html" title="plugin_cron_interface"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_cidmodem/plugin_cidmodem.html" title="Plugin cidmodem"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <p>__Important update : the new documentation of this plugin is [<a class="reference external" href="http://docs.domogik.org/plugin/cron/dev/en/index.html]__">http://docs.domogik.org/plugin/cron/dev/en/index.html]__</a></p>
+<p>The following documentation below is (or surely will be) outdated. Some parts of it will be added in ReST one when needed.</p>
+<p>The purpose of this plugin is to offer cron jobs over XPL.
+It can act as a timer, a date, an interval or a cron like server. It will send an xpl message at the specified date.
+It can be called in pure XPL or via the client library.
+See documentation <a href="#id5"><span class="problematic" id="id6">`here &lt;http://xplproject.org.uk/wiki/index.php?title=Schema\_-\_TIMER&gt;`_</span></a> for more details.</p>
+<div class="section" id="prerequisites">
+<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h1>
+<p>Normally you don&#8217;t need to do this, but ...
+* install the apscheduler extension for python:
+__sudo easy_install <a href="#id2"><span class="problematic" id="id3">apscheduler__</span></a></p>
+</div>
+<div class="section" id="install-the-plugin">
+<h1>Install the plugin<a class="headerlink" href="#install-the-plugin" title="Permalink to this headline">¶</a></h1>
+<p>This plugin is available in the development sources. Follow this <a href="#id7"><span class="problematic" id="id8">`documentation|nocache &lt;http://wiki.domogik.org/Developers\_installation&gt;`_</span></a> to install them.
+Enable the plugin :
+__dmgenplug <a href="#id2"><span class="problematic" id="id4">cron__</span></a></p>
+<p>There is no options to configure the plugin so just start it.</p>
+</div>
+<div class="section" id="adding-cron-jobs">
+<h1>Adding cron jobs<a class="headerlink" href="#adding-cron-jobs" title="Permalink to this headline">¶</a></h1>
+<p>This plugin is in alpha developpment, so there is actually no user interface.
+If you want to add alarms, you could use the <a href="#id9"><span class="problematic" id="id10">`zalarms plugin &lt;http://wiki.domogik.org/plugin\_zalarms&gt;`_</span></a>.</p>
+</div>
+<div class="section" id="adding-a-device-to-interact-with-a-cron-job">
+<h1>Adding a device to interact with a cron job<a class="headerlink" href="#adding-a-device-to-interact-with-a-cron-job" title="Permalink to this headline">¶</a></h1>
+<p>Add a cron.job device from the cron technology. Choose the usage christmas tree.
+You must use the name ( device / cron job) created previously as address (christmas).</p>
+<p>Next add the widgets :
+One for the status and another for the switch (stateless basic widget).
+Now, you can resume or stop the cron job using the On/Off buttons of the widget. When a cron job is stopped, it don&#8217;t send message anymore. But it stays in memory. You can restart it using the resume (on) button.</p>
+<p>Jobs are permanently stored in the plugin So if you want to remove it permanently, you must halt it.
+You can add a halt widget (stateless basic widget) to do it and click the off button. If you have a status widget, you will see it taking the &#8220;halted&#8221; status.
+You can also send an xpl message to halt a job. Loook at the documentation below to do it.</p>
+<blockquote>
+<div>Plugin developpers</div></blockquote>
+<hr class="docutils" />
+<p>The following documentation is for plugin developpers, specially the query_cron library. It can be usefull if you want to planned some events in your plugin.
+How it works
+<strong>*********</strong></p>
+<p>First, you need to create a device (a cron job in the timer.basic schema) with the client library, by sending an xpl message or using the plugin zalarms. Keep in mind that devices always stay in memory, until you halt (remove)  them.
+Here is the step to manage a device.
+#First, you need to start it. That will create the device and activate it.
+#Now, you cant stop it : stop sending messages
+#you can resume it : will send messages again
+#and halt it : this will stop the device and destroy it. You can&#8217;t resume it anymore.</p>
+<div class="section" id="using-the-client-library">
+<h2>Using the client library<a class="headerlink" href="#using-the-client-library" title="Permalink to this headline">¶</a></h2>
+<p>After starting the cron plugin (server) you could use the library to create your cron job inside your plugin.
+I use this library in the dawndusk one. Look at the code with me :</p>
+<p>Import the library
+.. code-block:: json</p>
+<blockquote>
+<div><p>from domogik.xpl.lib.cron_query import cronQuery{CODE}</p>
+<p>Initialize the class</p>
+</div></blockquote>
+<div class="highlight-json"><pre>self._cronQuery = cronQuery(self.myxpl,self.log){CODE}</pre>
+</div>
+<p>Create the message you want to receive
+.. code-block:: json</p>
+<blockquote>
+<div>nstMess = XplMessage()
+nstMess.set_type(&#8220;xpl-trig&#8221;)
+nstMess.set_schema(&#8220;dawndusk.basic&#8221;)
+nstMess.add_data({&#8220;type&#8221; : &#8220;dawndusk&#8221;})
+nstMess.add_data({&#8220;status&#8221; :  &#8220;dawn&#8221;})</div></blockquote>
+<p>And create the cron job
+.. code-block:: json</p>
+<blockquote>
+<div><p>self._cronQuery.startDateJob(&#8220;mydevice&#8221;,nstMess,&#8221;YYYYMMDDHHMMSS&#8221;){CODE}
+You will receive the message at date YYYYMMDDHHMMSS :)</p>
+<p>First case of use : I want to start my christmas tree at 7:00 every morning and stop it at 9:00. In the evening, I want to start it at 17:00 and stop it at 21:00. In the weekend, start it at 10:00 and stop it at 23:00.
+I want to send an on (off) command, using the telldus.basic schema to device TS34
+Here is the message to send</p>
+</div></blockquote>
+<div class="highlight-json"><pre>xpl-cmnd
+timer.basic
+     {
+      action=start
+      device=christmas
+      devicetype=alarm
+      alarm=MoTuWeThFr,07:00-09:00,17:00-21:00
+      alarm=SaSu,10:00-23:00
+      nst-xpltype=xpl-cmnd
+      nst-schema=telldus.basic
+      parameter0=command
+      valueon0=on
+      valueoff0=off
+      nst-device=TS34
+      }</pre>
+</div>
+<p>Second case of use : I want to emulate the dawn in my bedroom using a dimmer
+Start the dawn process at 6:00 in the week. At 7:00, the dimmer will be at 100%.
+Wake up lately in the weekend
+I want to use the device TS35 using the telldus.basic schema.
+Here is the message to send
+xpl-cmnd
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>timer.basic</dt>
+<dd><dl class="first last docutils">
+<dt>{</dt>
+<dd>action=start
+device=wakeup
+devicetype=dawnalarm
+alarm=MoTuWeThFr,06:00-07:00
+alarm=SaSu,09:00-10:00
+nst-xpltype=xpl-cmnd
+nst-schema=telldus.basic
+nst-device=TS35
+}</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="the-different-types-of-jobs">
+<h2>The different types of jobs<a class="headerlink" href="#the-different-types-of-jobs" title="Permalink to this headline">¶</a></h2>
+<p>This plugin use TIMER.BASIC <a href="#id11"><span class="problematic" id="id12">`schema &lt;http://xplproject.org.uk/wiki/index.php?title=Schema\_-\_TIMER&gt;`_</span></a>, and update it ;)</p>
+<p>!!!!The timer
+It works as a heartbeat sending message every &#8216;&#8217;frequence&#8217;&#8217; seconds.
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>def startTimerJob(self, device, nstMess, frequence, duration=0):</dt>
+<dd><p class="first">&#8216;&#8217;&#8217;
+Start a job of type timer
+&#64;param device : the name of the job (=device in xpl)
+timer.basic</p>
+<blockquote class="last">
+<div><dl class="docutils">
+<dt>{</dt>
+<dd>action=start
+device=&lt;name of the timer&gt;
+[devicetype=timer]
+[duration=0 or empty|integer]
+[frequence=integer. 45 by default]</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+</dd>
+</dl>
+</div></blockquote>
+<p>!!!!The date
+Send a message at the specified date.
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>def startDateJob(self, device, nstMess, sdate):</dt>
+<dd><p class="first">&#8216;&#8217;&#8217;
+Start a job of type date
+&#64;param device : the name of the job (=device in xpl)
+timer.basic</p>
+<blockquote class="last">
+<div><blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd>action=start
+device=&lt;name of the timer&gt;
+devicetype=date
+date= the datetime of the job (YYYYMMDDHHMMSS)</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>&#8216;&#8217;&#8216;</p>
+</div></blockquote>
+</dd>
+</dl>
+</div></blockquote>
+<p>!!!!The interval
+A more elaborated heartbeat.
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>def startIntervalJob( self, device, nstMess, weeks=0,days=0,hours=0,</dt>
+<dd><blockquote class="first">
+<div>minutes=0,seconds=0,startdate=None):</div></blockquote>
+<p>&#8216;&#8217;&#8217;
+Start a job of type interval
+&#64;param device : the name of the job (=device in xpl)
+timer.basic</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd>action=start
+device=&lt;name of the timer&gt;
+devicetype=interval
+[weeks=0]
+[days=0]
+[hours=0]
+[minutes=0]
+[seconds=0]
+[startdate=YYYYMMDDHHMMSS]</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p class="last">&#8216;&#8217;&#8216;</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>For a complete description of syntax, look at this <a class="reference external" href="http://packages.python.org/APScheduler/intervalschedule.html">page</a>.</p>
+<p>!!!!The cron like
+The more sophisticated one.
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>def startCronJob( self, device, nstMess, year=None,month=None,day=None,</dt>
+<dd><blockquote class="first">
+<div>week=None,dayofweek=None,hour=None,
+minute=None,second=None,startdate=None):</div></blockquote>
+<p>&#8216;&#8217;&#8217;
+Start a job of type cron
+&#64;param device : the name of the job (=device in xpl)
+timer.basic</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd>action=start
+device=&lt;name of the timer&gt;
+devicetype=cron
+[year= ... ]
+[month= ... ]
+[day= ... ]
+[week= ... ]
+[dayofweek= ... ]
+[hour= ... ]
+[minute= ... ]
+[second= ... ]
+[startdate=YYYYMMDDHHMMSS]</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p class="last">&#8216;&#8217;&#8216;</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>For a complete description of syntax, look at this <a class="reference external" href="http://packages.python.org/APScheduler/cronschedule.html">page</a>.</p>
+<p>!!!!The alarm
+Turn on and off a device.</p>
+<div class="highlight-json"><pre>def startDawnAlarmJob( self, device, nstMess, params={}, alarms=list()):
+    """
+    Start a job of type alarm
+
+    The format of the timer value consists of a list of
+    two-character codes for the days of the week (each code is
+    simply the first two letters of the day) on which the timer
+    will be active (with no delimiters)
+    The second parameter is a simple time or an interval time.
+    If the period is an interval, a valueOn message is sent first and
+    a valueOff is send at the end of te period
+    The time in the form hh:mm using the 24 hour clock.
+
+    For example, for defining one alarm during the week at 6:30 and another
+    for the weekend at 8:00 :
+    You can also create an alarm to turn on your christmas tree twice a day.
+    timer.basic
+       {
+        action=start
+        device=&lt;name of the timer&gt;
+        devicetype=alarm
+        alarm=MoTuWeThFr,09:30
+        alarm=SaSu,08:00
+        alarm=SaSu,08:00,18:00
+        alarm=MoTuWeThFrSaSu,07:00-08:00,17:00-21:00
+     }
+    '''</pre>
+</div>
+<p>!!!!The dawnalarm
+Turn on a light, simulating the dawn
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>def startJobDawnAlarm(self, device):</dt>
+<dd><p class="first">&#8220;&#8221;&#8221;
+Start a job of type dawnalarm
+A dawnalarm emulates the dawn using a dimmer device.</p>
+<p>The format of the timer value consists of a list of
+two-character codes for the days of the week (each code is
+simply the first two letters of the day) on which the timer
+will be active (with no delimiters)
+The second parameter is an interval time : the begin and the end
+of the dawn process.
+The times are in the form hh:mm using the 24 hour clock.
+The next parameters are the dim level of the device
+(from 00 to 99). If none are specified, we use 10,20,...,90</p>
+<p>For example, for defining one alarm starting at 6:00 and
+finishing at 6:30 with 4 status (10,40,70,90)
+and another for the weekend starting at 7:00 ans finishing at 8:00
+with the standard dim levels :
+timer.basic</p>
+<blockquote>
+<div><blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd>action=start
+device=&lt;name of the timer&gt;
+devicetype=dawnalarm
+alarm=MoTuWeThFr,06:00-06:30,10,40,70,90
+alarm=SaSu,07:00-08:00</dd>
+</dl>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p class="last">&#8220;&#8221;&#8220;</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>!!!!The HVAC timer
+Program a timer with the HVAC syntaxe. The full documentation is <a href="#id13"><span class="problematic" id="id14">`here &lt;http://xplproject.org.uk/wiki/index.php?title=Schema\_-\_HVAC&gt;`_</span></a>.
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>startHvacJob( self, device, nstMess, params={}, timers={}):</dt>
+<dd><p class="first">&#8220;&#8221;&#8221;
+Start a job of type hvac
+This schema reports the current timer settings. It is sent as
+an xPL status message if requested by an hvac.request
+with request=timer, or as a trigger message when a timer
+value is changed.</p>
+<p>The timer elements define the days and times on which the
+hvac system will be active. There can be more than one
+timer= element in the message. This allows different time
+periods to be set for different days of the week (for example,
+additional heating at weekends, when the house may be occupied
+for a greater portion of the day).The timer values provided in
+this message replace any previous timer settings, so the message
+contains all the timer information for the zone.</p>
+<p>The format of the timer value consists of a list of
+two-character codes for the days of the week (each code is
+simply the first two letters of the day) on which the timer
+will be active (with no delimiters), followed by a comma
+separated list of time periods. Each time period is formed
+from a start time and end time separated by a hyphen,
+with each time in the form hh:mm using the 24 hour clock.</p>
+<p>For example, for timers defining a morning and evening period
+during the week, and a daytime period at weekends,
+the message could look something like this:</p>
+<dl class="docutils">
+<dt>hvac.timer</dt>
+<dd><dl class="first docutils">
+<dt>{</dt>
+<dd>zone=lounge
+timer=MoTuWeThFr,06:30-09:00,17:00-22:30
+timer=SaSu,08:00-23:00</dd>
+</dl>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>If no timers have been set, then the message will contain
+the zone and a single timer= entry with nothing to the right
+of the equals sign.
+&#64;param device : the name of the job (=device in xpl)
+timer.basic</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd>action=start
+device=&lt;name of the timer&gt;, normally the zone id
+devicetype=hvac
+timer=MoTuWeThFr,06:30-09:00,17:00-22:30
+[timer=SaSu,08:00-23:00]
+[timer=...]
+[valueon1=comfort]
+[valueoff1=economy]</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<dl class="docutils">
+<dt>hvac.timer</dt>
+<dd><dl class="first docutils">
+<dt>{</dt>
+<dd>zone=id
+timer=[SuMoTuWeThFrSa,hh:mm-hh:mm,hh:mm-hh:mm,...etc]
+[timer=]</dd>
+</dl>
+<p class="last">}</p>
+</dd>
+</dl>
+<p class="last">&#8220;&#8221;&#8220;</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="the-different-actions">
+<h2>The different actions<a class="headerlink" href="#the-different-actions" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-json"><pre>def stopJob(self, device):
+        """
+        Stop a device. It could be restarted via a
+        resume command.
+        @param device : the name of the timer
+
+        timer.basic
+        {
+         action=stop
+         device=&lt;name of the timer&gt;
+        }
+        """</pre>
+</div>
+<div class="highlight-json"><pre>def resumeJob(self, device):
+        """
+        Resume a previous stopped device
+        @param device : the name of the timer
+
+        timer.basic
+        {
+         action=resume
+         device=&lt;name of the timer&gt;
+        }
+        """</pre>
+</div>
+<div class="highlight-json"><pre>def haltJob(self, device):
+        """
+        Stop a job and delete the device.
+        @param device : the name of the timer
+        """
+
+        timer.basic
+        {
+         action=halt
+         device=&lt;name of the timer&gt;
+        }</pre>
+</div>
+<div class="highlight-json"><pre>def statusJob(self, device):
+        """
+        Retrieve the status of a device. If it does not
+        exist, report it as halted
+        @param device : the name of the timer
+        """
+
+        timer.basic
+        {
+         action=status
+         device=&lt;name of the timer&gt;
+        }</pre>
+</div>
+</div>
+<div class="section" id="the-nested-message">
+<h2>The nested message :<a class="headerlink" href="#the-nested-message" title="Permalink to this headline">¶</a></h2>
+<p>You must add the message that will be send in the start message of the device.
+This is done by preceding the param name by nst-.
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd>nst-schema=The schema to use
+nst-type=The type of message to send
+parameter0=the name of the first parameter
+valueon0=value on for the first parameter
+valueoff0=value off for the first parameter
+...
+nst_another=another fiel to include</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>Parameters are transmitted using parameterx (0&lt;=x&lt;=3). The values that it can take are transmitted using valueonx and valueoff (0&lt;=x&lt;=3)</p>
+</div>
+<div class="section" id="storage-engine">
+<h2>Storage engine<a class="headerlink" href="#storage-engine" title="Permalink to this headline">¶</a></h2>
+<p>Cron jobs are stored as ConfigParser files in the domogik data directory. If you want to edit them, you must stop the cron plugin before. Keep in mind that when you create a cron job, it will exist until you halt it.</p>
+</div>
+<div class="section" id="interface-develoment">
+<h2>Interface develoment<a class="headerlink" href="#interface-develoment" title="Permalink to this headline">¶</a></h2>
+<p>Specifications are <a href="#id15"><span class="problematic" id="id16">`here|nocache &lt;http://wiki.domogik.org/plugin\_cron\_interface&gt;`_</span></a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Prerequisites</a></li>
+<li><a class="reference internal" href="#install-the-plugin">Install the plugin</a></li>
+<li><a class="reference internal" href="#adding-cron-jobs">Adding cron jobs</a></li>
+<li><a class="reference internal" href="#adding-a-device-to-interact-with-a-cron-job">Adding a device to interact with a cron job</a><ul>
+<li><a class="reference internal" href="#using-the-client-library">Using the client library</a></li>
+<li><a class="reference internal" href="#the-different-types-of-jobs">The different types of jobs</a></li>
+<li><a class="reference internal" href="#the-different-actions">The different actions</a></li>
+<li><a class="reference internal" href="#the-nested-message">The nested message :</a></li>
+<li><a class="reference internal" href="#storage-engine">Storage engine</a></li>
+<li><a class="reference internal" href="#interface-develoment">Interface develoment</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../plugin_cidmodem/plugin_cidmodem.html"
+                        title="previous chapter">Plugin cidmodem</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_cron_interface/plugin_cron_interface.html"
+                        title="next chapter">plugin_cron_interface</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/plugin_cron/plugin_cron.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_cron_interface/plugin_cron_interface.html" title="plugin_cron_interface"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_cidmodem/plugin_cidmodem.html" title="Plugin cidmodem"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

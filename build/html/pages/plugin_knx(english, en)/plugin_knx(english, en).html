@@ -1,0 +1,382 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>plugin_knx(english, en) &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Installation du BCUSDK" href="../plugin_knx/plugin_knx.html" />
+    <link rel="prev" title="Purpose" href="../plugin_karotz/plugin_karotz.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_knx/plugin_knx.html" title="Installation du BCUSDK"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_karotz/plugin_karotz.html" title="Purpose"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="plugin-knx-english-en">
+<h1>plugin_knx(english, en)<a class="headerlink" href="#plugin-knx-english-en" title="Permalink to this headline">¶</a></h1>
+<p>^La traduction de cette page n&#8217;est pas terminée.^</p>
+<p>__Notice : this plugin is still in <a href="#id5"><span class="problematic" id="id6">specication__</span></a></p>
+<p>{maketoc}</p>
+<p>!Protocol
+!!Resource
+* basics explanation : <a class="reference external" href="http://www.openremote.org/display/knowledge/Technical+Overview+of+KNX#TechnicalOverviewofKNX-ETSEngineeringToolSoftware">http://www.openremote.org/display/knowledge/Technical+Overview+of+KNX#TechnicalOverviewofKNX-ETSEngineeringToolSoftware</a></p>
+<p>!!Général
+* A sender (switch, sensor, etc...) can send only one group address.
+* An actuator can be in several address group.
+* Group address represent orders or informations. In fact, it&#8217;s a link between senders and receivers.</p>
+<p>!Installation of BCUSDK</p>
+<p>BCUSDK contains tools to establish the communication between computer and bus via an interface</p>
+<p>ubuntu users
+Installation from launchpad
+Add
+{CODE()}
+deb <a class="reference external" href="http://ppa.launchpad.net/mkoegler/bcusdk/ubuntu">http://ppa.launchpad.net/mkoegler/bcusdk/ubuntu</a> YOUR_UBUNTU_VERSION_HERE main
+deb-src <a class="reference external" href="http://ppa.launchpad.net/mkoegler/bcusdk/ubuntu">http://ppa.launchpad.net/mkoegler/bcusdk/ubuntu</a> YOUR_UBUNTU_VERSION_HERE</p>
+<p>to your source.list
+sudo apt-get update
+sudo apt-get install bcusdk
+{CODE}</p>
+<p>Else
+{CODE()}
+Install php5 via synaptic
+apt-get install gcc
+apt-get install g++
+apt-get install make
+apt-get install libmysqlclient15-dev</p>
+<p>wget <a class="reference external" href="http://sourceforge.net/projects/bcusdk/files/pthsem/pthsem_2.0.8.tar.gz">http://sourceforge.net/projects/bcusdk/files/pthsem/pthsem_2.0.8.tar.gz</a>
+wget <a class="reference external" href="http://sourceforge.net/projects/bcusdk/files/bcusdk/bcusdk_0.0.5.tar.gz">http://sourceforge.net/projects/bcusdk/files/bcusdk/bcusdk_0.0.5.tar.gz</a>
+tar -xzf pthsem_2.0.7.tar.gz
+tar -xzf bcusdk_0.0.5.tar.gz</p>
+<p>cd pthsem-2.0.7/
+./configure
+make
+make test
+make install
+export LD_LIBRARY_PATH=/usr/local/lib</p>
+<p>cd ..
+cd bcusdk-0.0.4/
+./configure &#8211;enable-onlyeibd &#8211;enable-eibnetiptunnel &#8211;enable-usb &#8211; enable-eibnetipserver &#8211;enable-ft12
+make
+make install
+{CODE}</p>
+<p>EIBD is ready to work</p>
+<p>Error: In my installation with Ubuntu server 11.04, I had the following error when starting eibd:
+... error loading libraries: libpthsem.so.20 ....</p>
+<p>The answer is:</p>
+<p>The command ldd /usr/local/bin/eibd display the libraries used by eibd and their location. The line libpthsem.so.20 display not found</p>
+<p>Check that libpthsem.so.20 is present in /usr/local/lib
+Edit the file /etc/ld.so.conf and add the line:
+include /usr/local/lib</p>
+<p>Save and quit</p>
+<p>As root do ldconfig</p>
+<p>restart ldd /usr/local/bin/eibd and this time the path must be correct and eibd will work correctly.</p>
+<p>!!Fonctions
+Les fonctions suivantes sont utilisable avec eibd:
+groupsocketlisten: éoute le trafic bus en permance
+groupwrite, groupswrite: écrit des données sur le bus
+groupread: demande une valeur d&#8217;une adresse de groupe
+groupresponse, groupsresponse: répond à une demande de valeur</p>
+<p>les &#8216;s&#8217; dans les fonctions correspondent à des données courtes, l&#8217;absence de s indique une donnée longue.</p>
+<p>!!Messages
+Les messages sont constitués de:</p>
+<p>L&#8217;adresse de l&#8217;émetteur (séparé par des .)
+L&#8217;adresse de groupe (séparé par de /)
+Des données (ordre ou état)</p>
+<ul class="simple">
+<li>L&#8217;adresse de l&#8217;émetteur est l&#8217;adresse physique</li>
+<li>L&#8217;adresse de groupe indique à qui est destiné le message,(sauf en mode prog).</li>
+</ul>
+<p>Par exemple, je veux allumer 5 ampoules avec un interrupteur, je les joins tous par la même adresse de groupe.
+Mon interrupteur envoie donc 1 sur l&#8217;adresse de groupe A/B/C, tous les participants voient passer le télégramme, et les ampoules avec l&#8217;adresse de groupe A/B/C s&#8217;allument.</p>
+<p>Les sorties d&#8217;état ainsi que les informations type températures sont diffusées de la même manière.
+Dans l&#8217;exemple précédent, l&#8217;ampoule 1 peut par exemple envoyer son état en B/B/C à chaque modification ou sur demande.</p>
+<p>exemple de message vue par groupsocketlisten d&#8217;EIBD ou 1/1/1 est un groupe qui commande une sortie A et ou le groupe 2/1/1 est le groupe d&#8217;état de cette sortie
+{CODE()}
+Read from 1.2.1 to 2/1/1   # le module 1.2.1 demande l&#8217;état du groupe 2/1/1 qui est l&#8217;état de ma lampe</p>
+<p>Response from 1.1.2 to 2/1/1: 01 # le module 1.1.2 répond que le 2/1/1 est a 1</p>
+<p>Write from 1.2.1 to 1/1/1: 00 # 1.2.1 en déduit que l&#8217;action a faire est de mettre a 0 la lampe en commandant le groupe de commande 1/1/1</p>
+<p>Write from 1.1.2 to 2/1/1: 00 # le module répond donc en écrivant le groupe 2/1/1 est a 0
+{CODE}</p>
+<p>!!Type de message
+<a href="#id1"><span class="problematic" id="id2">*</span></a>s : short : moins de 6 bits
+<a href="#id3"><span class="problematic" id="id4">*</span></a>l : long : jusqu&#8217;à 3 octets</p>
+<p>!!!short
+Utiliser __groupswrite__.</p>
+<p>en shell:
+{CODE()}
+groupswrite ip:127.0.0.1 1/1/1 1
+{CODE}
+Écrit la valeur 1 dans un message de moins de 6bits sur le groupe 1/1/1
+!!!long
+Utiliser __groupwrite__.
+{CODE()}
+groupwrite ip:127.0.0.1 1/1/1 1
+{CODE}
+Écrit la valeur 1 dans un message de plus de 6bits sur le groupe 1/1/1</p>
+<p>!!Variation
+La variation est une commande &amp;quot;+&amp;quot; ou &amp;quot;-&amp;quot; suivie d&#8217;une commande d&#8217;arrêt. A ne pas utiliser depuis l&#8217;UI donc.
+Privilégier les pourcentages.</p>
+<p>!!Comment faire la différence entre un on/off, une montée descente, etc ?
+Il n&#8217;y a pas de différence, la donnée est la même. Si une adresse de groupe contient un volet et un éclairage, l&#8217;envoi d&#8217;un 1 sur cette adresse provoquera l&#8217;allumage de la lumière et la descente du volet.</p>
+<p>Un on/off c&#8217;est 0 ou 1
+Monter descente c&#8217;est 0 ou 1</p>
+<p>Varier la lumière + c&#8217;est 09 la lumière augmente jusqu&#8217;à ce qu&#8217;on envoie un 08
+Varier la lumière - c&#8217;est 01 puis 00 ces 2 message sont en type s
+mais on peux aussi envoyer la valeur en % mais ce n&#8217;est pas géré par la même adresse de groupe. Même si c&#8217;est la même sortie et c&#8217;est un message de type long.</p>
+<p>Les groupes sont des commandes ou des informations.
+Par exemple, sur un module de sortie, il est possible de déclencher un allumage ou un allumage-minuterie, en commandant 2 adresses de groupe différente. Par contre l&#8217;adresse de groupe qui indique l&#8217;état de la lampe sera la même dans les deux cas.</p>
+<p>ex:
+Pour l&#8217;allumage simple envoie 1 à l&#8217;adresse 1/2/3
+Pour l&#8217;allumage-minuterie envoie 1 à l&#8217;adresse 1/2/4
+L&#8217;état de la lampe sera toujours envoyé en 1/3/3</p>
+<p>!Eibd et interactions avec Eibd
+!!Ressources
+* <a class="reference external" href="http://wiki.erazor-zone.de/wiki:projects:linux:eib">http://wiki.erazor-zone.de/wiki:projects:linux:eib</a></p>
+<p>!Tools
+!!Wireshark
+* <a class="reference external" href="https://www.auto.tuwien.ac.at/a-lab/wireshark-plugin-for-knxnet/ip.html">https://www.auto.tuwien.ac.at/a-lab/wireshark-plugin-for-knxnet/ip.html</a></p>
+<p>commandes en shell d&#8217;EIBD:
+groupsocketlisten: affiche tous les messages passant sur le bus jusqu&#8217;à interruption.</p>
+<p>Les messages sont du type:
+&amp;quot;Write from X.Y.Z to X/Y/Z: Value&amp;quot;
+or
+&amp;quot;Read from X.Y.Z to X/Y/Z&amp;quot;</p>
+<p>&amp;quot;Response from X.Y.Z to X/Y/Z: Value&amp;quot;</p>
+<p>groupwrite: envoi un message sur le bus et acquitte avec un:&amp;quot;Send request&amp;quot; puis termine.</p>
+<p>Nota: les messages envoyé via le localhost et lu par le localhost on l&#8217;adresse 0.0.0 si le message est envoyé par une autre machine via l&#8217;interface il prend l&#8217;adresse physique de l&#8217;interface.
+Par exemple si 2 serveurs contrôlent le bus (1 de gestion et 1 de visualisation)</p>
+<p>!DPT les plus utilisés</p>
+<blockquote>
+<div><ul class="simple">
+<li>1.001: switching (on/off) (EIS1)</li>
+</ul>
+</div></blockquote>
+<p>&#8211;    * 3.007: dimming (control of dimmer using up/down/stop) (EIS2)&#8211; Ne pas utilisé dans domogik, en fonction du lag commande incertaine
+&#8211;    * 3.008: blinds (control of blinds using close/open/stop)&#8211; Idem ci dessus</p>
+<blockquote>
+<div><ul class="simple">
+<li>5.xxx: 8bit unsigned integer (from 0 to 255) (EIS6)</li>
+<li>5.001: scaling (from 0 to 100%)</li>
+<li>5.003: angle (from 0 to 360°)</li>
+<li>6.xxx: 8bit signed integer (EIS14)</li>
+<li>7.xxx: 16bit unsigned integer (EIS10)</li>
+<li>8.xxx: 16bit signed integer</li>
+<li>9.xxx: 16 bit floating point number (EIS5)</li>
+<li>10.001: time (EIS3)</li>
+<li>11.001: date (EIS4)</li>
+<li>12.xxx: 32bit unsigned integer (EIS11)</li>
+<li>13.xxx: 32bit signed integer</li>
+<li>14.xxx: 32 bit IEEE 754 floating point number</li>
+<li>16.000: string (max 14 ASCII char) (EIS15)</li>
+<li>20.102: heating mode (comfort/standby/night/frost)</li>
+</ul>
+</div></blockquote>
+<p>!Schéma xpl</p>
+<ul class="simple">
+<li>xpl-cmnd : utilisé pour exécuter une commande sur le bus : Write,Read,Response</li>
+<li>xpl-trig : utilisé quand la boucle eibd &amp;quot;write&amp;quot; reçoit des &amp;quot;write&amp;quot; (Changement d&#8217;état) ou une confirmation de commande</li>
+<li>xpl-stat : utilisé quand eibd reçoit un message de type &amp;quot;Responce&amp;quot; (retour d&#8217;un état)</li>
+</ul>
+<p>On remplace les / séparateurs de l&#8217;adresse de groupe par : afin d&#8217;éviter les problèmes avec rest.</p>
+<p>!!xpl-cmnd
+{CODE()}
+xpl-cmnd
+{
+...
+}
+knx.basic
+{
+command=&amp;lt;commande knx : Write,Read ou Response&amp;gt;
+group=&amp;lt;addrese du groupe à qui on envoie la commande&amp;gt;
+type=&amp;lt;s|l : short ou long ou none pour un read&amp;gt;
+data: &amp;lt;valeur si write none si read&amp;gt;
+}
+{CODE}</p>
+<p>Exemple :
+{CODE()}
+xpl-cmnd
+{
+hop=1
+source=xpl-knx.domogikserver
+target=*
+}
+knx.basic
+{
+command=Write
+group=1:1:1
+type=s
+data=1
+}
+{CODE}</p>
+<p>{CODE()}
+xpl-cmnd
+{
+hop=1
+source=xpl-knx.domogikserver
+target=*
+}
+knx.basic
+{
+command=Read
+group=1:1:1
+type=none
+data=none
+}
+{CODE}</p>
+<p>!!xpl-cmnd
+{CODE()}
+xpl-cmnd
+{
+...
+}
+knx.basic
+{
+command=&amp;lt;Write, Write ack, Read, Read ack, Response, Response ack&amp;gt; ack est ajouté pour identifier un ack a d&#8217;un xpl-cmnd
+group=&amp;lt;addresse du groupe émettant la réponse&amp;gt;
+type=&amp;lt;s|l : short ou long&amp;gt;
+data=&amp;lt;valeur de la donnée
+}
+{CODE}</p>
+<p>Exemple :
+{CODE()}
+xpl-trig
+{
+hop=1
+source=xpl-knx.domogikserver
+target=*
+}
+knx.basic
+{
+command=Write
+group=1:1:1
+type=s
+data=00
+}
+{CODE}</p>
+<p>!!xpl-stat
+{CODE()}
+xpl-stat
+{
+...
+}
+knx.basic
+{
+command=&amp;lt;Responce&amp;gt;
+group=&amp;lt;addresse du groupe émettant la réponse&amp;gt;
+type=&amp;lt;s|l : short ou long&amp;gt;
+data=&amp;lt;valeur de la donnée
+}
+{CODE}</p>
+<p>Exemple :
+{CODE()}
+xpl-stat
+{
+hop=1
+source=xpl-knx.domogikserver
+target=*
+}
+knx.basic
+{
+command=Response
+group=1:1:1
+type=s
+data=00
+}
+{CODE}</p>
+<p>((plugin_knx_exemple|Des exemples içi))</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../plugin_karotz/plugin_karotz.html"
+                        title="previous chapter">Purpose</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_knx/plugin_knx.html"
+                        title="next chapter">Installation du BCUSDK</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/plugin_knx(english, en)/plugin_knx(english, en).txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_knx/plugin_knx.html" title="Installation du BCUSDK"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_karotz/plugin_karotz.html" title="Purpose"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

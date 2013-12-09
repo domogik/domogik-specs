@@ -1,0 +1,153 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plugin xpl_time &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Purpose" href="../plugin_yweather/plugin_yweather.html" />
+    <link rel="prev" title="plugin_xpl2ser" href="../plugin_xpl2ser/plugin_xpl2ser.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_yweather/plugin_yweather.html" title="Purpose"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_xpl2ser/plugin_xpl2ser.html" title="plugin_xpl2ser"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="plugin-xpl-time">
+<h1>Plugin xpl_time<a class="headerlink" href="#plugin-xpl-time" title="Permalink to this headline">¶</a></h1>
+<p>This plugin documentation is now available on [<a class="reference external" href="http://docs.domogik.org/plugin/xpl_time/dev/en/">http://docs.domogik.org/plugin/xpl_time/dev/en/</a>]</p>
+</div>
+<div class="section" id="developper-notes">
+<h1>Developper notes<a class="headerlink" href="#developper-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="xpl-schema">
+<h2>xPL schema<a class="headerlink" href="#xpl-schema" title="Permalink to this headline">¶</a></h2>
+<p>The [DATETIME.BASIC schema|http://xplproject.org.uk/wiki/index.php?title=Schema_-_DATETIME.BASIC] is used by this plugin.</p>
+<p>Example :
+.. code-block:</p>
+<div class="highlight-python"><pre>xpl-trig
+{
+...
+}
+datetime.basic
+{
+datetime=20110308115010
+date=20110308
+time=115010
+format1=201103081150101
+}</pre>
+</div>
+<ul class="simple">
+<li>datetime : &lt;yyyymmddhhmmss&gt;</li>
+<li>date : &lt;yyyymmdd&gt;</li>
+<li>time : &lt;hhmmss&gt;</li>
+<li>format1 : &lt;yyyymmddhhmmss+weekday&gt;</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Plugin xpl_time</a></li>
+<li><a class="reference internal" href="#developper-notes">Developper notes</a><ul>
+<li><a class="reference internal" href="#xpl-schema">xPL schema</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../plugin_xpl2ser/plugin_xpl2ser.html"
+                        title="previous chapter">plugin_xpl2ser</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_yweather/plugin_yweather.html"
+                        title="next chapter">Purpose</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/plugin_xpl_time/plugin_xpl_time.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_yweather/plugin_yweather.html" title="Purpose"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_xpl2ser/plugin_xpl2ser.html" title="plugin_xpl2ser"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

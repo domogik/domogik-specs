@@ -1,0 +1,391 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Specifications for the Repository &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="How to secure UI+REST API access" href="../Spec_security_ui/Spec_security_ui.html" />
+    <link rel="prev" title="Specifications : packages repository" href="../Spec_packages_repository/Spec_packages_repository.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Spec_security_ui/Spec_security_ui.html" title="How to secure UI+REST API access"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Spec_packages_repository/Spec_packages_repository.html" title="Specifications : packages repository"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="specifications-for-the-repository">
+<h1>Specifications for the Repository<a class="headerlink" href="#specifications-for-the-repository" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="terms">
+<h2>Terms<a class="headerlink" href="#terms" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>package : any component packaged that could be stored in the repository. Example : a plugin, a widget, an icon pack, etc</li>
+</ul>
+</div>
+<div class="section" id="needs">
+<h2>Needs<a class="headerlink" href="#needs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-do-we-need-to-store-in-the-repository">
+<h3>What do we need to store in the repository ?<a class="headerlink" href="#what-do-we-need-to-store-in-the-repository" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>plugins</li>
+<li>web ui widgets</li>
+<li>icons pack</li>
+<li>web ui themes</li>
+</ul>
+</div>
+<div class="section" id="domogik-releases">
+<h3>Domogik Releases<a class="headerlink" href="#domogik-releases" title="Permalink to this headline">¶</a></h3>
+<p>The plugin repository should offer packages for several Domogik releases :
+* last version (old stable)
+* actual (stable)
+* unstable (development version)
+* experimental (proof of concepts, etc)</p>
+</div>
+<div class="section" id="multiple-repositories">
+<h3>Multiple repositories<a class="headerlink" href="#multiple-repositories" title="Permalink to this headline">¶</a></h3>
+<p>We would like to allow multiple repositories for the following needs :
+* make mirrors
+* allow external people/companies to have their own repositories with their own plugins</p>
+<p>With all these repositories, we would like to be able to :
+* synchronize a repository with another one (mirror feature)
+* use several repositories at the same time on one domogik client. Example : a developer will use official Domogik repository for common plugins and his own repository for his plugins
+* indicate priorities in the list of used repositories (in case a package is available in 2 different repositories)</p>
+</div>
+<div class="section" id="technology">
+<h3>Technology<a class="headerlink" href="#technology" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>HTTP seems the easiest way to provide files</li>
+</ul>
+</div>
+<div class="section" id="dependencies">
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h3>
+<p>Should we implement dependencies? Maybe it is too early for that :)</p>
+</div>
+<div class="section" id="logic">
+<h3>Logic<a class="headerlink" href="#logic" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>downgrading a package should generate an explicit warning before installing (we should allow to downgrade for test/development purposes)</li>
+<li>when an xml file (share/domogik/<a href="#id1"><span class="problematic" id="id2">*</span></a>) already exists, the choice is given to the user</li>
+</ul>
+</div>
+</div>
+<div class="section" id="repository">
+<h2>Repository<a class="headerlink" href="#repository" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="tree">
+<h3>Tree<a class="headerlink" href="#tree" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-json"><pre>/&lt;release&gt;/&lt;category&gt;/&lt;package name&gt;.tgz   # package
+                      &lt;package name&gt;.txt   # package description</pre>
+</div>
+<p>Example :
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>/stable/</dt>
+<dd><dl class="first docutils">
+<dt>plugins/</dt>
+<dd>onewire.tgz
+onewire.txt
+cidmodem.tgz
+cidmodem.txt
+...</dd>
+<dt>web-ui-widgets/</dt>
+<dd>dmg_1x1_basicActuatorBinary.tgz
+dmg_1x1_basicActuatorBinary.txt
+dmg_1x1_basicSensorNumber.tgz
+dmg_1x1_basicSensorNumber.txt
+...</dd>
+</dl>
+<p class="last">...</p>
+</dd>
+<dt>/dev/</dt>
+<dd><dl class="first last docutils">
+<dt>plugins/</dt>
+<dd>xbmc.tgz
+xbmc.txt</dd>
+<dt>web-ui-widgets/</dt>
+<dd>dmg_4x4_xbmcPlaylist.tgz
+dmg_4x4_xbmcPlaylist.txt</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="package-description-file">
+<h3>Package description file<a class="headerlink" href="#package-description-file" title="Permalink to this headline">¶</a></h3>
+<p>Example :
+.. code-block:: json</p>
+<blockquote>
+<div>plugin_type = plugin        # plugin, web-ui-widget, etc
+plugin_name = onewire
+plugin_version = 0.1
+plugin_longname = Onewire support
+plugin_description = Bla bla bla bli bli bli blo blo blo</div></blockquote>
+</div>
+<div class="section" id="package-file">
+<h3>Package file<a class="headerlink" href="#package-file" title="Permalink to this headline">¶</a></h3>
+<p>!!!!Tree
+The structure is the same than in the sources. Example for a type &#8216;&#8217;plugin&#8217;&#8217; :
+.. code-block:: json</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>share/</dt>
+<dd><dl class="first last docutils">
+<dt>domogik/</dt>
+<dd><dl class="first last docutils">
+<dt>plugins/</dt>
+<dd>myplugin.xml</dd>
+<dt>stats/</dt>
+<dd><dl class="first last docutils">
+<dt>myplugintechnology/</dt>
+<dd>xpl.schema1.xml
+xpl.schema2.xml
+...</dd>
+</dl>
+</dd>
+<dt>url2xpl/</dt>
+<dd><dl class="first last docutils">
+<dt>myplugintechnology/</dt>
+<dd>command1.xml
+command2.xml
+...</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt>domogik/</dt>
+<dd><dl class="first last docutils">
+<dt>xpl/</dt>
+<dd><dl class="first last docutils">
+<dt>bin/</dt>
+<dd>myplugin.py</dd>
+<dt>lib/</dt>
+<dd>mypluginlib1.py
+mypluginlib2.py</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="client-configuration-files">
+<h3>Client configuration files<a class="headerlink" href="#client-configuration-files" title="Permalink to this headline">¶</a></h3>
+<p>!!!!/etc/domogik/sources.list
+An update tool has to be developed to update local repository
+Example :
+.. code-block:: json</p>
+<blockquote>
+<div># priority      url
+# (0..1000)     http(s)://&lt;server&gt;/&lt;release&gt;
+500             <a class="reference external" href="http://repo.domogik.org/stable">http://repo.domogik.org/stable</a>
+100             <a class="reference external" href="http://repo.domogik.org/dev">http://repo.domogik.org/dev</a>
+900             <a class="reference external" href="http://myownrepo.com/dev">http://myownrepo.com/dev</a></div></blockquote>
+<p>Here, an example for a developper :
+* first line : the official stable repository
+* second line : the official development repository
+* third line : the developper repository</p>
+</div>
+<div class="section" id="repository-configuration-files">
+<h3>Repository configuration files<a class="headerlink" href="#repository-configuration-files" title="Permalink to this headline">¶</a></h3>
+<p>A tool (launched with crontab) has to be developed to manage a repository sync.
+Example :
+.. code-block:: json</p>
+<blockquote>
+<div>[old-stable]
+sync = disabled
+[stable]
+sync = enabled
+master = <a class="reference external" href="http://repo.domogik.org/stable">http://repo.domogik.org/stable</a>
+[dev]
+sync = enabled
+master = <a class="reference external" href="http://repo.domogik.org/dev">http://repo.domogik.org/dev</a></div></blockquote>
+</div>
+</div>
+<div class="section" id="packager-tools">
+<h2>Packager tools<a class="headerlink" href="#packager-tools" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="creator">
+<h3>Creator<a class="headerlink" href="#creator" title="Permalink to this headline">¶</a></h3>
+<p>Parameters :
+* hg version
+* plugin name</p>
+</div>
+<div class="section" id="installer">
+<h3>Installer<a class="headerlink" href="#installer" title="Permalink to this headline">¶</a></h3>
+<p>Features :
+* update local repository
+* upgrade packages
+* search
+* show details
+* install</p>
+</div>
+</div>
+<div class="section" id="ui-interaction">
+<h2>UI interaction<a class="headerlink" href="#ui-interaction" title="Permalink to this headline">¶</a></h2>
+<p>At the end, it would be nice to allow the web UI to be able to install packages and update them.</p>
+</div>
+<div class="section" id="roadmap">
+<h2>Roadmap<a class="headerlink" href="#roadmap" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="release-1">
+<h3>Release 1<a class="headerlink" href="#release-1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Create package creator</li>
+<li>Create package installer</li>
+</ul>
+</div>
+<div class="section" id="release-2">
+<h3>Release 2<a class="headerlink" href="#release-2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Create first repository</li>
+<li>Set configuration files format</li>
+<li>Use only one repository</li>
+<li>Create update tool</li>
+<li>Create search/show tool</li>
+<li>Create install tool</li>
+<li>Create upgrade tool</li>
+</ul>
+</div>
+<div class="section" id="release-3">
+<h3>Release 3<a class="headerlink" href="#release-3" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Create synchronisation tool</li>
+<li>Allow several repositories</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Specifications for the Repository</a><ul>
+<li><a class="reference internal" href="#terms">Terms</a></li>
+<li><a class="reference internal" href="#needs">Needs</a><ul>
+<li><a class="reference internal" href="#what-do-we-need-to-store-in-the-repository">What do we need to store in the repository ?</a></li>
+<li><a class="reference internal" href="#domogik-releases">Domogik Releases</a></li>
+<li><a class="reference internal" href="#multiple-repositories">Multiple repositories</a></li>
+<li><a class="reference internal" href="#technology">Technology</a></li>
+<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#logic">Logic</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#repository">Repository</a><ul>
+<li><a class="reference internal" href="#tree">Tree</a></li>
+<li><a class="reference internal" href="#package-description-file">Package description file</a></li>
+<li><a class="reference internal" href="#package-file">Package file</a></li>
+<li><a class="reference internal" href="#client-configuration-files">Client configuration files</a></li>
+<li><a class="reference internal" href="#repository-configuration-files">Repository configuration files</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#packager-tools">Packager tools</a><ul>
+<li><a class="reference internal" href="#creator">Creator</a></li>
+<li><a class="reference internal" href="#installer">Installer</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ui-interaction">UI interaction</a></li>
+<li><a class="reference internal" href="#roadmap">Roadmap</a><ul>
+<li><a class="reference internal" href="#release-1">Release 1</a></li>
+<li><a class="reference internal" href="#release-2">Release 2</a></li>
+<li><a class="reference internal" href="#release-3">Release 3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Spec_packages_repository/Spec_packages_repository.html"
+                        title="previous chapter">Specifications : packages repository</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Spec_security_ui/Spec_security_ui.html"
+                        title="next chapter">How to secure UI+REST API access</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Spec_repository/Spec_repository.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Spec_security_ui/Spec_security_ui.html" title="How to secure UI+REST API access"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Spec_packages_repository/Spec_packages_repository.html" title="Specifications : packages repository"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

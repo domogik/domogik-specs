@@ -1,0 +1,308 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Purpose &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Status" href="../plugin_gagenda/plugin_gagenda.html" />
+    <link rel="prev" title="Purpose" href="../plugin_diskfree/plugin_diskfree.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_gagenda/plugin_gagenda.html" title="Status"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_diskfree/plugin_diskfree.html" title="Purpose"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="purpose">
+<h1>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h1>
+<p>This plugin was design to control foscam camera relay command.</p>
+<p>{img fileId=&#8221;272&#8221; thumb=&#8221;y&#8221; rel=&#8221;box[g]&#8221; title=&#8221;foscam photo&#8221; alt=&#8221;foscam photo&#8221;}</p>
+<p>Right now this plugin was tested with :
+* FI8908W
+* But should work with all fosam equiped with relay command.</p>
+</div>
+<div class="section" id="prerequisite">
+<h1>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this headline">¶</a></h1>
+<p>Domogik server should be able to access the foscam camera using http protocol. So be sure to open firewall if necessary.</p>
+<p>This plugin doesn&#8217;t use any specific python package.</p>
+<p>plug your relay on pin 1 and 2 according to this picture :
+{img fileId=&#8221;273&#8221; thumb=&#8221;y&#8221; rel=&#8221;box[g]&#8221; title=&#8221;foscam relay&#8221; alt=&#8221;foscam relay&#8221;}</p>
+</div>
+<div class="section" id="plugin-configuration">
+<h1>Plugin configuration<a class="headerlink" href="#plugin-configuration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="enabling-plugin">
+<h2>Enabling plugin<a class="headerlink" href="#enabling-plugin" title="Permalink to this headline">¶</a></h2>
+<p>You can enable plugin by using :
+.. code-block:: json</p>
+<blockquote>
+<div>dmgenplug foscam</div></blockquote>
+<p>You just have to reload administration page to see the plugin in the list.</p>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>In Domogik administration, go to foscam configuration page.
+The plugin is preconfigured with an example :</p>
+<p>{img fileId=&#8221;271&#8221; thumb=&#8221;y&#8221; rel=&#8221;box[g]&#8221; title=&#8221;foscam plugin&#8221; alt=&#8221;foscam plugin&#8221;}</p>
+<div class="section" id="name">
+<h3>Name<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h3>
+<p>Give a name to each camera you add, this name will be the adress device.</p>
+</div>
+<div class="section" id="ip">
+<h3>Ip<a class="headerlink" href="#ip" title="Permalink to this headline">¶</a></h3>
+<p>Could also be a dns name</p>
+</div>
+<div class="section" id="port">
+<h3>port<a class="headerlink" href="#port" title="Permalink to this headline">¶</a></h3>
+<p>use to reach the cam, default on is already 80.</p>
+</div>
+<div class="section" id="user-amp-password">
+<h3>user &amp;amp; password<a class="headerlink" href="#user-amp-password" title="Permalink to this headline">¶</a></h3>
+<p>It&#8217;s recommend not to use &#8220;admin&#8221;, so i suggest you to create a new one from your foscam camera web site, and set a password too !</p>
+</div>
+<div class="section" id="delay">
+<h3>delay<a class="headerlink" href="#delay" title="Permalink to this headline">¶</a></h3>
+<p>I implement this command for my special need, i will explain it a little later on this page, probably you never use it, so you could leave the default value for now (5).</p>
+<p>Don&#8217;t forget to save your configuration...</p>
+</div>
+</div>
+<div class="section" id="device">
+<h2>Device<a class="headerlink" href="#device" title="Permalink to this headline">¶</a></h2>
+<p>Now it&#8217;s time to create a device, stay in the administration section, but move to Organisation/Devices. On the Devices List, hit &#8220;+&#8221; .</p>
+<p>{img fileId=&#8221;270&#8221; thumb=&#8221;y&#8221; rel=&#8221;box[g]&#8221; title=&#8221;Device
+&#8221; alt=&#8221;Device&#8221;}</p>
+<div class="section" id="id1">
+<h3>Name<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Enter the name of your choice</p>
+</div>
+<div class="section" id="address">
+<h3>Address<a class="headerlink" href="#address" title="Permalink to this headline">¶</a></h3>
+<p>Rewrite exatly the plugin interface name your had enter in the previous chapter.</p>
+</div>
+<div class="section" id="feature">
+<h3>Feature<a class="headerlink" href="#feature" title="Permalink to this headline">¶</a></h3>
+<p>Choose Foscam Camera and Relay</p>
+</div>
+<div class="section" id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
+<p>Choose the icon you want.</p>
+</div>
+<div class="section" id="description-amp-reference">
+<h3>Description &amp;amp; Reference<a class="headerlink" href="#description-amp-reference" title="Permalink to this headline">¶</a></h3>
+<p>Not use.</p>
+</div>
+</div>
+<div class="section" id="start-plugin">
+<h2>Start plugin<a class="headerlink" href="#start-plugin" title="Permalink to this headline">¶</a></h2>
+<p>So go back to the plugin configuraion and start the plugin (start button).</p>
+</div>
+<div class="section" id="place-the-widget">
+<h2>place the widget<a class="headerlink" href="#place-the-widget" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Switch</div></blockquote>
+<hr class="docutils" />
+<p>Move to Organisation / Widgets
+Select the aera where you want to see the widget, a windows should appear, where you should see all your devices. Select the foscam device, switch and Basic widget.</p>
+<p>{img fileId=&#8221;269&#8221; thumb=&#8221;y&#8221; rel=&#8221;box[g]&#8221; title=&#8221;Widget placement&#8221; alt=&#8221;Widget placement&#8221;}</p>
+<p>You should go back to visualisation mode and  your widget sould work.</p>
+<p>In this example I made you select a switch widget which is an actuator LOW(open)/HIGH(close), each time you hit it, the relay switch from Open to Close to Open...etc</p>
+<blockquote>
+<div>Trigger</div></blockquote>
+<hr class="docutils" />
+<p>In some case relay should only be in contact for a specific duration. I implement Pulse command for this need.
+If you need a such thing, folow the switch paragraph, just select trigger instead of switch.
+Each time you hit the widget, your relay will be in contact and after a delay, release.This delay can be set in the plugin configuration page.</p>
+</div>
+</div>
+<div class="section" id="developper-notes">
+<h1>Developper Notes<a class="headerlink" href="#developper-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="xpl-schema">
+<h2>xPL schema<a class="headerlink" href="#xpl-schema" title="Permalink to this headline">¶</a></h2>
+<p>No official xPL Schema exists for Foscam. A dedicated schema has been made for this feature.
+<a class="reference external" href="http://xplproject.org.uk/forums/viewtopic.php?f=2&amp;amp;t=908&amp;amp;">Discussion on official xPL Forum about this xPL schema</a></p>
+<div class="section" id="xpl-cmnd">
+<h3>xpl-cmnd<a class="headerlink" href="#xpl-cmnd" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-json"><pre>{
+hop=1
+source=xpl-rest.domogik
+target=*
+}
+control.basic
+{
+current=HIGH
+device=Camera1
+type=output
+}</pre>
+</div>
+</div>
+<div class="section" id="xpl-trig">
+<h3>xpl-trig<a class="headerlink" href="#xpl-trig" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-json"><pre>{
+hop=1
+source=xpl-foscam.machine_name
+target=*
+}
+sensor.basic
+{
+device=Camera1
+type=output
+current=HIGH
+}</pre>
+</div>
+</div>
+<div class="section" id="command">
+<h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
+<p>Manual command example, assuming your usercode is &#8220;FF&#8221;</p>
+<p>First go to ~/domogik/src/domogik/xpl/bin/</p>
+<ul class="simple">
+<li>Turn HIGH Camera1 relay :</li>
+</ul>
+<div class="highlight-json"><pre>python ./send.py xpl-cmnd sensor.basic "device=Camera1,type=output,current=HIGH"</pre>
+</div>
+<ul class="simple">
+<li>Turn LOW Camera1 relay :</li>
+</ul>
+<div class="highlight-json"><pre>python ./send.py xpl-cmnd sensor.basic "device=Camera1,type=output,current=LOW"</pre>
+</div>
+<ul class="simple">
+<li>Turn PULSE Camera1 relay :</li>
+</ul>
+<div class="highlight-json"><pre>python ./send.py xpl-cmnd sensor.basic "device=Camera1,type=output,current=PULSE"</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Purpose</a></li>
+<li><a class="reference internal" href="#prerequisite">Prerequisite</a></li>
+<li><a class="reference internal" href="#plugin-configuration">Plugin configuration</a><ul>
+<li><a class="reference internal" href="#enabling-plugin">Enabling plugin</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li><a class="reference internal" href="#name">Name</a></li>
+<li><a class="reference internal" href="#ip">Ip</a></li>
+<li><a class="reference internal" href="#port">port</a></li>
+<li><a class="reference internal" href="#user-amp-password">user &amp;amp; password</a></li>
+<li><a class="reference internal" href="#delay">delay</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#device">Device</a><ul>
+<li><a class="reference internal" href="#id1">Name</a></li>
+<li><a class="reference internal" href="#address">Address</a></li>
+<li><a class="reference internal" href="#feature">Feature</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#description-amp-reference">Description &amp;amp; Reference</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#start-plugin">Start plugin</a></li>
+<li><a class="reference internal" href="#place-the-widget">place the widget</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#developper-notes">Developper Notes</a><ul>
+<li><a class="reference internal" href="#xpl-schema">xPL schema</a><ul>
+<li><a class="reference internal" href="#xpl-cmnd">xpl-cmnd</a></li>
+<li><a class="reference internal" href="#xpl-trig">xpl-trig</a></li>
+<li><a class="reference internal" href="#command">Command</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../plugin_diskfree/plugin_diskfree.html"
+                        title="previous chapter">Purpose</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_gagenda/plugin_gagenda.html"
+                        title="next chapter">Status</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/plugin_foscam/plugin_foscam.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_gagenda/plugin_gagenda.html" title="Status"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_diskfree/plugin_diskfree.html" title="Purpose"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

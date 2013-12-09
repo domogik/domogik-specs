@@ -1,0 +1,241 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>During installation &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Install the DSM Tool Chain" href="../tutorials_SynologyHub/tutorials_SynologyHub.html" />
+    <link rel="prev" title="traduction_fr" href="../traduction_fr/traduction_fr.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../tutorials_SynologyHub/tutorials_SynologyHub.html" title="Install the DSM Tool Chain"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../traduction_fr/traduction_fr.html" title="traduction_fr"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <p>Sometimes (yes, it can happen), your Domogik installation does not work as expected.</p>
+<p>Here are a few tips to check what&#8217;s wrong, and maybe find the problem by yourself, or at least let you come with all the data we will need to debug your installation.</p>
+<div class="section" id="during-installation">
+<h1>During installation<a class="headerlink" href="#during-installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="permission">
+<h2>Permission<a class="headerlink" href="#permission" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Problem</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>
+</pre></div>
+</div>
+<p>colors=&#8217;bash&#8217;</p>
+<blockquote>
+<div><dl class="docutils">
+<dt><a class="reference external" href="mailto:user&#37;&#52;&#48;domogik">user<span>&#64;</span>domogik</a>:~/domogik$ sudo ./install.sh</dt>
+<dd>sudo: ./install.sh: command not found</dd>
+</dl>
+</div></blockquote>
+<ul class="simple">
+<li>Solution</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>
+</pre></div>
+</div>
+<p>colors=&#8217;bash&#8217;</p>
+<blockquote>
+<div><a class="reference external" href="mailto:user&#37;&#52;&#48;domogik">user<span>&#64;</span>domogik</a>:~/domogik$ chmod +x install.sh</div></blockquote>
+</div>
+<div class="section" id="config-test">
+<h2>Config test<a class="headerlink" href="#config-test" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Problem</li>
+</ul>
+<p>test_config.py (started at the end of install.sh or by hand) find errors.</p>
+<ul class="simple">
+<li>Solution</li>
+</ul>
+<p>Most of the errors are explained by the script itself. Maybe a few things can be precised :</p>
+<div class="section" id="xpl-hub-not-found">
+<h3>xPL_Hub not found<a class="headerlink" href="#xpl-hub-not-found" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-json"><pre>==&gt; xPL_Hub can't be found, please double check CUSTOM_PATH is correctly defined if you are in development mode. In install mode, check your architecture is supported or check src/domogik/xpl/tools/COMPILE.txt, then restart test_config.py</pre>
+</div>
+<p>It can happen if you are using some version of arm which are not correctly detected. Try to take xPL_Hub from src/domogik/xpl/tools/arm/.</p>
+</div>
+</div>
+</div>
+<div class="section" id="domogik-startup">
+<h1>Domogik Startup<a class="headerlink" href="#domogik-startup" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="django">
+<h2>Django<a class="headerlink" href="#django" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Problem</li>
+</ul>
+<p>You don&#8217;t have any website when you try to connect to <a class="reference external" href="http://the.ip.you.set:40404/domogik">http://the.ip.you.set:40404/domogik</a></p>
+<ul class="simple">
+<li>Diagnostic</li>
+</ul>
+<p># Is your Django running ?
+.. code-block:: json</p>
+<p>colors=&#8217;bash&#8217;</p>
+<blockquote>
+<div><a class="reference external" href="mailto:user&#37;&#52;&#48;domogik">user<span>&#64;</span>domogik</a>:~/domogik$ ps aux|grep django</div></blockquote>
+<ul class="simple">
+<li>If nothing is running:</li>
+</ul>
+<p>** looks at /tmp/django.log
+** try to run it by hand :
+.. code-block:: json</p>
+<p>colors=&#8217;bash&#8217;</p>
+<blockquote>
+<div>/usr/bin/python /usr/local/bin/dmg_django runserver 127.0.0.1:40404</div></blockquote>
+<ul class="simple">
+<li>If something is running :</li>
+</ul>
+<p>** Are you looking at the good url ?
+** Any firewall ?
+** Anything in /tmp/django.log ?</p>
+</div>
+<div class="section" id="rest">
+<h2>Rest<a class="headerlink" href="#rest" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Problem</li>
+</ul>
+<p>When you connect on the web interface (<a class="reference external" href="http://the.ip.you.set:40404/domogik">http://the.ip.you.set:40404/domogik</a>) you get a :
+.. code-block:: json</p>
+<p>ishtml=&#8221;1&#8221;</p>
+<blockquote>
+<div><p>&lt;b&gt;Interface Server not responding&lt;/b&gt;</p>
+<p>Check if the server is running</p>
+</div></blockquote>
+<ul class="simple">
+<li>Diagnostic :</li>
+</ul>
+<p>** Is rest running ?
+.. code-block:: json</p>
+<p>colors=&#8217;bash&#8217;</p>
+<blockquote>
+<div><a class="reference external" href="mailto:user&#37;&#52;&#48;domogik">user<span>&#64;</span>domogik</a>:~/domogik$ ps aux|grep rest</div></blockquote>
+<p>** Yes
+<a href="#id1"><span class="problematic" id="id2">**</span></a>* Look at /var/log/domogik/rest.log</p>
+<p><a href="#id3"><span class="problematic" id="id4">**</span></a>** Problem:</p>
+<p>You find something like :
+.. code-block:: json</p>
+<p>colors=&#8217;python&#8217;</p>
+<blockquote>
+<div><blockquote>
+<div>[Errno 13] Permission denied: &#8216;/home/domogik/.python-eggs/somepackage.egg&#8217;</div></blockquote>
+<p>The Python egg cache directory is currently set to:</p>
+<blockquote>
+<div>/home/domogik/.python-eggs</div></blockquote>
+</div></blockquote>
+<hr class="docutils" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">During installation</a><ul>
+<li><a class="reference internal" href="#permission">Permission</a></li>
+<li><a class="reference internal" href="#config-test">Config test</a><ul>
+<li><a class="reference internal" href="#xpl-hub-not-found">xPL_Hub not found</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#domogik-startup">Domogik Startup</a><ul>
+<li><a class="reference internal" href="#django">Django</a></li>
+<li><a class="reference internal" href="#rest">Rest</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../traduction_fr/traduction_fr.html"
+                        title="previous chapter">traduction_fr</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../tutorials_SynologyHub/tutorials_SynologyHub.html"
+                        title="next chapter">Install the DSM Tool Chain</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/tutorial_howto_debug/tutorial_howto_debug.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../tutorials_SynologyHub/tutorials_SynologyHub.html" title="Install the DSM Tool Chain"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../traduction_fr/traduction_fr.html" title="traduction_fr"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

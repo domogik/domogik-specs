@@ -1,0 +1,310 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Purpose &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Prerequisites" href="../plugin_zalarms/plugin_zalarms.html" />
+    <link rel="prev" title="Plugin xpl_time" href="../plugin_xpl_time/plugin_xpl_time.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_zalarms/plugin_zalarms.html" title="Prerequisites"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_xpl_time/plugin_xpl_time.html" title="Plugin xpl_time"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="purpose">
+<h1>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h1>
+<p>This plugin get weather informations from Yahoo Weather online service.</p>
+<p>__Warning : this plugin is not fully developped yet. Ticket #586 need to be processed before previsionnal data could be stored in <a href="#id1"><span class="problematic" id="id2">database__</span></a></p>
+</div>
+<div class="section" id="known-features">
+<h1>Known features<a class="headerlink" href="#known-features" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference external" href="http://trac.domogik.org/domogik/ticket/773">http://trac.domogik.org/domogik/ticket/773</a></li>
+</ul>
+</div>
+<div class="section" id="plugin-configuration">
+<h1>Plugin configuration<a class="headerlink" href="#plugin-configuration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="enabling-plugin">
+<h2>Enabling plugin<a class="headerlink" href="#enabling-plugin" title="Permalink to this headline">¶</a></h2>
+<p>You can enable plugin by using :
+.. code-block:: json</p>
+<blockquote>
+<div>dmgenplug yweather</div></blockquote>
+<p>Now, restart Domogik manager (using root / sudo) :
+.. code-block:: json</p>
+<blockquote>
+<div>/etc/init.d/domogik restart manager</div></blockquote>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>In Domogik administration, go to yweather configuration page.</p>
+<div class="section" id="en-current">
+<h3>en-current<a class="headerlink" href="#en-current" title="Permalink to this headline">¶</a></h3>
+<p>Enable getting current weather data from Yahoo Weather. Il you have a local weather station, you could set this option to False and use local weather station plugin to get current data.
+Default : True</p>
+</div>
+<div class="section" id="en-prev">
+<h3>en-prev<a class="headerlink" href="#en-prev" title="Permalink to this headline">¶</a></h3>
+<p>Enable getting previsionnal weather data from Yahoo Weather.
+Default : True</p>
+</div>
+<div class="section" id="unit">
+<h3>unit<a class="headerlink" href="#unit" title="Permalink to this headline">¶</a></h3>
+<p>Temperature unit
+* c : Celcius
+* f : Farenheit</p>
+</div>
+<div class="section" id="city-1">
+<h3>city-1<a class="headerlink" href="#city-1" title="Permalink to this headline">¶</a></h3>
+<p>City code for the first city you want to get data about. To get city code :
+# Go to <a class="reference external" href="http://weather.yahoo.com/">http://weather.yahoo.com/</a>
+# Search for your city
+# You are sent to an url like this : <a class="reference external" href="http://weather.yahoo.com/france/pays-de-la-loire/nantes-613858/">http://weather.yahoo.com/france/pays-de-la-loire/nantes-613858/</a>
+# The number (here : 613858) is your city code</p>
+</div>
+<div class="section" id="device-1">
+<h3>device-1<a class="headerlink" href="#device-1" title="Permalink to this headline">¶</a></h3>
+<p>Device address for city-1. This address is set by you and is the address you should affect to a device when creating it.
+If you want to use Yahoo Weather for previsionnal and a local weather station for current data, you should set this address in the 2 plugins.</p>
+</div>
+<div class="section" id="city-2">
+<h3>city-2<a class="headerlink" href="#city-2" title="Permalink to this headline">¶</a></h3>
+<p>City code for the second city you want to get data about.</p>
+</div>
+<div class="section" id="device-2">
+<h3>device-2<a class="headerlink" href="#device-2" title="Permalink to this headline">¶</a></h3>
+<p>Device address for city-2.</p>
+</div>
+</div>
+<div class="section" id="start-plugin">
+<h2>Start plugin<a class="headerlink" href="#start-plugin" title="Permalink to this headline">¶</a></h2>
+<p>You can now start the plugin (start button).</p>
+</div>
+<div class="section" id="check-plugin-works">
+<h2>Check plugin works<a class="headerlink" href="#check-plugin-works" title="Permalink to this headline">¶</a></h2>
+<p>||TODO||</p>
+</div>
+</div>
+<div class="section" id="creating-a-device">
+<h1>Creating a device<a class="headerlink" href="#creating-a-device" title="Permalink to this headline">¶</a></h1>
+<p>Before, you have to execute :
+from src directory
+src/tools/packages/insert_data.py  /usr/local/share/domogik/plugins/yweather.xml</p>
+<p>In administration, go to __Organization &gt; <a href="#id1"><span class="problematic" id="id3">Devices__</span></a> page. Create a new device like this :
+||TODO||</p>
+</div>
+<div class="section" id="helpers">
+<h1>Helpers<a class="headerlink" href="#helpers" title="Permalink to this headline">¶</a></h1>
+<p>&#8216;&#8217;To get an introduction to helpers, you can read the ((Plugins_helpers|Helper documentation)). To use a helper, the plugin must be stopped.&#8217;&#8216;</p>
+<p>||TODO||</p>
+</div>
+<div class="section" id="developper-notes">
+<h1>Developper notes<a class="headerlink" href="#developper-notes" title="Permalink to this headline">¶</a></h1>
+<p>~~#390:__Notice :__ this plugin is one of existing weather related plugins. To get rules about these plugins (in order them to be compatible), see ((Plugin_weather_recommendations| the weather plugin&#8217;s recommendations)).~~</p>
+<div class="section" id="useful-links">
+<h2>Useful links<a class="headerlink" href="#useful-links" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://developer.yahoo.com/weather/">http://developer.yahoo.com/weather/</a></li>
+</ul>
+</div>
+<div class="section" id="rss">
+<h2>RSS<a class="headerlink" href="#rss" title="Permalink to this headline">¶</a></h2>
+<p>Example URL for Nantes (Fr) :
+* in Celsius : <a class="reference external" href="http://weather.yahooapis.com/forecastrss?w=613858&amp;amp;u=c">http://weather.yahooapis.com/forecastrss?w=613858&amp;amp;u=c</a>
+* in Fahrenheit : <a class="reference external" href="http://weather.yahooapis.com/forecastrss?w=613858&amp;amp;u=f">http://weather.yahooapis.com/forecastrss?w=613858&amp;amp;u=f</a></p>
+</div>
+<div class="section" id="xml-strucure">
+<h2>Xml Strucure :<a class="headerlink" href="#xml-strucure" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-json"><pre>xml
+
+   &lt;?xml version="1.0" encoding="UTF-8" standalone="yes" ?&gt;
+   &lt;rss version="2.0" xmlns:yweather="http://xml.weather.yahoo.com/ns/rss/1.0" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"&gt;
+         &lt;channel&gt;
+               &lt;title&gt;Yahoo! Weather - Nantes, FR&lt;/title&gt;
+               &lt;link&gt;http://us.rd.yahoo.com/dailynews/rss/weather/Nantes__FR/*http://weather.yahoo.com/forecast/FRXX0072_c.html&lt;/link&gt;
+               &lt;description&gt;Yahoo! Weather for Nantes, FR&lt;/description&gt;
+               &lt;language&gt;en-us&lt;/language&gt;
+               &lt;lastBuildDate&gt;Mon, 08 Nov 2010 11:00 am CET&lt;/lastBuildDate&gt;
+               &lt;ttl&gt;60&lt;/ttl&gt;
+               &lt;yweather:location city="Nantes" region="" country="France"/&gt;
+               &lt;yweather:units temperature="C" distance="km" pressure="mb" speed="km/h"/&gt;
+               &lt;yweather:wind chill="12" direction="300" speed="27.36" /&gt;
+               &lt;yweather:atmosphere humidity="72" visibility="9.99" pressure="948.19" rising="0" /&gt;
+               &lt;yweather:astronomy sunrise="7:59 am" sunset="5:40 pm"/&gt;
+               &lt;image&gt;
+                     &lt;title&gt;Yahoo! Weather&lt;/title&gt;
+                     &lt;width&gt;142&lt;/width&gt;
+                     &lt;height&gt;18&lt;/height&gt;
+                     &lt;link&gt;http://weather.yahoo.com&lt;/link&gt;
+                     &lt;url&gt;http://l.yimg.com/a/i/brand/purplelogo//uh/us/news-wea.gif&lt;/url&gt;
+               &lt;/image&gt;
+               &lt;item&gt;
+                     &lt;title&gt;Conditions for Nantes, FR at 11:00 am CET&lt;/title&gt;
+                     &lt;geo:lat&gt;47.22&lt;/geo:lat&gt;
+                     &lt;geo:long&gt;-1.55&lt;/geo:long&gt;
+                     &lt;link&gt;http://us.rd.yahoo.com/dailynews/rss/weather/Nantes__FR/*http://weather.yahoo.com/forecast/FRXX0072_c.html&lt;/link&gt;
+                     &lt;pubDate&gt;Mon, 08 Nov 2010 11:00 am CET&lt;/pubDate&gt;
+                     &lt;yweather:condition text="Partly Cloudy" code="30" temp="12" date="Mon, 08 Nov 2010 11:00 am CET" /&gt;
+                     &lt;description&gt;
+                           &lt;![CDATA[&lt;img src="http://l.yimg.com/a/i/us/we/52/30.gif"/&gt;&lt;br /&gt;&lt;b&gt;Current Conditions:&lt;/b&gt;&lt;br /&gt;Partly Cloudy, 12 C&lt;BR /&gt;&lt;BR /&gt;&lt;b&gt;Forecast:&lt;/b&gt;&lt;BR /&gt;Mon - Heavy Rain. High: 12 Low: 7&lt;br /&gt;Tue - AM Light Rain. High: 11 Low: 7&lt;br /&gt;&lt;br /&gt;&lt;a href="http://us.rd.yahoo.com/dailynews/rss/weather/Nantes__FR/*http://weather.yahoo.com/forecast/FRXX0072_c.html"&gt;Full Forecast at Yahoo! Weather&lt;/a&gt;&lt;BR/&gt;&lt;BR/&gt;(provided by &lt;a href="http://www.weather.com" &gt;The Weather Channel&lt;/a&gt;)&lt;br/&gt;]]&gt;
+                           &lt;/description&gt;
+                     &lt;yweather:forecast day="Mon" date="8 Nov 2010" low="7" high="12" text="Heavy Rain" code="40" /&gt;
+                     &lt;yweather:forecast day="Tue" date="9 Nov 2010" low="7" high="11" text="AM Light Rain" code="11" /&gt;
+                     &lt;guid isPermaLink="false"&gt;FRXX0072_2010_11_08_11_00_CET&lt;/guid&gt;
+               &lt;/item&gt;
+         &lt;/channel&gt;
+   &lt;/rss&gt;
+   &lt;!-- api4.weather.ch1.yahoo.com compressed/chunked Mon Nov 8 02:31:00 PST 2010 --&gt;</pre>
+</div>
+<p>Data to get :
+* &lt;yweather:location city=&#8221;Nantes&#8221; region=&#8221;&#8221;   country=&#8221;France&#8221;/&gt;
+* &lt;yweather:units temperature=&#8221;F&#8221; distance=&#8221;mi&#8221; pressure=&#8221;in&#8221; speed=&#8221;mph&#8221;/&gt;
+* &lt;yweather:wind chill=&#8221;75&#8221;   direction=&#8221;250&#8221;   speed=&#8221;12&#8221; /&gt;
+* &lt;yweather:atmosphere humidity=&#8221;53&#8221;  visibility=&#8221;6.21&#8221;  pressure=&#8221;29.97&#8221;  rising=&#8221;0&#8221; /&gt;
+* &lt;yweather:astronomy sunrise=&#8221;6:22 am&#8221;   sunset=&#8221;10:00 pm&#8221;/&gt;
+* &lt;yweather:condition  text=&#8221;Partly Cloudy&#8221;  code=&#8221;30&#8221;  temp=&#8221;75&#8221;  date=&#8221;Mon, 12 Jul 2010 1:00 pm CEST&#8221; /&gt;
+* &lt;yweather:forecast day=&#8221;Mon&#8221; date=&#8221;12 Jul 2010&#8221; low=&#8221;60&#8221; high=&#8221;75&#8221; text=&#8221;Mostly Cloudy&#8221; code=&#8221;28&#8221; /&gt;
+* &lt;yweather:forecast day=&#8221;Tue&#8221; date=&#8221;13 Jul 2010&#8221; low=&#8221;61&#8221; high=&#8221;78&#8221; text=&#8221;Partly Cloudy&#8221; code=&#8221;30&#8221; /&gt;</p>
+<p>Condition codes are described here : <a class="reference external" href="http://developer.yahoo.com/weather/#codes">http://developer.yahoo.com/weather/#codes</a></p>
+</div>
+<div class="section" id="xpl-schema">
+<h2>xPl schema<a class="headerlink" href="#xpl-schema" title="Permalink to this headline">¶</a></h2>
+<p>See ((Plugin_weather_recommendations|weather&#8217;s plugins common page))</p>
+</div>
+<div class="section" id="data-taken-from-yahoo-weather">
+<h2>Data taken from Yahoo Weather<a class="headerlink" href="#data-taken-from-yahoo-weather" title="Permalink to this headline">¶</a></h2>
+<p>||TODO||</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Purpose</a></li>
+<li><a class="reference internal" href="#known-features">Known features</a></li>
+<li><a class="reference internal" href="#plugin-configuration">Plugin configuration</a><ul>
+<li><a class="reference internal" href="#enabling-plugin">Enabling plugin</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li><a class="reference internal" href="#en-current">en-current</a></li>
+<li><a class="reference internal" href="#en-prev">en-prev</a></li>
+<li><a class="reference internal" href="#unit">unit</a></li>
+<li><a class="reference internal" href="#city-1">city-1</a></li>
+<li><a class="reference internal" href="#device-1">device-1</a></li>
+<li><a class="reference internal" href="#city-2">city-2</a></li>
+<li><a class="reference internal" href="#device-2">device-2</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#start-plugin">Start plugin</a></li>
+<li><a class="reference internal" href="#check-plugin-works">Check plugin works</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#creating-a-device">Creating a device</a></li>
+<li><a class="reference internal" href="#helpers">Helpers</a></li>
+<li><a class="reference internal" href="#developper-notes">Developper notes</a><ul>
+<li><a class="reference internal" href="#useful-links">Useful links</a></li>
+<li><a class="reference internal" href="#rss">RSS</a></li>
+<li><a class="reference internal" href="#xml-strucure">Xml Strucure :</a></li>
+<li><a class="reference internal" href="#xpl-schema">xPl schema</a></li>
+<li><a class="reference internal" href="#data-taken-from-yahoo-weather">Data taken from Yahoo Weather</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../plugin_xpl_time/plugin_xpl_time.html"
+                        title="previous chapter">Plugin xpl_time</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_zalarms/plugin_zalarms.html"
+                        title="next chapter">Prerequisites</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/plugin_yweather/plugin_yweather.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_zalarms/plugin_zalarms.html" title="Prerequisites"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_xpl_time/plugin_xpl_time.html" title="Plugin xpl_time"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

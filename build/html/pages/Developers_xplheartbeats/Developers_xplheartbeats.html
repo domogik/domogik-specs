@@ -1,0 +1,169 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>XPL Heartbeats &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="{IMG(src=”http://code.google.com/p/domodroid/logo?cct=1319102596”)}{IMG} Domodroid User Guide" href="../Domodroid/Domodroid.html" />
+    <link rel="prev" title="0.1.x Embedded Web UI" href="../Developers_ui/Developers_ui.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Domodroid/Domodroid.html" title="{IMG(src=”http://code.google.com/p/domodroid/logo?cct=1319102596”)}{IMG} Domodroid User Guide"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Developers_ui/Developers_ui.html" title="0.1.x Embedded Web UI"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="xpl-heartbeats">
+<h1>XPL Heartbeats<a class="headerlink" href="#xpl-heartbeats" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="xpl-specifications">
+<h2>XPL Specifications<a class="headerlink" href="#xpl-specifications" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="heartbeat-behaviour-at-initial-device-startup">
+<h3>Heartbeat behaviour at initial device startup<a class="headerlink" href="#heartbeat-behaviour-at-initial-device-startup" title="Permalink to this headline">¶</a></h3>
+<p>When the xPL device/application starts, it should start sending xPL heartbeats as soon as it can and send them every 3-10 seconds until it hears/receives one of it&#8217;s own heartbeats. The reception by a device of that devices own heartbeat indicates that there is a functioning xPL hub. Once the heartbeat is received, the application can drop back to sending a heartbeat once every &#8220;interval&#8221; minutes.</p>
+<p>Until the device/application hears it&#8217;s own echo, it should not send or expect to receive any other message. In fact, until a hub is confirmed, the device is not really part of the xPL network.
+If no echoed heartbeat has been received after 2 minutes, the device should drop to sending a heartbeat once every 30 seconds indefinetly until it hears it&#8217;s own echo.</p>
+</div>
+<div class="section" id="heartbeat-behaviour-at-device-shutdown-or-identity-change">
+<h3>Heartbeat behaviour at device shutdown or identity change<a class="headerlink" href="#heartbeat-behaviour-at-device-shutdown-or-identity-change" title="Permalink to this headline">¶</a></h3>
+<p>When an xPL device is about to shutdown or if the device is about to change any part of it&#8217;s identity (vendor ID, device ID or instance ID), the device should send a special &#8220;shutdown&#8221; heartbeat message as it&#8217;s last act. That message should have a schema type of &#8220;end&#8221; (i.e. hbeat.end or config.end). Many xPL devices, upon reception of such a message, will remove the device from any internal caches or uses. Other than using the schema type of &#8220;end&#8221;, the message is otherwise a normal heartbeat message for the device.</p>
+<blockquote>
+<div>Reference</div></blockquote>
+<hr class="docutils" />
+<p>Source: <a href="#id13"><span class="problematic" id="id14">`XPL heartbeat specifications &lt;http://xplproject.org.uk/wiki/index.php?title=XPL\_Specification\_Document#Heartbeat\_Messages&gt;`_</span></a>
+XPL Hbeat: <a href="#id15"><span class="problematic" id="id16">`HBEAT Schema &lt;http://xplproject.org.uk/wiki/index.php?title=Schema\_-\_HBEAT&gt;`_</span></a>
+Evolution: <a class="reference external" href="http://tracker.domogik.org/issues/728">728 (hbeat discovery)</a>
+Evolution: <a class="reference external" href="http://tracker.domogik.org/issues/717">717 (hbeat.end)</a></p>
+</div>
+</div>
+<div class="section" id="domogik-integration">
+<h2>Domogik integration<a class="headerlink" href="#domogik-integration" title="Permalink to this headline">¶</a></h2>
+<p>Because the hub discovery should be done before the startup of the xpl device (the plugin in this case) it will be integrated into the (xpl)Manager class inside the __init__ methode.</p>
+<p>An XPLTimer is started at init, with a random interval between 3 and 10 seconds, this will send out the heartbeats.</p>
+<p>At the monitor method (receiving packets), a new part is added to check for hbeat echos, this check is only done when no hub is found yet.</p>
+<p>in the hbeat.app message a new key/value pair is added, this pair will display the status of the plugin:
+<a href="#id1"><span class="problematic" id="id2">*</span></a>0 = plugin started, no hub found
+<a href="#id3"><span class="problematic" id="id4">*</span></a>1 = plugin started hub found, waiting for config
+<a href="#id5"><span class="problematic" id="id6">*</span></a>2 = plugin started, hub found and plugin configured.</p>
+<p>Inside the (xpl)Manager leave methode the hbeat.end message will be sent.</p>
+<div class="section" id="new-vars">
+<h3>New vars<a class="headerlink" href="#new-vars" title="Permalink to this headline">¶</a></h3>
+<p><a href="#id7"><span class="problematic" id="id8">*</span></a>status = int (see description above)
+<a href="#id9"><span class="problematic" id="id10">*</span></a>_lock_status =  semaphore because different threads update/read the status
+<a href="#id11"><span class="problematic" id="id12">*</span></a>foundhub = threading.event to keep track if a hub is found</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">XPL Heartbeats</a><ul>
+<li><a class="reference internal" href="#xpl-specifications">XPL Specifications</a><ul>
+<li><a class="reference internal" href="#heartbeat-behaviour-at-initial-device-startup">Heartbeat behaviour at initial device startup</a></li>
+<li><a class="reference internal" href="#heartbeat-behaviour-at-device-shutdown-or-identity-change">Heartbeat behaviour at device shutdown or identity change</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#domogik-integration">Domogik integration</a><ul>
+<li><a class="reference internal" href="#new-vars">New vars</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Developers_ui/Developers_ui.html"
+                        title="previous chapter">0.1.x Embedded Web UI</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Domodroid/Domodroid.html"
+                        title="next chapter">{IMG(src=&#8221;http://code.google.com/p/domodroid/logo?cct=1319102596&#8221;)}{IMG} Domodroid User Guide</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Developers_xplheartbeats/Developers_xplheartbeats.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Domodroid/Domodroid.html" title="{IMG(src=”http://code.google.com/p/domodroid/logo?cct=1319102596”)}{IMG} Domodroid User Guide"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Developers_ui/Developers_ui.html" title="0.1.x Embedded Web UI"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

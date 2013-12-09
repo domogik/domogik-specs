@@ -1,0 +1,186 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Specifications &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Plugin wol_ping" href="../plugin_wol_ping/plugin_wol_ping.html" />
+    <link rel="prev" title="Table of contents" href="../plugin_velbus/plugin_velbus.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_wol_ping/plugin_wol_ping.html" title="Plugin wol_ping"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_velbus/plugin_velbus.html" title="Table of contents"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="specifications">
+<h1>Specifications<a class="headerlink" href="#specifications" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="different-parts-of-plugin">
+<h2>Different parts of plugin<a class="headerlink" href="#different-parts-of-plugin" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="legionella-killing">
+<h3>Legionella killing<a class="headerlink" href="#legionella-killing" title="Permalink to this headline">¶</a></h3>
+<p>One day by month, the temperature must be 65°C to kill legionalle (killed at 60°C).
+We need :
+* one order to make temperature going to 65°C : see function __heat_to_65__.
+* one way to know when doing this (day/hour)
+** hour : a plugin parameter
+** day : 2 parameters :
+<strong>* number of the day in the period (1..7 for a week, 1..28 for a month)
+*</strong> period type : month or week
+* a way to know that action append (people safety!)
+** mail ?
+** sms ?
+** script (which would do the mail/sms/xpl message send/etc)?
+** ==&gt; See how to do this</p>
+</div>
+<div class="section" id="force-water-to-65c">
+<h3>Force water to 65°C<a class="headerlink" href="#force-water-to-65c" title="Permalink to this headline">¶</a></h3>
+<p>This will make the temperature going to 65°C : see function __heat_to_65__.
+We need :
+* a xPL listener for heating order
+* the function to do the action</p>
+</div>
+<div class="section" id="consumption-analysis">
+<h3>Consumption analysis<a class="headerlink" href="#consumption-analysis" title="Permalink to this headline">¶</a></h3>
+<p>Each day of the week, the water consumption should be analysed to get water volume used in the day. This will be used for the day &#8220;d+7&#8221; to heat water.
+In the first time, we may use last week data.
+In a second time, we may use a formula which make a smart calculation with last weeks.</p>
+<p>__Warning : to do this, we need to store and read data!!! How to do this ?__</p>
+<p>When doing the calculation ?
+* at midnight ?</p>
+<p>What do we do if plugin is stopped for several days ?</p>
+</div>
+<div class="section" id="water-heating-in-function-of-analysis">
+<h3>Water heating in function of analysis<a class="headerlink" href="#water-heating-in-function-of-analysis" title="Permalink to this headline">¶</a></h3>
+<p>Input ?
+* a temperature for &#8220;output temperature&#8221; ?</p>
+</div>
+</div>
+<div class="section" id="formulas">
+<h2>Formulas<a class="headerlink" href="#formulas" title="Permalink to this headline">¶</a></h2>
+<p>__Warning : formula in french for the <a href="#id1"><span class="problematic" id="id2">moment__</span></a>
+.. code-block:: json</p>
+<blockquote>
+<div>&#8220;Quantité d&#8217;eau à 40°=-LN((T°sortie-T°entrée)/V40*100) x Volume du ballon&#8221;</div></blockquote>
+</div>
+<div class="section" id="faq">
+<h2>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="why-not-using-a-scenarii-to-set-when-heating-to-kill-legionella">
+<h3>Why not using a scenarii to set when heating to kill legionella ?<a class="headerlink" href="#why-not-using-a-scenarii-to-set-when-heating-to-kill-legionella" title="Permalink to this headline">¶</a></h3>
+<p>Because this would need a manual configuration. This is a critical (people safety) feature.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Specifications</a><ul>
+<li><a class="reference internal" href="#different-parts-of-plugin">Different parts of plugin</a><ul>
+<li><a class="reference internal" href="#legionella-killing">Legionella killing</a></li>
+<li><a class="reference internal" href="#force-water-to-65c">Force water to 65°C</a></li>
+<li><a class="reference internal" href="#consumption-analysis">Consumption analysis</a></li>
+<li><a class="reference internal" href="#water-heating-in-function-of-analysis">Water heating in function of analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#formulas">Formulas</a></li>
+<li><a class="reference internal" href="#faq">FAQ</a><ul>
+<li><a class="reference internal" href="#why-not-using-a-scenarii-to-set-when-heating-to-kill-legionella">Why not using a scenarii to set when heating to kill legionella ?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../plugin_velbus/plugin_velbus.html"
+                        title="previous chapter">Table of contents</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_wol_ping/plugin_wol_ping.html"
+                        title="next chapter">Plugin wol_ping</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/plugin_water/plugin_water.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_wol_ping/plugin_wol_ping.html" title="Plugin wol_ping"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_velbus/plugin_velbus.html" title="Table of contents"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

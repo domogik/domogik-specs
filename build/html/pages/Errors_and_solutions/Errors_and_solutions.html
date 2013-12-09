@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Errors and solutions &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="External Resources" href="../ExternalResources/ExternalResources.html" />
+    <link rel="prev" title="Purpose" href="../DownloadStatistics/DownloadStatistics.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../ExternalResources/ExternalResources.html" title="External Resources"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../DownloadStatistics/DownloadStatistics.html" title="Purpose"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="errors-and-solutions">
+<h1>Errors and solutions<a class="headerlink" href="#errors-and-solutions" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="domogik-doesn-t-work-how-to-debug-it">
+<h2>Domogik doesn&#8217;t work, how to debug it ?<a class="headerlink" href="#domogik-doesn-t-work-how-to-debug-it" title="Permalink to this headline">¶</a></h2>
+<p>First, check the log files for ERROR messages.</p>
+<p>If you don&#8217;t find any, check if your xpl hub is working. You can use the tool __send.py__ to send a test message and __dump_xpl.py__ to check if you received it.</p>
+<p>If all is OK at this point, you may try so start the plugin (or manager/rest/dbgmr) which has an issue in a shell with the -f option (example : ./onewire.py -f) and check if there are uncaught errors on stdout.</p>
+</div>
+<div class="section" id="installation-issues">
+<h2>Installation issues<a class="headerlink" href="#installation-issues" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="libmysqlclient-issue-on-ubuntu-12-04">
+<h3>libmysqlclient issue on Ubuntu 12.04<a class="headerlink" href="#libmysqlclient-issue-on-ubuntu-12-04" title="Permalink to this headline">¶</a></h3>
+<p>!!!!Error
+.. code-block:: json</p>
+<blockquote>
+<div>ImportError: libmysqlclient_r.so.16: cannot open shared object file: No such file or directory</div></blockquote>
+<p>!!!!Solution
+Ubuntu install the libmysqlclient in release 18. Just create a symlink :
+.. code-block:: json</p>
+<blockquote>
+<div>ln -v /usr/lib/i386-linux-gnu/libmysqlclient_r.so.18 /usr/lib/i386-linux-gnu/libmysqlclient_r.so.16</div></blockquote>
+</div>
+</div>
+<div class="section" id="browser">
+<h2>Browser<a class="headerlink" href="#browser" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="my-browser-never-ends-loading-the-page">
+<h3>My browser never ends loading the page<a class="headerlink" href="#my-browser-never-ends-loading-the-page" title="Permalink to this headline">¶</a></h3>
+<p>!!!!Error
+The loading indicator of your browser never stops loading</p>
+<p>!!!!Cause
+This is not an error. Domogik always listen for events on the REST server so in fact loading never stops :)</p>
+</div>
+</div>
+<div class="section" id="xpl-hub">
+<h2>xPL Hub<a class="headerlink" href="#xpl-hub" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="xpl-hub-doesn-t-start-c-version">
+<h3>xPL Hub doesn&#8217;t start (C version)<a class="headerlink" href="#xpl-hub-doesn-t-start-c-version" title="Permalink to this headline">¶</a></h3>
+<p>!!!!Error
+When manualy launching the xPL Hub, you get :
+.. code-block:: json</p>
+<blockquote>
+<div>$ ./xPL_Hub
+bash: ./xPL_Hub: Aucun fichier ou dossier de ce type</div></blockquote>
+<p>!!!!Cause
+You may be on a 64bits system with no 32bits glibc library</p>
+<p>!!!!Solution
+Install the 32bits glibc. Example for Archlinux :</p>
+<div class="highlight-json"><pre>pacman -S lib32-glibc</pre>
+</div>
+</div>
+</div>
+<div class="section" id="manager">
+<h2>Manager<a class="headerlink" href="#manager" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="configparser-nosectionerror-no-section-domogik-v0-1">
+<h3>ConfigParser.NoSectionError: No section: &#8216;domogik&#8217;  (v0.1)<a class="headerlink" href="#configparser-nosectionerror-no-section-domogik-v0-1" title="Permalink to this headline">¶</a></h3>
+<p>!!!!Error
+.. code-block:: json</p>
+<blockquote>
+<div><p>...
+ConfigParser.NoSectionError: No section: &#8216;domogik&#8217;
+Exception AttributeError: &#8220;__Singl_BasePlugin instance has no attribute &#8216;_log&#8217;&#8221;
+in &lt;bound method __Singl_BasePlugin.__del__ of &lt;domogik.xpl.common.baseplugin.__
+Singl_BasePlugin instance at 0xc4ccb0&gt;&gt; ignored
+Exception AttributeError: &#8220;&#8216;NoneType&#8217; object has no attribute &#8216;debug&#8217;&#8221; in &lt;bound</p>
+<blockquote>
+<div>method __Singl_xPLPlugin.__del__ of None&gt; ignored</div></blockquote>
+</div></blockquote>
+<p>!!!!Cause
+There is no ~/.domogik/domogik.cfg file or it has a bad format</p>
+<p>!!!!Solution
+Create or fix the problem in this file.</p>
+</div>
+</div>
+<div class="section" id="rest-rinor">
+<h2>REST/RINOR<a class="headerlink" href="#rest-rinor" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rest-doesn-t-start">
+<h3>REST doesn&#8217;t start<a class="headerlink" href="#rest-doesn-t-start" title="Permalink to this headline">¶</a></h3>
+<p>!!!!Error
+In rest.log you only get :
+.. code-block:: json</p>
+<blockquote>
+<div>2010-05-21 16:16:41,150 domogik-rest INFO Daemonize plugin rest
+2010-05-21 16:16:41,151 domogik-rest DEBUG watcher fork
+2010-05-21 16:16:41,151 domogik-rest DEBUG New system manager instance for rest
+2010-05-21 16:16:41,152 domogik-rest DEBUG xPL plugin rest socket bound to 127.0.0.1, port 58975
+2010-05-21 16:16:41,153 domogik-rest DEBUG New timer registered : &lt;domogik.xpl.lib.xplconnector.xPLTimer&gt; name : internal-timer
+2010-05-21 16:16:41,154 domogik-rest DEBUG New listener, filter : {&#8216;xpltype&#8217;: &#8216;xpl-stat&#8217;, &#8216;schema&#8217;: &#8216;hbeat.app&#8217;}
+2010-05-21 16:16:41,155 domogik-rest DEBUG xPL thread started for rest
+2010-05-21 16:16:41,155 domogik-rest DEBUG New listener, filter : {&#8216;xpltype&#8217;: &#8216;xpl-cmnd&#8217;, &#8216;schema&#8217;: &#8216;domogik.system&#8217;}
+2010-05-21 16:16:41,155 domogik-rest DEBUG end single xpl plugin
+2010-05-21 16:16:41,155 domogik-rest DEBUG after watcher</div></blockquote>
+<p>If you launch REST manually (./rest.py -f), you get :
+.. code-block:: json</p>
+<blockquote>
+<div>create Base plugin instance
+new query</div></blockquote>
+<p>!!!!Cause
+There are two possibilities :
+* The xPL Hub is not launched
+* The Database Manager wasn&#8217;t able to give REST his configuration</p>
+<p>!!!!Solution
+!!!!!The xPL Hub is not launched
+Launch it. To check if it is started, run this command:
+.. code-block:: json</p>
+<blockquote>
+<div><p>netstat -lun{CODE}
+If you see a line displaying the port 3865 then it is running.</p>
+<p>!!!!!The Database Manager wasn&#8217;t able to give REST his configuration
+Launch it manually (./dbmgr.py -f). Launch REST and see which error happens (see Database Manager section to see errors)</p>
+<p>!!!!Error
+In stdout you get :</p>
+</div></blockquote>
+<div class="highlight-json"><pre>Traceback (most recent call last):
+  File "/root/configure-hgrc/domogik/src/domogik/xpl/bin/rest.py", line 3839, in &lt;module&gt;
+    rest_server.start_http()
+  File "/root/configure-hgrc/domogik/src/domogik/xpl/bin/rest.py", line 444, in start_http
+    handler_params = [self])
+  File "/root/configure-hgrc/domogik/src/domogik/xpl/bin/rest.py", line 496, in __init__
+    bind_and_activate)
+TypeError: __init__() takes exactly 3 arguments (4 given)</pre>
+</div>
+<p>!!!!Cause
+REST is not compatible with python 2.5</p>
+<p>!!!!Solution
+Install python 2.6</p>
+</div>
+<div class="section" id="rest-plugin-detail-plugin-name-makes-xpl-hub-c-version-crashes">
+<h3>Rest /plugin/detail/&lt;plugin name&gt; makes xpl_hub (c version) crashes<a class="headerlink" href="#rest-plugin-detail-plugin-name-makes-xpl-hub-c-version-crashes" title="Permalink to this headline">¶</a></h3>
+<p>!!!!Error
+A /plugin/detail/cidmodem (for example) REST request makes xpl_hub crash in a __segmentation <a href="#id3"><span class="problematic" id="id4">fault__</span></a></p>
+<p>!!!!Cause
+It happens only with the -xpldebug option for xpl_hub</p>
+<p>!!!!Solution
+Use the hub without -xpldebug option</p>
+</div>
+<div class="section" id="rest-is-slow">
+<h3>REST is slow<a class="headerlink" href="#rest-is-slow" title="Permalink to this headline">¶</a></h3>
+<p>!!!!Error
+For example, the config page of plugins takes more than 5 seconds to be displayed</p>
+<p>!!!!Cause
+Definitely due to DNS issue. Check rest.log times, especially the time between :
+* domogik-rest DEBUG Send HTTP header for OK, and
+* domogik-rest DEBUG Send HTTP data : {...}
+If the difference is something like 5s, your DNS setup may be bad.</p>
+<p>!!!!Solution
+If you have &#8216;&#8217;avahi&#8217;&#8217; running (at least on a Ubuntu Desktop install), it could be stopped unless you know that you need it. That should solve your problem.
+If you don&#8217;t have such software, check your DNS setup, one quick way to check (without using domogik) is to run the command :
+&lt;pre&gt;
+time getent hosts the.ip.of.client
+&lt;/pre&gt;
+If it takes long time without any answer, your setup is wrong.</p>
+<p>!!!!Solution with a karotz on the LAN
+You must assign a host name to your Karotz on your local network.</p>
+</div>
+</div>
+<div class="section" id="plugins">
+<h2>Plugins<a class="headerlink" href="#plugins" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="plugin-don-t-start-automatically">
+<h3>Plugin don&#8217;t start automatically<a class="headerlink" href="#plugin-don-t-start-automatically" title="Permalink to this headline">¶</a></h3>
+<p>!!!!Error
+After rebooting the server, plugins marked as &#8220;Automatically start plugin at Domogik startup&#8221; don&#8217;t start.
+Plugins start correctly after doing &#8216;&#8217;/etc/init.d/domogik restart&#8217;&#8216;.
+!!!!Cause
+Domogik starts before mysql and doesn&#8217;t load plugins.
+!!!!Solution (Debian)
+After the installation process, if you did:
+.. code-block:: json</p>
+<blockquote>
+<div>update-rc.d -f domogik defaults{CODE}
+It generates the following symlinks:</div></blockquote>
+<div class="highlight-json"><pre>/etc/rc1.d/K02domogik
+/etc/rc2.d/S01domogik
+/etc/rc3.d/S01domogik
+/etc/rc4.d/S01domogik
+/etc/rc5.d/S01domogik</pre>
+</div>
+<p>Add &#8216;&#8217;mysql&#8217;&#8217; to the &#8216;&#8217;/etc/init.d/domogik&#8217;&#8217; :
+.. code-block:: json</p>
+<blockquote>
+<div># Required-Start: $local_fs $network <a href="#id1"><span class="problematic" id="id2">*</span></a>mysql*{CODE}
+Now, these symlinks are generated :</div></blockquote>
+<div class="highlight-json"><pre>/etc/rc1.d/K02domogik
+/etc/rc2.d/S20domogik
+/etc/rc3.d/S20domogik
+/etc/rc4.d/S20domogik
+/etc/rc5.d/S20domogik</pre>
+</div>
+<p>Mysql starts before domogik (S19) and all is OK.</p>
+</div>
+<div class="section" id="plugin-onewire-and-hardware-usb-issue">
+<h3>Plugin onewire and hardware usb issue<a class="headerlink" href="#plugin-onewire-and-hardware-usb-issue" title="Permalink to this headline">¶</a></h3>
+<p>!!!!Error
+All was working with 6 DS18B20 in parasite mode, i add 4 new one on the onewire bus (still in parasite mode) and starting having problems.
+The plugin start correctly but stop working after few minutes or hours it depends.
+Plugin is still working and still send xpl-stat command but no answer from the hardware (you could see that in the onewire.log file).</p>
+<p>!!!!Cause
+I use a simple usb hub without power supply, Teleinfo hardware, DS9490R Usb adaptor and a Mir:ror are powered on.
+!!!!Solution
+If you see some ttyusb error in dmesg don&#8217;t look around it&#8217;s a usb power problem. Removing the Mir:ror or adding a power supply on the Usb Hub remove the problem.</p>
+<p>Now you can enjoy long time tracking without any hole.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Errors and solutions</a><ul>
+<li><a class="reference internal" href="#domogik-doesn-t-work-how-to-debug-it">Domogik doesn&#8217;t work, how to debug it ?</a></li>
+<li><a class="reference internal" href="#installation-issues">Installation issues</a><ul>
+<li><a class="reference internal" href="#libmysqlclient-issue-on-ubuntu-12-04">libmysqlclient issue on Ubuntu 12.04</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#browser">Browser</a><ul>
+<li><a class="reference internal" href="#my-browser-never-ends-loading-the-page">My browser never ends loading the page</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#xpl-hub">xPL Hub</a><ul>
+<li><a class="reference internal" href="#xpl-hub-doesn-t-start-c-version">xPL Hub doesn&#8217;t start (C version)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#manager">Manager</a><ul>
+<li><a class="reference internal" href="#configparser-nosectionerror-no-section-domogik-v0-1">ConfigParser.NoSectionError: No section: &#8216;domogik&#8217;  (v0.1)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rest-rinor">REST/RINOR</a><ul>
+<li><a class="reference internal" href="#rest-doesn-t-start">REST doesn&#8217;t start</a></li>
+<li><a class="reference internal" href="#rest-plugin-detail-plugin-name-makes-xpl-hub-c-version-crashes">Rest /plugin/detail/&lt;plugin name&gt; makes xpl_hub (c version) crashes</a></li>
+<li><a class="reference internal" href="#rest-is-slow">REST is slow</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#plugins">Plugins</a><ul>
+<li><a class="reference internal" href="#plugin-don-t-start-automatically">Plugin don&#8217;t start automatically</a></li>
+<li><a class="reference internal" href="#plugin-onewire-and-hardware-usb-issue">Plugin onewire and hardware usb issue</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../DownloadStatistics/DownloadStatistics.html"
+                        title="previous chapter">Purpose</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../ExternalResources/ExternalResources.html"
+                        title="next chapter">External Resources</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Errors_and_solutions/Errors_and_solutions.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../ExternalResources/ExternalResources.html" title="External Resources"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../DownloadStatistics/DownloadStatistics.html" title="Purpose"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

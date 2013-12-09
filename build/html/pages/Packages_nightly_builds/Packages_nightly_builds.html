@@ -1,0 +1,224 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Nightly builds for packages &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Pagina principale" href="../Pagina principale/Pagina principale.html" />
+    <link rel="prev" title="OldVersion0.1.0" href="../OldVersion0.1.0/OldVersion0.1.0.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Pagina principale/Pagina principale.html" title="Pagina principale"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../OldVersion0.1.0/OldVersion0.1.0.html" title="OldVersion0.1.0"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="nightly-builds-for-packages">
+<h1>Nightly builds for packages<a class="headerlink" href="#nightly-builds-for-packages" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<p>Nightly builds packages are packages generated from the &#8220;default&#8221; branch of the repository with the latest updates. The goal is to provide up to date experimental packages in order people to test the new plugins.</p>
+<p>In this page, we explain how to set up a nightly build repository.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites :<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Python 2.6 or above</li>
+<li>Sqlalchemy</li>
+</ul>
+</div>
+<div class="section" id="create-environment">
+<h2>Create environment<a class="headerlink" href="#create-environment" title="Permalink to this headline">¶</a></h2>
+<p>Create a folder for nightly tools :
+.. code-block:: json</p>
+<blockquote>
+<div># mkdir nightly-tools
+# cd nightly-tools/</div></blockquote>
+<p>Create a /var/lock/domogik directory :
+{code()}
+# mkdir /var/lock/domogik
+{code}</p>
+<p>Create a local copy of the Domogik repository :
+.. code-block:: json</p>
+<blockquote>
+<div># hg clone <a class="reference external" href="http://hg.domogik.org/domogik/">http://hg.domogik.org/domogik/</a>
+or
+# hg clone /home/domogik/domogik/</div></blockquote>
+<p>This creates a nightly-tools/domogik folder. __Don&#8217;t use this repository for anything else :__ it will be automatically updated.</p>
+<p>Add domogik package to the python configuration :
+.. code-block:: json</p>
+<blockquote>
+<div># echo &#8220;/root/nightly-tools/domogik/src&#8221; &gt; /usr/local/lib/python2.5/dist-packages/domogik.pth</div></blockquote>
+<p>Create a folder for logs :
+.. code-block:: json</p>
+<blockquote>
+<div>mkdir ~/nightly-tools/log</div></blockquote>
+<p>Create a basic configuration file :
+.. code-block:: json</p>
+<blockquote>
+<div><p># mkdir /etc/domogik
+# echo &#8221;
+[domogik]
+log_dir_path = /root/nightly-tools/log/
+log_level = debug
+src_prefix = /root/nightly-tools/domogik/src/</p>
+<p>[database]
+db_prefix = foo</p>
+<p>[rest]
+rest_server_ip = 127.0.0.1
+rest_server_port = 666
+&#8221; &gt;  /etc/domogik/domogik.cfg</p>
+</div></blockquote>
+</div>
+<div class="section" id="create-script-nightly-sh">
+<h2>Create script nightly.sh<a class="headerlink" href="#create-script-nightly-sh" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-json"><pre>#!/bin/bash
+
+### Params
+DATE=$(date "+%Y-%m-%d %H:%M")
+VERSION=".dev"$(date "+%Y%m%d")
+REPO_URL=http://repo.domogik.org/
+TMP_DIR=/root/nightly-tools/tmp/
+SRC_DIR=/root/nightly-tools/domogik/
+LOG_DIR=/root/nightly-tools/log/
+
+
+### Generate nightly packages
+
+mkdir -p $TMP_DIR
+rm -Rf $TMP_DIR/*
+
+cd $SRC_DIR
+hg revert --all
+hg pull
+hg update default
+
+cd $SRC_DIR/src/tools/packages/
+pwd
+./create_all_nightly_packages.sh $TMP_DIR
+
+for fic in $TMP_DIR/*
+  do
+    echo $fic
+    wget --post-file=$fic "$REPO_URL/version/send?qqfile=$(basename $fic)&amp;amp;deploy=true&amp;amp;repository=nightly"
+done</pre>
+</div>
+</div>
+<div class="section" id="set-up-crontab">
+<h2>Set up crontab<a class="headerlink" href="#set-up-crontab" title="Permalink to this headline">¶</a></h2>
+<p>Edit crontab :
+.. code-block:: json</p>
+<blockquote>
+<div># crontab -e</div></blockquote>
+<p>Add this line :
+.. code-block:: json</p>
+<blockquote>
+<div>0 4 * * * /root/nightly-tools/nightly.sh &gt; /root/nightly-tools/log/last-build.log</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Nightly builds for packages</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites :</a></li>
+<li><a class="reference internal" href="#create-environment">Create environment</a></li>
+<li><a class="reference internal" href="#create-script-nightly-sh">Create script nightly.sh</a></li>
+<li><a class="reference internal" href="#set-up-crontab">Set up crontab</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../OldVersion0.1.0/OldVersion0.1.0.html"
+                        title="previous chapter">OldVersion0.1.0</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Pagina principale/Pagina principale.html"
+                        title="next chapter">Pagina principale</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Packages_nightly_builds/Packages_nightly_builds.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Pagina principale/Pagina principale.html" title="Pagina principale"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../OldVersion0.1.0/OldVersion0.1.0.html" title="OldVersion0.1.0"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,232 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Purpose &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Plugin teleinfo" href="../plugin_teleinfo/plugin_teleinfo.html" />
+    <link rel="prev" title="Table of contents" href="../plugin_slim/plugin_slim.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_teleinfo/plugin_teleinfo.html" title="Plugin teleinfo"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_slim/plugin_slim.html" title="Table of contents"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="purpose">
+<h1>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h1>
+<p>This plugin allows sending SMS by the telephone bias of your operator.</p>
+<p>Currently the plugin allows using the accounts with the operators:  SFR, Orange and Bouygues.</p>
+<p>If you have a subscription SMS limitless, that will not cost you anything of more.</p>
+<p>If you do not dispose limitless SMS, according to the operator have you the right to some free SMS.  The SMS outside of the free ones will be billed directly by the operator.</p>
+</div>
+<div class="section" id="package-installation-required">
+<h1>Package Installation required<a class="headerlink" href="#package-installation-required" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-json"><pre># sudo easy_install mechanize</pre>
+</div>
+</div>
+<div class="section" id="plugin-configuration">
+<h1>Plugin configuration<a class="headerlink" href="#plugin-configuration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="enabling-plugin">
+<h2>Enabling plugin<a class="headerlink" href="#enabling-plugin" title="Permalink to this headline">¶</a></h2>
+<p>You can enable plugin by using :
+.. code-block:: json</p>
+<blockquote>
+<div>dmgenplug sms</div></blockquote>
+<p>You just have to reload administration page to see the plugin in the list.</p>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="start-plugin">
+<h2>Start plugin<a class="headerlink" href="#start-plugin" title="Permalink to this headline">¶</a></h2>
+<p>You can now start the plugin (start button).</p>
+<div class="section" id="login">
+<h3>login<a class="headerlink" href="#login" title="Permalink to this headline">¶</a></h3>
+<p>At the level of puts it login:  It is necessary to indicate your login that allows you to connect you on the site of the operator.</p>
+</div>
+<div class="section" id="password">
+<h3>password<a class="headerlink" href="#password" title="Permalink to this headline">¶</a></h3>
+<p>At the level of puts it password:  It is necessary to indicate your password that allows you to connect you on the site of the operator.</p>
+</div>
+<div class="section" id="phone">
+<h3>phone<a class="headerlink" href="#phone" title="Permalink to this headline">¶</a></h3>
+<p>At the level of puts it phone:  It is necessary to indicate your telephone number.</p>
+<p>The telephone number must correspond to the one of the account.  (Certain operators carry out this check to transmit the SMS).</p>
+<p>Of more it is necessary to respect the following format:
+* 00336XXXXXXXX
+* 00337XXXXXXXX
+* +336XXXXXXXX
+* +336XXXXXXXX
+* 06XXXXXXXX
+* 07XXXXXXXX</p>
+</div>
+<div class="section" id="operator">
+<h3>operator<a class="headerlink" href="#operator" title="Permalink to this headline">¶</a></h3>
+<p>At the level of puts it operator:  It is necessary to indicate name of the operateur.  This point is very important for it is according to this parameter that the plugin will tip on the good operator for the transmission of the sms.</p>
+<p>Here the possible values:
+* orange
+* sfr
+* bouygues</p>
+</div>
+</div>
+</div>
+<div class="section" id="developper-notes">
+<h1>Developper Notes<a class="headerlink" href="#developper-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="create-a-device-sms-with-a-name-test-sms-by-example">
+<h2>Create a device sms with a name test_sms by example<a class="headerlink" href="#create-a-device-sms-with-a-name-test-sms-by-example" title="Permalink to this headline">¶</a></h2>
+<p>So create a widget server with the same name test_sms</p>
+<p>in the last type url : IP:40405/command/communication/test_sms/send_sms/06XXXXXXXX/votre_message</p>
+</div>
+<div class="section" id="how-the-online-plugin-to-test-of-order">
+<h2>How the online plugin to test of order?<a class="headerlink" href="#how-the-online-plugin-to-test-of-order" title="Permalink to this headline">¶</a></h2>
+<p>In a final one, since the catalog xpl/bin it is necessary to launch the order.
+.. code-block:: json</p>
+<blockquote>
+<div>./sms.py -f</div></blockquote>
+<p>In a final other, since the catalog xpl/bin it is necessary to launch the order.
+.. code-block:: json</p>
+<blockquote>
+<div>./send.py xpl-cmnd sendmsg.basic “to=XXX,body=YYYYY&#8221;</div></blockquote>
+<p>where XXX is the number of the addressee and where YYYYY is the message that must be transmitted</p>
+<div class="section" id="xpl-schema">
+<h3>xPL schema<a class="headerlink" href="#xpl-schema" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a href="#id3"><span class="problematic" id="id4">`sendmsg.basic &lt;http://xplproject.org.uk/wiki/index.php?title=Schema\_-\_SENDMSG.BASIC&gt;`_</span></a></li>
+</ul>
+<p>!!!!Message to send to plugin for send SMS to receiver
+To ask a plugin to send a SMS, you should send this __xpl-<a href="#id1"><span class="problematic" id="id2">cmnd__</span></a> message :
+.. code-block:: json</p>
+<blockquote>
+<div>SENDMSG.BASIC
+{
+to=&lt;receiver phone number&gt;
+body=&lt;message&gt;g
+}</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Purpose</a></li>
+<li><a class="reference internal" href="#package-installation-required">Package Installation required</a></li>
+<li><a class="reference internal" href="#plugin-configuration">Plugin configuration</a><ul>
+<li><a class="reference internal" href="#enabling-plugin">Enabling plugin</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#start-plugin">Start plugin</a><ul>
+<li><a class="reference internal" href="#login">login</a></li>
+<li><a class="reference internal" href="#password">password</a></li>
+<li><a class="reference internal" href="#phone">phone</a></li>
+<li><a class="reference internal" href="#operator">operator</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#developper-notes">Developper Notes</a><ul>
+<li><a class="reference internal" href="#create-a-device-sms-with-a-name-test-sms-by-example">Create a device sms with a name test_sms by example</a></li>
+<li><a class="reference internal" href="#how-the-online-plugin-to-test-of-order">How the online plugin to test of order?</a><ul>
+<li><a class="reference internal" href="#xpl-schema">xPL schema</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../plugin_slim/plugin_slim.html"
+                        title="previous chapter">Table of contents</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_teleinfo/plugin_teleinfo.html"
+                        title="next chapter">Plugin teleinfo</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/plugin_sms/plugin_sms.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_teleinfo/plugin_teleinfo.html" title="Plugin teleinfo"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_slim/plugin_slim.html" title="Table of contents"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

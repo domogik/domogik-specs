@@ -1,0 +1,316 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Release process &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Log in (and eventually create an account if you don’t have one)" href="../ReportABug/ReportABug.html" />
+    <link rel="prev" title="Registered HomePage" href="../Registered HomePage/Registered HomePage.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../ReportABug/ReportABug.html" title="Log in (and eventually create an account if you don’t have one)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Registered HomePage/Registered HomePage.html" title="Registered HomePage"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="release-process">
+<h1>Release process<a class="headerlink" href="#release-process" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="terms">
+<h2>Terms<a class="headerlink" href="#terms" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>version : 0.1.0, 0.2.0, 0.2.1, ...</li>
+<li>release : 0.2.0 alpha1, 0.2.0 alpha2, 0.2.0 beta1</li>
+</ul>
+</div>
+<div class="section" id="faq">
+<h2>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="where-do-we-do-developments">
+<h3>Where do we do developments ?<a class="headerlink" href="#where-do-we-do-developments" title="Permalink to this headline">¶</a></h3>
+<p>New developments (except for plugins/external members) must be done in dedicated branches. When a development is ready/tested it can be merged in the &#8220;default&#8221; branch.</p>
+</div>
+<div class="section" id="where-do-we-do-bugfixes">
+<h3>Where do we do bugfixes ?<a class="headerlink" href="#where-do-we-do-bugfixes" title="Permalink to this headline">¶</a></h3>
+<p>Bugfixes are done in &#8220;default&#8221; branch. If needed, bugfixes will be merged in the appropriate branches (releases or developments).</p>
+</div>
+<div class="section" id="what-is-the-purpose-of-the-default-branch">
+<h3>What is the purpose of the default branch ?<a class="headerlink" href="#what-is-the-purpose-of-the-default-branch" title="Permalink to this headline">¶</a></h3>
+<p>The default branch is the &#8220;version+1&#8221;. It should be kept as stable as possible in order not to block plugins developpers. Only these tasks may be done on this branch :
+* plugins development
+* bugfixes
+* merge from development branches (for finished/tested developments only!!)</p>
+</div>
+<div class="section" id="when-do-we-create-a-branch">
+<h3>When do we create a branch ?<a class="headerlink" href="#when-do-we-create-a-branch" title="Permalink to this headline">¶</a></h3>
+<p>We create a branch for the version (&#8220;0.1&#8221;, &#8220;0.2&#8221;) when the first alpha/beta is released. In this branch, we will tag all the releases (&#8220;0.2.0 alpha1&#8221;, &#8220;0.2.0 alpha2&#8221;, ...)
+Merging rules
+* All fixes are done on &#8220;default&#8221; branch
+* A fix needed for another branch must be merged to this branch from default</p>
+</div>
+</div>
+<div class="section" id="lifecycle-of-a-version">
+<h2>Lifecycle of a version<a class="headerlink" href="#lifecycle-of-a-version" title="Permalink to this headline">¶</a></h2>
+<p>A Domogik version follows the several steps :
+* specifications
+* development
+* tests and fixes
+** tests
+** alpha1
+** tests
+** alpha2
+** ...
+** tests
+** beta1
+** ...
+** final release
+* delivery to public</p>
+<p>We are describing here an overview of what has to be done in the version process. Please see ((ReleaseProcess|#Detail_of_the_operations|the detail of the operations)) at the bottom of this page.</p>
+<div class="section" id="alpha-versions">
+<h3>Alpha versions<a class="headerlink" href="#alpha-versions" title="Permalink to this headline">¶</a></h3>
+<p>Alpha are versions where all main development has been done. There may be some bugs or some partial features.</p>
+<p>!!!!Generate the first alpha of the release 0.2.0
+* Create a branch named 0.2 (not 0.2.0!!!) from the branch default
+* Create a tag 0.2.0-alpha1 on this new branch
+* Create a .tar.gz package tagged as &#8220;0.2.0-alpha1&#8221;
+* Put the package on the ((Download)) page in __Test <a href="#id1"><span class="problematic" id="id2">releases__</span></a> chapter
+* Create the version 0.2.0-alpha1 version in the tracker
+* Start the test campaign</p>
+<p>!!!!Generate the others alpha
+* After all bugs on the previous alpha has been fixed, create a tag 0.2.0-alpha2 on the 0.2 branch
+* Create a .tar.gz package tagged as &#8220;0.2.0-alpha2&#8221;
+* ...</p>
+<p>!!!!Report/fix a bug/ticket
+* In the tracker / administration / customized fields / Version, in the list add the version that will be delivered (so that future bugs can be put for this version).
+* Bugs should be reported in the dedicated version.
+* Bugs have to be fixed in the 0.2 branch.
+* At the end of the version, all fixes must be merged on the default branch</p>
+</div>
+<div class="section" id="beta-and-candidate-rc-versions">
+<h3>Beta and candidate (RC) versions<a class="headerlink" href="#beta-and-candidate-rc-versions" title="Permalink to this headline">¶</a></h3>
+<p>A beta version is a version where all developments are finished and all features should be functionnal.
+A candidate version is a version which has been tested and seems to be a good candidate for the final version. This version&#8217;s goal is to check there is no more bugs.</p>
+<p>!!!!Generate the beta/Candidate version
+* After all bugs on the previous version has been fixed, create a tag 0.2.0-beta2/rc3 on the 0.2 branch
+* Create a .tar.gz package tagged as &#8220;0.2.0-beta2/rc3&#8221;
+* Put the package on the ((Download)) page in __Test <a href="#id1"><span class="problematic" id="id3">releases__</span></a> chapter
+* Create the version 0.2.0-beta2/rc3 version in the tracker
+* Start the test campaign</p>
+<p>!!!!Report/fix a bug/ticket
+* In the tracker / administration / customized fields / Version, in the list add the version that will be delivered (so that future bugs can be put for this version).
+* Bugs should be reported in the dedicated version.
+* Bugs have to be fixed in the &#8220;default&#8221; branch and have to be merged in the 0.2 branch.</p>
+</div>
+<div class="section" id="final-release">
+<h3>Final release<a class="headerlink" href="#final-release" title="Permalink to this headline">¶</a></h3>
+<p>The final release for public usage.</p>
+<p>!!!!Generate the version
+* In the tracker / administration / customized fields / Version, in the list add the version that will be delivered (so that future bugs can be put for this version).
+* After all bugs on the last candidate version has been fixed, create a tag 0.2.0 (yes, 0.2.0 !!) on the 0.2 branch
+* Create a .tar.gz package tagged as &#8220;0.2.0&#8221;
+* Put the package on the ((Download)) page in __Domogik <a href="#id1"><span class="problematic" id="id4">Core__</span></a> chapter
+* Communicate</p>
+</div>
+<div class="section" id="about-0-2-1-0-2-2">
+<h3>About 0.2.1, 0.2.2<a class="headerlink" href="#about-0-2-1-0-2-2" title="Permalink to this headline">¶</a></h3>
+<p>These versions will be about minor enhancements or fixes.</p>
+<p>!!!!Generate the version
+* Make the fixes/enhancements
+* Test them
+* Create a tag 0.2.1
+* Create a .tar.gz package tagged as &#8220;0.2.1&#8221;
+* Put the package on the ((Download)) page in __Domogik <a href="#id1"><span class="problematic" id="id5">Core__</span></a> chapter
+* Communicate</p>
+</div>
+<div class="section" id="how-to-do-the-different-actions">
+<h3>How to do the different actions<a class="headerlink" href="#how-to-do-the-different-actions" title="Permalink to this headline">¶</a></h3>
+<p>!!!!Make sure the code is up to date
+* Check that &#8216;&#8217;~np~src/domogik/common/__init__.py~/np~&#8217;&#8217; contains the current versions (database and application).
+* Check that &#8216;&#8217;install/upgrade_scripts.py&#8217;&#8217; contains all scripts to upgrade from previous versions to the current one.</p>
+<p>!!!!Create a branch from another one
+&#8216;&#8217;For more information about branches, see ((MercurialBranches|this page))&#8217;&#8216;.
+First, go into the __source__ branch (the branch from which you want to create the new branch) :
+.. code-block:: json</p>
+<blockquote>
+<div>$ hg update &lt;branch name&gt;</div></blockquote>
+<p>Then create the new branch and commit. Example :
+.. code-block:: json</p>
+<blockquote>
+<div>$ hg branch 0.1.0.alpha1
+marked working directory as branch 0.1.0.alpha1</div></blockquote>
+<p>Now, __complete the CHANGELOG <a href="#id1"><span class="problematic" id="id6">file__</span></a> with data that will be present in the mail announce of the release.</p>
+<p>And commit the new branch with its changelog :
+.. code-block:: json</p>
+<blockquote>
+<div>$ hg commit -m &#8220;Create branch 0.1.0.alpha1&#8221;</div></blockquote>
+<p>For the next push action, you will need to use the &#8220;-f&#8221; option because of the newly created branch :
+.. code-block:: json</p>
+<blockquote>
+<div>$ hg push -f # (or hg push &#8211;new-branch ?)</div></blockquote>
+<p>!!!!Create .tar.gz package
+Following operations have to be done in the appropriate branch :</p>
+<p>!!!!!Adapt package.sh file for release
+* check README file is OK for installation instructions
+* adapt exclusion patterns with uneccessary folders/files and things still in dev</p>
+<p>!!!!!Launch package.sh</p>
+<p>This script will :
+* set the log level to &#8216;&#8217;info&#8217;&#8217; in domogik.cfg sample file
+* set the version in setup.py
+* remove choice for &#8216;&#8217;develop&#8217;&#8217; mode in install.sh
+* create a &#8216;&#8217;.tgz&#8217;&#8217; file in your &#8216;&#8217;/tmp&#8217;&#8217; directory</p>
+<p>Launch the script, and get the .tgz file.</p>
+<p>Example
+.. code-block:: json</p>
+<blockquote>
+<div>$ ./package.sh tip 0.2.0-alpha1
+Generate package...
+Package successfully created : /tmp/domogik-temp.tgz
+Package extracted in post processing path : /tmp/domogik-post-12089
+Install.sh updated : force install mode
+domogik.cfg updated : force info log level
+setup.py, release : release number updated
+Final package generated : /tmp/domogik-0.2.0-alpha1.tgz</div></blockquote>
+<p>This will create a package for the tip revision (the last in branch). Release is set to 0.2.0-alpha1.
+You can use ./package.sh 0f090a8a6a3b 0.2.0-alpha1&#8221; to create a package for a specific revision (0f090a8a6a3b here).</p>
+<p>Commit updates made to __package.sh__ :
+.. code-block:: json</p>
+<blockquote>
+<div>$ hg commit -m &#8220;Package.sh for 0.2.0-alpha1&#8221;</div></blockquote>
+<p>!!!!Test campaign
+!!!!!Prepare test campaign
+Create a dedicated milestone in Trac. Example : 0.1.0 - alpha 1 (test campaign) for bug reports</p>
+<p>!!!!Test campaign
+((Test_campaigns|More information here))</p>
+<p>!!!!!Important tests
+They can be different between releases. Basically they are :
+* installation tests
+* main organization tests (house, areas, rooms creation)
+* main plugins tests (list, start, stop, configure)
+* main devices tests (create, affect a feature to a place, check that actuators and sensors work fine)
+* tests about bug fixed on last release</p>
+<p>!!!!Cherrypicking</p>
+<p>Cherrypicking is (here) the process that allows you to copy the modifications made from the &#8216;default&#8217; branch to a specific branch.</p>
+<p>All the bug fixing as to be made in the &#8216;default&#8217; branch.</p>
+<p>((Use_mercurial|#Cherrypicking|See here how to process))</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Release process</a><ul>
+<li><a class="reference internal" href="#terms">Terms</a></li>
+<li><a class="reference internal" href="#faq">FAQ</a><ul>
+<li><a class="reference internal" href="#where-do-we-do-developments">Where do we do developments ?</a></li>
+<li><a class="reference internal" href="#where-do-we-do-bugfixes">Where do we do bugfixes ?</a></li>
+<li><a class="reference internal" href="#what-is-the-purpose-of-the-default-branch">What is the purpose of the default branch ?</a></li>
+<li><a class="reference internal" href="#when-do-we-create-a-branch">When do we create a branch ?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lifecycle-of-a-version">Lifecycle of a version</a><ul>
+<li><a class="reference internal" href="#alpha-versions">Alpha versions</a></li>
+<li><a class="reference internal" href="#beta-and-candidate-rc-versions">Beta and candidate (RC) versions</a></li>
+<li><a class="reference internal" href="#final-release">Final release</a></li>
+<li><a class="reference internal" href="#about-0-2-1-0-2-2">About 0.2.1, 0.2.2</a></li>
+<li><a class="reference internal" href="#how-to-do-the-different-actions">How to do the different actions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Registered HomePage/Registered HomePage.html"
+                        title="previous chapter">Registered HomePage</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../ReportABug/ReportABug.html"
+                        title="next chapter">Log in (and eventually create an account if you don&#8217;t have one)</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Release_process/Release_process.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../ReportABug/ReportABug.html" title="Log in (and eventually create an account if you don’t have one)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Registered HomePage/Registered HomePage.html" title="Registered HomePage"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

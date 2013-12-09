@@ -1,0 +1,186 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Dépendance: &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Table of contents" href="../plugin_slim/plugin_slim.html" />
+    <link rel="prev" title="Plugin for the RFXCOM Usb Model" href="../plugin_rfxcom/plugin_rfxcom.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_slim/plugin_slim.html" title="Table of contents"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_rfxcom/plugin_rfxcom.html" title="Plugin for the RFXCOM Usb Model"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <p>Ce plugin permet de réaliser des tests logiques ou de valeur sur des devices et de lancer une action en fonction du résultat.</p>
+<div class="section" id="dependance">
+<h1>Dépendance:<a class="headerlink" href="#dependance" title="Permalink to this headline">¶</a></h1>
+<p>Le plugin n&#8217;a aucune dépendance à proprement parler, en fonction de ce que vous voudrez réaliser, il vous faudra ou non installer d&#8217;autres plugins.</p>
+<div class="section" id="attention-ce-plugin-etant-en-cours-de-developpement-et-fortement-lie-a-domoweb-il-vous-faut-aussi-la-version-dev-de-domoweb">
+<h2>Attention, ce plugin étant en cours de développement et fortement lié a Domoweb, il vous faut aussi la version &#8216;dev&#8217; de domoweb.<a class="headerlink" href="#attention-ce-plugin-etant-en-cours-de-developpement-et-fortement-lie-a-domoweb-il-vous-faut-aussi-la-version-dev-de-domoweb" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+<div class="section" id="installation-du-plugin">
+<h1>Installation du plugin:<a class="headerlink" href="#installation-du-plugin" title="Permalink to this headline">¶</a></h1>
+<p>Ce plugin est inclus dans les sources, pour l&#8217;activer:</p>
+<p>dmgenplug scene</p>
+</div>
+<div class="section" id="ajouter-une-regle">
+<h1>Ajouter une règle:<a class="headerlink" href="#ajouter-une-regle" title="Permalink to this headline">¶</a></h1>
+<p>Pour ajouter une règle, assurez vous que le plugin est lancé, puis rendez vous dans l&#8217;onglet &#8216;creator&#8217; de l&#8217;admin du plugin.</p>
+<p>{img fileId=&#8221;344&#8221;}</p>
+<p>Choisir un device à tester avec éventuellement une condition.</p>
+<p>Pour ajouter un autre device à tester cliquer sur &#8216;Add another device&#8217;.</p>
+<p>Une fois tous les devices devant déclencher le test ajoutés, renseigner le champ condition en utilisant les termes device1, device2 etc. (limité a 100)</p>
+<p>Des test pouvant être réalisés par exemple:
+device1 or device2 &#8211;&gt; device1 et device2 doivent avoir un test configuré
+device1 and device2 &#8211;&gt; device1 et device2 doivent avoir un test configuré
+device1 != device2 &#8211;&gt; device1 et device2 peuvent avoir un test configuré ou non
+(device1 and device2) or device3 &#8211;&gt; device1, device2 et device3 doivent avoir un test configurer
+(device1 &gt; device2) and device3 &#8211;&gt; seul device3 doit avoir un test configuré
+True  &#8211;&gt; dans ce cas dès qu&#8217;un message xpl-trig sera reçu pour l&#8217;un des device configurés, les actions &#8220;true&#8221; seront réalisées (idem si False mais avec les actions False)
+....</p>
+<p>Vous pouvez ensuite définir la ou les actions à réaliser, pour cela choisir sur quel état de la condition vous voulez réaliser l&#8217;action (True ou False) sélectionner le device à commander et sa valeur.</p>
+<p>Cliquer sur &#8220;Add another action&#8221; pour ajouter une autre action (limité a 100 au total)</p>
+<p>Option: vous pouvez choisir si la scène sera lancée automatiquement avec le plugin ou non. Cela permet de créer une scène qui devient active grâce a une autre scène.</p>
+<div class="section" id="cree-un-tache-avec-des-fonctions-basees-sur-l-heure">
+<h2>Crée un tache avec des fonctions basées sur l&#8217;heure:<a class="headerlink" href="#cree-un-tache-avec-des-fonctions-basees-sur-l-heure" title="Permalink to this headline">¶</a></h2>
+<p>Grace au plugin cron vous avez la possiblité de définir des ordres à certaines heures ou sur certaines dates.
+Pour l&#8217;utiliser dans le plugin Scene il vous faut un device a piloter, c&#8217;est pourquoi dans les devices de la technologie Scene vous trouverez un &#8220;Fake device&#8221; (un device fictif).</p>
+<p>Si vous voulez qu&#8217;en cas de grosse chaleur l&#8217;été vos volets se ferment, définissez une tache cron entre 2 dates qui mettra a true votre Fake device entre ces 2 dates.</p>
+<p>Ajouter ce fake device dans l&#8217;une des conditions d&#8217;une scene.</p>
+</div>
+<div class="section" id="exemple-d-utilisation">
+<h2>Exemple d&#8217;utilisation:<a class="headerlink" href="#exemple-d-utilisation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="arrosage-automatique-plugin-scene-et-plugin-cron">
+<h3>-Arrosage automatique (plugin Scene et plugin Cron):<a class="headerlink" href="#arrosage-automatique-plugin-scene-et-plugin-cron" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Crée un fake device &#8220;horraire arrosage&#8221; type scene.fake device</li>
+<li>Dans le plugin Cron crée une tache qui comprend les jours ou vous voulez arroser et la plage horraire sur laquel vous autorisé l&#8217;arrosage.</li>
+<li>Dans le plugin Scene selectionner votre device &#8220;horraire arrosage&#8221; test &#8216;=&#8217; et valeur &#8216;true&#8217;</li>
+<li>Ajouter eventuellement une autre condition, par exemple &#8220;capteur1.humidity&#8221; &lt; &#8216;20&#8217;</li>
+<li>Selectionner une commande &#8220;True&#8221;: &#8220;arrosage&#8221; à on et une commande &#8220;False&#8221; arrosage à &#8220;off&#8221;</li>
+</ul>
+</div>
+<div class="section" id="envoyer-un-sms-si-l-alarme-se-declanche-plugin-sms-et-plugin-scene">
+<h3>-Envoyer un sms si l&#8217;alarme se déclanche (plugin SMS et plugin Scene)<a class="headerlink" href="#envoyer-un-sms-si-l-alarme-se-declanche-plugin-sms-et-plugin-scene" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Dans le plugin scene selection le device représentant l&#8217;état déclenché de votre alarme</li>
+<li>dans une commande True selectionner &#8220;command line&#8221; et entrer la ligne chemincomplet/./send.py xpl-cmnd sendmsg.basic &#8220;to=yourphone,body=&#8221;votre message&#8221;</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Dépendance:</a><ul>
+<li><a class="reference internal" href="#attention-ce-plugin-etant-en-cours-de-developpement-et-fortement-lie-a-domoweb-il-vous-faut-aussi-la-version-dev-de-domoweb">Attention, ce plugin étant en cours de développement et fortement lié a Domoweb, il vous faut aussi la version &#8216;dev&#8217; de domoweb.</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation-du-plugin">Installation du plugin:</a></li>
+<li><a class="reference internal" href="#ajouter-une-regle">Ajouter une règle:</a><ul>
+<li><a class="reference internal" href="#cree-un-tache-avec-des-fonctions-basees-sur-l-heure">Crée un tache avec des fonctions basées sur l&#8217;heure:</a></li>
+<li><a class="reference internal" href="#exemple-d-utilisation">Exemple d&#8217;utilisation:</a><ul>
+<li><a class="reference internal" href="#arrosage-automatique-plugin-scene-et-plugin-cron">-Arrosage automatique (plugin Scene et plugin Cron):</a></li>
+<li><a class="reference internal" href="#envoyer-un-sms-si-l-alarme-se-declanche-plugin-sms-et-plugin-scene">-Envoyer un sms si l&#8217;alarme se déclanche (plugin SMS et plugin Scene)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../plugin_rfxcom/plugin_rfxcom.html"
+                        title="previous chapter">Plugin for the RFXCOM Usb Model</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_slim/plugin_slim.html"
+                        title="next chapter">Table of contents</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/plugin_scene/plugin_scene.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_slim/plugin_slim.html" title="Table of contents"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_rfxcom/plugin_rfxcom.html" title="Plugin for the RFXCOM Usb Model"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

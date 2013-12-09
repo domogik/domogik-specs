@@ -1,0 +1,238 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Use Case 1 - Address split in 2 sub addresses &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="{IMG(attId=”366”)}{IMG}" href="../Version0.1.0/Version0.1.0.html" />
+    <link rel="prev" title="Add a user to manage repository" href="../Ubuntu_repository/Ubuntu_repository.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Version0.1.0/Version0.1.0.html" title="{IMG(attId=”366”)}{IMG}"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Ubuntu_repository/Ubuntu_repository.html" title="Add a user to manage repository"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="use-case-1-address-split-in-2-sub-addresses">
+<h1>Use Case 1 - Address split in 2 sub addresses<a class="headerlink" href="#use-case-1-address-split-in-2-sub-addresses" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>In rfxcom plugin, there is an __ac.basic__ schema :
+.. code-block:</p>
+<div class="highlight-python"><pre>ac.basic
+{
+address=&lt;0x1..0x3ffffffff&gt;
+unit=&lt;1..16&gt;
+command=...
+...
+}</pre>
+</div>
+<p>To address the device, you must specify address AND unit. So /command must be able to use 2 addresses (address and unit) to create the xPL
+What has been done
+===================</p>
+<p>solved in 0.x.x-deviceparams
+the address is removed from a device config, now this can be configured by multiple values</p>
+</div>
+</div>
+<div class="section" id="use-case-2-multi-technology-plugins">
+<h1>Use Case 2 - Multi technology plugins<a class="headerlink" href="#use-case-2-multi-technology-plugins" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>Example<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Rfxcom handle several technologies : homeeasy, x10, ...
+Several technologies can need the same order (on, off, ...).</p>
+</div>
+<div class="section" id="what-has-been-done">
+<h2>What has been done<a class="headerlink" href="#what-has-been-done" title="Permalink to this headline">¶</a></h2>
+<p>solved in 0.x.x-deviceparams
+a plugin doens&#8217;t define a technology anymore, it only defines device_types</p>
+</div>
+</div>
+<div class="section" id="use-case-3-give-access-to-list-and-ressources-of-usages-by-rinor">
+<h1>Use case 3 - Give access to list and ressources of usages by RINOR<a class="headerlink" href="#use-case-3-give-access-to-list-and-ressources-of-usages-by-rinor" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>Example<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>All UIs may use new usages by getting then from RINOR (/usage/list, /usage/...) and also get the different icons with RINOR</p>
+</div>
+<div class="section" id="what-has-to-be-done">
+<h2>What has to be done<a class="headerlink" href="#what-has-to-be-done" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+<div class="section" id="use-case-4-group-of-features-virtual-devices">
+<h1>Use case 4 - Group of features/ Virtual devices<a class="headerlink" href="#use-case-4-group-of-features-virtual-devices" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="use-case-5-can-send-extra-attributes-with-a-command">
+<h1>Use case 5 - Can send extra attributes, with a command<a class="headerlink" href="#use-case-5-can-send-extra-attributes-with-a-command" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id3">
+<h2>Example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>For relay box (ipx800) the box has a unique address, so the command needs to send the action, AND the relay id
+For KNX the KNX datatype is required for conversion before sending to the bus</p>
+</div>
+<div class="section" id="id4">
+<h2>What has been done<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>solved in 0.x.x-deviceparams
+the address is removed from a device config, now this can be configured by multiple values</p>
+</div>
+</div>
+<div class="section" id="use-case-6-calculated-values">
+<h1>Use case 6 - Calculated values<a class="headerlink" href="#use-case-6-calculated-values" title="Permalink to this headline">¶</a></h1>
+<p>How to have calculated values based on features values, constants, formulas
+See forum topic for full details:
+<a class="reference external" href="http://forum.domogik.org/viewtopic.php?f=3&amp;amp;t=88&amp;amp;p=669#p669">http://forum.domogik.org/viewtopic.php?f=3&amp;amp;t=88&amp;amp;p=669#p669</a></p>
+</div>
+<div class="section" id="use-case-7-specific-target">
+<h1>Use case 7 - Specific Target<a class="headerlink" href="#use-case-7-specific-target" title="Permalink to this headline">¶</a></h1>
+<p>Some xpl equipment, like an arduino, could have multiple instance on the network.  The XPL protocol allows to target a specific instance of a device like:
+.. code-block:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">target</span><span class="o">=</span><span class="n">arduino</span><span class="o">-</span><span class="n">rgb</span><span class="o">.</span><span class="n">parentsbedroom</span>
+<span class="n">target</span><span class="o">=</span><span class="n">arduino</span><span class="o">-</span><span class="n">rgb</span><span class="o">.</span><span class="n">kitchen</span>
+</pre></div>
+</div>
+<p>But for the moment, Domogik permits only  broadcast target.</p>
+</div>
+<div class="section" id="use-case-8-multiples-states-command">
+<h1>Use case 8 - Multiples states command<a class="headerlink" href="#use-case-8-multiples-states-command" title="Permalink to this headline">¶</a></h1>
+<p>For group command (like OFF ALL), multiple responses can be received, with no direct link to the original command.
+Need to find a way to catch them all, and display a summary on UI.</p>
+<div class="section" id="id5">
+<h2>What has been done<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>solved in 0.x.x-deviceparams
+a device_type can have multiple sensors to catch all those states, or it can even have multiple xpl_stats linked to one sensor</p>
+</div>
+</div>
+<div class="section" id="use-case-9-the-up-down-and-stop">
+<h1>Use case 9 - The Up, Down and Stop<a class="headerlink" href="#use-case-9-the-up-down-and-stop" title="Permalink to this headline">¶</a></h1>
+<p>Shutters are managed using the 3 commands : up, down and stop. Need to have 3 commands in a feature to do it.</p>
+<div class="section" id="id6">
+<h2>What has been done<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>solved in 0.x.x-deviceparams
+a device_type can have multiple commands</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Use Case 1 - Address split in 2 sub addresses</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#use-case-2-multi-technology-plugins">Use Case 2 - Multi technology plugins</a><ul>
+<li><a class="reference internal" href="#id1">Example</a></li>
+<li><a class="reference internal" href="#what-has-been-done">What has been done</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#use-case-3-give-access-to-list-and-ressources-of-usages-by-rinor">Use case 3 - Give access to list and ressources of usages by RINOR</a><ul>
+<li><a class="reference internal" href="#id2">Example</a></li>
+<li><a class="reference internal" href="#what-has-to-be-done">What has to be done</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#use-case-4-group-of-features-virtual-devices">Use case 4 - Group of features/ Virtual devices</a></li>
+<li><a class="reference internal" href="#use-case-5-can-send-extra-attributes-with-a-command">Use case 5 - Can send extra attributes, with a command</a><ul>
+<li><a class="reference internal" href="#id3">Example</a></li>
+<li><a class="reference internal" href="#id4">What has been done</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#use-case-6-calculated-values">Use case 6 - Calculated values</a></li>
+<li><a class="reference internal" href="#use-case-7-specific-target">Use case 7 - Specific Target</a></li>
+<li><a class="reference internal" href="#use-case-8-multiples-states-command">Use case 8 - Multiples states command</a><ul>
+<li><a class="reference internal" href="#id5">What has been done</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#use-case-9-the-up-down-and-stop">Use case 9 - The Up, Down and Stop</a><ul>
+<li><a class="reference internal" href="#id6">What has been done</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Ubuntu_repository/Ubuntu_repository.html"
+                        title="previous chapter">Add a user to manage repository</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Version0.1.0/Version0.1.0.html"
+                        title="next chapter">{IMG(attId=&#8221;366&#8221;)}{IMG}</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/Uses_Case_for_v2/Uses_Case_for_v2.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Version0.1.0/Version0.1.0.html" title="{IMG(attId=”366”)}{IMG}"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Ubuntu_repository/Ubuntu_repository.html" title="Add a user to manage repository"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

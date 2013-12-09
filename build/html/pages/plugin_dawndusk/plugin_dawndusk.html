@@ -1,0 +1,192 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Prerequisites &mdash; Domogik specifications 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Domogik specifications 0.1 documentation" href="../../index.html" />
+    <link rel="next" title="Plugin demo" href="../plugin_demo/plugin_demo.html" />
+    <link rel="prev" title="plugin_cron_interface" href="../plugin_cron_interface/plugin_cron_interface.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../plugin_demo/plugin_demo.html" title="Plugin demo"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_cron_interface/plugin_cron_interface.html" title="plugin_cron_interface"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <p>The purpose of this plugin is to manage the dawn and dusk over XPL.
+It sends a dawn (or dusk) message over XPL when dawn (or dusk) occurs.
+It can also be asked to know if it is the day or the night.
+See documentation <a href="#id5"><span class="problematic" id="id6">`here &lt;http://xplproject.org.uk/wiki/index.php?title=Schema\_-\_DAWNDUSK.BASIC&gt;`_</span></a> for more details.</p>
+<div class="section" id="prerequisites">
+<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h1>
+<p>Normally you don&#8217;t need to do this, but ...
+* install the apscheduler extension for python:
+__sudo easy_install <a href="#id1"><span class="problematic" id="id2">apscheduler__</span></a>
+* install the pyephem package for python
+__sudo easy_install <a href="#id1"><span class="problematic" id="id3">pyephem__</span></a></p>
+</div>
+<div class="section" id="install-the-plugin">
+<h1>Install the plugin<a class="headerlink" href="#install-the-plugin" title="Permalink to this headline">¶</a></h1>
+<p>This plugin is available in the development sources. Follow this <a href="#id7"><span class="problematic" id="id8">`documentation|nocache &lt;http://wiki.domogik.org/Developers\_installation&gt;`_</span></a> to install them.
+Enable the plugin :
+__sudo dmgenplug -f <a href="#id1"><span class="problematic" id="id4">dawndusk__</span></a></p>
+</div>
+<div class="section" id="configure-and-start-the-plugin">
+<h1>Configure and start the plugin<a class="headerlink" href="#configure-and-start-the-plugin" title="Permalink to this headline">¶</a></h1>
+<p>{IMG(attId=&#8221;428&#8221;)}{IMG}</p>
+<p>You must specify the latitude and the longitude of your house. Use your GPS or Google maps to find them.
+If you have the cron plugin installed, you can use it instead of the internal one.</p>
+<p>You can add a list of devices that should be activated at dawn and deactivated at dusk (like your shutters).
+Here are the parameters :</p>
+<p>xpltype: the xpl type to use (ie xpl-cmnd)
+schema : the schema to use to send the command (ie x10.basic)
+addname : the name of the adress field (ie device)
+add : the adresse of the device (ie A1, 04-1)
+command : the name of the command field (ie command, level)
+dawn : Value of command when dawn event occurs (ie on, 0)
+dusk : Value of command when dusk event occurs (ie off, 255)
+dawnseconds : Value in +/- minutes after/before dawn event
+duskseconds : Value in +/- minutes after/before dusk event</p>
+<p>Save the configuration and start the plugin.
+That&#8217;s all.</p>
+</div>
+<div class="section" id="configuration-examples">
+<h1>Configuration examples<a class="headerlink" href="#configuration-examples" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="velbus-light">
+<h2>Velbus Light<a class="headerlink" href="#velbus-light" title="Permalink to this headline">¶</a></h2>
+<p>xpltype : xpl-cmnd
+schema : lighting.basic
+addname : device
+add : 04-1
+command : level
+dawn : 0
+dusk : 255</p>
+</div>
+<div class="section" id="velbus-shutter">
+<h2>Velbus Shutter<a class="headerlink" href="#velbus-shutter" title="Permalink to this headline">¶</a></h2>
+<p>xpltype : xpl-cmnd
+schema : shutter.basic
+addname : device
+add : 07-1
+command : command
+dawn : up
+dusk : down</p>
+</div>
+<div class="section" id="scene-fake-device">
+<h2>scene.Fake device<a class="headerlink" href="#scene-fake-device" title="Permalink to this headline">¶</a></h2>
+<p>xpltype : xpl-cmnd
+schema : scene.basic
+addname : number
+add : fake1 (the address of your scene.Fake device)
+command : command
+dawn : fake-true
+dusk : fake-false</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Prerequisites</a></li>
+<li><a class="reference internal" href="#install-the-plugin">Install the plugin</a></li>
+<li><a class="reference internal" href="#configure-and-start-the-plugin">Configure and start the plugin</a></li>
+<li><a class="reference internal" href="#configuration-examples">Configuration examples</a><ul>
+<li><a class="reference internal" href="#velbus-light">Velbus Light</a></li>
+<li><a class="reference internal" href="#velbus-shutter">Velbus Shutter</a></li>
+<li><a class="reference internal" href="#scene-fake-device">scene.Fake device</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../plugin_cron_interface/plugin_cron_interface.html"
+                        title="previous chapter">plugin_cron_interface</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../plugin_demo/plugin_demo.html"
+                        title="next chapter">Plugin demo</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pages/plugin_dawndusk/plugin_dawndusk.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../plugin_demo/plugin_demo.html" title="Plugin demo"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../plugin_cron_interface/plugin_cron_interface.html" title="plugin_cron_interface"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Domogik specifications 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Domogik team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
