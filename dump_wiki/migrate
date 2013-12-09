@@ -1,0 +1,55 @@
+#!/bin/bash
+
+if [ "$REAL" != "" ];then
+    REAL="-i"
+else
+    REAL=""
+fi
+find . -maxdepth 2 -type f |while read f; do
+    echo "Working on $f"
+
+    # Replace {maketoc}
+    # with .. toctree::
+    echo '`-> Replace {maketoc} with .. toctree::'
+    sed $REAL 's/^{maketoc.*$/.. toctree::\n\n/' $f
+
+     #Replace !xxxxxx by
+     #********
+     #xxxxxxx
+     #********
+    echo '`-> Replace first level header (!xxxxx)'
+    sed $REAL '/^![^!]\+/{s/^!//;h;s/./*/g;H;G;s/$/\n/}' $f
+
+    #Replace !!xxxxxxx by
+    #xxxxxxx
+    #=======
+    echo '`-> Replace second level header (!!xxxxx)'
+    sed $REAL '/^!![^!]\+/{s/^!!//g;h;s/[^!]/=/g;H;g;s/$/\n/}' $f
+
+    #Replace !!!xxxxxxx by
+    #xxxxxxxxx
+    #*********
+
+    echo '`-> Replace third level header (!!!xxxxx)'
+    sed $REAL '/^!!![^!]\+/{s/^!!!//g;h;s/[^!]/*/g;H;g;s/$/\n/}' $f
+
+    #Replace [http://xxxx| some desc] by
+    #`some desc <http://xxxxx>`_
+    echo '`-> Replace links [http://xxxx | description]'
+    sed $REAL '/\[ *http/{s/_/\\_/g;s/\[\([^|]\+\)|\(.*\)]/`\2 \<\1\>`_/g}' $f
+
+    #Replace '- xxxx' by
+    #* xxxxxxx
+
+    echo '`-> Replace dash lists with bullet (*) lists'
+    sed $REAL 's/^- /* /' $f
+
+    #Replace html code with their value
+    echo '`-> Replace html code with their value'
+    sed $REAL 's/&gt;/>/g;s/&lt;/</g;s/&quot;/"/g' $f
+
+    #Replace {CODE} blocks with
+    #.. code-block
+    echo '`-> Replace {CODE} with .. code-block'
+    sed $REAL '/{CODE(/,/{CODE}/{s/colors="\([^"]*\)",\?/ \1/;s/)}/\n    /;s/ln="1"//;s/{CODE(/.. code-block::\n\n/;/.. code-block::/b;s/^/    /;s/{CODE}/\n/}' $f
+done
