@@ -1,7 +1,5 @@
-*****************************
-Domogik's version numbering 
-*****************************
-.. toctree::
+!Domogik's version numbering 
+{maketoc}
 
 Domogik versions have this format : X.Y.Z
 
@@ -9,29 +7,21 @@ Domogik versions have this format : X.Y.Z
 * Y = Minor version
 * Z = See below 
 
-Alpha versions
-===============
-.. code-block::
-    x.y.z-alpha1
-    x.y.z-alpha2
-    ...
+!!Alpha versions
+{CODE()}x.y.z-alpha1
+x.y.z-alpha2
+...{CODE}
 
-Beta versions
-==============
-.. code-block::
-    x.y.z-beta1
-    x.y.z-beta2
-    ...
+!!Beta versions
+{CODE()}x.y.z-beta1
+x.y.z-beta2
+...{CODE}
 
-Release Candidate versions
-===========================
-.. code-block::
-    x.y.z-rc1
-    x.y.z-rc2
-    ...
+!!Release Candidate versions
+{CODE()}x.y.z-rc1
+x.y.z-rc2
+...{CODE}
 
-Stable versions
-================
-.. code-block::
-    x.y.z{CODE}
-    
+!!Stable versions
+{CODE()}x.y.z{CODE}
+

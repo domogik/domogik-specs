@@ -1,12 +1,8 @@
-**************
-PLCBUS plugin
-**************
-.. toctree::
+!PLCBUS plugin
+{maketoc}
 
 
-Developper Notes
-=================
+!!Developper Notes
 
-xPL schema
-***********
+!!!xPL schema
 See the end user documentation : http://docs.domogik.org/domogik/dev/en/technical/xpl/plcbus.basic.html

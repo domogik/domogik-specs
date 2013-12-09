@@ -33,9 +33,9 @@ find . -maxdepth 2 -type f |while read f; do
     echo '`-> Replace third level header (!!!xxxxx)'
     sed $REAL '/^!!![^!]\+/{s/^!!!//g;h;s/[^!]/*/g;H;g;}' $f
 
-    #Replace ` some desc <http://xxxx>`_ by
+    #Replace [http://xxxx| some desc] by
     #`some desc <http://xxxxx>`_
-    echo '`-> Replace links ` description <http://xxxx >`_'
+    echo '`-> Replace links [http://xxxx | description]'
     sed $REAL '/\[ *http/{s/_/\\_/g;s/\[\([^|]\+\)|\(.*\)]/`\2 \<\1\>`_/g}' $f
 
     #Replace '- xxxx' by
@@ -46,11 +46,10 @@ find . -maxdepth 2 -type f |while read f; do
 
     #Replace html code with their value
     echo '`-> Replace html code with their value'
-    sed $REAL 's/>/>/g;s/</</g;s/"/"/g' $f
+    sed $REAL 's/&gt;/>/g;s/&lt;/</g;s/&quot;/"/g' $f
 
     #Replace {CODE} blocks with
     #.. code-block
     echo '`-> Replace {CODE} with .. code-block'
-    sed $REAL '/.. code-block::/,/{CODE}/{s/ \([^]*\)",\?/ \1/;s/
-    /\n    /;s///;s/{CODE(/.. code-block::/;/.. code-block::/b;s/^/    /;s/{CODE}/\n/}' $f
-    done
+    sed $REAL '/{CODE(/,/{CODE}/{s/colors="\([^"]*\)",\?/ \1/;s/)}/\n    /;s/ln="1"//;s/{CODE(/.. code-block::/;/.. code-block::/b;s/^/    /;s/{CODE}/\n/}' $f
+done

@@ -1,7 +1,4 @@
 
-*****************
-Events handeling
-*****************
+!Events handeling
 Creating a event will now use the feature id
-.. code-block::
-    /events/request/new/<feature id 0>/<feature id 1>/<feature id 2>/....{CODE}
+{CODE()}/events/request/new/&lt;feature id 0&gt;/&lt;feature id 1&gt;/&lt;feature id 2&gt;/....{CODE}

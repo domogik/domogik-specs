@@ -1,16 +1,12 @@
-************************************
-Domogik installation for developers
-************************************
+!Domogik installation for developers
 __*** Please note that this document may often change as the project is under development.***__
-.. toctree::
+{maketoc}
 
-Difference between this page and the `official installation method page <http://docs.domogik.org/domogik/dev/en/>`_
-=================================================================================================================
+!!Difference between this page and the [http://docs.domogik.org/domogik/dev/en/|official installation method page]
 This page is about development version installation. Moreover, some tricks could be given here to customize Domogik for development purpose.
 The official installation method page give the way to install a released version of Domogik.
 
-Prerequisites
-==============
+!!Prerequisites
 
 * Python 2.6/2.7
 * Python 2.6/2.7 development package (for ssl support compile with setup.py). You can also directly install python-openssl.
@@ -19,193 +15,166 @@ Prerequisites
 
 There may be additional dependencies based upon your selection of plugins.  We recommend that you take care of these after you have installed Domogik, before you activate new plugins.
 
-Installation
-=============
+!!Installation
 ''Notice : if you want to install Domogik on several hosts, see the chapter __Installation on secondary hosts__ for the secondary hosts''
 
-Notes
-******
+!!!Notes
 * These examples assume Debian or another apt-based distribution (Ubuntu, etc). Adjust accordingly (eg, use yum instead if using RedHat-based distribution).
 * Domogik includes its own xPL hub. If you are running another xPL hub on your target machine (xpl-perl, etc), you will want to stop it before installation. 
 
 (TODO: Mac installation)
 
-In a nutshell
-**************
+!!!In a nutshell
 !!!!Dependencies
 Python 2.6 or above is required; note that Python version 3.x is not supported.  
 
-.. code-block::
-    
-    # apt-get install python2.7
-    # ln -sf /usr/bin/python2.7 /usr/bin/python
-    
+{CODE()}
+# apt-get install python2.7
+# ln -sf /usr/bin/python2.7 /usr/bin/python
+{CODE}
 
 Even if you have python2.6 or higher installed, check development package is also installed, or do :
-.. code-block::
-                                              
-    # apt-get install python2.7-dev gcc
-    
+{CODE()}                                          
+# apt-get install python2.7-dev gcc
+{CODE}
 
 Install SSL librairies
-.. code-block::
-    
-    # apt-get install libssl-dev 
-    
+{CODE()}
+# apt-get install libssl-dev 
+{CODE}
 
 Install librairies for MySQL access and command line client :
-.. code-block::
-    
-    # apt-get install libmysqlclient-dev mysql-client
-    
+{CODE()}
+# apt-get install libmysqlclient-dev mysql-client
+{CODE}
 
 !!!!MySQL server
 ''If you have already installed MySQL server, you will only have to create the Domogik database.''
 
 Install packages for MySQL server :
-.. code-block::
-    
-    # apt-get install mysql-server-5.0 libmysqlclient-dev
-    
+{CODE()}
+# apt-get install mysql-server-5.0 libmysqlclient-dev
+{CODE}
 Or if MySQL 5.1 is available on your Linux system :
-.. code-block::
-    
-    # apt-get install mysql-server-5.1
-    
+{CODE()}
+# apt-get install mysql-server-5.1
+{CODE}
 
 Log on MySQL database as root user :
-.. code-block::
-    
-    $ mysql -u root -p
-    Enter password: 
-    
+{CODE()}
+$ mysql -u root -p
+Enter password: 
+{CODE}
 
-Create a database "domogik" :
-.. code-block::
-    
-    mysql> CREATE DATABASE domogik;
-    Query OK, 1 row affected (0.00 sec)
-    
+Create a database &quot;domogik&quot; :
+{CODE()}
+mysql&gt; CREATE DATABASE domogik;
+Query OK, 1 row affected (0.00 sec)
+{CODE}
 
-Create user "domogik" to use the new database :
-.. code-block::
-    
-    mysql> GRANT ALL PRIVILEGES ON domogik.* to domogik@localhost IDENTIFIED BY 'domopass';
-    Query OK, 0 rows affected (0.00 sec)
-    
-    mysql>exit
-    
+Create user &quot;domogik&quot; to use the new database :
+{CODE()}
+mysql&gt; GRANT ALL PRIVILEGES ON domogik.* to domogik@localhost IDENTIFIED BY 'domopass';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt;exit
+{CODE}
 
 !!!!Install the Domogik development release
 Install mercurial package :
-.. code-block::
-    
-    # apt-get install mercurial
-    
+{CODE()}
+# apt-get install mercurial
+{CODE}
 
 Grab the sources (with mercurial, see ((Use_mercurial|here for more information))) :
-.. code-block::
-    
-    git clone --recursive https://github.com/domogik/domogik.git
-    
+{CODE()}
+git clone --recursive https://github.com/domogik/domogik.git
+{CODE}
 
 Go on the appropriate branch (example : 0.3) : 
 
-.. code-block::
-    
-    git checkout 0.3
-    
+{CODE()}
+git checkout 0.3
+{CODE}
 
 Run the installation script :
 ''Note : during installation, a new user will be created if necessary.''
-.. code-block::
-    
-    $ cd domogik
-    $ sudo ./install.sh
-    
+{CODE()}
+$ cd domogik
+$ sudo ./install.sh
+{CODE}
 
 You will be asked for the following questions :
 
-.. code-block::
-    
-    Which install mode do you want (choose develop if you don't know)? [install/develop] :
-    
+{CODE()}
+Which install mode do you want (choose develop if you don't know)? [install/develop] :
+{CODE}
 For development purpose, you should answer develop.
 
-.. code-block::
-    
-    If you want to use a proxy, please set it now. It will only be used during the installation. (ex: http://1.2.3.4:8080)
-    
+{CODE()}
+If you want to use a proxy, please set it now. It will only be used during the installation. (ex: http://1.2.3.4:8080)
+{CODE}
 During the installation, some python librairies could be downloaded. If you use a proxy, you must set it here.
 
-.. code-block::
-    
-    Which user will run domogik, it will be created if it does not exist yet? (default : domogik)
-    
+{CODE()}
+Which user will run domogik, it will be created if it does not exist yet? (default : domogik)
+{CODE}
 System user that will launch Domogik. This user should have read and write permissions to sources. Ideally, choose the user with which you grab the sources.
 
-.. code-block::
-    
-    You already have Domogik configuration files. Do you want to keep them ? [Y/n]
-    
+{CODE()}
+You already have Domogik configuration files. Do you want to keep them ? [Y/n]
+{CODE}
 If you already have Domogik configuration files, you will be asked for keeping them or not.
 
-.. code-block::
-    
-    Which interface do you want to bind to? (default : lo) :
-    
+{CODE()}
+Which interface do you want to bind to? (default : lo) :
+{CODE}
 To use Domogik only on a local computer, choose __lo__. To access it from another computer or use multi host features, choose appropriate network interface (e.g. : __eth0__).
 
-.. code-block::
-    
-    If you need to reach Domogik from outside, you can specify an IP now :
-    
+{CODE()}
+If you need to reach Domogik from outside, you can specify an IP now :
+{CODE}
 To use to access to Domogik from internet. You can set your public IP here (depending on your configuration, you could need to create a port redirection on your router.
 Domogik is not yet secure, use this with caution!
 
-.. code-block::
-    
-    You need to have a working MySQL server with a domogik user and database.       
-    You can create it using these commands (as MySQL admin user) :                  
-     > CREATE DATABASE domogik;                                                     
-     > GRANT ALL PRIVILEGES ON domogik.* to domogik@localhost IDENTIFIED BY 'randompassword';                                                                       
-    Press Enter to continue the installation when your setup is ok.
-    
+{CODE()}
+You need to have a working MySQL server with a domogik user and database.       
+You can create it using these commands (as MySQL admin user) :                  
+ &gt; CREATE DATABASE domogik;                                                     
+ &gt; GRANT ALL PRIVILEGES ON domogik.* to domogik@localhost IDENTIFIED BY 'randompassword';                                                                       
+Press Enter to continue the installation when your setup is ok.
+{CODE}
 If you have installed MySQL server and create the Domogik database, just press Enter.
 
-.. code-block::
-    
-    Please set your MySQL parameters.                                               
-    Username : domogik                                                              
-    Password : domopass                                                             
-    Port [3306] :                                                                   
-    Host [localhost] :                                                              
-    Database name [domogik]:
-    
+{CODE()}
+Please set your MySQL parameters.                                               
+Username : domogik                                                              
+Password : domopass                                                             
+Port [3306] :                                                                   
+Host [localhost] :                                                              
+Database name [domogik]:
+{CODE}
 Set connection informations for the database.
 
-.. code-block::
-    
-    Your database already contains some tables, do you want to drop them. If you choose No, new items will *NOT* be installed ? [Y/n]
-    
+{CODE()}
+Your database already contains some tables, do you want to drop them. If you choose No, new items will *NOT* be installed ? [Y/n]
+{CODE}
 In case the Domogik database is not empty (it is not the first installation), you will get this warning. Depending on your needs choose the appropriate option. Y choice will delete all existing data.
 
-.. code-block::
-    
-    Everything seems to be good, Domogik should be installed correctly.             
-    I will start the test_config.py script to check it.                             
-    Please press Enter when ready.
-    
+{CODE()}
+Everything seems to be good, Domogik should be installed correctly.             
+I will start the test_config.py script to check it.                             
+Please press Enter when ready.
+{CODE}
 Just press enter to start the check script.
 
-.. code-block::
-    
-     ==> ================================================== <==                     
-     ==>  Everything seems ok, you should be able to start  <==                     
-     ==>       Domogik with /etc/init.d/domogik start       <==                     
-     ==>             or /etc/rc.d/domogik start             <==                     
-     ==> ================================================== <==
-    
+{CODE()}
+ ==&gt; ================================================== &lt;==                     
+ ==&gt;  Everything seems ok, you should be able to start  &lt;==                     
+ ==&gt;       Domogik with /etc/init.d/domogik start       &lt;==                     
+ ==&gt;             or /etc/rc.d/domogik start             &lt;==                     
+ ==&gt; ================================================== &lt;==
+{CODE}
 Installation is finished and seems to be OK.
 
 !!!!Optional : postgresql (instead of MySQL)
@@ -215,20 +184,18 @@ If you wish to use postgresql instead of MySQL
 
 !!!!Make Domogik start with your computer
 For Debian or Ubuntu systems:
-.. code-block::
-    
-    # update-rc.d domogik defaults
-    
+{CODE()}
+# update-rc.d domogik defaults
+{CODE}
 
 For Archlinux:
 Add ''@domogik'' at the very end of the line starting with ''DAEMON''.
 
 !!!!Start domogik
 Then start Domogik!
-.. code-block::
-    
-    sudo /etc/init.d/domogik start
-    
+{CODE()}
+sudo /etc/init.d/domogik start
+{CODE}
 
 It will start : 
 * The xpl hub
@@ -238,44 +205,36 @@ It will start :
 Domogik is mutli-thread, so it could take some times before you can connect to it.
 
 You can use the following command to manage domogik :
-.. code-block::
-    
-    sudo /etc/init.d/domogik start|stop|restart|status
-    
+{CODE()}
+sudo /etc/init.d/domogik start|stop|restart|status
+{CODE}
 
 Developpers can use the extended command (they are more verbose) to start/stop domogik and utilities:
-.. code-block::
-    
-    sudo /etc/init.d/domogik start|stop|restart|status xpl
-    sudo /etc/init.d/domogik start|stop|restart|status manager
-    
+{CODE()}
+sudo /etc/init.d/domogik start|stop|restart|status xpl
+sudo /etc/init.d/domogik start|stop|restart|status manager
+{CODE}
 
-Logs
-*****
+!!!Logs
 A file named __domogik__ is installed in __/etc/logrotate.d/__. You can update it to change the logrotate configuration.
 
 
-Next step ?
-============
-* `Domoweb installation <http://docs.domogik.org/domoweb/dev/en/installation/index.html>`_ !
+!!Next step ?
+* [http://docs.domogik.org/domoweb/dev/en/installation/index.html|Domoweb installation] !
 
 
-There is an error!!!
-*****************!!!*
+!!!There is an error!!!
 Please, feel free to consult ((Errors_and_solutions)) page : there may be a solution :)
 
-Installation on secondary hosts
-================================
+!!Installation on secondary hosts
 Domogik is multihost, but the installation will be different between the main host (which will have the database manager and rinor activated) and the others hosts (which will have only the manager activated).
 
-Dependencies
-*************
+!!!Dependencies
 Just do the same actions you did for the main host
 
 !!!!Install the Domogik development release
 Do the same actions you did for the main host, except for the __install.sh__ shell script : to launch install for a secondary host, run the installation script with the __--secondary__ option :
-.. code-block::
-    
-    $ cd domogik
-    $ sudo ./install.sh --secondary
-    
+{CODE()}
+$ cd domogik
+$ sudo ./install.sh --secondary
+{CODE}

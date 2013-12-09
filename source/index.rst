@@ -9,7 +9,10 @@ Welcome to Domogik specifications's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+    :maxdepth: 1
+    :glob:
+
+    pages/*
 
 
 

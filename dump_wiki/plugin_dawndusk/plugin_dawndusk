@@ -1,25 +1,22 @@
 The purpose of this plugin is to manage the dawn and dusk over XPL.
 It sends a dawn (or dusk) message over XPL when dawn (or dusk) occurs.
 It can also be asked to know if it is the day or the night.
-See documentation `here <http://xplproject.org.uk/wiki/index.php?title=Schema\_-\_DAWNDUSK.BASIC>`_ for more details.
+See documentation [http://xplproject.org.uk/wiki/index.php?title=Schema_-_DAWNDUSK.BASIC|here] for more details.
 
-Prerequisites
-==============
+!!Prerequisites
 Normally you don't need to do this, but ...
-* install the apscheduler extension for python:
+- install the apscheduler extension for python:
 __sudo easy_install apscheduler__
-* install the pyephem package for python
+- install the pyephem package for python
 __sudo easy_install pyephem__
 
-Install the plugin
-===================
-This plugin is available in the development sources. Follow this `documentation|nocache <http://wiki.domogik.org/Developers\_installation>`_ to install them.
+!!Install the plugin
+This plugin is available in the development sources. Follow this [http://wiki.domogik.org/Developers_installation|documentation|nocache] to install them.
 Enable the plugin :
 __sudo dmgenplug -f dawndusk__
 
-Configure and start the plugin
-===============================
-{IMG(attId="428")}{IMG}
+!!Configure and start the plugin
+{IMG(attId=&quot;428&quot;)}{IMG}
 
 You must specify the latitude and the longitude of your house. Use your GPS or Google maps to find them.
 If you have the cron plugin installed, you can use it instead of the internal one.
@@ -41,10 +38,8 @@ duskseconds : Value in +/- minutes after/before dusk event
 Save the configuration and start the plugin.
 That's all.
 
-Configuration examples
-=======================
-Velbus Light
-*************
+!!Configuration examples
+!!!Velbus Light
 xpltype : xpl-cmnd
 schema : lighting.basic
 addname : device
@@ -53,8 +48,7 @@ command : level
 dawn : 0
 dusk : 255
 
-Velbus Shutter
-***************
+!!!Velbus Shutter
 xpltype : xpl-cmnd
 schema : shutter.basic
 addname : device
@@ -63,8 +57,7 @@ command : command
 dawn : up
 dusk : down
 
-scene.Fake device
-******************
+!!!scene.Fake device
 xpltype : xpl-cmnd
 schema : scene.basic
 addname : number

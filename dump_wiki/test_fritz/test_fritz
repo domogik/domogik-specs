@@ -1,11 +1,7 @@
-********
- Part 1
-********
+! Part 1
 
 bla bla bla
 
-*******
-Part 2
-*******
+!Part 2
 
 foo foo foo

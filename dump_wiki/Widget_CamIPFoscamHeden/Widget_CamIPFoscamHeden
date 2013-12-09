@@ -10,7 +10,7 @@ Crée un device dans domogik
 
 Renseigner dans l'adresse du device:
 
- "http://<IPCAMERA>:<PORT>/user=utilisateur&amp;pwd=motdepasse"
+ &quot;http://&lt;IPCAMERA&gt;:&lt;PORT&gt;/user=utilisateur&amp;pwd=motdepasse&quot;
 
 A Remplacer utilisateur et motdepasse par les informations que vous avez rentrer dans la camera.
 

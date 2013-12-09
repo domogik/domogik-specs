@@ -1,23 +1,19 @@
-*******************************
-Types for generating UI fields
-*******************************
+!Types for generating UI fields
 ||__Created:__|8/07/2012
 __Creator:__|Ferllings
 __Reviewers:__|
-__Status:__|{GAUGE(value=>50, max=>100, label=>''draft'', perc=>true, labelsize=>50, height=>20, color=>green, bgcolor=>#EEEEEE)}{GAUGE}
+__Status:__|{GAUGE(value=&gt;50, max=&gt;100, label=&gt;''draft'', perc=&gt;true, labelsize=&gt;50, height=&gt;20, color=&gt;green, bgcolor=&gt;#EEEEEE)}{GAUGE}
 __Target:__|?
 __References:__|((Spec_device_template|Device template))||
-.. toctree::
+{maketoc}
 
 The following types are used to define a data value type and generate the appropriate field in the UI.
 
- Type: boolean
-===============
+!! Type: boolean
 Validation: Validates that the value is True (e.g. the check box is checked) if the field has required=true.
 Errors: required
 
- Type: string
-==============
+!! Type: string
 Parameters:
 *max_length:int (optional)
 *min_length:int (optional)
@@ -26,44 +22,38 @@ Parameters:
 Validation: Validates max_length or min_length, if they are provided. Otherwise, all inputs are valid.
 Errors: required, max_length, min_length
 
- Type: choice
-==============
+!! Type: choice
 Parameters:
 *choices : An iterable (e.g., a list or tuple) of 2-tuples to use as choices for this field.
 Validation: Validates that the given value exists in the list of choices.
 Errors: required, invalid_choice
 
- Type: multiplechoice
-======================
+!! Type: multiplechoice
 Will return a list of values separated with ','
 Parameters:
 *choices : An iterable (e.g., a list or tuple) of 2-tuples to use as choices for this field.
 Validation: Validates that the given values exists in the list of choices.
 Errors: required, invalid_choice
 
- Type: date
-============
+!! Type: date
 format is 'DD/MM/YYYY'
 Parameters:
 Validation: Validates that the given value respect the particular date format.
 Errors: required, invalid
 
- Type: time
-============
+!! Type: time
 format is 'HH:MM:SS'
 Parameters:
 Validation: Validates that the given value respect the particular time format.
 Errors: required, invalid
 
- Type: datetime
-================
+!! Type: datetime
 format is 'YYYY-MM-DD HH:MM:SS'
 Parameters:
 Validation: Validates that the given value respect the particular datetime format.
 Errors: required, invalid
 
- Type: float
-=============
+!! Type: float
 Parameters:
 *max_value:int (optional)
 *min_value:int (optional)
@@ -71,8 +61,7 @@ These control the range of values permitted in the field.
 Validation: Validates that the given value is an float.
 Errors: required, invalid, max_value, min_value
 
- Type: integer
-===============
+!! Type: integer
 Parameters:
 *max_value:int (optional)
 *min_value:int (optional)
@@ -80,21 +69,18 @@ These control the range of values permitted in the field.
 Validation: Validates that the given value is an integer.
 Errors: required, invalid, max_value, min_value
 
- Type: email
-=============
+!! Type: email
 Validation: Validates that the given value is a valid email address.
 Parameters:
 *max_length:int (optional)
 *min_length:int (optional)
 Errors: required, invalid
 
- Type: ipv4
-============
+!! Type: ipv4
 Validation: Validates that the given value is a valid IPv4 address.
 Errors: required, invalid
 
- Type: url
-===========
+!! Type: url
 Parameters:
 *max_length:int (optional)
 *min_length:int (optional)

@@ -1,67 +1,57 @@
-**************
-Plugin ipx800
-**************
+!Plugin ipx800
 
 This plugin documentation is now available on [http://docs.domogik.org/plugin/ipx800/dev/en/]
 
-*****************
-Developper notes
-*****************
+!Developper notes
 
-.. toctree::
+{maketoc}
 
-Finding an IPX relay board
-***************************
+!!!Finding an IPX relay board
 TO discover all IPX relay boards on local network, you can send the following message on UDP (port 30303) : 
-.. code-block::
-    
-    Discovery: Who is out there?
-    
+{CODE()}
+Discovery: Who is out there?
+{CODE}
 
 All IPX relay boards will answser 
-.. code-block::
-    
-    <name of relay board>
-    <mac address of relay board>
-    
+{CODE()}
+&lt;name of relay board&gt;
+&lt;mac address of relay board&gt;
+{CODE}
 
-Get actual card status
-***********************
+!!!Get actual card status
 You can get the actual status of the card with this url : http://ip:port/status.xml
 
 This will give this xml data :
 
-.. code-block::
-    
-    <response>
-    <led0>0</led0>
-    <led1>1</led1>
-    <led2>1</led2>
-    <led3>0</led3>
-    <led4>1</led4>
-    <led5>0</led5>
-    <led6>0</led6>
-    <led7>0</led7>
-    <btn0>up</btn0>
-    <btn1>up</btn1>
-    <btn2>up</btn2>
-    <btn3>up</btn3>
-    <an1>81</an1>
-    <an2>0</an2>
-    <time0>07:40:19</time0>
-    <count1>0</count1>            # beta feature on IPX
-    <count2>0</count2>            #
-    <count3>0</count3>            #
-    <count4>0</count4>            #
-    </response>
-    
-* ledX : status of each relay (0 => OFF, 1 => ON)
-* btnX : status of each digital input (up => ON, down => OFF)
+{CODE()}
+&lt;response&gt;
+&lt;led0&gt;0&lt;/led0&gt;
+&lt;led1&gt;1&lt;/led1&gt;
+&lt;led2&gt;1&lt;/led2&gt;
+&lt;led3&gt;0&lt;/led3&gt;
+&lt;led4&gt;1&lt;/led4&gt;
+&lt;led5&gt;0&lt;/led5&gt;
+&lt;led6&gt;0&lt;/led6&gt;
+&lt;led7&gt;0&lt;/led7&gt;
+&lt;btn0&gt;up&lt;/btn0&gt;
+&lt;btn1&gt;up&lt;/btn1&gt;
+&lt;btn2&gt;up&lt;/btn2&gt;
+&lt;btn3&gt;up&lt;/btn3&gt;
+&lt;an1&gt;81&lt;/an1&gt;
+&lt;an2&gt;0&lt;/an2&gt;
+&lt;time0&gt;07:40:19&lt;/time0&gt;
+&lt;count1&gt;0&lt;/count1&gt;            # beta feature on IPX
+&lt;count2&gt;0&lt;/count2&gt;            #
+&lt;count3&gt;0&lt;/count3&gt;            #
+&lt;count4&gt;0&lt;/count4&gt;            #
+&lt;/response&gt;
+{CODE}
+* ledX : status of each relay (0 =&gt; OFF, 1 =&gt; ON)
+* btnX : status of each digital input (up =&gt; ON, down =&gt; OFF)
 * anX : value of each analog input (0 for 0V, 1024 for 3.3V)
 * countX : value of each counter (0...)
  
-API
-****
+!!!API
 !!!!Change the relay state
 Calling this url will change a relay state 
 http://ip:port/leds.cgi?led=N  (N=0..7)
@@ -89,31 +79,29 @@ Example :
 * Reset counter 2 : http://ip:port/counter.cgi?count=2
 
 !!!!/command
-Here are the url to use for each feature of IPX800 board. "address" is <boardname>-<element type (led, btn...)><number of element>
+Here are the url to use for each feature of IPX800 board. &quot;address&quot; is &lt;boardname&gt;-&lt;element type (led, btn...)&gt;&lt;number of element&gt;
 
 Switch : 
-* /command/relayboard/<address>/high
-* /command/relayboard/<address>/low
+* /command/relayboard/&lt;address&gt;/high
+* /command/relayboard/&lt;address&gt;/low
 Trigger : 
-* /command/relayboard/<address>/pulse
+* /command/relayboard/&lt;address&gt;/pulse
 
 ||TODO : reset counter when implemented||
 
-xPL Schema
-***********
+!!!xPL Schema
 !!!!xpl-cmnd
 The COMMAND.BASIC xPL schema is used in this module : http://xplproject.org.uk/wiki/index.php?title=Schema_-_CONTROL.BASIC
 
-.. code-block::
-    
-    CONTROL.BASIC
-    {
-    DEVICE=<device name>
-    TYPE=<device type>
-    CURRENT=<value sent to the device>
-    }
-     
-* device : <relay board name in plugin config>-<element : btn0, btn1...>
+{CODE()}
+CONTROL.BASIC
+{
+DEVICE=&lt;device name&gt;
+TYPE=&lt;device type&gt;
+CURRENT=&lt;value sent to the device&gt;
+}
+{CODE} 
+* device : &lt;relay board name in plugin config&gt;-&lt;element : btn0, btn1...&gt;
 * type : 
 ** output for a relay
 ** count for the counter
@@ -127,16 +115,15 @@ There is no usage of xpl-stat with this plugin
 !!!!xpl-trig
 The SENSOR.BASIC xPL schema is used in this module : http://xplproject.org.uk/wiki/index.php?title=Schema_-_SENSOR.BASIC
 
-.. code-block::
-    
-    SENSOR.BASIC
-    {
-    DEVICE=<device name>
-    TYPE=<device type>
-    CURRENT=<current value>
-    }
-    
-* device : <relay board name in plugin config>-<element : btn0, btn1...>
+{CODE()}
+SENSOR.BASIC
+{
+DEVICE=&lt;device name&gt;
+TYPE=&lt;device type&gt;
+CURRENT=&lt;current value&gt;
+}
+{CODE}
+* device : &lt;relay board name in plugin config&gt;-&lt;element : btn0, btn1...&gt;
 * type : 
 ** output for a relay
 ** input for the digital input

@@ -1,6 +1,4 @@
-******
- Test
-******
+! Test
 
 Deutsche Hauptseite
 

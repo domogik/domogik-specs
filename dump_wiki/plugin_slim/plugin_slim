@@ -1,10 +1,7 @@
-Table of contents
-******************
-.. toctree::
+!!!Table of contents
+{maketoc}
 
-**************
- General info
-**************
+! General info
 This plugin is for controlling the SlimServer, or Logitech Media Server.
 
 Logitech Media Server is the server software that powers audio players from Logitech (formerly known as SlimDevices), including Squeezebox 3rd Generation, Squeezebox Boom, Squeezebox Receiver, Transporter, Squeezebox2, Squeezebox and SLIMP3.
